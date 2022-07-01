@@ -48,7 +48,7 @@ export default {
 
   methods : {
     ...mapMutations('emissions',['setPageNum','setSearch']),
-    ...mapActions('emissions',['get_new_comings']),
+    ...mapActions('emissions',['sp_admin_get_new_comings']),
 
     async controlQuerySetAndGetPermitList(querySet){
       let pageToGo = Number(querySet.query.page)
@@ -66,7 +66,7 @@ export default {
       // 라우터 쿼리에 담긴 값으로 검색 시작
       this.setSearch(searchKeyword)
       this.setPageNum(pageToGo)
-      this.get_new_comings()
+      this.sp_admin_get_new_comings()
 
     }
   },

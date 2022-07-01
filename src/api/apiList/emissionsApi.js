@@ -2,9 +2,9 @@ import myAxios from "@/api";
 const method = "post";
 
 export default {
-	get_new_comings({ state, rootState }) {
+	sp_admin_get_new_comings({ state, rootState }) {
     const userId = rootState.auth.userId;
-    const url = "api/admin/common/get_new_comings";
+    const url = "api/admin/common/sp_admin_get_new_comings";
     let data = {
       params: JSON.stringify([
         {
@@ -17,9 +17,9 @@ export default {
     };
     return myAxios(url, method, data);
   },
-  get_new_comings_detail({ rootState, orderId }) {
+  sp_admin_get_new_comings_detail({ rootState, orderId }) {
     const userId = rootState.auth.userId;
-    const url = "api/admin/common/get_new_comings_detail";
+    const url = "api/admin/common/sp_admin_get_new_comings_detail";
     const data = {
       params: JSON.stringify([
         {

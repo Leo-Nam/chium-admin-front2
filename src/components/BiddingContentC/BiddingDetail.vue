@@ -199,6 +199,8 @@ export default {
         return `/admin/main/emissions/${value[0].ID}`
       } else if (key === 'COLLECTOR_ID') {
         return `/admin/main/emitter-collector/${value}`
+      } else if (key === 'BIDDING_ID') {
+        return `/admin/main/biddings/${value}`
       }
     },
     changeState(value,key){

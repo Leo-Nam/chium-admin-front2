@@ -79,7 +79,7 @@ export default {
 
     shortenContent(content){
       if (content !== null && content.length > 35){
-         return content.slice(0,20) + '...'
+         return content.slice(0,35) + '...'
       }
       return content
 

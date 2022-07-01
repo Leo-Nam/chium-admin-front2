@@ -6,6 +6,10 @@
     </v-card>
 
     <v-card class="top-card">
+      <BusinessArea />
+    </v-card>
+
+    <v-card class="top-card">
       <v-row>
         <v-col cols="6">
           <SiteMap2 />
@@ -25,7 +29,6 @@
     >
       <EmitOrColList />
     </v-card>
-
     <v-card
       class="top-card"
     >
@@ -49,6 +52,7 @@ import SiteMap2 from "@/components/EmitterCollectorContentC/SiteMap2.vue"
 import OptList from "@/components/EmitterCollectorContentC/OptList.vue"
 import mapListTable from "@/components/EmitterCollectorContentC/mapListTable.vue"
 import EmitOrColList from "@/components/EmitterCollectorContentC/EmitOrColList.vue"
+import BusinessArea from "@/components/EmitterCollectorContentC/BusinessArea.vue"
 import NoteInput from "@/components/CommonC/NoteInput.vue"
 import NoteList from "@/components/CommonC/NoteList.vue"
 
@@ -62,7 +66,8 @@ export default {
     mapListTable,
     EmitOrColList,
     NoteInput,
-    NoteList
+    NoteList,
+    BusinessArea
   },
 
   computed : {

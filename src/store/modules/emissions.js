@@ -1,4 +1,3 @@
-
 import emissionsApi from '@/api/apiList/emissionsApi'
 import logApi from "@/api/apiList/logApi";
 export default {
@@ -46,7 +45,6 @@ export default {
     nowSelectedIsTransitOpt : '모두',
     // 비 회원사 거리일 경우 해당 시군구, 전국
     nowSelectedBCodeWithinOpt : '해당 시군구',
-
   },
 
   mutations: {
@@ -125,19 +123,19 @@ export default {
   },
   actions: {
     // 배출 등록 리스트 조회
-    async get_new_comings({ state,  commit , rootState }){
+    async sp_admin_get_new_comings({ state,  commit , rootState }){
       try {
-        const res = await emissionsApi.get_new_comings({state, rootState})
+        const res = await emissionsApi.sp_admin_get_new_comings({state, rootState})
         commit("setEmissionsList", res.data.data[0]);
       } catch (e) {
         console.log(e)
       }
     },
     // 선택한 배출 조회
-    async get_new_comings_detail({commit, rootState},payload){
+    async sp_admin_get_new_comings_detail({commit, rootState},payload){
       try {
         const orderId = Number(payload)
-        const res = await emissionsApi.get_new_comings_detail({rootState ,orderId })
+        const res = await emissionsApi.sp_admin_get_new_comings_detail({rootState ,orderId })
         console.log(res,'레스레스')
         commit('setOrderInfo',res.data.data[0].ORDER_INFO[0])
         commit('setBiddingInfo',res.data.data[0].ORDER_INFO[0].BIDDING_LIST)

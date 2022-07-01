@@ -42,7 +42,7 @@ export default {
       siteId : 0,
       pageOffset: 0,
       pageSize: 15,
-    },
+    }
   },
   mutations: {
 

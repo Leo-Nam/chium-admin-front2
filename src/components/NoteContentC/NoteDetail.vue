@@ -21,7 +21,7 @@
             :key="key"
             cols="12"
             md="6"
-            lg="6"
+            lg="4"
           >
             <v-row>
               <v-col cols="auto">
@@ -29,17 +29,23 @@
               </v-col>
               <v-col cols="auto">
                 <div v-if="key === 'NOTE'">
-                  <v-text-field
+                  <v-textarea
                     :id="key+value"
                     dense
                     :value="value"
                     hide-details=""
                     solo
                     readonly
+                    style="width:500px"
                     append-icon="mdi-pencil"
                     @click:append="changeContent(key+value)"
                     @input="MyVmodel(key,$event)"
                   />
+                </div>
+                <div v-else-if="key === 'ORDER_ID' || key === 'SITE_ID' || key === 'BIDDING_ID' || key === 'TRANSACTION_ID' || key === 'REPORT_ID'">
+                  <a :href="returnUrl(value,key)">
+                    {{ changeValue(value, key) }}
+                  </a>
                 </div>
                 <div v-else>
                   {{ changeValue(value, key) }}
@@ -125,6 +131,23 @@ export default {
     MyVmodel(key,value){
 		this.changeSelectedNote({key,value})
 		console.log(value)
+    },
+
+    returnUrl(value,key){
+		console.log("returnUrl ===>", value, key)
+      if (key === 'ORDER_ID'){
+        return `/admin/main/emissions/${value}`
+      } else if (key === 'SITE_ID') {
+        return `/admin/main/emitter-collector/${value}`
+      } else if (key === 'BIDDING_ID') {
+        return `/admin/main/biddings/${value}`
+      } else if (key === 'TRANSACTION_ID') {
+        return `/admin/main/transaction/${value}`
+      } else if (key === 'REPORT_ID') {
+        return `/admin/main/report/${value}`
+      } else {
+		return value
+		}
     },
   }
 

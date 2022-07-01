@@ -61,7 +61,8 @@ export default {
 
     // 개인 배출자의 정보가 여기에 담긴다.
     selectedPersonEmitter : {
-    }
+    },
+	businessArea: []
   },
   mutations: {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -238,7 +239,16 @@ export default {
     // 개인배출자 수정사항 설정
     modifySelectedPersonEmitter(state,{key,value}){
       state.selectedPersonEmitter[key] = value
-    }
+    },
+	setBusinessAreaList(state, payload){
+		state.businessArea = []
+		for(var i=0;i<payload.length;i++){
+			var sido = payload[i].BCODE_INFO.SI_DO
+			var sigungu = payload[i].BCODE_INFO.SI_GUN_GU
+			var areaName = sido + ' ' + sigungu
+			state.businessArea.push(areaName)
+		}
+	},
   },
   actions: {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -256,6 +266,7 @@ export default {
         } else if (state.selectedUser.userType === 2){
           commit('setShowListIfIEmitter', siteInfo.DISPOSER_ORDER_LIST)
         }
+		commit('setBusinessAreaList', siteInfo.BUSINESS_AREA)
         commit('common/setNotes',res.data.data[0].NOTES.NOTES,{root : true})
       } catch (e) {
         console.log(e);
@@ -380,6 +391,10 @@ export default {
     // [ 개인 ]  배출자의 정보
     getSelectedPersonEmitter(state){
       return state.selectedPersonEmitter
-    }
+    },
+
+	getBusinessAreaList(state){
+		return state.businessArea
+	}
   },
 };

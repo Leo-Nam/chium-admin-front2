@@ -71,9 +71,7 @@ import EmissionLog from "@/components/EmissionsContentC/EmissionLog.vue"
 import EmissionReportTable from "@/components/EmissionsContentC/EmissionReportTable.vue"
 import NoteInput from "@/components/CommonC/NoteInput.vue"
 import NoteList from "@/components/CommonC/NoteList.vue"
-
 import {mapActions,mapGetters, mapMutations} from "vuex"
-
 export default {
    components : {
     EmissionOrderInfoFirst,
@@ -93,7 +91,6 @@ export default {
       orderId : null
     }
   },
-
   computed : {
     ...mapGetters('emissions',['getCollectorListAreaOfInterest','getBiddingInfo','getOrderInfo','getLogList','getReportInfo']),
     ...mapGetters('common',['getNotes']),
@@ -110,17 +107,15 @@ export default {
      this.setNowSelectedBCodeWithinOpt('해당 시군구')
   },
   async created(){
-    await this.get_new_comings_detail(this.$route.params.id)
+    await this.sp_admin_get_new_comings_detail(this.$route.params.id)
     await this.sp_get_site_list_whose_biz_areas_of_interest()
     await this.sp_get_site_list_inside_range()
     await this.logList2({orderId : this.getOrderInfo.ORDER_ID})
   },
-
   methods : {
-    ...mapActions('emissions',['get_new_comings_detail','sp_get_site_list_whose_biz_areas_of_interest','sp_get_site_list_inside_range','logList2']),
+    ...mapActions('emissions',['sp_admin_get_new_comings_detail','sp_get_site_list_whose_biz_areas_of_interest','sp_get_site_list_inside_range','logList2']),
     ...mapMutations('emissions',['setNowSelectedOpt','setCircleRange','setNowSelectedIsTransitOpt','setNowSelectedBCodeWithinOpt'])
   },
-
 }
 </script>
 <style >

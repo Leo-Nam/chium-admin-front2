@@ -23,17 +23,51 @@
             v-for="transaction,idx in getTransactionList"
             :key="idx"
             style="cursor : pointer"
-            @click="goToContent(transaction.ID)"
           >
-            <td>{{ transaction.ID }}</td>
-            <td>{{ transaction.ORDER_CODE }}</td>
+            <td>
+              <a
+                v-if="transaction.ID !== null"
+                :href="returnUrl4(transaction.ID)"
+              >
+                {{ transaction.ID }}
+              </a>
+            </td>
+            <td>
+              <a
+                v-if="transaction.DISPOSAL_ORDER_ID !== null"
+                :href="returnUrl1(transaction.DISPOSAL_ORDER_ID)"
+              >
+                {{ transaction.ORDER_CODE }}
+              </a>
+            </td>
             <td>{{ transaction.TRANSACTION_TYPE }}</td>
 
-            <td>{{ transaction.COLLECTOR_NAME }}</td>
-            <td>{{ transaction.COLLECTOR_SITE_ID }}</td>
+            <td> 
+              <a
+                v-if="transaction.COLLECTOR_SITE_ID !== null"
+                :href="returnUrl6(transaction.COLLECTOR_SITE_ID)"
+              >
+                {{ transaction.COLLECTOR_NAME }}
+              </a>
+            </td>
+            <td>
+              <a
+                v-if="transaction.COLLECTOR_SITE_ID !== null"
+                :href="returnUrl6(transaction.COLLECTOR_SITE_ID)"
+              >
+                {{ transaction.COLLECTOR_SITE_ID }}
+              </a>
+            </td>
             <td>{{ getTime(transaction.COLLECT_ASK_END_AT) }}</td>
 
-            <td> ({{ transaction.DISPOSER_TYPE }}) {{ transaction.DISPOSER_NAME }}</td>
+            <td>
+              <a
+                v-if="transaction.DISPOSER_SITE_ID !== null"
+                :href="returnUrl6(transaction.DISPOSER_SITE_ID)"
+              >
+                ({{ transaction.DISPOSER_TYPE }}) {{ transaction.DISPOSER_NAME }}
+              </a>
+            </td> 
             <td> {{ changeBoolToEmoji(transaction.CHECK_STATE) }}</td>
           </tr>
         </tbody>
@@ -81,6 +115,55 @@ export default {
     },
     goToContent(siteId){
        this.$router.push({ path: `/admin/main/transaction/${siteId}`})
+    },
+    returnUrl1(orderId){
+		if (orderId !== null){
+			return `/admin/main/emissions/${orderId}`
+		} else {
+			return
+		}
+    },
+    returnUrl2(noteId){
+		if (noteId !== null){
+			return `/admin/main/note-list/${noteId}`
+		} else {
+			return
+		}
+    },
+    returnUrl3(biddingId){
+		if (biddingId !== null){
+			return `/admin/main/biddings/${biddingId}`
+		} else {
+			return
+		}
+    },
+    returnUrl4(transactionId){
+		if (transactionId !== null){
+			return `/admin/main/transaction/${transactionId}`
+		} else {
+			return
+		}
+    },
+    returnUrl5(reportId){
+		if (reportId !== null){
+			return `/admin/main/report/${reportId}`
+		} else {
+			return
+		}
+    },
+    returnUrl6(siteId){
+		if (siteId !== null){
+			return `/admin/main/emitter-collector/${siteId}`
+		} else {
+			return
+		}
+    },
+    returnUrl7(memberId){
+		if (memberId !== null){
+			return `/admin/main/person-emitter/${memberId}`
+		} else {
+			return
+		}
     },
 
   }

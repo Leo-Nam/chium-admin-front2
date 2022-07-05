@@ -40,7 +40,7 @@ export default {
 		
 		commit("setNoteLists", res.data.data[0].NOTE_LIST)	
 		commit("setLastPage", res.data.data[0].LAST_PAGE)	
-		console.log("noteList ====>", res.data)
+		console.log("noteList ====>", res.data.data[0].NOTE_LIST)
 	},
 	async sp_admin_get_note_details({rootState, state, commit}, payload){
 		const res = await noteListApi.sp_admin_get_note_details({rootState, payload})
@@ -61,6 +61,7 @@ export default {
   },
   getters: {
     getNoteLists(state){
+		console.log(state.noteList[0], '==>state.noteList')
 		return state.noteList
 	}, 
 	getPageNum(state){

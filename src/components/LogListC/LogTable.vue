@@ -24,16 +24,79 @@
             @click="showMeLog(idx)"
           >
             <td> {{ log.ID }} </td>
-            <td> {{ log.USER_ID }} </td>
-            <td> {{ log.USER_NAME }} </td>
-            <td> {{ log.BIDDING_ID }} </td>
-            <td> {{ log.ORDER_CODE }} </td>
-            <td> {{ log.ORDER_ID }} </td>
+            <td> 
+              <a
+                v-if="log.USER_ID !== null"
+                :href="returnUrl7(log.USER_ID)"
+              >
+                {{ log.USER_ID }} 
+              </a>
+            </td>
+            <td>
+              <a
+                v-if="log.USER_NAME !== null"
+                :href="returnUrl7(log.USER_ID)"
+              >
+                {{ log.USER_NAME }}
+              </a>
+            </td>
+            <td> 
+              <a
+                v-if="log.BIDDING_ID !== null"
+                :href="returnUrl3(log.BIDDING_ID)"
+              >
+                {{ log.BIDDING_ID }} 
+              </a>
+            </td>
+            <td> 
+              <a
+                v-if="log.ORDER_ID !== null"
+                :href="returnUrl1(log.ORDER_ID)"
+              >
+                {{ log.ORDER_CODE }} 
+              </a>
+            </td>
+            <td>
+              <a
+                v-if="log.ORDER_ID !== null"
+                :href="returnUrl1(log.ORDER_ID)"
+              >
+                {{ log.ORDER_ID }} 
+              </a>
+            </td>
             <td> {{ shortenContent(log.JOB_NAME) }} </td>
-            <td> {{ log.REPORT_ID }} </td>
-            <td> {{ log.SITE_ID }} </td>
-            <td> {{ log.SITE_NAME }} </td>
-            <td> {{ log.TRANSACTION_ID }} </td>
+            <td> 
+              <a
+                v-if="log.REPORT_ID !== null"
+                :href="returnUrl5(log.REPORT_ID)"
+              >
+                {{ log.REPORT_ID }} 
+              </a>
+            </td>
+            <td> 
+              <a
+                v-if="log.SITE_ID !== null"
+                :href="returnUrl6(log.SITE_ID)"
+              >
+                {{ log.SITE_ID }} 
+              </a>
+            </td>
+            <td>
+              <a
+                v-if="log.SITE_ID !== null"
+                :href="returnUrl6(log.SITE_ID)"
+              >
+                {{ log.SITE_NAME }} 
+              </a>
+            </td>
+            <td> 
+              <a
+                v-if="log.TRANSACTION_ID !== null"
+                :href="returnUrl4(log.TRANSACTION_ID)"
+              >
+                {{ log.TRANSACTION_ID }} 
+              </a>
+            </td>
             <td> {{ getTime(log.CREATED_AT) }} </td>
             <td> {{ log.JOB_TABLE }} </td>
           </tr>
@@ -99,6 +162,55 @@ export default {
     },
     closeDialog(){
       this.dialog = false
+    },
+    returnUrl1(orderId){
+		if (orderId !== null){
+			return `/admin/main/emissions/${orderId}`
+		} else {
+			return
+		}
+    },
+    returnUrl2(noteId){
+		if (noteId !== null){
+			return `/admin/main/note-list/${noteId}`
+		} else {
+			return
+		}
+    },
+    returnUrl3(biddingId){
+		if (biddingId !== null){
+			return `/admin/main/biddings/${biddingId}`
+		} else {
+			return
+		}
+    },
+    returnUrl4(transactionId){
+		if (transactionId !== null){
+			return `/admin/main/transaction/${transactionId}`
+		} else {
+			return
+		}
+    },
+    returnUrl5(reportId){
+		if (reportId !== null){
+			return `/admin/main/report/${reportId}`
+		} else {
+			return
+		}
+    },
+    returnUrl6(siteId){
+		if (siteId !== null){
+			return `/admin/main/emitter-collector/${siteId}`
+		} else {
+			return
+		}
+    },
+    returnUrl7(memberId){
+		if (memberId !== null){
+			return `/admin/main/person-emitter/${memberId}`
+		} else {
+			return
+		}
     },
 
   }

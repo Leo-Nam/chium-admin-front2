@@ -215,7 +215,7 @@
       <v-expansion-panel>
         <v-expansion-panel-header>
           <v-card-title>
-            허가증 정보 변경
+            허가증 정보 변경1
           </v-card-title>
         </v-expansion-panel-header>
         <v-expansion-panel-content>

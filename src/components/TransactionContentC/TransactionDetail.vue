@@ -18,7 +18,7 @@
                 {{ englishToKorean(key) }} :
               </v-col>
               <v-col cols="auto">
-                <div v-if="key === 'ORDER_INFO' || key === 'COLLECTOR_ID' || key === 'COLLECTOR_BIDDING_ID'">
+                <div v-if="key === 'ORDER_INFO' || key === 'COLLECTOR_ID' || key === 'COLLECTOR_BIDDING_ID' || key === 'ID'">
                   <a @click="goToSomeWhere(value,key)">{{ changeValue(value,key) }}</a>
                 </div>
                 <div v-else-if="key === 'QCC_IMG_PATH'">
@@ -183,6 +183,8 @@ export default {
         this.$router.push(`/admin/main/biddings/${value}`)
       } else if (key === 'COLLECTOR_SITE_ID'){
         this.$router.push(`/admin/main/emitter-collector/${value}`)
+      } else if (key === 'TRANSACTION_ID'){
+        this.$router.push(`/admin/main/transaction/${value}`)
       }
     },
 

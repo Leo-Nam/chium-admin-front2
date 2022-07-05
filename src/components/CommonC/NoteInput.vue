@@ -12,7 +12,7 @@
       <v-col
         cols="auto"
       >
-        <v-btn @click="beforInsertNote">
+        <v-btn @click="beforeInsertNote">
           입력하기
         </v-btn>
       </v-col>
@@ -22,17 +22,17 @@
 <script>
 import {mapActions, mapMutations} from "vuex"
 export default {
-  props : ['memberId','siteId','orderId','biddingId','transactionId','reportId'],
+  props : ['memberId','site-id','orderId','biddingId','transactionId','reportId','siteCategory'],
   data(){
     return {
       note : null,
-      propsList : ['memberId','siteId','orderId','biddingId','transactionId','reportId'],
+      propsList : ['memberId','siteId','orderId','biddingId','transactionId','reportId','siteCategory'],
     }
   },
   methods : {
     ...mapActions('common',['sp_admin_insert_note']),
     ...mapMutations('common',['setNoteDetailIds']),
-    beforInsertNote(){
+    beforeInsertNote(){
       const emptyObj = {}
       this.propsList.forEach( v => {
         if (this[v] !== undefined){
@@ -40,6 +40,8 @@ export default {
         } else {
           emptyObj[v] = null
         }
+		console.log(v)
+		console.log(this[v])
       });
       emptyObj.note = this.note
       console.log(emptyObj,'ddd')

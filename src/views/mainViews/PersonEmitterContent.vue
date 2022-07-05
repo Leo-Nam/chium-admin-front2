@@ -15,10 +15,10 @@ export default {
   created(){
     const personEmitterId = this.$route.params.id
 
-    this.personEmitter(personEmitterId)
+    this.sp_admin_get_personal_details(personEmitterId)
   },
   methods : {
-    ...mapActions('selectedUser',['personEmitter'])
+    ...mapActions('selectedUser',['sp_admin_get_personal_details'])
   },
 
 }

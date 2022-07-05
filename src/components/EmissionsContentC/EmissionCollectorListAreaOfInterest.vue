@@ -25,23 +25,58 @@
           <tr
             v-for="collector,idx in getCollectorListAreaOfInterest"
             :key="idx+collector"
-            style="cursor : pointer"
-            @click="goToContent(collector.ID)"
           >
-            <td>{{ collector.SITE_NAME }}</td>
+            <td
+              style="cursor : pointer"
+              @click="goToContent(collector.ID)"
+            >
+              {{ collector.SITE_NAME }}
+            </td>
             <td>{{ collector.PHONE }}</td>
             <td>{{ collector.SI_DO }}</td>
             <td>{{ collector.SI_GUN_GU }}</td>
             <td>{{ collector.TRMT_BIZ_NM }}</td>
+            <td>
+              <v-btn
+                style="cursor : pointer"
+                rounded
+                color="primary"
+                dark
+                @click="showNoteCreatePopup(collector.ID)"
+              >
+                노트추가
+              </v-btn>
+            </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
+    <NoteCreatePopup
+      :dialog="dialog"
+      :orderid="orderid"
+      :siteid="siteID"
+      :sitecategory="1"
+      @closeDialog="closeDialog"
+    />
   </v-card>
 </template>
 <script>
+import NoteCreatePopup from "../CommonC/NoteCreate.vue"
 import {mapGetters} from "vuex"
 export default {
+  components : {
+    NoteCreatePopup
+  },
+  props: {
+    orderid: {
+        type: Number,
+        default: 0
+    },
+    siteid: {
+        type: Number,
+        default: 0
+    },
+  },
   data(){
     return {
       collectorTh : [
@@ -49,8 +84,11 @@ export default {
         '핸드폰',
         '시, 도',
         '시, 군, 구',
-        '업종'
-      ]
+        '업종',
+        '노트추가'
+      ],
+	dialog: false,
+	siteID: 0,
     }
   },
   computed : {
@@ -63,7 +101,14 @@ export default {
     goToContent(siteId){
        this.$router.push({ path: `/admin/main/emitter-collector/${siteId}`})
     },
-  }
+    showNoteCreatePopup(siteId){
+		this.dialog = true
+		this.siteID = siteId
+    },
+    closeDialog(){
+      this.dialog = false
+    },
+  },
 }
 </script>
 <style lang="">

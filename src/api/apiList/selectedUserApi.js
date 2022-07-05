@@ -68,7 +68,7 @@ export default {
     };
     return myAxios(url, method, data);
   },
-  personEmitter({ rootState, memberId }) {
+  sp_admin_get_personal_details({ rootState, memberId }) {
     const userId = rootState.auth.userId;
     const url = "api/admin/common/sp_admin_get_personal_details";
     const data = {

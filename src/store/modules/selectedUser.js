@@ -307,10 +307,10 @@ export default {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     // [ 개인 ] 배출자 정보 조회
-    async personEmitter({ rootState, commit }, payload) {
+    async sp_admin_get_personal_details({ rootState, commit }, payload) {
       try {
         const memberId = payload
-        const res = await selectedUserApi.personEmitter({rootState, memberId});
+        const res = await selectedUserApi.sp_admin_get_personal_details({rootState, memberId});
         commit('setSelectedPersonEmitter',res.data.data)
         commit('common/setNotes',res.data.data.NOTES.NOTES, {root : true})
       } catch (e) {

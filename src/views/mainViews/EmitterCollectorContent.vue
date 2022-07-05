@@ -33,10 +33,11 @@
       class="top-card"
     >
       <v-card-title>
-        노트
+        노트1
       </v-card-title>
       <NoteInput
         :site-id="getSeletedUser.siteId"
+        :site-category="1"
       />
       <NoteList
         v-if="getNotes"
@@ -56,7 +57,7 @@ import BusinessArea from "@/components/EmitterCollectorContentC/BusinessArea.vue
 import NoteInput from "@/components/CommonC/NoteInput.vue"
 import NoteList from "@/components/CommonC/NoteList.vue"
 
-import {mapActions,mapGetters} from "vuex"
+import {mapActions,mapGetters,} from "vuex"
 export default {
    components : {
     SiteInfo,
@@ -90,6 +91,7 @@ export default {
     this.getWsteLists()
 
   },
+
   methods : {
     ...mapActions('selectedUser',['sp_admin_retrieve_site_info']),
      ...mapActions('common',['getWsteLists','checkIsLogged']),

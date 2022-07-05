@@ -79,9 +79,10 @@ changeSelectedNotMember(state,{key,value}){
     async sp_admin_retrieve_prospective_site_info({rootState,commit},{siteId}){
       try {
         const res = await notMemberApi.sp_admin_retrieve_prospective_site_info({rootState,siteId})
-        console.log(res.data.data[0].SITE_INFO[0],'레스레스')
+        console.log(res.data.data[0],'레스레스')
         commit("setNotMemberDetail", res.data.data[0].SITE_INFO[0]);
-        // commit("common/setNotes", res.data.data[0].NOTES.NOTES, { root : true });
+        commit("common/setNotes", res.data.data[0].NOTES.NOTES, { root : true });
+		console.log(res.data.data[0].NOTES.NOTES, 'fff')
       } catch (e) {
         console.log(e)
       }

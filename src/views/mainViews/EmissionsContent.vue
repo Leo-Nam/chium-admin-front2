@@ -2,7 +2,9 @@
   <div>
     <v-card class="main-order">
       <EmissionOrderInfoFirst />
-      <EmissionCollectorListAreaOfInterest />
+      <EmissionCollectorListAreaOfInterest
+        :orderid="orderId"
+      />
       <v-card class="collector-list">
         <v-row>
           <v-col>
@@ -10,7 +12,9 @@
           </v-col>
           <v-col>
             <EmissionCollectorListOpt />
-            <EmissionCollectorListTableWithOpt />
+            <EmissionCollectorListTableWithOpt 
+              :orderid="orderId"
+            />
           </v-col>
         </v-row>
       </v-card>

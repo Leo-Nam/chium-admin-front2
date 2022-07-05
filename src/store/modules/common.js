@@ -20,6 +20,8 @@ export default {
       BIDDING_ID : null,
       TRANSACTION_ID : null,
       REPORT_ID : null,
+      NOTE : null,
+      SITE_CATEGORY : null,
     },
     notes : []
   },
@@ -121,7 +123,8 @@ export default {
                         biddingId,
                         transactionId,
                         reportId,
-                        note
+                        note,
+                        siteCategory
                       })
     {
       state.noteDetailsIds.MEMBER_ID = memberId
@@ -131,6 +134,7 @@ export default {
       state.noteDetailsIds.TRANSACTION_ID = transactionId
       state.noteDetailsIds.REPORT_ID = reportId
       state.noteDetailsIds.NOTE = note
+      state.noteDetailsIds.SITE_CATEGORY = siteCategory
     },
     resetNoteDetailIds(state){
       state.noteDetailsIds.MEMBER_ID = null
@@ -140,9 +144,13 @@ export default {
       state.noteDetailsIds.TRANSACTION_ID = null
       state.noteDetailsIds.REPORT_ID = null
       state.noteDetailsIds.NOTE = null
+      state.noteDetailsIds.SITE_CATEGORY = null
     },
     setNotes(state,payload){
       state.notes = payload
+    },
+    resetNotes(state){
+      state.notes = []
     }
 
   },
@@ -191,6 +199,7 @@ export default {
     },
     // 노트 리스트를 가지고옴
     getNotes(state){
+		console.log(state.notes, 'state.notes')
       return state.notes
     }
   },

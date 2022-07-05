@@ -26,30 +26,30 @@
         </v-row>
       </v-card>
     </v-sheet>
-    <!-- <v-card style="margin-top : 50px;">
+    <v-card style="margin-top : 50px;">
       <v-card-title>
         노트
       </v-card-title>
       <NoteInput
-        :order-id="orderId"
-        :bidding-id="biddingId"
+        :site-id="getNotMemberDetail.ID"
+        :site-category="0"
       />
       <NoteList
         v-if="getNotes"
         :note-list="getNotes"
       />
-    </v-card> -->
+    </v-card>
   </div>
 </template>
 <script>
-// import NoteInput from "@/components/CommonC/NoteInput.vue"
-// import NoteList from "@/components/CommonC/NoteList.vue"
-import {mapGetters, mapMutations, mapActions} from "vuex"
+import NoteInput from "@/components/CommonC/NoteInput.vue"
+import NoteList from "@/components/CommonC/NoteList.vue"
+import {mapGetters, mapMutations} from "vuex"
 export default {
-  //  components : {
-  //   NoteInput,
-  //   NoteList
-  // },
+   components : {
+    NoteInput,
+    NoteList
+  },
   data(){
     return {
       englishToKoreanObj : {
@@ -83,8 +83,7 @@ export default {
   },
 
   methods : {
-    ...mapMutations('biddings',['changeBiddingDetail']),
-    ...mapActions('biddings',['sp_admin_update_bidding_details']),
+    ...mapMutations('common',['resetNotes']),
     englishToKorean(key){
       return this.englishToKoreanObj[key]
     },

@@ -27,7 +27,8 @@ export default {
         PHONE: '연락처',
         PUSH_ENABLED: 'PUSH_ENABLED',
         USER_ID: '아이디',
-        USER_NAME: '이름'
+        USER_NAME: '이름',
+		SITE_ID: '소속사이트'
       }
     }
   }

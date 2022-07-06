@@ -74,6 +74,18 @@
                       mdi-pencil
                     </v-icon>
                   </div>
+                  <!-- 소속사이트인 경우 -->
+                  <div v-else-if="content == 'SITE_ID'">
+                    <div v-if="getSelectedPersonEmitter[content]===0">
+                      {{ getSelectedPersonEmitter['SITE_NAME'] }}
+                    </div>
+                    <div v-else>
+                      <a
+                        :href="returnUrl6(getSelectedPersonEmitter[content])"
+                      >{{ getSelectedPersonEmitter['SITE_NAME'] }}
+                      </a>
+                    </div>
+                  </div>
                   <!-- 그 외 분기 -->
                   <div v-else>
                     <v-text-field
@@ -141,6 +153,7 @@ export default {
         '확인 상태',
         'NOTICE_ENABLED',
         'PUSH_ENABLED',
+        '소속사이트',
       ],
        headerArray : [
         'USER_ID',
@@ -152,6 +165,7 @@ export default {
         'CONFIRMED',
         'NOTICE_ENABLED',
         'PUSH_ENABLED',
+        'SITE_ID',
         ]
     }
   },
@@ -204,7 +218,14 @@ export default {
     },
     clickAvatarImg(){
       document.getElementById('avatar-img').click()
-    }
+    },
+    returnUrl6(siteId){
+		if (siteId !== null){
+			return `/admin/main/emitter-collector/${siteId}`
+		} else {
+			return
+		}
+    },
   },
 
 }

@@ -20,8 +20,6 @@
           <tr
             v-for="log,idx in getLogList"
             :key="idx"
-            style="cursor : pointer"
-            @click="showMeLog(idx)"
           >
             <td> {{ log.ID }} </td>
             <td> 
@@ -64,7 +62,12 @@
                 {{ log.ORDER_ID }} 
               </a>
             </td>
-            <td> {{ shortenContent(log.JOB_NAME) }} </td>
+            <td
+              style="cursor : pointer"
+              @click="showMeLog(idx)"
+            > 
+              {{ shortenContent(log.JOB_NAME) }} 
+            </td>
             <td> 
               <a
                 v-if="log.REPORT_ID !== null"

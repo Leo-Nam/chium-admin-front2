@@ -100,5 +100,20 @@ export default {
       ]),
     };
     return myAxios(url, method, data);
-  }
+  },
+  sp_admin_get_disposer_schedule({ rootState, orderId }) {
+	console.log('hello')
+    const userId = rootState.auth.userId;
+    const url = "api/admin/common/sp_admin_get_disposer_schedule";
+    const data = {
+      params: JSON.stringify([
+        {
+          ADMIN_ID: userId,
+          ORDER_ID : orderId
+        },
+      ]),
+    };
+	console.log(data, '===>data123')
+    return myAxios(url, method, data);
+  },
 };

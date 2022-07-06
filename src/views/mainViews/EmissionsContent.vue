@@ -2,6 +2,7 @@
   <div>
     <v-card class="main-order">
       <EmissionOrderInfoFirst />
+      <EmissionScheduleCalendar />
       <EmissionCollectorListAreaOfInterest
         :orderid="orderId"
       />
@@ -66,6 +67,7 @@
 <script>
 import EmissionOrderInfoFirst from "@/components/EmissionsContentC/EmissionOrderInfoFirst.vue"
 import EmissionBiddingTable from "@/components/EmissionsContentC/EmissionBiddingTable.vue"
+import EmissionScheduleCalendar from "@/components/EmissionsContentC/EmissionScheduleCalendar.vue"
 import EmissionCollectorListAreaOfInterest from "@/components/EmissionsContentC/EmissionCollectorListAreaOfInterest.vue"
 import EmissionCollectorListOpt from "@/components/EmissionsContentC/EmissionCollectorListOpt.vue"
 import EmissionCollectorListTableWithOpt from "@/components/EmissionsContentC/EmissionCollectorListTableWithOpt.vue"
@@ -80,6 +82,7 @@ export default {
    components : {
     EmissionOrderInfoFirst,
     EmissionBiddingTable,
+    EmissionScheduleCalendar,
     EmissionCollectorListAreaOfInterest,
     EmissionCollectorListOpt,
     EmissionCollectorListTableWithOpt,
@@ -111,13 +114,15 @@ export default {
      this.setNowSelectedBCodeWithinOpt('해당 시군구')
   },
   async created(){
+	console.log(this.$route.params.id, "====>this.$route.params.id")
+	await this.sp_admin_get_disposer_schedule({orderId: this.$route.params.id})
     await this.sp_admin_get_new_comings_detail(this.$route.params.id)
     await this.sp_get_site_list_whose_biz_areas_of_interest()
     await this.sp_get_site_list_inside_range()
     await this.logList2({orderId : this.getOrderInfo.ORDER_ID})
   },
   methods : {
-    ...mapActions('emissions',['sp_admin_get_new_comings_detail','sp_get_site_list_whose_biz_areas_of_interest','sp_get_site_list_inside_range','logList2']),
+    ...mapActions('emissions',['sp_admin_get_new_comings_detail','sp_get_site_list_whose_biz_areas_of_interest','sp_get_site_list_inside_range','logList2','sp_admin_get_disposer_schedule']),
     ...mapMutations('emissions',['setNowSelectedOpt','setCircleRange','setNowSelectedIsTransitOpt','setNowSelectedBCodeWithinOpt'])
   },
 }

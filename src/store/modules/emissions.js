@@ -45,6 +45,7 @@ export default {
     nowSelectedIsTransitOpt : '모두',
     // 비 회원사 거리일 경우 해당 시군구, 전국
     nowSelectedBCodeWithinOpt : '해당 시군구',
+	orderSchedule : {}
   },
 
   mutations: {
@@ -118,6 +119,10 @@ export default {
     // 배출 오더에 관련된 로그 리스트 설정
     setLogList(state,payload){
       state.logList = payload
+    },
+    // 배출 오더에 관련된 로그 리스트 설정
+    setOrderSchedule(state,payload){
+      state.orderSchedule = payload
     },
 
   },
@@ -216,7 +221,17 @@ export default {
       const res = await emissionsApi.sp_get_prospective_site_list_inside_range({rootState ,distance, lat, lng, bCode, isTransit})
       console.log(res,'dddd')
       commit('setCollectorListWithin',res.data.data)
-    }
+    },
+
+    async sp_admin_get_disposer_schedule({rootState,commit},{orderId}){
+      try {
+        const res = await emissionsApi.sp_admin_get_disposer_schedule({rootState, orderId})
+        console.log(res.data.data.DATA,'sp_admin_get_disposer_schedule')
+        commit("setOrderSchedule", res.data.data.DATA);
+      } catch (e) {
+        console.log(e)
+      }
+    },
 
   },
   getters: {
@@ -276,6 +291,10 @@ export default {
     // 처리보고서 리스트 가져오기
     getReportInfo(state){
       return state.reportInfo
+    },
+    // 처리보고서 리스트 가져오기
+    getOrderSchedule(state){
+      return state.orderSchedule
     }
   },
 };

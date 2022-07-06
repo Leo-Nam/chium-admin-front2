@@ -59,10 +59,10 @@
           </td>
           <td> 
             <a
-              v-if="note.ORDER_ID !== null"
-              :href="returnUrl6(note.ORDER_INFO[0].SITE_ID)"
+              v-if="note.SITE_ID !== null"
+              :href="returnUrl6(note.SITE_ID)"
             >
-              {{ note.ORDER_INFO[0].SITE_NAME }}
+              {{ note.SITE_ID }}
             </a>
           </td>
           <td>

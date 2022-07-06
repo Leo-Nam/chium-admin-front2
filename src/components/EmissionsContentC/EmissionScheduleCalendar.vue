@@ -1,4 +1,4 @@
-<template>
+<template ref="refCalendar"> 
   <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
@@ -133,7 +133,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
+import {mapGetters, mapActions} from "vuex"
   export default {
     data: () => ({
       focus: '',
@@ -158,6 +158,10 @@ import {mapGetters} from "vuex"
       this.$refs.calendar.checkChange()
     },
     methods: {
+    ...mapActions('emissions',['sp_admin_get_disposer_schedule']),
+		reloadPage(){
+			console.log('자식컴포넌트 리로드')
+		},
       viewDay ({ date }) {
         this.focus = date
         this.type = 'day'
@@ -190,40 +194,32 @@ import {mapGetters} from "vuex"
 
         nativeEvent.stopPropagation()
       },
-      updateRange ({ start, end }) {
+      async updateRange () {
+		await this.sp_admin_get_disposer_schedule({orderId: this.$route.params.id})
         const events = []
-
-        const min = new Date(`${start.date}T00:00:00`)
-        const max = new Date(`${end.date}T23:59:59`)
-        const days = (max.getTime() - min.getTime()) / 86400000
-        const eventCount = this.rnd(days, days + 20)
-        // const eventCount = this.getOrderSchedule.length
-		// console.log(eventCount, 'eventCount')
+        const eventCount = this.getOrderSchedule.length
+		console.log(eventCount, 'eventCount')
 
         for (let i = 0; i < eventCount; i++) {
-          const allDay = this.rnd(0, 3) === 0
-          const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-          const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-          const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-          const second = new Date(first.getTime() + secondTimestamp)
-
-          events.push({
-            name: this.names[this.rnd(0, this.names.length - 1)],
-            start: first,
-            end: second,
-            color: this.colors[this.rnd(0, this.colors.length - 1)],
-            timed: !allDay,
-            // name: this.getOrderSchedule[i].NAME,
-            // start: this.getOrderSchedule[i].START_AT.slice(0,19),
-            // end: this.getOrderSchedule[i].END_AT.slice(0,19),
-            // color: this.color[this.getOrderSchedule[i].COLOR],
-            // timed: this.getOrderSchedule[i].TIMED,
-          })
+			if(this.getOrderSchedule[i].START_AT != null && this.getOrderSchedule[i].END_AT != null){
+				console.log(this.getOrderSchedule[i].NAME)
+				console.log(this.getOrderSchedule[i].START_AT)
+				console.log(this.getOrderSchedule[i].END_AT)
+				events.push({
+					name: this.getOrderSchedule[i].NAME,
+					// start: (this.getOrderSchedule[i].START_AT !== null ? new Date(this.getOrderSchedule[i].START_AT) : null),
+					// end: (this.getOrderSchedule[i].END_AT !== null ? new Date(this.getOrderSchedule[i].END_AT) : null),
+					start: new Date(this.getOrderSchedule[i].START_AT),
+					end: new Date(this.getOrderSchedule[i].END_AT),
+					color: this.colors[this.getOrderSchedule[i].COLOR],
+					timed: this.getOrderSchedule[i].TIMED,
+				})
+			}
         }
 
         this.events = events
-        // this.events = this.getOrderSchedule
-		// console.log(events, '===> events')
+        // this.events = this.getOrderSchedule1
+		console.log(this.events, '===> events')
       },
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a

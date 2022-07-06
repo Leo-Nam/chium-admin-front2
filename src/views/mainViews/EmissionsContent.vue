@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-card class="main-order">
-      <EmissionOrderInfoFirst />
-      <EmissionScheduleCalendar />
+      <EmissionOrderInfoFirst />  
+      <EmissionScheduleCalendar ref="scheduleCalendar" />
       <EmissionCollectorListAreaOfInterest
         :orderid="orderId"
       />
@@ -115,15 +115,14 @@ export default {
   },
   async created(){
 	console.log(this.$route.params.id, "====>this.$route.params.id")
-	await this.sp_admin_get_disposer_schedule({orderId: this.$route.params.id})
     await this.sp_admin_get_new_comings_detail(this.$route.params.id)
     await this.sp_get_site_list_whose_biz_areas_of_interest()
     await this.sp_get_site_list_inside_range()
     await this.logList2({orderId : this.getOrderInfo.ORDER_ID})
   },
   methods : {
-    ...mapActions('emissions',['sp_admin_get_new_comings_detail','sp_get_site_list_whose_biz_areas_of_interest','sp_get_site_list_inside_range','logList2','sp_admin_get_disposer_schedule']),
-    ...mapMutations('emissions',['setNowSelectedOpt','setCircleRange','setNowSelectedIsTransitOpt','setNowSelectedBCodeWithinOpt'])
+    ...mapActions('emissions',['sp_admin_get_new_comings_detail','sp_get_site_list_whose_biz_areas_of_interest','sp_get_site_list_inside_range','logList2']),
+    ...mapMutations('emissions',['setNowSelectedOpt','setCircleRange','setNowSelectedIsTransitOpt','setNowSelectedBCodeWithinOpt']),
   },
 }
 </script>

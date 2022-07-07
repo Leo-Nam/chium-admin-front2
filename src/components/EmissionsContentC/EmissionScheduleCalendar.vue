@@ -148,7 +148,7 @@ import {mapGetters, mapActions} from "vuex"
       selectedElement: null,
       selectedOpen: false,
       events: [],
-      colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
+      colors: ['black', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1', 'red'],
       names: ['폐기물배출등록', '방문', '입찰', '폐기물수거요청일', '폐기물수거요청응답일', '방문조기마감일', '입찰조기마감일', '1순위자응답'],
     }),
 	computed : {

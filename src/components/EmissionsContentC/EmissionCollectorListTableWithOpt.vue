@@ -32,7 +32,7 @@
           >
             <td
               style="cursor : pointer"
-              @click="goToContent(site.ID)"
+              @click="goToContent(site.ID, 1)"
             >
               {{ site.SITE_NAME }}
             </td>
@@ -57,7 +57,12 @@
             :key="idx"
             style="cursor : pointer"
           >
-            <td>{{ site.SITE_NAME }}</td>
+            <td
+              style="cursor : pointer"
+              @click="goToContent(site.ID, 0)"
+            >
+              {{ site.SITE_NAME }}
+            </td>
             <td>{{ site.PHONE }}</td>
             <td>{{ changeToString(site.DIST) }}</td>
             <td>{{ changeToIsTransit(site.IS_TRANSIT) }}</td>
@@ -140,8 +145,12 @@ export default {
       }
       return '불가능'
     },
-     goToContent(siteId){
-       this.$router.push({ path: `/admin/main/emitter-collector/${siteId}`})
+     goToContent(siteId, siteCategory){
+		if(siteCategory === 1) {
+			this.$router.push({ path: `/admin/main/emitter-collector/${siteId}`})
+		} else {
+			this.$router.push({ path: `/admin/main/not-member/${siteId}`})
+		}
     },
     showNoteCreatePopup(siteId, siteCategory){
 		this.dialog = true

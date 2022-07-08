@@ -22,6 +22,34 @@ import EmissionsSearchBar from "@/components/EmissionsListViewC/EmissionsSearchB
 import EmissionsTable from "@/components/EmissionsListViewC/EmissionsTable.vue"
 
 import {mapActions,mapMutations} from "vuex"
+  if (window.EventSource) {
+    var source = new EventSource('http://192.168.0.46:3000/admin/main/server_notification')
+	console.log("source >>>>>>>>", source)
+    source.addEventListener('message', function(e) {
+    //   document.getElementById('data').innerHTML = e.data
+      console.log(e.data)
+    }, false)
+
+    source.addEventListener('open', function(e) {
+    //   document.getElementById('state').innerHTML = "Connected" + e.data
+      console.log("Connected", e.data)
+    }, false)
+
+    // source.addEventListener('error', function(e) {
+    //   const id_state = document.getElementById('state')
+    //   if (e.eventPhase == EventSource.CLOSED)
+    //     source.close()
+    //   if (e.target.readyState == EventSource.CLOSED) {
+    //     id_state.innerHTML = "Disconnected"
+    //   }
+    //   else if (e.target.readyState == EventSource.CONNECTING) {
+    //     id_state.innerHTML = "Connecting..."
+    //   }
+    // }, false)
+  } else {
+    console.log("Your browser doesn't support SSE")
+  }
+
 export default {
 
   components : {
@@ -67,6 +95,8 @@ export default {
       this.setSearch(searchKeyword)
       this.setPageNum(pageToGo)
       this.sp_admin_get_new_comings()
+      //this.server_notification()
+		console.log('server_notification is running!!')
 
     }
   },

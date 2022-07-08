@@ -58,12 +58,22 @@
             </a>
           </td>
           <td> 
-            <a
-              v-if="note.SITE_ID !== null"
-              :href="returnUrl6(note.SITE_ID)"
-            >
-              {{ note.SITE_ID }}
-            </a>
+            <div v-if="note.SITE_ID !== null">
+              <div v-if="note.SITE_CATEGORY === 0">
+                <a
+                  :href="returnUrl8(note.SITE_ID)"
+                >
+                  {{ note.SITE_ID }}
+                </a>
+              </div>
+              <div v-else>
+                <a
+                  :href="returnUrl6(note.SITE_ID)"
+                >
+                  {{ note.SITE_ID }}
+                </a>
+              </div>
+            </div>
           </td>
           <td>
             <a
@@ -172,6 +182,13 @@ export default {
     returnUrl7(memberId){
 		if (memberId !== null){
 			return `/admin/main/person-emitter/${memberId}`
+		} else {
+			return
+		}
+    },
+    returnUrl8(siteId){
+		if (siteId !== null){
+			return `/admin/main/not-member/${siteId}`
 		} else {
 			return
 		}

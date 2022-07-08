@@ -1,4 +1,5 @@
 import emissionsApi from '@/api/apiList/emissionsApi'
+import commonApi from '@/api/apiList/commonApi'
 import logApi from "@/api/apiList/logApi";
 export default {
   namespaced: true,
@@ -228,6 +229,16 @@ export default {
         const res = await emissionsApi.sp_admin_get_disposer_schedule({rootState, orderId})
         console.log(res.data.data.DATA,'sp_admin_get_disposer_schedule')
         commit("setOrderSchedule", res.data.data.DATA);
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    async server_notification(){
+      try {
+        const res = await commonApi.server_notification()
+        console.log(res)
+        console.log('server_notification')
       } catch (e) {
         console.log(e)
       }

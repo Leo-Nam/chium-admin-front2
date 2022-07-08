@@ -36,7 +36,7 @@
         class="text-center"
         cols="12"
       >
-        {{ new Date().getFullYear() }} — <strong>CHIUM ADMIN PAGE Ver. 1.0.0</strong>
+        {{ new Date().getFullYear() }} — <strong>CHIUM ADMIN PAGE Ver. {{ version }}</strong>
       </v-col>
     </v-footer>
     <v-overlay
@@ -57,6 +57,7 @@
 <script>
 
 import {mapGetters,mapActions} from "vuex"
+import packageJson from "/package.json"
 
 import NavList from "@/components/AppC/NavList"
 export default {
@@ -66,7 +67,9 @@ export default {
   },
   data(){
     return{
-      value : false
+		value : false,
+		packageJson : packageJson,
+		version: null
     }
   },
   computed : {
@@ -78,6 +81,10 @@ export default {
       this.checkIsLogged()
     }
   },
+  mounted() {
+	this.version = this.packageJson.version
+	this.getLastModifiedDateOfPackageJson()
+  },
   created(){
     this.checkIsLogged()
   },
@@ -85,7 +92,7 @@ export default {
     ...mapActions('common',['checkIsLogged']),
     toggle(){
       this.value = !this.value
-    }
+    },
   }
 }
 </script>

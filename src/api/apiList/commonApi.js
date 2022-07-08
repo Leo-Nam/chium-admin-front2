@@ -19,12 +19,6 @@ export default {
     return myAxios(url, method, data);
   },
 
-  server_notification() {
-	console.log('server_notification')
-	const url = "api/admin/common/server_notification";
-	return myAxios(url, 'get', null);
-},
-
 
 
   // 유저의 인덱스의 값

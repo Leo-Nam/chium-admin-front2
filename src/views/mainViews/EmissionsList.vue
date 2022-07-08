@@ -68,7 +68,6 @@ export default {
       this.setSearch(searchKeyword)
       this.setPageNum(pageToGo)
       this.sp_admin_get_new_comings()
-      //this.server_notification()
 
     }
   },

@@ -1,6 +1,6 @@
 {
   "name": "chium-admin",
-  "version": "0.0.3",
+  "version": "0.0.2",
   "private": false,
   "update date": null,
   "scripts": {
@@ -15,6 +15,7 @@
     "core-js": "^3.8.3",
     "css-loader": "^6.7.1",
     "eslint-plugin-vuetify": "^1.1.0",
+    "fs": "^0.0.1-security",
     "npm-version": "^1.1.0",
     "secure-ls": "^1.2.6",
     "socket.io-client": "^2.3.0",

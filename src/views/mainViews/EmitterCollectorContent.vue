@@ -33,7 +33,7 @@
       class="top-card"
     >
       <v-card-title>
-        노트1
+        노트
       </v-card-title>
       <NoteInput
         :site-id="getSeletedUser.siteId"

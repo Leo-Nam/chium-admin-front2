@@ -55,6 +55,7 @@ export default {
           B_CODE: state.selectedUser.bCode,
           ADDR: state.selectedUser.addr,
           WSTE_LIST: state.selectedUser.wsteList,
+          WSTE_CLASS_LIST: state.selectedUser.wsteClassList,
           LAT: state.selectedUser.lat,
           LNG: state.selectedUser.lng,
           COMP_NAME: state.selectedUser.compName,

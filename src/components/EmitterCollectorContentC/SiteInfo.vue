@@ -154,68 +154,117 @@
               </v-row>
             </v-col>
           </v-row>
-          <v-divider style="margin-top : 20px; margin-bottom : 20px" />
-          <v-row v-if="checkEmiOrCol(getSeletedUser.trmtBizCode)">
-            <v-col>
-              <v-card-title style="display : inline">
-                사업장 폐기물 종류
-              </v-card-title>
-              <span
-                style="font-size: 12px; cursor : pointer; "
-                @click="dialog=true"
-              >
-                종류 추가하기
-                <v-icon style="font-size: 13px">
-                  mdi-plus
-                </v-icon>
-              </span>
-            </v-col>
-          </v-row>
-          <v-row
-            v-for="wste,idx in getSeletedUser['wsteList']"
-            :key="idx"
-          >
-            <v-col>
-              <v-subheader>
-                사업자 폐기물 종류
-              </v-subheader>
-            </v-col>
-            <v-col>
-              <v-card>
-                <v-card-text
-                  hide-details=""
-                  readonly
+          <div v-if="checkEmiOrCol(getSeletedUser.trmtBizCode)">
+            <v-divider style="margin-top : 20px; margin-bottom : 20px" />
+            <v-row>
+              <v-col>
+                <v-card-title style="display : inline">
+                  영업대상 폐기물 대구분
+                </v-card-title>
+                <span
+                  style="font-size: 12px; cursor : pointer; "
+                  @click="dialog1=true"
                 >
-                  {{ wste.WSTE_NM }}
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col>
-              <v-card>
-                <v-card-text
-                  hide-details=""
-                  readonly
-                >
-                  {{ wste.APPR_NM }}
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col
-              cols="auto"
-              style="cursor : pointer"
-              @click="removeWste(wste)"
+                  종류 추가하기
+                  <v-icon style="font-size: 13px">
+                    mdi-plus
+                  </v-icon>
+                </span>
+              </v-col>
+            </v-row>
+            <v-row
+              v-for="wsteClass, idx in getSeletedUser['wsteClassList']"
+              :key="idx+'c'"	
             >
-              <v-icon>
-                mdi-close
-              </v-icon>
-            </v-col>
-          </v-row>
+              <!--//[Vue warn]: Duplicate keys detected: '0'. This may cause an update error. 이런 에러가 발생하여서 :key의 이름에 +'c'를 붙여서 다른 키와 이름이 중복되지 않도록 함-->
+              <v-col>
+                <v-subheader>
+                  폐기물 대구분
+                </v-subheader>
+              </v-col>
+              <v-col>
+                <v-card>
+                  <v-card-text
+                    hide-details=""
+                    readonly
+                  >
+                    {{ wsteClass.WSTE_CLASS_NAME }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col
+                cols="auto"
+                style="cursor : pointer"
+                @click="removeWsteClass(wsteClass)"
+              >
+                <v-icon>
+                  mdi-close
+                </v-icon>
+              </v-col>
+            </v-row>
+            <v-divider style="margin-top : 20px; margin-bottom : 20px" />
+            <v-row>
+              <v-col>
+                <v-card-title style="display : inline">
+                  영업대상 폐기물 소구분
+                </v-card-title>
+                <span
+                  style="font-size: 12px; cursor : pointer; "
+                  @click="dialog2=true"
+                >
+                  종류 추가하기
+                  <v-icon style="font-size: 13px">
+                    mdi-plus
+                  </v-icon>
+                </span>
+              </v-col>
+            </v-row>
+            <v-row
+              v-for="wste,idx2 in getSeletedUser['wsteList']"
+              :key="idx2"
+            >
+              <v-col>
+                <v-subheader>
+                  폐기물 종류
+                </v-subheader>
+              </v-col>
+              <v-col>
+                <v-card>
+                  <v-card-text
+                    hide-details=""
+                    readonly
+                  >
+                    {{ wste.WSTE_NM }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col>
+                <v-card>
+                  <v-card-text
+                    hide-details=""
+                    readonly
+                  >
+                    {{ wste.APPR_NM }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col
+                cols="auto"
+                style="cursor : pointer"
+                @click="removeWste(wste)"
+              >
+                <v-icon>
+                  mdi-close
+                </v-icon>
+              </v-col>
+            </v-row>
+          </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
         <v-expansion-panel-header>
           <v-card-title>
-            허가증 정보 변경1
+            허가증 정보 변경
           </v-card-title>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -292,9 +341,13 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
+    <WsteClassKind
+      :dialog="dialog1"
+      @close-dialog="closeDialog1"
+    />
     <WsteKind
-      :dialog="dialog"
-      @close-dialog="closeDialog"
+      :dialog="dialog2"
+      @close-dialog="closeDialog2"
     />
 
     <v-file-input
@@ -317,15 +370,20 @@ import SubHeader from "@/components/EmitterCollectorContentC/SubHeader.vue"
 
 import ImagePopup from "@/components/EmitterCollectorContentC/ImagePopup.vue"
 import WsteKind from "@/components/EmitterCollectorContentC/WsteKind"
+import WsteClassKind from "@/components/EmitterCollectorContentC/WsteClassKind"
 
 
 export default {
   components : {
-    SubHeader,WsteKind,ImagePopup
+    SubHeader,
+	WsteKind,
+	WsteClassKind, 
+	ImagePopup
   },
   data(){
     return  {
-      dialog : false,
+      dialog1 : false,
+      dialog2 : false,
       imgDialog1 : false,
       imgDialog2 : false,
     }
@@ -334,13 +392,19 @@ export default {
     ...mapGetters('selectedUser',['getLine1','getLine2','getSeletedUser','getShowIf'])
   },
   methods : {
-    ...mapMutations('selectedUser',['changeSelectedUserInfo','setAddr','removeWsteList']),
+    ...mapMutations('selectedUser',['changeSelectedUserInfo','setAddr','removeWsteList','removeWsteClassList']),
     ...mapActions('selectedUser',['uploadPermitImgToS3','uploadBizImgToS3','sp_admin_update_site_info']),
     removeWste(value){
       this.removeWsteList(value)
     },
-    closeDialog(){
-      this.dialog = false
+    removeWsteClass(value){
+      this.removeWsteClassList(value)
+    },
+    closeDialog1(){
+      this.dialog1 = false
+    },
+    closeDialog2(){
+      this.dialog2 = false
     },
     changeContent(e){
       if (e == 'addr'){

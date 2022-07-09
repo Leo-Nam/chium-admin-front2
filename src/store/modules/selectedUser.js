@@ -26,6 +26,7 @@ export default {
       phone: null,
       bCode: null,
       wsteList: [],
+      wsteClassList: [],
       siteList: [],
       lat: null,
       lng: null,
@@ -148,8 +149,10 @@ export default {
       state.selectedUser.bCode = payload.B_CODE,
       // 최종 수정 날짜
       state.selectedUser.updatedAt = payload.UPDATED_AT.slice(0, 19);
-      // 배출 리스트
+      // 영업대상 폐기물 소구분 리스트
       state.selectedUser.wsteList = payload.WSTE_INFO;
+      // 영업대상 폐기물 대구분 리스트
+      state.selectedUser.wsteClassList = payload.WSTE_CLASS_INFO;
       // 위도 경도
       state.selectedUser.lat = payload.SITE_INFO[0].LAT;
       state.selectedUser.lng = payload.SITE_INFO[0].LNG;
@@ -171,6 +174,9 @@ export default {
 
       if (payload.WSTE_INFO == null) {
         state.selectedUser.wsteList = [];
+      }
+      if (payload.WSTE_CLASS_INFO == null) {
+        state.selectedUser.wsteClassList = [];
       }
       if (payload.SITE_LIST == null) {
         state.selectedUser.siteList = [];
@@ -213,10 +219,20 @@ export default {
       state.selectedUser.lng = payload.lng;
     },
     addWsteList(state, payload) {
+		console.log('123>>>', state, payload)
       state.selectedUser.wsteList.push(payload);
+    },
+    addWsteClassList(state, payload) {
+		console.log('456>>>', state, payload)
+      state.selectedUser.wsteClassList.push(payload);
     },
     removeWsteList(state, payload) {
       state.selectedUser.wsteList = state.selectedUser.wsteList.filter(
+        (v) => v != payload
+      );
+    },
+    removeWsteClassList(state, payload) {
+      state.selectedUser.wsteClassList = state.selectedUser.wsteClassList.filter(
         (v) => v != payload
       );
     },

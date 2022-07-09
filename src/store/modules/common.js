@@ -10,6 +10,8 @@ export default {
     wsteList1: [],
     // 배출 폐기물 리스트 2
     wsteList2: [],
+    // 배출 폐기물 대구분 리스트
+    wsteClassList: [],
     // 네비바 리스트
     navItems: [],
 
@@ -38,6 +40,7 @@ export default {
     setWsteLists(state, payload) {
       state.wsteList1 = payload.wste1;
       state.wsteList2 = payload.wste2;
+      state.wsteClassList = payload.wste3;
     },
     // 네비바 설정
     setNavItems(state, isLogged) {
@@ -160,17 +163,21 @@ export default {
       const method = "post";
       const url = "api/admin/common/get_wste_lists";
       const url2 = "api/admin/common/get_wste_appearance";
+      const url3 = "api/admin/common/sp_req_b_wste_class_code";
       let wste1
       let wste2
+      let wste3
       try {
         wste1 = await myAxios(url, method);
         wste2 = await myAxios(url2, method);
+        wste3 = await myAxios(url3, method);
       } catch (e) {
         console.log(e)
       }
       commit("setWsteLists", {
         wste1: wste1.data.data,
         wste2: wste2.data.data,
+        wste3: wste3.data.data,
       });
     },
     // 로그인 여부에 따라 네비게이션 목록 바꿔줌
@@ -191,7 +198,7 @@ export default {
     },
     // 폐기물 리스트 나태냄
     showWsteLists(state) {
-      return { wsteList1: state.wsteList1, wsteList2: state.wsteList2 };
+      return { wsteList1: state.wsteList1, wsteList2: state.wsteList2, wsteClassList: state.wsteClassList };
     },
     // 네비게이션 리스트 나타냄
     getNavList(state) {

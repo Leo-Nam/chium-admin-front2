@@ -135,9 +135,9 @@ export default {
       },
       closeDialog(){
         if (this.wste1 && this.wste2){
-          console.log(this.getSeletedUser.wsteList.filter(v=>{console.log(v)}))
-          console.log(this.wste1)
-          console.log(this.wste2)
+          console.log('this.getSeletedUser.wsteList.filter(v=>{console.log(v)}) >>>>>>',this.getSeletedUser.wsteList.filter(v=>{console.log(v)}))
+          console.log('this.wste1 >>>>>>',this.wste1)
+          console.log('this.wste2 >>>>>>',this.wste2)
           const checkExist = this.getSeletedUser.wsteList.filter(v => {
             return  v.WSTE_NM == this.wste1.NAME &&
                     v.WSTE_CODE == this.wste1.CODE &&
@@ -156,6 +156,7 @@ export default {
             APPR_NM: this.wste2.NAME,
             APPR_CODE :this.wste2.ID,
             })
+			console.log('close-dialog')
           this.$emit('close-dialog')
         }else {
           this.$emit('close-dialog')

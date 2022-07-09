@@ -83,7 +83,6 @@ export default {
   },
   mounted() {
 	this.version = this.packageJson.version
-	this.getLastModifiedDateOfPackageJson()
   },
   created(){
     this.checkIsLogged()

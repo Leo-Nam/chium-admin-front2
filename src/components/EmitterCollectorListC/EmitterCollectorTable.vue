@@ -1,26 +1,18 @@
 <template>
   <v-simple-table
-
+    dense
     fixed-header
-    height="700px"
+    height="600px"
   >
     <template #default>
       <thead>
         <tr>
-          <th class="text-left">
-            ID
-          </th>
-          <th class="text-left">
-            구분
-          </th>
-          <th class="text-left">
-            사이트 이름
-          </th>
-          <th class="text-left">
-            사업자 등록 번호
-          </th>
-          <th class="text-left">
-            등록일자
+          <th 
+            v-for="th in headers"
+            :key="th"
+            class="text-left"
+          >
+            {{ th }}
           </th>
         </tr>
       </thead>
@@ -44,6 +36,11 @@
 <script>
 import {mapGetters} from "vuex"
 export default {
+	data(){
+		return{
+			headers: ['ID', '구분', '사이트 이름', '사업자 등록 번호', '등록일자']
+		}
+	},
   computed : {
     ...mapGetters('emitterCollector',['getEmitterCollectorList'])
   },

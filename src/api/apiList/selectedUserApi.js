@@ -67,6 +67,7 @@ export default {
         },
       ]),
     };
+	console.log(data)
     return myAxios(url, method, data);
   },
   sp_admin_get_personal_details({ rootState, memberId }) {

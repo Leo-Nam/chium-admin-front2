@@ -15,9 +15,10 @@ export default {
   created(){
     const notMemberId = this.$route.params.id
     this.sp_admin_retrieve_prospective_site_info({siteId : notMemberId})
+    this.sp_req_b_trmt_biz()
   },
   methods : {
-    ...mapActions('notMember',['sp_admin_retrieve_prospective_site_info'])
+    ...mapActions('notMember',['sp_admin_retrieve_prospective_site_info', 'sp_req_b_trmt_biz'])
   },
 
 }

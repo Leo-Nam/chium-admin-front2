@@ -75,7 +75,6 @@ export default {
     async sp_admin_get_new_report_details({rootState, commit},{reportId}){
       try {
         const res = await reportApi.sp_admin_get_new_report_details({rootState,reportId})
-        console.log(res,'레스레스')
         commit("setReportDetail", res.data.data[0].REPORT_INFO[0]);
         commit("common/setNotes", res.data.data[0].NOTES.NOTES, { root : true });
       } catch (e) {

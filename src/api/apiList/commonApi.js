@@ -15,7 +15,6 @@ export default {
         },
       ]),
     };
-    console.log(noteDetails)
     return myAxios(url, method, data);
   },
 

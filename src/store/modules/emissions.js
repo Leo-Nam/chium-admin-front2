@@ -141,7 +141,6 @@ export default {
       try {
         const orderId = Number(payload)
         const res = await emissionsApi.sp_admin_get_new_comings_detail({rootState ,orderId })
-        console.log(res,'레스레스')
         commit('setOrderInfo',res.data.data[0].ORDER_INFO[0])
         commit('setBiddingInfo',res.data.data[0].ORDER_INFO[0].BIDDING_LIST)
         commit('setTransactionList',res.data.data[0].ORDER_INFO[0].TRANSACTION_INFO)

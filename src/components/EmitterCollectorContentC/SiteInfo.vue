@@ -490,21 +490,22 @@ export default {
 
 
                 Promise.resolve(data).then(()=>{
-                  return new Promise((resolve,reject)=>{
-                    const geocoder = new window.kakao.maps.services.Geocoder();
-                    geocoder.addressSearch(fullRoadAddr,(result,status)=>{
-                      if(status === window.kakao.maps.services.Status.OK){
-                          const { x, y } = result[0];
-                          resolve({ lat: y, log: x })
-                      }else{
-                          reject();
-                      }
-                    })
-                  })
+					return new Promise((resolve,reject)=>{
+						const geocoder = new window.kakao.maps.services.Geocoder();
+						geocoder.addressSearch(fullRoadAddr,(result,status)=>{
+						if(status === window.kakao.maps.services.Status.OK){
+							const { x, y } = result[0];
+							resolve({ lat: y, log: x })
+						}else{
+							reject();
+						}
+						})
+					})
                 }).then(result => {
-                  let lat = parseFloat(result.lat)
-                  let lng = parseFloat(result.log)
-                  this.setAddr({ addr : data.address+', ', bCode : data.bcode, lat, lng } )
+					let lat = parseFloat(result.lat)
+					let lng = parseFloat(result.log)
+					this.setAddr({ addr : data.address+', ', bCode : data.bcode, lat, lng } )
+						console.log('this.addrInfo >>>>>>', { addr : data.address+', ', bCode : data.bcode, lat, lng })
                 })
 
             },

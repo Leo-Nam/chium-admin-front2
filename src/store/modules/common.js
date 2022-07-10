@@ -206,7 +206,6 @@ export default {
     },
     // 노트 리스트를 가지고옴
     getNotes(state){
-		console.log(state.notes, 'state.notes')
       return state.notes
     }
   },

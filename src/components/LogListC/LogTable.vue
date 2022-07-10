@@ -79,7 +79,7 @@
             <td> 
               <a
                 v-if="log.SITE_ID !== null"
-                :href="returnUrl6(log.SITE_ID)"
+                :href="returnUrl6(log.SITE_ID, log.USER_CATEGORY)"
               >
                 {{ log.SITE_ID }} 
               </a>
@@ -87,7 +87,7 @@
             <td>
               <a
                 v-if="log.SITE_ID !== null"
-                :href="returnUrl6(log.SITE_ID)"
+                :href="returnUrl6(log.SITE_ID, log.USER_CATEGORY)"
               >
                 {{ log.SITE_NAME }} 
               </a>
@@ -201,9 +201,13 @@ export default {
 			return
 		}
     },
-    returnUrl6(siteId){
+    returnUrl6(siteId, userType){
 		if (siteId !== null){
-			return `/admin/main/emitter-collector/${siteId}`
+			if (userType === 'member'){
+				return `/admin/main/emitter-collector/${siteId}`
+			} else {
+				return `/admin/main/not-member/${siteId}`
+			}
 		} else {
 			return
 		}

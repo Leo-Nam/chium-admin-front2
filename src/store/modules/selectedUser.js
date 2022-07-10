@@ -311,7 +311,7 @@ export default {
     async sp_admin_update_site_info({ state, rootState }) {
       try {
         await selectedUserApi.sp_admin_update_site_info({state,rootState});
-        window.location.reload();
+        //window.location.reload();
       } catch (e) {
         console.log(e);
       }

@@ -44,6 +44,9 @@
   <v-subheader v-else-if="title == 'managerList'">
     담당자
   </v-subheader>
+  <v-subheader v-else-if="title == 'contactPath'">
+    접속경로
+  </v-subheader>
 </template>
 <script>
 export default {

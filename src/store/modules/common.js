@@ -103,8 +103,13 @@ export default {
           },
           {
             title: "상담내역",
-            icon: "mdi-math-log",
+            icon: "mdi-face-agent",
             route: "/admin/main/note-list/list"
+          },
+          {
+            title: "문의사항",
+            icon: "mdi-alert",
+            route: "/admin/main/question/list"
           },
           { title: "로그아웃",
             icon: "mdi-account-cancel",

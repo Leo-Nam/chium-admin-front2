@@ -36,6 +36,8 @@ export default {
       bizRegImgPath: null,
       compName: null,
       repName: null,
+      contactPath: null,
+      addedSiteList: [],
     },
     // 배출자 밑에 보여지는 리스트들 ( 입찰 한 사람들 ?)
     showListIfIEmitter : {
@@ -63,7 +65,8 @@ export default {
     // 개인 배출자의 정보가 여기에 담긴다.
     selectedPersonEmitter : {
     },
-	businessArea: []
+	businessArea: [],
+	InterestedSite: []
   },
   mutations: {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -162,6 +165,8 @@ export default {
       state.selectedUser.userType = payload.USER_TYPE;
       // 값이 null 일때에도 배열상태를 유지하기 위해
       state.selectedUser.managerList = payload.MANAGER_LIST
+      state.selectedUser.contactPath = payload.CONTACT_PATH
+      state.selectedUser.addedSiteList = payload.ADDED_SITE_LIST
 
       if (payload.MANAGER_LIST == null) {
         state.selectedUser.managerList = [];
@@ -265,6 +270,12 @@ export default {
 			state.businessArea.push(areaName)
 		}
 	},
+	setInsteredSiteList(state, payload){
+		state.InterestedSite = []
+		for(var i=0;i<payload.length;i++){
+			state.InterestedSite.push(payload[i].TARGET_NAME)
+		}
+	},
   },
   actions: {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -276,6 +287,7 @@ export default {
       try {
         const res = await selectedUserApi.sp_admin_retrieve_site_info({state,rootState,siteId})
         const siteInfo = res.data.data[0].SITE_INFO[0];
+		console.log('siteInfo >>>>>>', siteInfo)
         commit("setSelectedUser", siteInfo);
         if (state.selectedUser.userType === 3){
           commit('setShowListIfIEmitter', siteInfo.COLLECTOR_BIDDING_LIST.BIDDINGS)
@@ -283,6 +295,7 @@ export default {
           commit('setShowListIfIEmitter', siteInfo.DISPOSER_ORDER_LIST)
         }
 		commit('setBusinessAreaList', siteInfo.BUSINESS_AREA)
+		commit('setInsteredSiteList', siteInfo.ADDED_SITE_LIST)
         commit('common/setNotes',res.data.data[0].NOTES.NOTES,{root : true})
       } catch (e) {
         console.log(e);
@@ -327,6 +340,7 @@ export default {
       try {
         const memberId = payload
         const res = await selectedUserApi.sp_admin_get_personal_details({rootState, memberId});
+		console.log(res.data.data)
         commit('setSelectedPersonEmitter',res.data.data)
         commit('common/setNotes',res.data.data.NOTES.NOTES, {root : true})
       } catch (e) {
@@ -376,6 +390,7 @@ export default {
         // readonly
         confirmedAt: state.selectedUser.confirmedAt,
         confirmed: state.selectedUser.confirmed,
+        contactPath: state.selectedUser.contactPath,
       };
     },
     // 두 번째 나타낼 정보
@@ -411,6 +426,22 @@ export default {
 
 	getBusinessAreaList(state){
 		return state.businessArea
+	},
+
+	getInterestedSiteList(state){
+		return state.selectedUser.addedSiteList
+	},
+
+	getInterestedSiteCount(state){
+		if (state.selectedUser.addedSiteList === null){
+			return 0
+		} else {
+			return state.selectedUser.addedSiteList.length
+		}
+	},
+
+	getUserType(state){
+		return state.selectedUser.userType
 	}
   },
 };

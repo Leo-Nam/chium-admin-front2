@@ -86,6 +86,10 @@
                       </a>
                     </div>
                   </div>
+                  <!-- 접속경로인 경우 -->
+                  <div v-else-if="content == 'CONTACT_PATH'">
+                    {{ getSelectedPersonEmitter['CONTACT_PATH'] }}
+                  </div>
                   <!-- 그 외 분기 -->
                   <div v-else>
                     <v-text-field
@@ -154,6 +158,7 @@ export default {
         'NOTICE_ENABLED',
         'PUSH_ENABLED',
         '소속사이트',
+        '접속경로',
       ],
        headerArray : [
         'USER_ID',
@@ -166,6 +171,7 @@ export default {
         'NOTICE_ENABLED',
         'PUSH_ENABLED',
         'SITE_ID',
+        'CONTACT_PATH',
         ]
     }
   },

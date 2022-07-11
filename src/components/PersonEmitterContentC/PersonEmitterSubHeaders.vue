@@ -28,7 +28,8 @@ export default {
         PUSH_ENABLED: 'PUSH_ENABLED',
         USER_ID: '아이디',
         USER_NAME: '이름',
-		SITE_ID: '소속사이트'
+		SITE_ID: '소속사이트',
+		CONTACT_PATH_NAME: '접속경로'
       }
     }
   }

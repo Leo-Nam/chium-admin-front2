@@ -5,7 +5,19 @@
       <SiteInfo />
     </v-card>
 
-    <v-card class="top-card">
+    <v-card 
+		v-if="getUserType==2"
+		class="top-card"
+	>
+		<div v-if="getInterestedSiteCount>0">
+			<InterestedSite />
+		</div>
+    </v-card>
+
+    <v-card 
+		v-if="getUserType==3"
+		class="top-card"
+	>
       <BusinessArea />
     </v-card>
 
@@ -54,6 +66,7 @@ import OptList from "@/components/EmitterCollectorContentC/OptList.vue"
 import mapListTable from "@/components/EmitterCollectorContentC/mapListTable.vue"
 import EmitOrColList from "@/components/EmitterCollectorContentC/EmitOrColList.vue"
 import BusinessArea from "@/components/EmitterCollectorContentC/BusinessArea.vue"
+import InterestedSite from "@/components/EmitterCollectorContentC/InterestedSite.vue"
 import NoteInput from "@/components/CommonC/NoteInput.vue"
 import NoteList from "@/components/CommonC/NoteList.vue"
 
@@ -68,11 +81,12 @@ export default {
     EmitOrColList,
     NoteInput,
     NoteList,
-    BusinessArea
+    BusinessArea,
+    InterestedSite
   },
 
   computed : {
-    ...mapGetters('selectedUser',['getShowListIfIEmitter','getSeletedUser']),
+    ...mapGetters('selectedUser',['getShowListIfIEmitter','getSeletedUser', 'getUserType', 'getInterestedSiteCount']),
     ...mapGetters('common',['getNotes'])
   },
   watch : {
@@ -95,12 +109,12 @@ export default {
   methods : {
     ...mapActions('selectedUser',['sp_admin_retrieve_site_info']),
      ...mapActions('common',['getWsteLists','checkIsLogged']),
-
   },
 
 }
 </script>
 <style lang="scss">
+a { text-decoration: none; }
 .top-card {
   padding : 40px;
   margin-bottom: 40px;

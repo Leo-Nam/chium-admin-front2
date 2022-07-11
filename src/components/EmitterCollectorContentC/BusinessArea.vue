@@ -1,15 +1,18 @@
 <template>
-  <v-chip-group
-    active-class="primary--text"
-    column
-  >
-    <v-chip
-      v-for="area in getBusinessAreaList"
-      :key="area"
-    >
-      {{ area }}
-    </v-chip>
-  </v-chip-group>
+	<div>
+	<div>관심지역</div>
+		<v-chip-group
+			active-class="primary--text"
+			column
+		>
+			<v-chip
+			v-for="area in getBusinessAreaList"
+			:key="area"
+			>
+			{{ area }}
+			</v-chip>
+		</v-chip-group>
+	</div>
 </template>
 <script>
 import { mapGetters, mapActions, mapMutations} from "vuex"

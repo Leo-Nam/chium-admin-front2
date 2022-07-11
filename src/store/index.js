@@ -12,6 +12,7 @@ import report from "./modules/report";
 import log from "./modules/log";
 import notMember from "./modules/notMember";
 import noteList from "./modules/noteList";
+import questionList from "./modules/questionList";
 import addAdmin from "./modules/addAdmin";
 import createPersistedState from "vuex-persistedstate";
 import SecureLS from "secure-ls";
@@ -43,6 +44,7 @@ export default new Vuex.Store({
     log,
     notMember,
 	noteList,
+	questionList,
 	addAdmin
   },
 });

@@ -197,6 +197,20 @@ const routes = [
 
                 ]
               },
+              {
+                path: "question",
+                name: "question",
+                component: () =>
+                  import("../views/defaultViews/QuestionDefaultView.vue"),
+                children: [
+                  {
+                    path: "list",
+                    name: "question-list",
+                    component: () => import("../views/mainViews/QuestionList.vue"),
+                  },
+
+                ]
+              },
 
             ],
           },

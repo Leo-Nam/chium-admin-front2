@@ -64,6 +64,9 @@
                   </div>
 
                   <!-- ######################### 담당자 ####################### -->
+                  <div v-else-if="key==='contactPath'">
+                    {{ value }}
+                  </div>
                   <div v-else-if="key in {'managerList': ''}">
                     <!-- value에는 배열이 담긴다. manager에는 오브젝트가 담긴다. PHONE, USER_NAME -->
                     <div

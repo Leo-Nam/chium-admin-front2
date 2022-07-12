@@ -1,24 +1,24 @@
 <template>
   <div>
-    <v-row>
-      <v-col
-        cols="auto"
-      >
-		<VersionUpdateCategory />
-      </v-col>
-      <v-col
-        cols="auto"
-      >
-		{{ getVersionStateChanged }}
-      </v-col>
-      <v-col
-        cols="auto"
-      >
-		<v-btn @click="commitVersionChangedDetails">
-			수정하기
-		</v-btn>
-      </v-col>
-    </v-row>
+	<v-row>
+		<v-col
+			cols="auto"
+		>
+			<VersionUpdateCategory />
+		</v-col>
+		<v-col
+			cols="auto"
+		>
+			{{ getVersionStateChanged }}
+		</v-col>
+		<v-col
+			cols="auto"
+		>
+			<v-btn @click="commitVersionChangedDetails">
+				수정하기
+			</v-btn>
+		</v-col>
+	</v-row>
     <v-row>
       <v-col
         cols="auto"

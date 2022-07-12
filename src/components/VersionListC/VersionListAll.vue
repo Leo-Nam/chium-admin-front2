@@ -1,6 +1,6 @@
 <template>
   <div>
-	<div>
+	<div v-if="getUserId===7">
 		<VersionUpdate />
 	</div>
 	<div 
@@ -41,7 +41,7 @@ export default {
 	computed : {
 		...mapActions('versionControl',['sp_admin_get_version_list']),
 		...mapGetters('versionControl',['getVersionList']),
-		// ...mapGetters('common',['getVersionInfo'])
+		...mapGetters('auth',['getUserId'])
 	},
 	methods : {
 		getTime(time){

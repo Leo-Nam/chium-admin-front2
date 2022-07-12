@@ -24,7 +24,7 @@ export default {
     logout(state) {
       // 쿠키에서 토큰제거 후 vuex의 userId, class 초기화
       VueCookies.remove("token");
-      location.reload()
+    //   location.reload()
       Object.assign(state, cloneDeep(INITIAL_STATE));
     },
 

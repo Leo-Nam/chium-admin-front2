@@ -94,14 +94,14 @@ export default {
                 route: "/admin/main/emitter-collector",
               },
               {
-                title: "[ 비회원 ] 배출자 , 수거자 ",
+                title: "[ 비회원 ] 수거자 ",
                 icon: "mdi-account",
                 route: "/admin/main/not-member/list",
               },
             ]
           },
           {
-            title: "배출등록 현황",
+            title: "폐기물등록현황",
             icon: "mdi-new-box",
             route: "/admin/main/emissions/list",
           },

@@ -1,37 +1,42 @@
 <template>
-  <v-simple-table
-    dense
-    fixed-header
-    height="600px"
-  >
-    <template #default>
-      <thead>
-        <tr>
-          <th 
-            v-for="th in headers"
-            :key="th"
-            class="text-left"
-          >
-            {{ th }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="item,idx in getEmitterCollectorList"
-          :key="idx"
-          style="cursor : pointer"
-          @click="goToContent(item.SITE_ID)"
-        >
-          <td>{{ item.SITE_ID }}</td>
-          <td>{{ checkEmOrCol(item.SITE_INFO[0].TRMT_BIZ_CODE) }} </td>
-          <td>{{ item.SITE_NAME }}</td>
-          <td>{{ item.COMPANY_INFO[0].BIZ_REG_CODE }}</td>
-          <td>{{ getTime(item.CREATED_AT) }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+	<div>
+		<v-card-title>
+			사업자회원(배출자, 수거자)
+		</v-card-title>
+		<v-simple-table
+			dense
+			fixed-header
+			height="700px"
+		>
+			<template #default>
+			<thead>
+				<tr>
+				<th 
+					v-for="th in headers"
+					:key="th"
+					class="text-left"
+				>
+					{{ th }}
+				</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					v-for="item,idx in getEmitterCollectorList"
+					:key="idx"
+					style="cursor : pointer"
+					@click="goToContent(item.SITE_ID)"
+				>
+					<td>{{ item.SITE_ID }}</td>
+					<td>{{ checkEmOrCol(item.SITE_INFO[0].TRMT_BIZ_CODE) }} </td>
+					<td>{{ item.SITE_NAME }}</td>
+					<td>{{ item.COMPANY_INFO[0].BIZ_REG_CODE }}</td>
+					<td>{{ getTime(item.CREATED_AT) }}</td>
+				</tr>
+			</tbody>
+			</template>
+		</v-simple-table>
+	</div>
 </template>
 <script>
 import {mapGetters} from "vuex"

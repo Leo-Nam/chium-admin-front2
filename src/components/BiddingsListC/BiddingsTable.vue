@@ -1,40 +1,45 @@
 <template>
-  <v-simple-table
-
-    fixed-header
-    height="700px"
-  >
-    <template #default>
-      <thead>
-        <tr>
-          <th
-            v-for="th,idx in thArray"
-            :key="idx"
-          >
-            {{ th }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="bidding,idx in getBiddingsList"
-          :key="idx"
-          style="cursor : pointer"
-          @click="goToContent(bidding.BIDDING_ID)"
-        >
-          <td>{{ bidding.BIDDING_ID }}</td>
-          <td>{{ bidding.BIDDING_RANK }}</td>
-          <td>{{ changeNumToRegNum(bidding.BID_AMOUNT) }}</td>
-          <td>{{ bidding.ORDER_ID }}</td>
-          <td>{{ bidding.COLLECTOR_NAME }}</td>
-          <td> ({{ bidding.DISPOSER_TYPE }}) {{ bidding.DISPOSER_NAME }}</td>
-          <td>{{ changeBoolToEmoji(bidding.ACTIVE) }}</td>
-          <td>{{ changeBoolToEmoji(bidding.CHECK_STATE) }}</td>
-          <td>{{ getTime(bidding.CREATED_AT) }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+	<div>
+		<v-card-title>
+			입찰정보
+		</v-card-title>
+		<v-simple-table
+			dense
+			fixed-header
+			height="700px"
+		>
+			<template #default>
+			<thead>
+				<tr>
+				<th
+					v-for="th,idx in thArray"
+					:key="idx"
+				>
+					{{ th }}
+				</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					v-for="bidding,idx in getBiddingsList"
+					:key="idx"
+					style="cursor : pointer"
+					@click="goToContent(bidding.BIDDING_ID)"
+				>
+					<td>{{ bidding.BIDDING_ID }}</td>
+					<td>{{ bidding.BIDDING_RANK }}</td>
+					<td>{{ changeNumToRegNum(bidding.BID_AMOUNT) }}</td>
+					<td>{{ bidding.ORDER_ID }}</td>
+					<td>{{ bidding.COLLECTOR_NAME }}</td>
+					<td> ({{ bidding.DISPOSER_TYPE }}) {{ bidding.DISPOSER_NAME }}</td>
+					<td>{{ changeBoolToEmoji(bidding.ACTIVE) }}</td>
+					<td>{{ changeBoolToEmoji(bidding.CHECK_STATE) }}</td>
+					<td>{{ getTime(bidding.CREATED_AT) }}</td>
+				</tr>
+			</tbody>
+			</template>
+		</v-simple-table>
+	</div>
 </template>
 <script>
 import {mapGetters} from "vuex"

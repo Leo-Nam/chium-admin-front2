@@ -21,19 +21,16 @@
 
       <v-spacer></v-spacer>
 	<div v-if="isLogged===true">
-		<v if="getUserClassId <= 101">
 			<router-link
 				to="/admin/main/add-admin"
-				tag="v-btn"
+				v-if="getUserClassId===101"
 			>
-				<v-btn icon>
-					<v-icon>mdi-account</v-icon>
-				</v-btn>
+					<v-btn icon>
+						<v-icon>mdi-account</v-icon>
+					</v-btn>
 			</router-link>
-		</v>
 		<router-link
 			to="/admin/main/log/list"
-			tag="v-btn"
 		>
 			<v-btn icon>
 				<v-icon>mdi-math-log</v-icon>
@@ -41,7 +38,6 @@
 		</router-link>
 		<router-link
 			to="/admin/main/note-list/list"
-			tag="v-btn"
 		>
 			<v-btn icon>
 				<v-icon>mdi-face-agent</v-icon>
@@ -49,7 +45,6 @@
 		</router-link>
 		<router-link
 			to="/admin/main/question/list"
-			tag="v-btn"
 		>
 			<v-btn icon>
 				<v-icon>mdi-alert</v-icon>
@@ -57,7 +52,6 @@
 		</router-link>
 		<router-link
 			to="/admin/main/version/list"
-			tag="v-btn"
 		>
 			<v-btn icon>
 				<v-icon>mdi-dev-to</v-icon>
@@ -65,17 +59,15 @@
 		</router-link>
 		<router-link
 			to="/logout"
-			tag="v-btn"
 		>
 			<v-btn icon>
-				<v-icon>mdi-account-cancel</v-icon>
+				<v-icon>mdi-logout</v-icon>
 			</v-btn>
 		</router-link>
 	</div>
 	<div v-else>
 		<router-link
 			to="/login"
-			tag="v-btn"
 		>
 			<v-btn icon>
 				<v-icon>mdi-login</v-icon>
@@ -189,7 +181,7 @@ export default {
 }
 </script>
 <style >
-
+a { text-decoration: none; }
 html {
 
     height: 100%;

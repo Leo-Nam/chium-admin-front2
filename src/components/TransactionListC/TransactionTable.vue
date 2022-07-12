@@ -1,41 +1,46 @@
 <template>
-  <v-simple-table
+	<div>
+		<v-card-title>
+			트랜잭션
+		</v-card-title>
+		<v-simple-table
+			dense
+			fixed-header
+			height="700px"
+		>
+			<template #default>
+			<thead>
+				<tr>
+				<th
+					v-for="th,idx in thArray"
+					:key="idx"
+				>
+					{{ th }}
+				</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					v-for="transaction,idx in getTransactionList"
+					:key="idx"
+					style="cursor : pointer"
+					@click="goToContent(transaction.ID)"
+				>
+					<td>{{ transaction.ID }}</td>
+					<td>{{ transaction.ORDER_CODE }}</td>
+					<td>{{ transaction.TRANSACTION_TYPE }}</td>
 
-    fixed-header
-    height="700px"
-  >
-    <template #default>
-      <thead>
-        <tr>
-          <th
-            v-for="th,idx in thArray"
-            :key="idx"
-          >
-            {{ th }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="transaction,idx in getTransactionList"
-          :key="idx"
-          style="cursor : pointer"
-          @click="goToContent(transaction.ID)"
-        >
-          <td>{{ transaction.ID }}</td>
-          <td>{{ transaction.ORDER_CODE }}</td>
-          <td>{{ transaction.TRANSACTION_TYPE }}</td>
+					<td>{{ transaction.COLLECTOR_NAME }}</td>
+					<td>{{ transaction.COLLECTOR_SITE_ID }}</td>
+					<td>{{ getTime(transaction.COLLECT_ASK_END_AT) }}</td>
 
-          <td>{{ transaction.COLLECTOR_NAME }}</td>
-          <td>{{ transaction.COLLECTOR_SITE_ID }}</td>
-          <td>{{ getTime(transaction.COLLECT_ASK_END_AT) }}</td>
-
-          <td> ({{ transaction.DISPOSER_TYPE }}) {{ transaction.DISPOSER_NAME }}</td>
-          <td> {{ changeBoolToEmoji(transaction.CHECK_STATE) }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+					<td> ({{ transaction.DISPOSER_TYPE }}) {{ transaction.DISPOSER_NAME }}</td>
+					<td> {{ changeBoolToEmoji(transaction.CHECK_STATE) }}</td>
+				</tr>
+			</tbody>
+			</template>
+		</v-simple-table>
+	</div>
 </template>
 <script>
 import {mapGetters} from "vuex"

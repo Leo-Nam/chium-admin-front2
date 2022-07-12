@@ -1,4 +1,8 @@
 <template>
+<div>
+	<v-card-title>
+		상담내역
+	</v-card-title>
   <v-simple-table
 
     fixed-header
@@ -88,6 +92,8 @@
       </tbody>
     </template>
   </v-simple-table>
+
+</div>
 </template>
 <script>
 import {mapGetters} from "vuex"

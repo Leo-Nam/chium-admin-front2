@@ -4,7 +4,9 @@
       개인 배출자 👷‍♂️
     </v-card-title>
     <v-simple-table
-      fixed-header
+		dense
+		fixed-header
+		height="700px"
     >
       <template #default>
         <thead>

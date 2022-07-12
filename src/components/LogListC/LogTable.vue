@@ -1,5 +1,8 @@
 <template>
   <div>
+	<v-card-title>
+		로그정보
+	</v-card-title>
     <v-simple-table
 
       fixed-header

@@ -1,5 +1,8 @@
 <template>
   <div>
+	<v-card-title>
+		고객문의사항
+	</v-card-title>
 	<v-simple-table
 
 		fixed-header

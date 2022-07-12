@@ -1,45 +1,50 @@
 <template>
-  <v-simple-table
-
-    fixed-header
-    height="700px"
-  >
-    <template #default>
-      <thead>
-        <tr>
-          <th
-            v-for="th,idx in thArray"
-            :key="idx"
-          >
-            {{ th }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="report,idx in getReportList"
-          :key="idx"
-          style="cursor : pointer"
-          @click="goToSomeWhere({key : 'ID', value : report.ID})"
-        >
-          <td>{{ report.ID }}</td>
-          <td>{{ report.ORDER_CODE }}</td>
-          <td>
-            {{ report.COLLECTOR_SITE_ID }}
-          </td>
-          <td>{{ report.COLLECTOR_SITE_NAME }}</td>
-          <td>{{ report.DISPOSER_ID }}</td>
-          <td> ({{ report.DISPOSER_TYPE }}) {{ report.DISPOSER_NAME }}</td>
-          <td>
-            {{ report.DISPOSER_ORDER_ID }}
-          </td>
-          <td>{{ report.DISPOSER_SITE_ID }}</td>
-          <td>{{ getTime(report.CREATED_AT) }}</td>
-          <td>{{ changeBoolToEmoji(report.CONFIRMED) }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table>
+	<div>
+		<v-card-title>
+			처리보고서
+		</v-card-title>
+		<v-simple-table
+			dense
+			fixed-header
+			height="700px"
+		>
+			<template #default>
+			<thead>
+				<tr>
+				<th
+					v-for="th,idx in thArray"
+					:key="idx"
+				>
+					{{ th }}
+				</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					v-for="report,idx in getReportList"
+					:key="idx"
+					style="cursor : pointer"
+					@click="goToSomeWhere({key : 'ID', value : report.ID})"
+				>
+					<td>{{ report.ID }}</td>
+					<td>{{ report.ORDER_CODE }}</td>
+					<td>
+						{{ report.COLLECTOR_SITE_ID }}
+					</td>
+					<td>{{ report.COLLECTOR_SITE_NAME }}</td>
+					<td>{{ report.DISPOSER_ID }}</td>
+					<td> ({{ report.DISPOSER_TYPE }}) {{ report.DISPOSER_NAME }}</td>
+					<td>
+						{{ report.DISPOSER_ORDER_ID }}
+					</td>
+					<td>{{ report.DISPOSER_SITE_ID }}</td>
+					<td>{{ getTime(report.CREATED_AT) }}</td>
+					<td>{{ changeBoolToEmoji(report.CONFIRMED) }}</td>
+				</tr>
+			</tbody>
+			</template>
+		</v-simple-table>
+	</div>
 </template>
 <script>
 import {mapGetters} from "vuex"

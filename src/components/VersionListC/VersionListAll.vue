@@ -1,7 +1,8 @@
-문의사항 메뉴추가
-
-접속경로 표시<template>
+<template>
   <div>
+	<v-card-title>
+		버전정보
+	</v-card-title>
 	<div v-if="getUserId===7">
 		<VersionUpdate />
 	</div>

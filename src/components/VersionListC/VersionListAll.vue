@@ -1,4 +1,6 @@
-<template>
+문의사항 메뉴추가
+
+접속경로 표시<template>
   <div>
 	<div v-if="getUserId===7">
 		<VersionUpdate />
@@ -16,7 +18,8 @@
 					</v-col>
 				</v-row>
 				<v-row style="height: 20px;">
-					<v-col cols="auto">{{ info.CONTENT }}
+					<v-col cols="auto">
+						{{ showContent(info.CONTENT) }}
 					</v-col>
 				</v-row>
 			</v-col>
@@ -33,6 +36,7 @@ export default {
 	},
 	data(){
 		return {
+			content: null
 		}
 	},
 	created(){
@@ -45,10 +49,10 @@ export default {
 	},
 	methods : {
 		getTime(time){
-		if (time){
-			return time.slice(0,19)
-		}
-		return time
+			if (time){
+				return time.slice(0,19)
+			}
+			return time
 		},
 		async init(){
 			await this.sp_admin_get_version_list;
@@ -57,6 +61,7 @@ export default {
 		showContent(e){
 			let content = e.split('\n')
 			console.log('hello')
+			content = e.replace(/(?:\r\n|\r|\n)/g, '<br />')
 			return content
 		},
 	}

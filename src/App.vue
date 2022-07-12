@@ -13,9 +13,66 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="toggle" />
-      <v-toolbar-title style="color : white; font-size : 14px">
+		<v-toolbar-title 
+			style="color : white; font-size : 14px"
+		>
         치움 관리자 페이지
       </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+	<div v-if="isLogged===true">
+		<router-link
+			to="/admin/main/log/list"
+			tag="v-btn"
+		>
+			<v-btn icon>
+				<v-icon>mdi-math-log</v-icon>
+			</v-btn>
+		</router-link>
+		<router-link
+			to="/admin/main/note-list/list"
+			tag="v-btn"
+		>
+			<v-btn icon>
+				<v-icon>mdi-face-agent</v-icon>
+			</v-btn>
+		</router-link>
+		<router-link
+			to="/admin/main/question/list"
+			tag="v-btn"
+		>
+			<v-btn icon>
+				<v-icon>mdi-alert</v-icon>
+			</v-btn>
+		</router-link>
+		<router-link
+			to="/admin/main/version/list"
+			tag="v-btn"
+		>
+			<v-btn icon>
+				<v-icon>mdi-dev-to</v-icon>
+			</v-btn>
+		</router-link>
+		<router-link
+			to="/logout"
+			tag="v-btn"
+		>
+			<v-btn icon>
+				<v-icon>mdi-account-cancel</v-icon>
+			</v-btn>
+		</router-link>
+	</div>
+	<div v-else>
+		<router-link
+			to="/login"
+			tag="v-btn"
+		>
+			<v-btn icon>
+				<v-icon>mdi-login</v-icon>
+			</v-btn>
+		</router-link>
+
+	</div>
     <!-- -->
     </v-app-bar>
 

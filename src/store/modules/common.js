@@ -128,30 +128,6 @@ export default {
             icon: "mdi-content-paste",
             route: "/admin/main/report/list"
           },
-          {
-            title: "로그 정보",
-            icon: "mdi-math-log",
-            route: "/admin/main/log/list"
-          },
-          {
-            title: "상담내역",
-            icon: "mdi-face-agent",
-            route: "/admin/main/note-list/list"
-          },
-          {
-            title: "문의사항",
-            icon: "mdi-alert",
-            route: "/admin/main/question/list"
-          },
-          {
-            title: "Version",
-            icon: "mdi-dev-to",
-            route: "/admin/main/version/list"
-          },
-          { title: "로그아웃",
-            icon: "mdi-account-cancel",
-            route: "/logout"
-          },
 
         ];
       // 아니라면 아래와 같이 설정

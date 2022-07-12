@@ -1,6 +1,6 @@
 {
   "name": "chium-admin",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve --local",

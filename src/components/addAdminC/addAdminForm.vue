@@ -4,7 +4,7 @@
     style="margin-top : 100px;"
   >
     <v-card style="padding : 40px; width : 50%; margin : 0 auto; ">
-      <h2>사용자 추가</h2>
+      <h2>직원 추가</h2>
       <v-row>
         <v-col
           cols="3"
@@ -27,15 +27,62 @@
           cols="3"
         >
           <v-subheader class="text-center">
+            전화번호
+          </v-subheader>
+        </v-col>
+
+        <v-col>
+          <v-text-field
+            solo
+            hide-details=""
+			@input="changeState('phone',$event)"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          cols="3"
+        >
+          <v-subheader class="text-center">
+            아이디
+          </v-subheader>
+        </v-col>
+
+        <v-col>
+          <v-text-field
+            solo
+            hide-details=""
+			@input="changeState('userId',$event)"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          cols="3"
+        >
+          <v-subheader class="text-center">
+            암호
+          </v-subheader>
+        </v-col>
+        <v-col>
+          암호는 초기값 1234로 입력됩니다. 직원이 최초 로그인시에 변경하여야 합니다.
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          cols="3"
+        >
+          <v-subheader class="text-center">
             권한
           </v-subheader>
         </v-col>
         <v-col>
-          <v-text-field
-            placeholder="102~199"
+          <v-autocomplete
+            placeholder="101~103"
             solo
             hide-details=""
-            @input="changeState('classCode',$event)"
+			:items="classCode"
+            @change="changeState('classCode',$event)"
           />
         </v-col>
       </v-row>
@@ -70,7 +117,11 @@
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex"
 export default {
-
+	data(){
+		return{
+			classCode: [101, 102, 103]
+		}
+	},
 	computed : {
 		...mapGetters('addAdmin',['getDepartment', 'getTitle'])
 	},
@@ -90,6 +141,12 @@ export default {
 			}
 		},
 	},
-
+	watch: {
+		classCode(val){
+			const reg = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z]/
+			if(reg.exec(val)!==null) this.number=val.replace(/[^0-9]/g,'')
+			if(isNaN(parseFloat(val))) this.number=''
+		}
+	}
 }
 </script>

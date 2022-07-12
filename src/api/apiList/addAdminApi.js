@@ -19,12 +19,17 @@ export default {
 		const name = state.adminDetails.name
 		const classCode = state.adminDetails.classCode
 		const department = state.adminDetails.department
+		const userId = state.adminDetails.userId
+		const phone = state.adminDetails.phone
 		const data = {
 			params: JSON.stringify([
 				{
 					NAME: name,
 					CLASS: classCode,
-					DEPARTMENT: department
+					DEPARTMENT: department,
+					USER_ID: userId,
+					PASSWORD: '1234',
+					PHONE: phone
 				},
 			]),
 		}

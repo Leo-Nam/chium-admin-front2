@@ -6,7 +6,10 @@ export default {
 	adminDetails: {
 		name: null,
 		classCode: null,
-		department: null
+		department: null,
+		userId: null,
+		password: null,
+		phone: null
 	},
 	departmentObj: {},
 	department: [],

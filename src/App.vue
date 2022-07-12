@@ -36,7 +36,7 @@
         class="text-center"
         cols="12"
       >
-        {{ new Date().getFullYear() }} — <strong>CHIUM ADMIN PAGE Ver. {{ version }}</strong>
+        {{ new Date().getFullYear() }} — <strong>CHIUM ADMIN PAGE Ver. {{ version.fullVersion }}</strong>
       </v-col>
     </v-footer>
     <v-overlay

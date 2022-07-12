@@ -1,8 +1,10 @@
 import myAxios from "@/api";
 import commonApi from "@/api/apiList/commonApi";
+import packageJson from "/package.json"
 
 export default {
   namespaced: true,
+  packageJson : packageJson,
   state: {
     // 로딩 상태
     loading: false,
@@ -25,10 +27,40 @@ export default {
       NOTE : null,
       SITE_CATEGORY : null,
     },
-    notes : []
+    notes : [],
+	version : {
+		fullVersion : null,
+		majorVersion : 0,
+		minorVersion : 0,
+		patchVersion : 0
+	}
   },
   mutations: {
     // 로딩값 true
+    setVersionInfo(state, payload) {
+		state.version.fullVersion = payload.fullVersion;
+		state.version.majorVersion = Number(payload.majorVersion);
+		state.version.minorVersion = Number(payload.minorVersion);
+		state.version.patchVersion = Number(payload.patchVersion);
+	},
+	changeVersionInfo(state, payload){
+		let fullVersion = ''
+		if (payload === 'major'){
+			state.version.majorVersion = Number(state.version.majorVersion) + 1
+			state.version.minorVersion = 0
+			state.version.patchVersion = 0
+			state.version.fullVersion = fullVersion.concat(fullVersion, state.version.majorVersion, '.', state.version.minorVersion, '.', state.version.patchVersion)
+		}else if (payload === 'minor'){
+			state.version.minorVersion = Number(state.version.minorVersion) + 1
+			state.version.patchVersion = 0
+			state.version.fullVersion = fullVersion.concat(fullVersion, state.version.majorVersion, '.', state.version.minorVersion, '.', state.version.patchVersion)
+		}else if (payload === 'patch') {
+			state.version.patchVersion = Number(state.version.patchVersion) + 1
+			state.version.fullVersion = fullVersion.concat(fullVersion, state.version.majorVersion, '.', state.version.minorVersion, '.', state.version.patchVersion)
+		}else {
+			return
+		}
+	},
     getLoading(state) {
       state.loading = true;
     },
@@ -110,6 +142,11 @@ export default {
             title: "문의사항",
             icon: "mdi-alert",
             route: "/admin/main/question/list"
+          },
+          {
+            title: "Version",
+            icon: "mdi-dev-to",
+            route: "/admin/main/version/list"
           },
           { title: "로그아웃",
             icon: "mdi-account-cancel",
@@ -212,6 +249,20 @@ export default {
     // 노트 리스트를 가지고옴
     getNotes(state){
       return state.notes
+    },
+    // 노트 리스트를 가지고옴
+    getVersionInfo(state){
+      return state.version
+    },
+    // 노트 리스트를 가지고옴
+    getVersionStateChanged(state){
+		if (packageJson.version != state.version.fullVersion){
+			return packageJson.version + ' => ' + state.version.fullVersion
+
+		} else {
+			return packageJson.version
+
+		}
     }
   },
 };

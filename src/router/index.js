@@ -211,6 +211,19 @@ const routes = [
 
                 ]
               },
+              {
+                path: "version",
+                name: "version",
+                component: () =>
+                  import("../views/defaultViews/VersionDefaultView.vue"),
+                children: [
+                  {
+                    path: "list",
+                    name: "version-list",
+                    component: () => import("../views/mainViews/VersionList.vue"),
+                  },
+                ]
+              },
 
             ],
           },

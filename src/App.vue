@@ -56,43 +56,69 @@
 
 <script>
 
-import {mapGetters,mapActions} from "vuex"
+import {mapGetters,mapActions,mapMutations} from "vuex"
 import packageJson from "/package.json"
 
 import NavList from "@/components/AppC/NavList"
 export default {
-  name: 'App',
-  components : {
-    NavList
-  },
-  data(){
-    return{
-		value : false,
-		packageJson : packageJson,
-		version: null
-    }
-  },
-  computed : {
-    ...mapGetters('common',['getNowLoadingState']),
-    ...mapGetters('auth',['isLogged']),
-  },
-  watch : {
-    isLogged(){
-      this.checkIsLogged()
-    }
-  },
-  mounted() {
-	this.version = this.packageJson.version
-  },
-  created(){
-    this.checkIsLogged()
-  },
-  methods : {
-    ...mapActions('common',['checkIsLogged']),
-    toggle(){
-      this.value = !this.value
-    },
-  }
+	name: 'App',
+	components : {
+		NavList
+	},
+	data(){
+		return{
+			value : false,
+			packageJson : packageJson,
+			version : {
+				fullVersion: null,
+				majorVersion: 0,
+				minorVersion: 0,
+				patchVersion: 0
+			}
+		}
+	},
+	computed : {
+		...mapGetters('common',['getNowLoadingState', 'getVersionInfo']),
+		...mapGetters('auth',['isLogged']),
+	},
+	watch : {
+		isLogged(){
+		this.checkIsLogged()
+		}
+	},
+	mounted() {
+		this.parseVersionInfo()
+	},
+	created(){
+		this.checkIsLogged()
+	},
+	methods : {
+		...mapActions('common',['checkIsLogged']),
+		...mapMutations('common',['setVersionInfo']),
+		toggle(){
+			this.value = !this.value
+		},
+
+		right(str, chr) {
+			return str.slice(str.length-chr,str.length);
+		},
+	
+		left(str, chr) {
+			return str.slice(0, chr - str.length);
+		},
+
+		parseVersionInfo(){
+			this.version.fullVersion = this.packageJson.version
+			let firstComma = this.version.fullVersion.indexOf('.', 0)
+			let secondComma = this.version.fullVersion.indexOf('.', firstComma+1)
+			this.version.majorVersion = this.left(this.version.fullVersion, firstComma)
+			this.version.minorVersion = this.version.fullVersion.substring(firstComma+1, secondComma)
+			this.version.patchVersion = this.version.fullVersion.substring(secondComma+1, this.version.fullVersion.length)
+			this.setVersionInfo(this.version)
+
+			console.log('VersionInfo', this.getVersionInfo)
+		}
+	},
 }
 </script>
 <style >

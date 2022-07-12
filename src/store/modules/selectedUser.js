@@ -272,8 +272,10 @@ export default {
 	},
 	setInsteredSiteList(state, payload){
 		state.InterestedSite = []
-		for(var i=0;i<payload.length;i++){
-			state.InterestedSite.push(payload[i].TARGET_NAME)
+		if(payload != null){
+			for(var i=0;i<payload.length;i++){
+				state.InterestedSite.push(payload[i].TARGET_NAME)
+			}
 		}
 	},
   },

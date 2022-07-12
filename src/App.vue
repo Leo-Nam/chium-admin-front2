@@ -21,6 +21,16 @@
 
       <v-spacer></v-spacer>
 	<div v-if="isLogged===true">
+		<v if="getUserClassId <= 101">
+			<router-link
+				to="/admin/main/add-admin"
+				tag="v-btn"
+			>
+				<v-btn icon>
+					<v-icon>mdi-account</v-icon>
+				</v-btn>
+			</router-link>
+		</v>
 		<router-link
 			to="/admin/main/log/list"
 			tag="v-btn"
@@ -136,7 +146,7 @@ export default {
 	},
 	computed : {
 		...mapGetters('common',['getNowLoadingState', 'getVersionInfo']),
-		...mapGetters('auth',['isLogged']),
+		...mapGetters('auth',['isLogged', 'getUserId', 'getUserClassId']),
 	},
 	watch : {
 		isLogged(){

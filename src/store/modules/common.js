@@ -101,16 +101,6 @@ export default {
             ]
           },
           {
-            title: "사용자 추가",
-            icon: "mdi-account",
-            route: "/admin/main/add-admin",
-          },
-          {
-            title: "통계📊",
-            icon: "mdi-chart-bar",
-            route: "/admin/main/chart",
-          },
-          {
             title: "배출등록 현황",
             icon: "mdi-new-box",
             route: "/admin/main/emissions/list",
@@ -127,6 +117,11 @@ export default {
           { title: "처리보고서",
             icon: "mdi-content-paste",
             route: "/admin/main/report/list"
+          },
+          {
+            title: "통계📊",
+            icon: "mdi-chart-bar",
+            route: "/admin/main/chart",
           },
 
         ];

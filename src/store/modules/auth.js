@@ -85,7 +85,10 @@ export default {
     },
     getUserId(state){
       return state.userId
-    }
+    },
+    getUserClassId(state) {
+      return state.class
+    },
   },
 };
 

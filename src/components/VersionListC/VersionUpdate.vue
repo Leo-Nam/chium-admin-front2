@@ -15,7 +15,7 @@
 			cols="auto"
 		>
 			<v-btn @click="commitVersionChangedDetails">
-				수정하기
+				입력하기
 			</v-btn>
 		</v-col>
 	</v-row>

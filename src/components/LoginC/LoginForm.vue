@@ -21,7 +21,10 @@
             </v-subheader>
           </v-col>
           <v-col>
-            <v-text-field v-model="adminId" />
+            <v-text-field 
+				v-model="adminId" 
+				@keyup="setLoginInfo('adminId', $event)"
+			/>
           </v-col>
         </v-row>
         <v-row>
@@ -37,14 +40,41 @@
             <v-text-field
               v-model="adminPw"
               type="password"
+				@keyup="setLoginInfo('adminPw', $event)"
             />
           </v-col>
         </v-row>
+		<div v-if="getUserInit===true">
+			<v-row>
+				<v-col
+					class="input-label"
+					cols="4"
+				>
+					<v-subheader style="font-size : 16px; font-weight : bold">
+					비밀번호확인
+					</v-subheader>
+				</v-col>
+				<v-col>
+					<v-text-field
+					v-model="adminPw2"
+					type="password"
+					@keyup="setLoginInfo('adminPw2', $event)"
+					/>
+				</v-col>
+			</v-row>
+		</div>
         <v-row justify="end">
           <v-col cols="auto">
-            <v-btn @click="loginBtn">
-              로그인
-            </v-btn>
+			<div v-if="getUserInit===true">
+				<v-btn @click="initUserInfo">
+				수정
+				</v-btn>
+			</div>
+			<div v-else>
+				<v-btn @click="loginBtn">
+				로그인
+				</v-btn>
+			</div>
           </v-col>
         </v-row>
       </div>
@@ -52,19 +82,36 @@
   </v-card>
 </template>
 <script>
-import {mapActions} from "vuex"
+import {mapActions, mapGetters, mapMutations} from "vuex"
 export default {
   data(){
     return {
       adminId : '',
-      adminPw : ''
+      adminPw : '',
+      adminPw2 : ''
     }
   },
+	computed : {
+		...mapGetters('auth',['getUserInit', 'getUserId'])
+	},
   methods : {
-    ...mapActions('auth', ['login']),
+    ...mapActions('auth', ['login', 'initUser']),
+      ...mapMutations('auth',['setUserItem']),
     loginBtn(){
+		console.log('loginbtn')
       this.login({adminId : this.adminId, adminPw : this.adminPw})
-    }
+    },
+    initUserInfo(){
+		console.log('zzzㅋㅋㅋ')
+		if (this.adminPw === this.adminPw2){
+			this.initUser()
+		}else{
+			alert("암호가 일치하지 않습니다.")
+		}
+    },
+	setLoginInfo(key, event){
+		this.setUserItem({key:key, payload:event.target.value})
+	}
   }
 }
 </script>
@@ -81,6 +128,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+	width: 200px;
   }
 }
 .cols-padding-x-zero {

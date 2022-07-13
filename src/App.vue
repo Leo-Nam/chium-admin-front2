@@ -31,6 +31,7 @@
 			</router-link>
 		<router-link
 			to="/admin/main/log/list"
+			v-if="getUserClassId===101"
 		>
 			<v-btn icon>
 				<v-icon>mdi-math-log</v-icon>

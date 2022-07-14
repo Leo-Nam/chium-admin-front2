@@ -57,7 +57,7 @@ export default {
     async sp_admin_get_new_logs({state,rootState,commit},{orderId}){
       try {
         const res = await logApi.sp_admin_get_new_logs({state, rootState,orderId})
-		console.log(res)
+		console.log('store:modules:log.js:sp_admin_get_new_logs:', res)
         commit("setLogList", res.data.data[0]);
       } catch (e) {
         console.log(e)

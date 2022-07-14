@@ -190,7 +190,7 @@ export default {
     async logList2({rootState,commit},{orderId}){
       try {
         const res = await logApi.logList2({rootState,orderId})
-        console.log(res,'로그리스트2')
+        console.log('store:modules:emissions.js:logList2:', res,'로그리스트2')
         commit("setLogList", res.data.data[0].LOG_LIST);
       } catch (e) {
         console.log(e)
@@ -218,14 +218,14 @@ export default {
       }
 
       const res = await emissionsApi.sp_get_prospective_site_list_inside_range({rootState ,distance, lat, lng, bCode, isTransit})
-      console.log(res,'dddd')
+      console.log('store:modules:emissions.js:sp_get_prospective_site_list_inside_range:', res,'dddd')
       commit('setCollectorListWithin',res.data.data)
     },
 
     async sp_admin_get_disposer_schedule({rootState,commit},{orderId}){
       try {
         const res = await emissionsApi.sp_admin_get_disposer_schedule({rootState, orderId})
-        console.log(res.data.data.DATA,'sp_admin_get_disposer_schedule')
+        console.log('store:modules:emissions.js:sp_admin_get_disposer_schedule:', res.data.data.DATA,'sp_admin_get_disposer_schedule')
         commit("setOrderSchedule", res.data.data.DATA);
       } catch (e) {
         console.log(e)

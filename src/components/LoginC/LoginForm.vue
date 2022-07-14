@@ -98,11 +98,11 @@ export default {
     ...mapActions('auth', ['login', 'sp_admin_init_user']),
       ...mapMutations('auth',['setUserItem']),
     loginBtn(){
-		console.log('loginbtn')
+		console.log('components:LoginC:LoginForm.vue:loginBtn:','loginbtn')
       this.login({adminId : this.adminId, adminPw : this.adminPw})
     },
     initUserInfo(){
-		console.log('zzzㅋㅋㅋ')
+		console.log('components:LoginC:LoginForm.vue:initUserInfo:','zzzㅋㅋㅋ')
 		if (this.adminPw === this.adminPw2){
 			this.sp_admin_init_user()
 		}else{

@@ -40,7 +40,7 @@ export default {
 	},
 	actions: {
 		async sp_admin_get_version_list({state, rootState, commit}){
-			console.log('hello')
+			console.log('store:modules:versionControl.js:sp_admin_get_version_list:','hello')
 			try {
 				const res = await versionControlApi.sp_admin_get_version_list({state, rootState})
 				commit("setVersionList", res.data.data[0]);
@@ -52,7 +52,7 @@ export default {
 		async sp_admin_insert_version_info({state, rootState}){
 			try {
 				const res = await versionControlApi.sp_admin_insert_version_info({state, rootState})
-				console.log(res)
+				console.log('store:modules:versionControl.js:sp_admin_insert_version_info:',res)
 				location.reload()
 			} catch (e) {
 				console.log(e)

@@ -32,7 +32,7 @@ export default {
 		
 		commit("setQuestionLists", res.data.data[0].QUESTION_LIST)	
 		commit("setLastPage", res.data.data[0].LAST_PAGE)	
-		console.log("QuestionList ====>", res.data.data[0].QUESTION_LIST)
+		console.log('store:modules:questionList.js:sp_admin_get_question_lists:',"QuestionList ====>", res.data.data[0].QUESTION_LIST)
 	},
     
   },

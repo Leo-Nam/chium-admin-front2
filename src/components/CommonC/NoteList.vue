@@ -144,7 +144,7 @@ export default {
       const newArr = this.getNotes[noteIdx].NOTE.split('\n')
       this.content = newArr
       this.dialog = true
-		console.log('hello')
+		console.log('components:commonC:NoteList.vue:showMeNote:','hello')
     },
     shortenContent(content){
       if (content !== null && content.length > 35){

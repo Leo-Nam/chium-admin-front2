@@ -53,20 +53,20 @@ export default {
     // 로그인
     async login({ commit }, { adminId, adminPw }) {
       let res
-		console.log('1')
+		console.log('store:modules:auth.js:login:','1')
       try{
-		console.log('2')
+		console.log('store:modules:auth.js:login:','2')
         res = await authApi.login({adminId,adminPw});
-		console.log('res>>>', res)
+		console.log('store:modules:auth.js:login:','res>>>', res)
       }catch(e){
-        console.log(e)
+        console.log('store:modules:auth.js:login:',e)
       }
-		console.log('3')
-		console.log('res.data.data', res.data.data)
-		console.log('res.data.message', res.data.message)
-		console.log('res.data.state', res.data.state)
+		console.log('store:modules:auth.js:login:','3')
+		console.log('store:modules:auth.js:login:','res.data.data', res.data.data)
+		console.log('store:modules:auth.js:login:','res.data.message', res.data.message)
+		console.log('store:modules:auth.js:login:','res.data.state', res.data.state)
       const state = res.data.state;
-		console.log('4')
+		console.log('store:modules:auth.js:login:','4')
 		let userInit = false;
       if (state == 100001) {
         alert("아이디가 존재하지 않습니다.");
@@ -75,9 +75,9 @@ export default {
         alert("비밀번호가 일치하지 않습니다.");
         return;
       }else {
-		console.log('5')
+		console.log('store:modules:auth.js:login:','5')
 		const getData = JSON.parse(res.data.data);
-		console.log('getData >>>>>>>>>>>>', getData)
+		console.log('store:modules:auth.js:login:','getData >>>>>>>>>>>>', getData)
 		const userId = getData.ID;
 		const classNum = getData.CLASS;
 		if (state == 0 && adminPw =='1234'){
@@ -93,26 +93,26 @@ export default {
 			// 화면 이동
 			router.push({ path: "/admin/main/emitter-collector" });
 		}
-		console.log('6')
+		console.log('store:modules:auth.js:login:','6')
 		}
     },
 
     async sp_admin_init_user({state, commit}) {
       let res
       try{
-		console.log('state.loginInfo>>>', state.loginInfo)
+		console.log('store:modules:auth.js:sp_admin_init_user:', state.loginInfo)
         res = await authApi.sp_admin_init_user({
 			adminId: state.userId, 
 			adminUid: state.loginInfo.adminId, 
 			adminPw: state.loginInfo.adminPw, 
 		});
-		console.log('res0987>>>', res)
+		console.log('store:modules:auth.js:sp_admin_init_user:', res)
       }catch(e){
-		console.log(e)
+		console.log('store:modules:auth.js:sp_admin_init_user:', e)
       }
       const status = res.data.state;
     //   const getData = res.data.data;
-		console.log('res >>>>>>>>>>>>', res)
+		console.log('store:modules:auth.js:sp_admin_init_user:', res)
     //   const userId = getData.ADMIN_ID;
     //   const classNum = getData.CLASS;
 	// 	let userInit = false;

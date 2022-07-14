@@ -68,7 +68,7 @@ export default {
       }
       // 상태를 변경해주고,
       this.setPersonEmitterActive(active)
-      console.log(this.getPersonEmitterActive,'액티브요')
+      console.log('components:PersonEmitterListC:PersonEmitterActiveSelect.vue:setPersonEmitterActive:',this.getPersonEmitterActive,'액티브요')
       // vuex에 저장된 값들을 불러와서 같이 라우터 쿼리에 넣어 보내준다.
       this.$router.push({ path: 'list', query: {
             page : 1,

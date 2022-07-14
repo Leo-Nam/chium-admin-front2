@@ -6,7 +6,7 @@ export default {
   // 로그인 할 시 인풋으로 받는 아이디 비밀번호 값
   sp_admin_init_user({ adminId, adminUid, adminPw }) {
     const url = "api/admin/common/sp_admin_init_user";
-	console.log('userInit-url >>>>>', { adminId, adminUid, adminPw })
+	console.log('api:apiList:authApi.js:sp_admin_init_user:userInit-url >>>>>', { adminId, adminUid, adminPw })
     let data = {
       params: JSON.stringify([
         {
@@ -16,12 +16,12 @@ export default {
         },
       ]),
     };
-	console.log('data123>>>>', data)
+	console.log('api:apiList:authApi.js:sp_admin_init_user::data123>>>>', data)
     return myAxios(url, method, data);
   },
   login({ adminId, adminPw }) {
     const url = "api/admin/common/admin_login";
-	console.log('login-url >>>>>', url)
+	console.log('api:apiList:authApi.js:login:login-url >>>>>', url)
     let data = {
       params: JSON.stringify([
         {

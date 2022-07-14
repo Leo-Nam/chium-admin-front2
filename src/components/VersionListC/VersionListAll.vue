@@ -61,7 +61,7 @@ export default {
 		},
 		showContent(e){
 			let content = e.split('\n')
-			console.log('hello')
+			console.log('components:VersionListC:VersionListAll.vue:showContent:','hello')
 			content = e.replace(/(?:\r\n|\r|\n)/g, '<br />')
 			return content
 		},

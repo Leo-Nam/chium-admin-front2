@@ -25,10 +25,10 @@ export default {
 	setProspectiveMemberInfo(state, { key, value }) {
 		if (value == ''){
 			state.selectedNotMember[key] = null;
-			console.log('1 >>>', state.selectedNotMember[key])
+			console.log('store:modules:notMembers.js:setProspectiveMemberInfo:','1 >>>', state.selectedNotMember[key])
 		} else {
 			state.selectedNotMember[key] = value;
-			console.log('2 >>>', state.selectedNotMember[key])
+			console.log('store:modules:notMembers.js:setProspectiveMemberInfo:','2 >>>', state.selectedNotMember[key])
 		}
 	},
     setAddr(state, payload) {
@@ -126,7 +126,7 @@ export default {
     },
     async sp_admin_update_prospective_member_info({state, rootState}){
       try {
-		console.log('hello')
+		console.log('store:modules:notMembers.js:sp_admin_update_prospective_member_info:','hello')
         await notMemberApi.sp_admin_update_prospective_member_info({state, rootState})
         //location.reload()
       } catch (e) {

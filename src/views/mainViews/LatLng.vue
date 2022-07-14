@@ -51,7 +51,7 @@
         },
         watch :{
           gogo(){
-            console.log('dp')
+            console.log('views:mainViews:LatLng.vue:gogo:','dp')
               this.cnt++
               if(this.cnt == 10){
                 this.splitPoint();
@@ -81,9 +81,9 @@
           success({coords}){
             const lat = coords.latitude;
             const lng = coords.longitude;
-            console.log(lng,'lng')
-            console.log(lat,'lat')
-            console.log(this.cnt)
+            console.log('views:mainViews:LatLng.vue:success:',lng,'lng')
+            console.log('views:mainViews:LatLng.vue:success:',lat,'lat')
+            console.log('views:mainViews:LatLng.vue:success:',this.cnt)
             this.DrawLine.arrPoint.push(lng)
             this.DrawLine.arrPoint.push(lat)
 
@@ -102,8 +102,8 @@
               });
           },
           isValidate(){
-            console.log(this.DrawLine.arrPoint.length,'어레이 포인트 갯수')
-            console.log(this.DrawLine.CNT_BUFF*2,'버퍼 개수')
+            console.log('views:mainViews:LatLng.vue:isValidate:',this.DrawLine.arrPoint.length,'어레이 포인트 갯수')
+            console.log('views:mainViews:LatLng.vue:isValidate:',this.DrawLine.CNT_BUFF*2,'버퍼 개수')
             // if( this.DrawLine.arrPoint.length <= (this.DrawLine.CNT_BUFF*2) || this.DrawLine.SPLIT_VALUE <= this.DrawLine.CNT_BUFF || this.DrawLine.SPLIT_VALUE > 100 ) {
             //   alert("리소스 포인트 데이터 개수는 버퍼크기 초과여야 하고, \'DrawLine.SPLIT_VALUE\' 는 버퍼 크기 초과 100 이하 여야 합니다.");
             //   return false;
@@ -328,7 +328,7 @@
 
           },
           reqLoadApi( pointString, callback ){
-            console.log('poinstrinf!!!!',pointString)
+            console.log('views:mainViews:LatLng.vue:reqLoadApi:','poinstrinf!!!!',pointString)
             var url = 'https://apis.openapi.sk.com/tmap/road/matchToRoads?version=1&appKey=l7xxf9c79745eeb2448f86433b9e231eb2f9'; // 이동한 도로 찾기 api 요청 url입니다.
                 // eslint-disable-next-line no-undef
                 $.ajax({

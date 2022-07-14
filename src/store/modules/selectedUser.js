@@ -224,11 +224,11 @@ export default {
       state.selectedUser.lng = payload.lng;
     },
     addWsteList(state, payload) {
-		console.log('123>>>', state, payload)
+		console.log('store:modules:selectedUser.js:addWsteList:','123>>>', state, payload)
       state.selectedUser.wsteList.push(payload);
     },
     addWsteClassList(state, payload) {
-		console.log('456>>>', state, payload)
+		console.log('store:modules:selectedUser.js:addWsteClassList:','456>>>', state, payload)
       state.selectedUser.wsteClassList.push(payload);
     },
     removeWsteList(state, payload) {
@@ -289,7 +289,7 @@ export default {
       try {
         const res = await selectedUserApi.sp_admin_retrieve_site_info({state,rootState,siteId})
         const siteInfo = res.data.data[0].SITE_INFO[0];
-		console.log('siteInfo >>>>>>', siteInfo)
+		console.log('store:modules:selectedUser.js:sp_admin_retrieve_site_info:','siteInfo >>>>>>', siteInfo)
         commit("setSelectedUser", siteInfo);
         if (state.selectedUser.userType === 3){
           commit('setShowListIfIEmitter', siteInfo.COLLECTOR_BIDDING_LIST.BIDDINGS)
@@ -342,7 +342,7 @@ export default {
       try {
         const memberId = payload
         const res = await selectedUserApi.sp_admin_get_personal_details({rootState, memberId});
-		console.log(res.data.data)
+		console.log('store:modules:selectedUser.js:sp_admin_get_personal_details:',res.data.data)
         commit('setSelectedPersonEmitter',res.data.data)
         commit('common/setNotes',res.data.data.NOTES.NOTES, {root : true})
       } catch (e) {

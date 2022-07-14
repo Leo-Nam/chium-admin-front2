@@ -63,7 +63,7 @@ export default {
   },
   sp_get_site_list_inside_range({rootState, distance, lat, lng}){
     const userId = rootState.auth.userId;
-    console.log(distance,userId,lat,lng)
+    console.log('api:apiList:emissionApi.js:sp_get_site_list_inside_range:',distance,userId,lat,lng)
     const url = 'api/admin/common/sp_get_site_list_inside_range';
     const data = {
       params: JSON.stringify([
@@ -82,7 +82,7 @@ export default {
   },
   sp_get_prospective_site_list_inside_range({rootState, distance, lat, lng, bCode, isTransit}){
     const userId = rootState.auth.userId;
-    console.log(distance,userId,lat,lng,bCode,'ㅋㅋㅋ')
+    console.log('api:apiList:emissionApi.js:sp_get_prospective_site_list_inside_range:',distance,userId,lat,lng,bCode,'ㅋㅋㅋ')
     const url = 'api/admin/common/sp_get_prospective_site_list_inside_range';
     const data = {
       params: JSON.stringify([
@@ -102,7 +102,7 @@ export default {
     return myAxios(url, method, data);
   },
   sp_admin_get_disposer_schedule({ rootState, orderId }) {
-	console.log('hello')
+	console.log('api:apiList:emissionApi.js:sp_admin_get_disposer_schedule:hello')
     const userId = rootState.auth.userId;
     const url = "api/admin/common/sp_admin_get_disposer_schedule";
     const data = {
@@ -113,7 +113,7 @@ export default {
         },
       ]),
     };
-	console.log(data, '===>data123')
+	console.log('api:apiList:emissionApi.js:sp_admin_get_disposer_schedule:', data, '===>data123')
     return myAxios(url, method, data);
   },
 };

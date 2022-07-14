@@ -18,7 +18,7 @@ export default {
         },
       ]),
     };
-	console.log(data)
+	console.log('api:apiList:versionControlApi.js:sp_admin_get_version_list:', data)
     return myAxios(url, method, data);
   },
   sp_admin_insert_version_info({ rootState, state }) {
@@ -37,7 +37,7 @@ export default {
         },
       ]),
     };
-	console.log(data)
+	console.log('api:apiList:versionControlApi.js:sp_admin_insert_version_info:',data)
     return myAxios(url, method, data);
   },
 

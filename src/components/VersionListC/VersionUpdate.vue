@@ -72,7 +72,7 @@ export default {
 					alert('변경할 버전을 선택해주세요')
 				}else {
 					this.sp_admin_insert_version_info()
-					console.log('commit Version Updated ....')
+					console.log('components:VersionListC:VersionUpdate.vue:commitVersionChangedDetails:','commit Version Updated ....')
 				}
 			}
 		},

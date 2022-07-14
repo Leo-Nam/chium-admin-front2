@@ -135,9 +135,9 @@ export default {
       },
       closeDialog(){
         if (this.wste1 && this.wste2){
-          console.log('this.getSeletedUser.wsteList.filter(v=>{console.log(v)}) >>>>>>',this.getSeletedUser.wsteList.filter(v=>{console.log(v)}))
-          console.log('this.wste1 >>>>>>',this.wste1)
-          console.log('this.wste2 >>>>>>',this.wste2)
+          console.log('components:EmitterCollectorContentC:WsteKind.vue:closeDialog:','this.getSeletedUser.wsteList.filter(v=>{console.log(v)}) >>>>>>',this.getSeletedUser.wsteList.filter(v=>{console.log(v)}))
+          console.log('components:EmitterCollectorContentC:WsteKind.vue:closeDialog:','this.wste1 >>>>>>',this.wste1)
+          console.log('components:EmitterCollectorContentC:WsteKind.vue:closeDialog:','this.wste2 >>>>>>',this.wste2)
           const checkExist = this.getSeletedUser.wsteList.filter(v => {
             return  v.WSTE_NM == this.wste1.NAME &&
                     v.WSTE_CODE == this.wste1.CODE &&
@@ -156,7 +156,7 @@ export default {
             APPR_NM: this.wste2.NAME,
             APPR_CODE :this.wste2.ID,
             })
-			console.log('close-dialog')
+			console.log('components:EmitterCollectorContentC:WsteKind.vue:closeDialog:','close-dialog')
           this.$emit('close-dialog')
         }else {
           this.$emit('close-dialog')
@@ -202,7 +202,7 @@ export default {
         // 2. wste1이 있기 때문에 다른 것을 선택할 수가 없다.( 폐유리 검색, 선택 하면 이 후에는 다른 것이 안 되는 현상)
         // 따라서 초기화 시켜준다.
         if(this.nowTarget){
-          console.log('ee')
+          console.log('components:EmitterCollectorContentC:WsteKind.vue:selectWsteList2:','ee')
           this.nowTarget.classList.remove('active')
           this.wste1 =null
         }

@@ -26,7 +26,7 @@ export default {
 	sp_admin_get_question_details({rootState, payload}) {
 		const userId = rootState.auth.userId;
 		const QuestionId = payload.QuestionId;
-		console.log(userId, QuestionId)
+		console.log('api:apiList:questionListApi.js:sp_admin_get_question_details:', userId, QuestionId)
 		const url = "api/admin/common/sp_admin_get_question_details";
 		let data = {
 			params: JSON.stringify([
@@ -42,7 +42,7 @@ export default {
 	sp_admin_update_question({rootState, state}) {
 		const userId = rootState.auth.userId;
 		const QuestionDetails = state.selectedQuestion;
-		console.log(userId, QuestionDetails)
+		console.log('api:apiList:questionListApi.js:sp_admin_update_question:', userId, QuestionDetails)
 		const url = "api/admin/common/sp_admin_update_question";
 		let data = {
 			params: JSON.stringify([
@@ -55,7 +55,7 @@ export default {
 				},
 			]),
 		};
-		console.log(data, 'data.......')
+		console.log('api:apiList:questionListApi.js:sp_admin_update_question:', data, 'data.......')
 		return myAxios(url, method, data);
 	},
 

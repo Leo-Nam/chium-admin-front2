@@ -67,7 +67,7 @@ export default {
         },
       ]),
     };
-	console.log(data)
+	console.log('api:apiList:selectedUserApi.js:sp_admin_update_site_info:', data)
     return myAxios(url, method, data);
   },
   sp_admin_get_personal_details({ rootState, memberId }) {

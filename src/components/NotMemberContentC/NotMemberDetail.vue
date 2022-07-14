@@ -132,7 +132,7 @@ export default {
 		changeActive(key){
 			const el = document.getElementById(key)
 			const value = el.checked === true ? true : false
-			console.log('zzz value', value)
+			console.log('components:NotMemberContentC:NotMemberDetail.vue:changeActive:','zzz value', value)
 			this.MyVmodel(key,value)
 		},
 		modify(){
@@ -185,7 +185,7 @@ export default {
 		// eslint-disable-next-line no-undef
 			new daum.Postcode({
 				oncomplete: (data) => {
-					console.log('1')
+					console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','1')
 					let fullRoadAddr = data.roadAddress; // 도로명 주소 변수
 					let extraRoadAddr = ''; // 도로명 조합형 주소 변수
 					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -203,35 +203,35 @@ export default {
 						fullRoadAddr += extraRoadAddr;
 					} // 우편번호와 주소 정보를 해당 필드에 넣는다.
 
-					console.log('2')
+					console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','2')
 					Promise.resolve(data).then(()=>{
 					return new Promise((resolve,reject)=>{
-						console.log('3')
+						console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','3')
 						const geocoder = new window.kakao.maps.services.Geocoder();
 						geocoder.addressSearch(fullRoadAddr,(result,status)=>{
 						if(status === window.kakao.maps.services.Status.OK){
-							console.log('4')
+							console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','4')
 							const { x, y } = result[0];
 							resolve({ lat: y, log: x })
 						}else{
-							console.log('5')
+							console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','5')
 							reject();
 						}
 						})
 					})
 					}).then(result => {
-						console.log('6')
+						console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','6')
 						let lat = parseFloat(result.lat)
 						let lng = parseFloat(result.lng)
 						this.addrInfo = { ADDR: data.address+', ', BCODE: data.bcode, LAT: lat, LNG: lng }
 						this.setAddr(this.addrInfo)
-						console.log('this.addrInfo >>>>>>', this.addrInfo)
+						console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','this.addrInfo >>>>>>', this.addrInfo)
 					})
 
 				},
 				animation : true,
 				onclose: (state) => {
-					console.log('7')
+					console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','7')
 					if(state === 'COMPLETE_CLOSE') alert('상세 주소를 뒤에 이어서 적어주세요!')
 					const el = document.getElementById('ADDR')
 					el.readOnly = false
@@ -239,7 +239,7 @@ export default {
 				},
 
 			}).open();
-			console.log('hello')
+			console.log('components:NotMemberContentC:NotMemberDetail.vue:addrChange:','hello')
 		},
 	}
 }

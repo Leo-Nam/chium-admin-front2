@@ -176,7 +176,7 @@ export default {
 			this.version.patchVersion = this.version.fullVersion.substring(secondComma+1, this.version.fullVersion.length)
 			this.setVersionInfo(this.version)
 
-			console.log('VersionInfo', this.getVersionInfo)
+			console.log('App.vue:parseVersionInfo:', this.getVersionInfo)
 		}
 	},
 }

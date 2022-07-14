@@ -40,11 +40,11 @@ export default {
         } else {
           emptyObj[v] = null
         }
-		console.log(v)
-		console.log(this[v])
+		console.log('components:commonC:NoteInput.vue:beforeInsertNote:',v)
+		console.log('components:commonC:NoteInput.vue:beforeInsertNote:',this[v])
       });
       emptyObj.note = this.note
-      console.log(emptyObj,'ddd')
+      console.log('components:commonC:NoteInput.vue:beforeInsertNote:',emptyObj,'ddd')
       this.setNoteDetailIds(emptyObj)
       this.sp_admin_insert_note()
     }

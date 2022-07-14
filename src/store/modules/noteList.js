@@ -40,19 +40,19 @@ export default {
 		
 		commit("setNoteLists", res.data.data[0].NOTE_LIST)	
 		commit("setLastPage", res.data.data[0].LAST_PAGE)	
-		console.log("noteList ====>", res.data.data[0].NOTE_LIST)
+		console.log('store:modules:noteList.js:sp_admin_get_note_lists:',"noteList ====>", res.data.data[0].NOTE_LIST)
 	},
 	async sp_admin_get_note_details({rootState, state, commit}, payload){
 		const res = await noteListApi.sp_admin_get_note_details({rootState, payload})
 		const note_details = res.data.data[0].NOTE_DETAILS[0]
-		console.log(note_details)
+		console.log('store:modules:noteList.js:sp_admin_get_note_details:',note_details)
 		commit("setNoteDetails", res.data.data[0].NOTE_DETAILS[0])
-		console.log('state.selectedNote==>', state.selectedNote)
+		console.log('store:modules:noteList.js:sp_admin_get_note_details:','state.selectedNote==>', state.selectedNote)
 	},
 	async sp_admin_update_note({rootState, state}){
 		try{
 			const res = await noteListApi.sp_admin_update_note({rootState, state})
-			console.log(res, "=> res")
+			console.log('store:modules:noteList.js:sp_admin_update_note:',res, "=> res")
 		} catch(e){
 			console.log(e)
 		}
@@ -61,7 +61,7 @@ export default {
   },
   getters: {
     getNoteLists(state){
-		console.log(state.noteList[0], '==>state.noteList')
+		console.log('store:modules:noteList.js:getNoteLists:',state.noteList[0], '==>state.noteList')
 		return state.noteList
 	}, 
 	getPageNum(state){

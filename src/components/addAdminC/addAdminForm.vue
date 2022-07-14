@@ -133,7 +133,7 @@ export default {
 		...mapMutations('addAdmin',['changeAdminDetail', 'setDepartmentItem']),
 
 		changeState(key,value){
-			console.log(value,key)
+			console.log('components:addAdminC:addAdminForm.vue:changeState:',value,key)
 			if(key === 'department'){
 				this.setDepartmentItem(value)
 			}else{

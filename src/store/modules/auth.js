@@ -97,11 +97,11 @@ export default {
 		}
     },
 
-    async initUser({state, commit}) {
+    async sp_admin_init_user({state, commit}) {
       let res
       try{
 		console.log('state.loginInfo>>>', state.loginInfo)
-        res = await authApi.initUser({
+        res = await authApi.sp_admin_init_user({
 			adminId: state.userId, 
 			adminUid: state.loginInfo.adminId, 
 			adminPw: state.loginInfo.adminPw, 

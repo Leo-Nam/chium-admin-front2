@@ -95,7 +95,7 @@ export default {
 		...mapGetters('auth',['getUserInit', 'getUserId'])
 	},
   methods : {
-    ...mapActions('auth', ['login', 'initUser']),
+    ...mapActions('auth', ['login', 'sp_admin_init_user']),
       ...mapMutations('auth',['setUserItem']),
     loginBtn(){
 		console.log('loginbtn')
@@ -104,7 +104,7 @@ export default {
     initUserInfo(){
 		console.log('zzzㅋㅋㅋ')
 		if (this.adminPw === this.adminPw2){
-			this.initUser()
+			this.sp_admin_init_user()
 		}else{
 			alert("암호가 일치하지 않습니다.")
 		}

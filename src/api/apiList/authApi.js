@@ -4,7 +4,7 @@ const method = "post";
 
 export default {
   // 로그인 할 시 인풋으로 받는 아이디 비밀번호 값
-  initUser({ adminId, adminUid, adminPw }) {
+  sp_admin_init_user({ adminId, adminUid, adminPw }) {
     const url = "api/admin/common/sp_admin_init_user";
 	console.log('userInit-url >>>>>', { adminId, adminUid, adminPw })
     let data = {

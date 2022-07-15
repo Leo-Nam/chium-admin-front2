@@ -71,20 +71,31 @@
 			</v-col>
 		</v-row>
 		<v-row justify="center">
-			<v-col><div style="width:100%;text-align:center"><h3>Ver.0.0.15</h3></div>
+			<v-col><div style="width:100%;text-align:center"><h3><strong>Ver. {{ version.fullVersion }}</strong></h3></div>
 			</v-col>
 		</v-row>
 	</div>
 </template>
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex"
+import packageJson from "/package.json"
 export default {
 	data(){
 		return {
 			adminId : '',
 			adminPw : '',
 			adminPw2 : '',
+			packageJson : packageJson,
+			version : {
+				fullVersion: null,
+				majorVersion: 0,
+				minorVersion: 0,
+				patchVersion: 0
+			},
 		}
+	},
+	mounted() {
+		this.parseVersionInfo()
 	},
 	computed : {
 		...mapGetters('auth',['getUserInit', 'getUserId']),
@@ -106,7 +117,19 @@ export default {
 		},
 		setLoginInfo(key, event){
 			this.setUserItem({key:key, payload:event.target.value})
-		}
+		},
+
+		parseVersionInfo(){
+			this.version.fullVersion = this.packageJson.version
+			let firstComma = this.version.fullVersion.indexOf('.', 0)
+			let secondComma = this.version.fullVersion.indexOf('.', firstComma+1)
+			this.version.majorVersion = this.left(this.version.fullVersion, firstComma)
+			this.version.minorVersion = this.version.fullVersion.substring(firstComma+1, secondComma)
+			this.version.patchVersion = this.version.fullVersion.substring(secondComma+1, this.version.fullVersion.length)
+			this.setVersionInfo(this.version)
+
+			console.log('App.vue:parseVersionInfo:', this.getVersionInfo)
+		},
 	}
 }
 </script>

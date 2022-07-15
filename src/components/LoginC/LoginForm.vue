@@ -103,6 +103,7 @@ export default {
 	methods : {
 		...mapActions('auth', ['login', 'sp_admin_init_user']),
 		...mapMutations('auth',['setUserItem']),
+		...mapMutations('common',['setVersionInfo']),
 		loginBtn(){
 			console.log('components:LoginC:LoginForm.vue:loginBtn:','loginbtn')
 			this.login({adminId : this.adminId, adminPw : this.adminPw})
@@ -129,6 +130,14 @@ export default {
 			this.setVersionInfo(this.version)
 
 			console.log('App.vue:parseVersionInfo:', this.getVersionInfo)
+		},
+
+		right(str, chr) {
+			return str.slice(str.length-chr,str.length);
+		},
+	
+		left(str, chr) {
+			return str.slice(0, chr - str.length);
 		},
 	}
 }

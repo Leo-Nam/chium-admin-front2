@@ -126,6 +126,7 @@
 	<div 
 		v-else
 		class="app-content-body"
+		:style="{ 'background-image': `url(${backgroundImg})`}"
 	>
 		<template>
 			<div
@@ -142,7 +143,7 @@
 								style="background-color:transparent"
 							>
 							<!--style="background-color:transparent"-->
-								<LoginForm />
+								<LoginForm /><div :style="{ color: color}"></div>
 							</v-card>
 						</v-col>
 					</v-row>
@@ -181,15 +182,18 @@ export default {
 				'center',
 				'end',
 			],
+			backgroundImg: null,
+			color: "red"
 		}
 	},
 	computed : {
-		...mapGetters('common',['getNowLoadingState', 'getVersionInfo']),
+		...mapGetters('common',['getNowLoadingState', 'getVersionInfo', 'getBackgroundTheme']),
 		...mapGetters('auth',['isLogged', 'getUserId', 'getUserClassId']),
+		
 	},
 	watch : {
 		isLogged(){
-		this.checkIsLogged()
+			this.checkIsLogged()
 		}
 	},
 	mounted() {
@@ -197,9 +201,12 @@ export default {
 	},
 	created(){
 		this.checkIsLogged()
+		this.sp_admin_get_current_background_theme()
+		this.backgroundTheme()
 	},
 	methods : {
 		...mapActions('common',['checkIsLogged']),
+		...mapActions('common', ['sp_admin_get_current_background_theme']),
 		...mapMutations('common',['setVersionInfo']),
 		toggle(){
 			this.value = !this.value
@@ -231,17 +238,24 @@ export default {
 			this.dialog = true
 			console.log('components:commonC:NoteList.vue:showMeNote:','hello')
 		},
+		backgroundTheme(){
+			this.backgroundImg = this.getBackgroundTheme.imgPath
+			console.log('this.backgroundImg', this.backgroundImg)
+		}
 	},
 }
 </script>
 <style scoped>
+	:root {
+	--main-bg-color: brown;
+	}
 	a { text-decoration: none; }
 	html {
 
 		height: 100%;
 	}
 	.app-content-body {
-		background-image: url('https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1657876487.png');
+		/* background-image: url('https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1657876487.png'); */
 		height: 100vh;
 		flex-direction: column;
 		display: flex;

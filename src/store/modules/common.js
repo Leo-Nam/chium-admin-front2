@@ -33,10 +33,18 @@ export default {
 		majorVersion : 0,
 		minorVersion : 0,
 		patchVersion : 0
+	},
+	backgroundTheme : {
+		month: null,
+		imgPath: null
 	}
   },
   mutations: {
     // 로딩값 true
+    setBackgroundTheme(state, payload) {
+		state.backgroundTheme.month = payload.MONTH;
+		state.backgroundTheme.imgPath = payload.BACKGROUND_IMG;
+	},
     setVersionInfo(state, payload) {
 		state.version.fullVersion = payload.fullVersion;
 		state.version.majorVersion = Number(payload.majorVersion);
@@ -211,7 +219,19 @@ export default {
       await commonApi.sp_admin_insert_note({rootState, noteDetails : state.noteDetailsIds})
       commit('resetNoteDetailIds')
       location.reload()
-    }
+    },
+
+    async sp_admin_get_current_background_theme({commit}){
+      try {
+        const res = await commonApi.sp_admin_get_current_background_theme()
+		console.log('res', res)
+        commit('setBackgroundTheme',res.data.data)
+
+
+      } catch (e) {
+        console.log(e)
+      }
+    },
   },
   getters: {
     // 현재 로딩 상태 나타냄
@@ -243,6 +263,10 @@ export default {
 			return packageJson.version
 
 		}
-    }
+    },
+
+    getBackgroundTheme(state){
+      return state.backgroundTheme
+    },
   },
 };

@@ -17,6 +17,10 @@ export default {
     };
     return myAxios(url, method, data);
   },
+  sp_admin_get_current_background_theme() {
+    const url = "api/admin/common/sp_admin_get_current_background_theme";
+    return myAxios(url, method, null);
+  },
 
 
 

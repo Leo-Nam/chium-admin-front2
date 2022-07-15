@@ -37,11 +37,16 @@ export default {
 	backgroundTheme : {
 		month: null,
 		imgPath: null
-	}
+	},
+	currentRoute: null
   },
   mutations: {
     // 로딩값 true
+	setCurrentRoute(state, payload){
+		state.currentRoute = payload
+	},
     setBackgroundTheme(state, payload) {
+		console.log(payload)
 		state.backgroundTheme.month = payload.MONTH;
 		state.backgroundTheme.imgPath = payload.BACKGROUND_IMG;
 	},
@@ -268,5 +273,9 @@ export default {
     getBackgroundTheme(state){
       return state.backgroundTheme
     },
+
+	getCurrentRoute(state){
+		return state.currentRoute
+	}
   },
 };

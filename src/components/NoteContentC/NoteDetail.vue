@@ -96,6 +96,9 @@ export default {
   computed : {
     ...mapGetters('noteList',['getNoteDetail']),
   },
+	created(){
+		console.log('this.$route>>>>', this.$route)
+	},
 
   methods : {	
 	...mapMutations('noteList', ['changeSelectedNote']),

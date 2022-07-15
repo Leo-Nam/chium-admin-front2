@@ -1,80 +1,46 @@
 <template>
-	<div v-if="isLogged===true">
+	<div 
+		v-if="isLogged===true" 
+		class="container-width wrapper"
+	>
 		<v-app>
 			<v-navigation-drawer
-				v-model="value"
+				v-model="navToggle"
 				app
 			>
-			<!-- --><NavList />
+				<NavList />
 			</v-navigation-drawer>
 
 			<v-app-bar
 				dense
-				color="#01b286"
+				color="#FFFFFF"
 				app
+				class="container-width"
+				height="72px"
 			>
-			<v-app-bar-nav-icon @click.stop="toggle" />
-				<v-toolbar-title 
-					style="color : white; font-size : 14px"
-				>
-					치움 관리자 페이지
-				</v-toolbar-title>
-
+				<v-app-bar-nav-icon @click.stop="toggle" />
 				<v-spacer></v-spacer>
 				<div v-if="isLogged===true">
 					<router-link
-						to="/admin/main/add-admin"
-						v-if="getUserClassId===101"
+						v-for="menu in appBarMenus"
+						:key="menu.label"
+						:to="menu.to"
 					>
-						<v-btn icon>
-							<v-icon>mdi-account</v-icon>
-						</v-btn>
-					</router-link>
-					<router-link
-						to="/admin/main/log/list"
-						v-if="getUserClassId===101"
-					>
-						<v-btn icon>
-							<v-icon>mdi-math-log</v-icon>
-						</v-btn>
-					</router-link>
-					<router-link
-						to="/admin/main/note-list/list"
-					>
-						<v-btn icon>
-							<v-icon>mdi-face-agent</v-icon>
-						</v-btn>
-					</router-link>
-					<router-link
-						to="/admin/main/question/list"
-					>
-						<v-btn icon>
-							<v-icon>mdi-alert</v-icon>
-						</v-btn>
-					</router-link>
-					<router-link
-						to="/admin/main/version/list"
-					>
-						<v-btn icon>
-							<v-icon>mdi-dev-to</v-icon>
-						</v-btn>
-					</router-link>
-					<router-link
-						to="/account"
-					>
-						<v-btn 
-							icon
-							@click="showMyAccountSimple()"
+						<span
+							v-if="getCurrentRoute in menu.route"
+							style="color:#00B286"
 						>
-							<v-icon>mdi-account-details</v-icon>
-						</v-btn>
+							{{ menu.lable }}
+						</span>
+						<span v-else>
+							{{ menu.lable }}
+						</span>
+						&nbsp;&nbsp;
 					</router-link>
 					<router-link
 						to="/logout"
 					>
-						<v-btn icon>
-							<v-icon>mdi-logout</v-icon>
-						</v-btn>
+						로그아웃  
 					</router-link>
 				</div>
 				<div v-else>
@@ -169,7 +135,7 @@ export default {
 	data(){
 		return{
 			dialog : false,
-			value : false,
+			navToggle : false,
 			packageJson : packageJson,
 			version : {
 				fullVersion: null,
@@ -183,11 +149,19 @@ export default {
 				'end',
 			],
 			backgroundImg: null,
-			color: "red"
+			color: "red",
+			appBarMenus:[
+				{lable: '직원관리', route: {'add-admin':''}, to: '/admin/main/add-admin'},
+				{lable: '로그정보', route: {'log-list':''}, to: '/admin/main/log/list'},
+				{lable: '상담내역', route: {'note-list-list':'', 'note-content':''}, to: '/admin/main/note-list/list'},
+				{lable: '고객문의', route: {'question-list':''}, to: '/admin/main/question/list'},
+				{lable: '버전정보', route: {'version-list':''}, to: '/admin/main/version/list'},
+				{lable: 'MyPage', route: {'account':''}, to: '/account'},
+			]
 		}
 	},
 	computed : {
-		...mapGetters('common',['getNowLoadingState', 'getVersionInfo', 'getBackgroundTheme']),
+		...mapGetters('common',['getNowLoadingState', 'getVersionInfo', 'getBackgroundTheme', 'getCurrentRoute']),
 		...mapGetters('auth',['isLogged', 'getUserId', 'getUserClassId']),
 		
 	},
@@ -209,7 +183,7 @@ export default {
 		...mapActions('common', ['sp_admin_get_current_background_theme']),
 		...mapMutations('common',['setVersionInfo']),
 		toggle(){
-			this.value = !this.value
+			this.navToggle = !this.navToggle
 		},
 
 		right(str, chr) {
@@ -246,10 +220,22 @@ export default {
 }
 </script>
 <style scoped>
-	:root {
-	--main-bg-color: brown;
+	a:link { 
+		text-decoration: none; 
+		color: black
 	}
-	a { text-decoration: none; }
+	a:visited { 
+		text-decoration: none; 
+		color: black
+	}
+	a:hover { 
+		text-decoration: none; 
+		color: black
+	}
+	a:active { 
+		text-decoration: none; 
+		color: black
+	}
 	html {
 
 		height: 100%;
@@ -265,5 +251,13 @@ export default {
 	.app-content-wrapper {
 		background-color: rgba(255,255,255,0);
 		z-index:3;
+	}
+	.container-width{
+		width: 1280px;
+	}
+	.wrapper{
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 </style>

@@ -96,7 +96,7 @@
 </div>
 </template>
 <script>
-import {mapGetters} from "vuex"
+import {mapGetters, mapMutations} from "vuex"
 export default {
   data(){
     return {
@@ -117,7 +117,12 @@ export default {
   computed : {
     ...mapGetters('noteList',['getNoteLists'])
   },
+	created(){
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
+	},
   methods : {
+	...mapMutations('common',['setCurrentRoute']),
     getTime(time){
       if (time){
         return time.slice(0,19)

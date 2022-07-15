@@ -100,9 +100,10 @@
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex"
 export default {
+	
 	data(){
 		return{
-			classCode: [101, 102, 103]
+			classCode: [101, 102, 103],
 		}
 	},
 	computed : {
@@ -110,10 +111,13 @@ export default {
 	},
 	created(){
 		this.sp_req_b_department()
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
 	},
 	methods: {
 		...mapActions('addAdmin',['sp_req_b_department', 'sp_admin_insert_manager']),
 		...mapMutations('addAdmin',['changeAdminDetail', 'setDepartmentItem']),
+		...mapMutations('common',['setCurrentRoute']),
 
 		changeState(key,value){
 			console.log('components:addAdminC:addAdminForm.vue:changeState:',value,key)

@@ -118,7 +118,7 @@
 </template>
 <script>
 import LogPopup from "./LogPopup.vue"
-import {mapGetters} from "vuex"
+import {mapGetters, mapMutations} from "vuex"
 export default {
   components : {
     LogPopup
@@ -147,7 +147,12 @@ export default {
   computed : {
     ...mapGetters('log',['getLogList'])
   },
+	created(){
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
+	},
   methods : {
+	...mapMutations('common',['setCurrentRoute']),
     getTime(time){
       if (time){
         return time.slice(0,19)

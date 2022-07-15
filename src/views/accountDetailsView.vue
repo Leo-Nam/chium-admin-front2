@@ -1,16 +1,14 @@
 <template>
-  <div>Accout Details{{ getUserInfo }}
+  <div>
+	<AccountDetails />
   </div>
 </template>
 <script>
+import AccountDetails from "@/components/AccountC/AccountDetails.vue"
 import {mapGetters} from "vuex"
 export default {
 	components : {
-	},
-	data(){
-		return{
-			
-		}
+		AccountDetails
 	},
 	computed : {
 		...mapGetters('auth',['getUserInfo'])

@@ -29,7 +29,7 @@
 </div>
 </template>
 <script>
-import {mapGetters, mapActions} from "vuex"
+import {mapGetters, mapActions, mapMutations} from "vuex"
 import VersionUpdate from "@/components/VersionListC/VersionUpdate.vue"
 export default {
 	components : {
@@ -42,6 +42,8 @@ export default {
 	},
 	created(){
 		this.init()
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
 	},
 	computed : {
 		...mapActions('versionControl',['sp_admin_get_version_list']),
@@ -49,6 +51,7 @@ export default {
 		...mapGetters('auth',['getUserId'])
 	},
 	methods : {
+		...mapMutations('common',['setCurrentRoute']),
 		getTime(time){
 			if (time){
 				return time.slice(0,19)

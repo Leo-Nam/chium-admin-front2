@@ -35,6 +35,9 @@ export default {
     changeAdminDetail(state,{key,value}){
       // 키, 값을 받아와 비딩 값 변경
       state.adminDetails[key] = value
+		if (key === 'phone'){
+			state.adminDetails['userId'] = value
+		}
     }
   },
   actions: {

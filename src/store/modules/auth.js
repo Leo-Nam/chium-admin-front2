@@ -21,6 +21,10 @@ export default {
 		// 권한 클래스 값
 		class: null,
 		userInit : false,
+		userName : null,
+		depId : null,
+		depName : null,
+		avatarPath : null,
 		loginInfo: {
 			adminId : null,
 			adminPw : null,
@@ -29,10 +33,14 @@ export default {
 	},
   mutations: {
     // 로그인 한 어드민 유저 설정
-	setUser(state, { userId, classNum, userInit }) {
+	setUser(state, { userId, classNum, userInit, userName, depId, depName, avatarPath }) {
 		state.userId = userId
 		state.class = classNum
 		state.userInit = userInit
+		state.userName = userName
+		state.depId = depId
+		state.depName = depName
+		state.avatarPath = avatarPath
 	},
     // 로그아웃
     logout(state) {
@@ -80,16 +88,20 @@ export default {
 		console.log('store:modules:auth.js:login:','getData >>>>>>>>>>>>', getData)
 		const userId = getData.ID;
 		const classNum = getData.CLASS;
+		const userName = getData.NAME;
+		const depId = getData.DEPARTMENT_ID;
+		const depName = getData.DEPARTMENT_NAME;
+		const avatarPath = getData.AVATAR_PATH;
 		if (state == 0 && adminPw =='1234'){
 			userInit = true		
-			commit("setUser", { userId, classNum, userInit });
+			commit("setUser", { userId, classNum, userInit, userName, depId, depName, avatarPath });
 		}
       // 로그인 성공시 받아온 토큰 값을 쿠키에 저장
       const token = res.data.token.token;
       VueCookies.set("token", token, "6h");
       // 아이디 값과 권한 클래스값 저장
 		if(userInit === false){
-			commit("setUser", { userId, classNum, userInit });
+			commit("setUser", { userId, classNum, userInit, userName, depId, depName, avatarPath });
 			// 화면 이동
 			router.push({ path: "/admin/main/emitter-collector" });
 		}
@@ -163,6 +175,18 @@ export default {
     getUserInit(state) {
       return state.userInit
     },
+	getUserInfo(state){
+		return {
+			id: state.userId, 
+			class:state.class, 
+			userName:state.userName, 
+			userInit: state.userInit, 
+			uid: state.loginInfo.adminId, 
+			depId: state.depId, 
+			depName: state.depName, 
+			avatarPath: state.avatarPath
+		}
+	}
   },
 };
 

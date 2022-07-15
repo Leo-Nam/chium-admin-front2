@@ -230,6 +230,11 @@ const routes = [
         ],
       },
       {
+        path: "account",
+        name: "account",
+        component: () => import("../views/accountDetailsView.vue"),
+      },
+      {
         path: "login",
         name: "login",
         component: () => import("../views/LoginView.vue"),

@@ -44,23 +44,6 @@
           cols="3"
         >
           <v-subheader class="text-center">
-            아이디
-          </v-subheader>
-        </v-col>
-
-        <v-col>
-          <v-text-field
-            solo
-            hide-details=""
-			@input="changeState('userId',$event)"
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col
-          cols="3"
-        >
-          <v-subheader class="text-center">
             암호
           </v-subheader>
         </v-col>

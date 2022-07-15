@@ -82,21 +82,25 @@ export default {
           {
             title: "회원목록",
             icon: "mdi-clipboard-text-outline",
+			menuId: 100,
             subNavs : [
               {
                 title: "[ 개인 ] 배출자",
                 icon: "mdi-account",
                 route: "/admin/main/person-emitter/list",
+				menuId: 101,
               },
               {
                 title: "[ 사업자 ] 배출자 , 수거자 ",
                 icon: "mdi-account",
                 route: "/admin/main/emitter-collector",
+				menuId: 102,
               },
               {
                 title: "[ 비회원 ] 수거자 ",
                 icon: "mdi-account",
                 route: "/admin/main/not-member/list",
+				menuId: 103,
               },
             ]
           },
@@ -104,24 +108,29 @@ export default {
             title: "폐기물등록현황",
             icon: "mdi-new-box",
             route: "/admin/main/emissions/list",
+			menuId: 200,
           },
           {
             title: "입찰정보",
             icon: "mdi-handshake-outline",
             route: "/admin/main/biddings/list",
+			menuId: 300,
           },
           { title: "트랜잭션",
             icon: "mdi-vector-combine",
-            route: "/admin/main/transaction/list"
+            route: "/admin/main/transaction/list",
+			menuId: 400,
           },
           { title: "처리보고서",
             icon: "mdi-content-paste",
-            route: "/admin/main/report/list"
+            route: "/admin/main/report/list",
+			menuId: 500,
           },
           {
             title: "통계📊",
             icon: "mdi-chart-bar",
             route: "/admin/main/chart",
+			menuId: 600,
           },
 
         ];

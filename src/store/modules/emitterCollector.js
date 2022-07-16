@@ -42,10 +42,17 @@ export default {
       siteId : 0,
       pageOffset: 0,
       pageSize: 15,
-    }
+    },
+	emojiPath: null,
+	tableConfig: {}
   },
   mutations: {
-
+	setTableConfig(state, payload){
+		state.tableConfig = payload
+	},
+	setEmojiPath(state, payload){
+		state.emojiPath = payload
+	},
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     // %%%%%%%%%%%%%%%%%%%%사업자 수거자 배출자%%%%%%%%%%%%%%%%%%
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -224,5 +231,11 @@ export default {
     getPersonEmitterSiteId(state) {
       return state.personEmitterObj.siteId;
     },
+	getEmojiPath(state){
+		return state.emojiPath
+	},
+	getTableConfig(state){
+		return state.tableConfig
+	}
   },
 };

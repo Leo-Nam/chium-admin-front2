@@ -43,6 +43,75 @@ export default {
 		PersonEmitterConfirmedSelect,
 		PersonEmitterActiveSelect
 	},
+	data(){
+		return {
+			emojiPath : 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1657963679.png',
+			tableConfig: {
+				titleColor: '#00B286',
+				head: {
+					columns: {
+						color: '#031849',
+						title : [
+							'ID',
+							'계정 아이디',
+							'이름',
+							'핸드폰',
+							'활성화',
+							'확인 상태',
+							'권한',
+							'담당 CS 매니저',
+							'등록 일자'
+						],
+						title2 : [
+							{
+								name: '등록번호',
+								binding: 'ID'
+							},
+							{
+								name: '계정',
+								binding: 'USER_ID'
+							},
+							{
+								name: '이름',
+								binding: 'USER_NAME'
+							},
+							{
+								name: '핸드폰',
+								binding: 'PHONE'
+							},
+							{
+								name: '활성화',
+								binding: 'ACTIVE'
+							},
+							{
+								name: '확인',
+								binding: 'CONFIRMED'
+							},
+							{
+								name: '권한',
+								binding: 'CLASS'
+							},
+							{
+								name: 'CS',
+								binding: 'CS_MANAGER_NAME'
+							},
+							{
+								name: '등록 일자',
+								binding: 'CREATED_AT'
+							},
+						]
+					}
+				},
+				body: {
+					columns: {
+						color: {
+							userId: '#00B286'
+						}
+					}
+				}
+			}
+		}
+	},
 	watch: {
 		$route(to) {
 			// 네비게이션에서 버튼을 눌렀을 경우에 그 파라미터 값을 받아와서
@@ -60,11 +129,21 @@ export default {
 		this.controlQuerySetAndGetList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
+		this.setEmojiPath(this.emojiPath)
+		this.setTableConfig(this.tableConfig)
 	},
 
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),
-		...mapMutations('emitterCollector',['setPersonEmitterConfirmed','setPersonEmitterActive','setPersonEmitterSearch','setPersonEmitterSiteId','setPersonEmitterPageNum']),
+		...mapMutations('emitterCollector',[
+			'setPersonEmitterConfirmed',
+			'setPersonEmitterActive',
+			'setPersonEmitterSearch',
+			'setPersonEmitterSiteId',
+			'setPersonEmitterPageNum', 
+			'setEmojiPath', 
+			'setTableConfig'
+		]),
 		...mapActions('emitterCollector',['sp_admin_retrieve_users']),
 
 		controlQuerySetAndGetList(querySet){

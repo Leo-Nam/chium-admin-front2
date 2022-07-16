@@ -377,164 +377,157 @@ import WsteClassKind from "@/components/EmitterCollectorContentC/WsteClassKind"
 
 
 export default {
-  components : {
-    SubHeader,
-	WsteKind,
-	WsteClassKind, 
-	ImagePopup
-  },
-  data(){
-    return  {
-      dialog1 : false,
-      dialog2 : false,
-      imgDialog1 : false,
-      imgDialog2 : false,
-    }
-  },
-  computed : {
-    ...mapGetters('selectedUser',['getLine1','getLine2','getSeletedUser','getShowIf'])
-  },
-  methods : {
-    ...mapMutations('selectedUser',['changeSelectedUserInfo','setAddr','removeWsteList','removeWsteClassList']),
-    ...mapActions('selectedUser',['uploadPermitImgToS3','uploadBizImgToS3','sp_admin_update_site_info']),
-    removeWste(value){
-      this.removeWsteList(value)
-    },
-    removeWsteClass(value){
-      this.removeWsteClassList(value)
-    },
-    closeDialog1(){
-      this.dialog1 = false
-    },
-    closeDialog2(){
-      this.dialog2 = false
-    },
-    changeContent(e){
-      if (e == 'addr'){
-        this.addrChange()
-      }
-      const el = document.getElementById(e)
-      if (el.readOnly){
-        el.readOnly = false
-      } else {
-        el.readOnly = true
-      }
-       el.focus()
+	components : {
+		SubHeader,
+		WsteKind,
+		WsteClassKind, 
+		ImagePopup
+	},
+	data(){
+		return  {
+			dialog1 : false,
+			dialog2 : false,
+			imgDialog1 : false,
+			imgDialog2 : false,
+		}
+	},
+	computed : {
+		...mapGetters('selectedUser',['getLine1','getLine2','getSeletedUser','getShowIf'])
+	},
+	methods : {
+		...mapMutations('selectedUser',['changeSelectedUserInfo','setAddr','removeWsteList','removeWsteClassList']),
+		...mapActions('selectedUser',['uploadPermitImgToS3','uploadBizImgToS3','sp_admin_update_site_info']),
+		removeWste(value){
+			this.removeWsteList(value)
+		},
+		removeWsteClass(value){
+			this.removeWsteClassList(value)
+		},
+		closeDialog1(){
+			this.dialog1 = false
+		},
+		closeDialog2(){
+			this.dialog2 = false
+		},
+		changeContent(e){
+			if (e == 'addr'){
+				this.addrChange()
+			}
+			const el = document.getElementById(e)
+			if (el.readOnly){
+				el.readOnly = false
+			} else {
+				el.readOnly = true
+			}
+			el.focus()
+		},
+		changeActive(key){
+			let value
+			const el = document.getElementById(key)
+			if (el.checked){
+				el.checked = false
+				value = 0
+			} else {
+				el.checked = true
+				value = 1
+			}
+			this.changeSelectedUserInfo({key,value})
+		},
 
-    },
-    changeActive(key){
-      let value
-      const el = document.getElementById(key)
-      if (el.checked){
-        el.checked = false
-        value = 0
-      } else {
-        el.checked = true
-        value = 1
+		MyVmodel(key,value){
+			this.changeSelectedUserInfo({key,value})
+		},
+		changeImgae(key){
+			if (key == 'bizRegImgPath') {
+				document.getElementById('biz-img').click()
+			} else if (key == 'permitRegImgPath') {
+				document.getElementById('permit-img').click()
+			}
+		},
+		uploadPermitImg(e){
+			if (e == undefined){
+				alert('파일을 제대로 입력해주세요')
+				return
+			}
+			const formData = new FormData();
+			formData.append('file', e)
+			this.uploadPermitImgToS3(formData)
+		},
+		uploadBizImg(e){
+			console.log('components:EmitterCollectorContentC:SiteInfo.vue:uploadBizImg:',e,'bizimg 1')
+			if (e == undefined){
+				alert('파일을 제대로 입력해주세요')
+				return
+			}
+			const formData = new FormData();
+			formData.append('file', e)
+			this.uploadBizImgToS3(formData)
+		},
+		modifyBtn(){
+			this.sp_admin_update_site_info()
+		},
+		addrChange(){
+		// eslint-disable-next-line no-undef
+			new daum.Postcode({
+				oncomplete: (data) => {
+					let fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+					let extraRoadAddr = ''; // 도로명 조합형 주소 변수
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+						extraRoadAddr += data.bname;
+					} // 건물명이 있고, 공동주택일 경우 추가한다.
+					if(data.buildingName !== '' && data.apartment === 'Y'){
+						extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+					} // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if(extraRoadAddr !== ''){
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					} // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+					if(fullRoadAddr !== ''){ 
+						fullRoadAddr += extraRoadAddr;
+					} // 우편번호와 주소 정보를 해당 필드에 넣는다.
 
-      }
-      this.changeSelectedUserInfo({key,value})
-
-    },
-
-    MyVmodel(key,value){
-      this.changeSelectedUserInfo({key,value})
-    },
-    changeImgae(key){
-      if (key == 'bizRegImgPath') {
-        document.getElementById('biz-img').click()
-      } else if (key == 'permitRegImgPath') {
-        document.getElementById('permit-img').click()
-      }
-    },
-    uploadPermitImg(e){
-      if (e == undefined){
-        alert('파일을 제대로 입력해주세요')
-        return
-      }
-      const formData = new FormData();
-      formData.append('file', e)
-      this.uploadPermitImgToS3(formData)
-    },
-    uploadBizImg(e){
-      console.log('components:EmitterCollectorContentC:SiteInfo.vue:uploadBizImg:',e,'bizimg 1')
-      if (e == undefined){
-        alert('파일을 제대로 입력해주세요')
-        return
-      }
-      const formData = new FormData();
-      formData.append('file', e)
-      this.uploadBizImgToS3(formData)
-
-    },
-    modifyBtn(){
-      this.sp_admin_update_site_info()
-    },
-    addrChange(){
-      // eslint-disable-next-line no-undef
-        new daum.Postcode({
-            oncomplete: (data) => {
-                let fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                let extraRoadAddr = ''; // 도로명 조합형 주소 변수
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                } // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                } // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                } // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                if(fullRoadAddr !== ''){ fullRoadAddr += extraRoadAddr;
-                } // 우편번호와 주소 정보를 해당 필드에 넣는다.
-
-
-
-                Promise.resolve(data).then(()=>{
-					return new Promise((resolve,reject)=>{
-						const geocoder = new window.kakao.maps.services.Geocoder();
-						geocoder.addressSearch(fullRoadAddr,(result,status)=>{
-						if(status === window.kakao.maps.services.Status.OK){
-							const { x, y } = result[0];
-							resolve({ lat: y, log: x })
-						}else{
-							reject();
-						}
+					Promise.resolve(data).then(()=>{
+						return new Promise((resolve,reject)=>{
+							const geocoder = new window.kakao.maps.services.Geocoder();
+							geocoder.addressSearch(fullRoadAddr,(result,status)=>{
+							if(status === window.kakao.maps.services.Status.OK){
+								const { x, y } = result[0];
+								resolve({ lat: y, log: x })
+							}else{
+								reject();
+							}
+							})
 						})
+					}).then(result => {
+						let lat = parseFloat(result.lat)
+						let lng = parseFloat(result.log)
+						this.setAddr({ addr : data.address+', ', bCode : data.bcode, lat, lng } )
+							console.log('components:EmitterCollectorContentC:SiteInfo.vue:addrChange:','this.addrInfo >>>>>>', { addr : data.address+', ', bCode : data.bcode, lat, lng })
 					})
-                }).then(result => {
-					let lat = parseFloat(result.lat)
-					let lng = parseFloat(result.log)
-					this.setAddr({ addr : data.address+', ', bCode : data.bcode, lat, lng } )
-						console.log('components:EmitterCollectorContentC:SiteInfo.vue:addrChange:','this.addrInfo >>>>>>', { addr : data.address+', ', bCode : data.bcode, lat, lng })
-                })
 
-            },
-            animation : true,
-            onclose: (state) => {
-                if(state === 'COMPLETE_CLOSE') alert('상세 주소를 뒤에 이어서 적어주세요!')
-                const el = document.getElementById('addr')
-                el.readOnly = false
-                el.focus()
-            },
+				},
+				animation : true,
+				onclose: (state) => {
+					if(state === 'COMPLETE_CLOSE') alert('상세 주소를 뒤에 이어서 적어주세요!')
+					const el = document.getElementById('addr')
+					el.readOnly = false
+					el.focus()
+				},
 
-        }).open();
-    },
-    close(){
-      this.imgDialog1 = false
-      this.imgDialog2 = false
-    },
-    checkEmiOrCol(code){
-      if (Number(code) == 9){
-        return false
-      }
-      return true
-    }
-  }
-
-
+			}).open();
+		},
+		close(){
+			this.imgDialog1 = false
+			this.imgDialog2 = false
+		},
+		checkEmiOrCol(code){
+			if (Number(code) == 9){
+				return false
+			}
+			return true
+		}
+	}
 }
 </script>
 <style lang="scss" >

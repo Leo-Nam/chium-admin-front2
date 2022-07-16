@@ -46,23 +46,23 @@ export default {
 			headers: ['ID', '구분', '사이트 이름', '사업자 등록 번호', '등록일자']
 		}
 	},
-  computed : {
-    ...mapGetters('emitterCollector',['getEmitterCollectorList'])
-  },
-  methods : {
-    getTime(time){
-      return time.slice(0,19)
-    },
-    goToContent(siteId){
-       this.$router.push({ path: `emitter-collector/${siteId}`})
-    },
-    checkEmOrCol(code){
-      if (Number(code) == 9){
-        return '배출자'
-      }
-      return '수거자'
-    },
-  }
+	computed : {
+		...mapGetters('emitterCollector',['getEmitterCollectorList'])
+	},
+	methods : {
+		getTime(time){
+			return time.slice(0,19)
+		},
+		goToContent(siteId){
+			this.$router.push({ path: `emitter-collector/${siteId}`})
+		},
+		checkEmOrCol(code){
+			if (Number(code) == 9){
+				return '배출자'
+			}
+			return '수거자'
+		},
+	}
 
 
 

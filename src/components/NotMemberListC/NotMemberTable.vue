@@ -45,47 +45,40 @@
 <script>
 import {mapGetters} from "vuex"
 export default {
-  data(){
-    return {
-      thArray : [
-        'ID',
-        '회사명',
-        '업종',
-        '전화번호',
-        '팩스번호',
-        '이메일',
-        '수집운반',
-        '대표자',
-        '웹사이트',
-        '주소',
-        ]
-    }
+	data(){
+		return {
+			thArray : [
+				'ID',
+				'회사명',
+				'업종',
+				'전화번호',
+				'팩스번호',
+				'이메일',
+				'수집운반',
+				'대표자',
+				'웹사이트',
+				'주소',
+			]
+		}
+	},
+	computed : {
+		...mapGetters('notMember',['getNotMemberList'])
+	},
+	methods : {
+		changeToIsTransit(num){
+			if (num == 1){
+				return '가능'
+			}
+			return '불가'
+		},
 
-
-  },
-  computed : {
-    ...mapGetters('notMember',['getNotMemberList'])
-  },
-  methods : {
-    changeToIsTransit(num){
-      if (num == 1){
-        return '가능'
-      }
-      return '불가'
-    }
-  ,
-
-    goToSomeWhere({value,key}){
-
-      if (key === 'ID'){
-        this.$router.push(`./${value}`)
-        return
-      }
-    },
-  }
-
-
-
+		goToSomeWhere({value,key}){
+			if (key === 'ID'){
+				this.$router.push(`./${value}`)
+				return
+			}
+		},
+	}
 }
 </script>
 <style lang="">

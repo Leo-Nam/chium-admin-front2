@@ -70,47 +70,48 @@ import InterestedSite from "@/components/EmitterCollectorContentC/InterestedSite
 import NoteInput from "@/components/CommonC/NoteInput.vue"
 import NoteList from "@/components/CommonC/NoteList.vue"
 
-import {mapActions,mapGetters,} from "vuex"
+import {mapActions,mapGetters,mapMutations} from "vuex"
 export default {
-   components : {
-    SiteInfo,
-    TitleText,
-    SiteMap2,
-    OptList,
-    mapListTable,
-    EmitOrColList,
-    NoteInput,
-    NoteList,
-    BusinessArea,
-    InterestedSite
-  },
+	components : {
+		SiteInfo,
+		TitleText,
+		SiteMap2,
+		OptList,
+		mapListTable,
+		EmitOrColList,
+		NoteInput,
+		NoteList,
+		BusinessArea,
+		InterestedSite
+	},
 
-  computed : {
-    ...mapGetters('selectedUser',['getShowListIfIEmitter','getSeletedUser', 'getUserType', 'getInterestedSiteCount']),
-    ...mapGetters('common',['getNotes'])
-  },
-  watch : {
-    $route(to) {
-      // 네비게이션에서 버튼을 눌렀을 경우에 그 파라미터 값을 받아와서
-      // 페이지번호 를 받아온 값으로 바꾸고 데이터들을 불러옴
-      // 페이지 번호를 Number로 바꿔준다. 만약 아무 값이 없다면 NaN이 나오니까 아래에서 1로 바꿔주는 작업을 진행
-      // this.controlQuerySetAndGetPermitList(to)
-      const siteId = to.params.id
-       this.sp_admin_retrieve_site_info({siteId, circleRange : null})
-    },
-  },
+	computed : {
+		...mapGetters('selectedUser',['getShowListIfIEmitter','getSeletedUser', 'getUserType', 'getInterestedSiteCount']),
+		...mapGetters('common',['getNotes'])
+	},
+	watch : {
+		$route(to) {
+		// 네비게이션에서 버튼을 눌렀을 경우에 그 파라미터 값을 받아와서
+		// 페이지번호 를 받아온 값으로 바꾸고 데이터들을 불러옴
+		// 페이지 번호를 Number로 바꿔준다. 만약 아무 값이 없다면 NaN이 나오니까 아래에서 1로 바꿔주는 작업을 진행
+		// this.controlQuerySetAndGetPermitList(to)
+		const siteId = to.params.id
+		this.sp_admin_retrieve_site_info({siteId, circleRange : null})
+		},
+	},
 
-  created(){
-    this.sp_admin_retrieve_site_info({siteId : this.$route.params.id, circleRange : null})
-    this.getWsteLists()
+	created(){
+		this.sp_admin_retrieve_site_info({siteId : this.$route.params.id, circleRange : null})
+		this.getWsteLists()
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
+	},
 
-  },
-
-  methods : {
-    ...mapActions('selectedUser',['sp_admin_retrieve_site_info']),
-     ...mapActions('common',['getWsteLists','checkIsLogged']),
-  },
-
+	methods : {
+		...mapMutations('common',['setCurrentRoute']),
+		...mapActions('selectedUser',['sp_admin_retrieve_site_info']),
+		...mapActions('common',['getWsteLists','checkIsLogged']),
+	},
 }
 </script>
 <style lang="scss">

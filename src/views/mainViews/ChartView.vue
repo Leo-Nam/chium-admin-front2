@@ -11,23 +11,24 @@
 <script>
 import BarChart from "@/components/ChartC/BarChart.vue"
 import SidoBarChart from "@/components/ChartC/SidoBarChart.vue"
-import {mapActions,mapGetters} from "vuex"
+import {mapActions,mapGetters,mapMutations} from "vuex"
 export default {
-  components : {
-    BarChart,SidoBarChart
-  },
+	components : {
+		BarChart,SidoBarChart
+	},
 
-  computed : {
-    ...mapGetters('chart',['getTitle','getSidoTitle'])
-  },
-  created(){
-    this.sp_admin_retrieve_stat_registeration()
-
-  },
-  methods : {
-    ...mapActions('chart',['sp_admin_retrieve_stat_registeration'])
-  }
-
+	computed : {
+		...mapGetters('chart',['getTitle','getSidoTitle'])
+	},
+	created(){
+		this.sp_admin_retrieve_stat_registeration()
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
+	},
+	methods : {
+		...mapMutations('common',['setCurrentRoute']),
+		...mapActions('chart',['sp_admin_retrieve_stat_registeration'])
+	}
 }
 </script>
 <style lang="">

@@ -6,13 +6,15 @@
 <script>
 import {mapMutations} from "vuex"
 export default {
-  created(){
-    this.logout()
-  },
-  methods : {
-    ...mapMutations('auth',['logout']),
-  },
-
+	created(){
+		this.logout()
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
+	},
+	methods : {
+		...mapMutations('common',['setCurrentRoute']),
+		...mapMutations('auth',['logout']),
+	},
 }
 </script>
 <style lang="">

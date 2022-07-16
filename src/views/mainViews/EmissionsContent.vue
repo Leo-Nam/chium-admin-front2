@@ -79,51 +79,54 @@ import NoteInput from "@/components/CommonC/NoteInput.vue"
 import NoteList from "@/components/CommonC/NoteList.vue"
 import {mapActions,mapGetters, mapMutations} from "vuex"
 export default {
-   components : {
-    EmissionOrderInfoFirst,
-    EmissionBiddingTable,
-    EmissionScheduleCalendar,
-    EmissionCollectorListAreaOfInterest,
-    EmissionCollectorListOpt,
-    EmissionCollectorListTableWithOpt,
-    EmissionMapCollectorListWithin,
-    EmissionTransactionTable,
-    EmissionLog,
-    EmissionReportTable,
-    NoteInput,
-    NoteList
-  },
-  data(){
-    return  {
-      orderId : null
-    }
-  },
-  computed : {
-    ...mapGetters('emissions',['getCollectorListAreaOfInterest','getBiddingInfo','getOrderInfo','getLogList','getReportInfo']),
-    ...mapGetters('common',['getNotes']),
-  },
-  watch : {
-    getOrderInfo(to){
-      this.orderId = to.ORDER_ID
-    }
-  },
-  destroyed(){
-     this.setNowSelectedOpt('회원사 거리')
-     this.setCircleRange(50)
-     this.setNowSelectedIsTransitOpt('모두')
-     this.setNowSelectedBCodeWithinOpt('해당 시군구')
-  },
-  async created(){
-	console.log('views:mainViews:EmissionsContent.vue:created:',this.$route.params.id, "====>this.$route.params.id")
-    await this.sp_admin_get_new_comings_detail(this.$route.params.id)
-    await this.sp_get_site_list_whose_biz_areas_of_interest()
-    await this.sp_get_site_list_inside_range()
-    await this.logList2({orderId : this.getOrderInfo.ORDER_ID})
-  },
-  methods : {
-    ...mapActions('emissions',['sp_admin_get_new_comings_detail','sp_get_site_list_whose_biz_areas_of_interest','sp_get_site_list_inside_range','logList2']),
-    ...mapMutations('emissions',['setNowSelectedOpt','setCircleRange','setNowSelectedIsTransitOpt','setNowSelectedBCodeWithinOpt']),
-  },
+	components : {
+		EmissionOrderInfoFirst,
+		EmissionBiddingTable,
+		EmissionScheduleCalendar,
+		EmissionCollectorListAreaOfInterest,
+		EmissionCollectorListOpt,
+		EmissionCollectorListTableWithOpt,
+		EmissionMapCollectorListWithin,
+		EmissionTransactionTable,
+		EmissionLog,
+		EmissionReportTable,
+		NoteInput,
+		NoteList
+	},
+	data(){
+		return  {
+			orderId : null
+		}
+	},
+	computed : {
+		...mapGetters('emissions',['getCollectorListAreaOfInterest','getBiddingInfo','getOrderInfo','getLogList','getReportInfo']),
+		...mapGetters('common',['getNotes']),
+	},
+	watch : {
+		getOrderInfo(to){
+			this.orderId = to.ORDER_ID
+		}
+	},
+	destroyed(){
+		this.setNowSelectedOpt('회원사 거리')
+		this.setCircleRange(50)
+		this.setNowSelectedIsTransitOpt('모두')
+		this.setNowSelectedBCodeWithinOpt('해당 시군구')
+	},
+	async created(){
+		console.log('views:mainViews:EmissionsContent.vue:created:',this.$route.params.id, "====>this.$route.params.id")
+		await this.sp_admin_get_new_comings_detail(this.$route.params.id)
+		await this.sp_get_site_list_whose_biz_areas_of_interest()
+		await this.sp_get_site_list_inside_range()
+		await this.logList2({orderId : this.getOrderInfo.ORDER_ID})
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
+	},
+	methods : {
+		...mapMutations('common',['setCurrentRoute']),
+		...mapActions('emissions',['sp_admin_get_new_comings_detail','sp_get_site_list_whose_biz_areas_of_interest','sp_get_site_list_inside_range','logList2']),
+		...mapMutations('emissions',['setNowSelectedOpt','setCircleRange','setNowSelectedIsTransitOpt','setNowSelectedBCodeWithinOpt']),
+	},
 }
 </script>
 <style >

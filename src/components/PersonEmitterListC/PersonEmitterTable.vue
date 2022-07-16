@@ -45,39 +45,39 @@
 <script>
 import {mapGetters} from "vuex"
 export default {
-  data(){
-    return {
-      personEmitterTh : [
-        'ID',
-        '계정 아이디',
-        '이름',
-        '핸드폰',
-        '활성화',
-        '확인 상태',
-        '권한',
-        '담당 CS 매니저',
-        '등록 일자'
-      ]
-    }
-  },
-  computed : {
-    ...mapGetters('emitterCollector',['getPersonEmitterList']),
+	data(){
+		return {
+			personEmitterTh : [
+				'ID',
+				'계정 아이디',
+				'이름',
+				'핸드폰',
+				'활성화',
+				'확인 상태',
+				'권한',
+				'담당 CS 매니저',
+				'등록 일자'
+			]
+		}
+	},
+	computed : {
+		...mapGetters('emitterCollector',['getPersonEmitterList']),
 
-  },
-  methods : {
-    getTime(time){
-      if (time){
-        return time.slice(0,19)
-      }
-      return time
-    },
-    goToContent(personEmitterId){
-       this.$router.push({ path: `./${personEmitterId}`})
-    },
-    changeStateToEmoji(state){
-      return  state ? '✅' : '❌'
-    }
-  }
+	},
+	methods : {
+		getTime(time){
+			if (time){
+				return time.slice(0,19)
+			}
+			return time
+		},
+		goToContent(personEmitterId){
+			this.$router.push({ path: `./${personEmitterId}`})
+		},
+		changeStateToEmoji(state){
+			return  state ? '✅' : '❌'
+		}
+	}
 }
 </script>
 <style lang="">

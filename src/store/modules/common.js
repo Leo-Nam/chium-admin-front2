@@ -15,7 +15,7 @@ export default {
     // 배출 폐기물 대구분 리스트
     wsteClassList: [],
     // 네비바 리스트
-    navItems: [],
+    menuItems: [],
 
     noteDetailsIds : {
       MEMBER_ID : null,
@@ -38,7 +38,12 @@ export default {
 		month: null,
 		imgPath: null
 	},
-	currentRoute: null
+	adminPageConfig: {
+		colorTheme: {
+			activeText: '#00B286',
+		}
+	},
+	currentRoute: null,
   },
   mutations: {
     // 로딩값 true
@@ -88,31 +93,37 @@ export default {
       state.wsteClassList = payload.wste3;
     },
     // 네비바 설정
-    setNavItems(state, isLogged) {
+    setMenuItems(state, isLogged) {
       // 로그인 되었다면 아래와 같이 설정
       if (isLogged) {
-        state.navItems = [
+        state.menuItems = [
           {
             title: "회원목록",
             icon: "mdi-clipboard-text-outline",
+            route: "/account",
+			routes: {'person-emitter-list':'', 'person-emitter-content':'', 'emitter-collector':'', 'site-info':'', 'not-member-list':'', 'not-member-content':''},
+			location: "nav",
 			menuId: 100,
             subNavs : [
               {
                 title: "[ 개인 ] 배출자",
                 icon: "mdi-account",
                 route: "/admin/main/person-emitter/list",
+				routes: {'person-emitter-list':'', 'person-emitter-content':''},
 				menuId: 101,
               },
               {
                 title: "[ 사업자 ] 배출자 , 수거자 ",
                 icon: "mdi-account",
                 route: "/admin/main/emitter-collector",
+				routes: {'emitter-collector':'', 'site-info':''},
 				menuId: 102,
               },
               {
                 title: "[ 비회원 ] 수거자 ",
                 icon: "mdi-account",
                 route: "/admin/main/not-member/list",
+				routes: {'not-member-list':'', 'not-member-content':''},
 				menuId: 103,
               },
             ]
@@ -121,35 +132,86 @@ export default {
             title: "폐기물등록현황",
             icon: "mdi-new-box",
             route: "/admin/main/emissions/list",
+			routes: {'emissions-list':'', 'emissions-content':''},
+			location: "nav",
 			menuId: 200,
           },
           {
             title: "입찰정보",
             icon: "mdi-handshake-outline",
             route: "/admin/main/biddings/list",
+			routes: {'biddings-list':'', 'biddings-content':''},
+			location: "nav",
 			menuId: 300,
           },
           { title: "트랜잭션",
             icon: "mdi-vector-combine",
             route: "/admin/main/transaction/list",
+			routes: {'transaction-list':'', 'transaction-content':''},
+			location: "nav",
 			menuId: 400,
           },
           { title: "처리보고서",
             icon: "mdi-content-paste",
             route: "/admin/main/report/list",
+			routes: {'report-list':'', 'report-content':''},
+			location: "nav",
 			menuId: 500,
           },
           {
-            title: "통계📊",
+            title: "통계",
             icon: "mdi-chart-bar",
             route: "/admin/main/chart",
+			routes: {'chart':''},
+			location: "nav",
 			menuId: 600,
           },
-
+          { title: "직원관리",
+            route: "/admin/main/add-admin",
+			routes: {'add-admin':''},
+			location: "app-bar",
+			menuId: 700,
+          },
+          { title: "로그정보",
+            route: "/admin/main/log/list",
+			routes: {'log-lis':''},
+			location: "app-bar",
+			menuId: 800,
+          },
+          { title: "상담내역",
+            route: "/admin/main/note-list/list",
+			routes: {'note-list-list':'', 'note-content':''},
+			location: "app-bar",
+			menuId: 900,
+          },
+          { title: "고객문의",
+            route: "/admin/main/question/list",
+			routes: {'question-list':''},
+			location: "app-bar",
+			menuId: 900,
+          },
+          { title: "버전정보",
+            route: "/admin/main/version/list",
+			routes: {'version-list':''},
+			location: "app-bar",
+			menuId: 1000,
+          },
+          { title: "MyPage",
+            route: "/account",
+			routes: {'account':''},
+			location: "app-bar",
+			menuId: 1100,
+          },
+          { title: "로그아웃",
+            route: "/logout",
+			routes: {'account':''},
+			location: "app-bar",
+			menuId: 1200,
+          },
         ];
       // 아니라면 아래와 같이 설정
       } else {
-        state.navItems = [
+        state.menuItems = [
           { title: "로그인", icon: "mdi-account", route: "/login" },
         ];
       }
@@ -217,7 +279,7 @@ export default {
     },
     // 로그인 여부에 따라 네비게이션 목록 바꿔줌
     checkIsLogged({ commit, rootGetters }) {
-      commit("setNavItems", rootGetters["auth/isLogged"]);
+      commit("setMenuItems", rootGetters["auth/isLogged"]);
     },
 
     async sp_admin_insert_note({state, rootState,commit}){
@@ -248,8 +310,8 @@ export default {
       return { wsteList1: state.wsteList1, wsteList2: state.wsteList2, wsteClassList: state.wsteClassList };
     },
     // 네비게이션 리스트 나타냄
-    getNavList(state) {
-      return state.navItems;
+    getMenuList(state) {
+      return state.menuItems;
     },
     // 노트 리스트를 가지고옴
     getNotes(state){
@@ -276,6 +338,11 @@ export default {
 
 	getCurrentRoute(state){
 		return state.currentRoute
+	},
+
+	getAdminPageConfig(state){
+		console.log('adminPageConfig>>>>', state.adminPageConfig)
+		return state.adminPageConfig
 	}
   },
 };

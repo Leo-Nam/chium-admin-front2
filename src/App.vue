@@ -6,7 +6,8 @@
 		<v-app>
 			<v-navigation-drawer
 				v-model="navToggle"
-				app
+				absolute
+				temporary
 			>
 				<NavList />
 			</v-navigation-drawer>
@@ -22,25 +23,24 @@
 				<v-spacer></v-spacer>
 				<div v-if="isLogged===true">
 					<router-link
-						v-for="menu in appBarMenus"
+						v-for="menu in getMenuList"
 						:key="menu.label"
-						:to="menu.to"
+						:to="menu.route"
 					>
 						<span
-							v-if="getCurrentRoute in menu.route"
-							style="color:#00B286"
+							v-if="menu.location==='app-bar'"
 						>
-							{{ menu.lable }}
+							<span
+								v-if="getCurrentRoute in menu.routes"
+								:style="{ 'color': `${getAdminPageConfig.colorTheme.activeText}` }"
+							>
+								{{ menu.title }}
+							</span>
+							<span v-else>
+								{{ menu.title }}
+							</span>
+							&nbsp;&nbsp;
 						</span>
-						<span v-else>
-							{{ menu.lable }}
-						</span>
-						&nbsp;&nbsp;
-					</router-link>
-					<router-link
-						to="/logout"
-					>
-						로그아웃  
 					</router-link>
 				</div>
 				<div v-else>
@@ -150,18 +150,10 @@ export default {
 			],
 			backgroundImg: null,
 			color: "red",
-			appBarMenus:[
-				{lable: '직원관리', route: {'add-admin':''}, to: '/admin/main/add-admin'},
-				{lable: '로그정보', route: {'log-list':''}, to: '/admin/main/log/list'},
-				{lable: '상담내역', route: {'note-list-list':'', 'note-content':''}, to: '/admin/main/note-list/list'},
-				{lable: '고객문의', route: {'question-list':''}, to: '/admin/main/question/list'},
-				{lable: '버전정보', route: {'version-list':''}, to: '/admin/main/version/list'},
-				{lable: 'MyPage', route: {'account':''}, to: '/account'},
-			]
 		}
 	},
 	computed : {
-		...mapGetters('common',['getNowLoadingState', 'getVersionInfo', 'getBackgroundTheme', 'getCurrentRoute']),
+		...mapGetters('common',['getNowLoadingState', 'getVersionInfo', 'getBackgroundTheme', 'getCurrentRoute', 'getAdminPageConfig', 'getMenuList']),
 		...mapGetters('auth',['isLogged', 'getUserId', 'getUserClassId']),
 		
 	},

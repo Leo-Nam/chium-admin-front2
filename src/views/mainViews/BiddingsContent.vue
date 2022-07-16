@@ -5,19 +5,21 @@
 </template>
 <script>
 import BiddingDetail from "@/components/BiddingContentC/BiddingDetail.vue"
-import {mapActions} from "vuex"
+import {mapActions, mapMutations} from "vuex"
 export default {
-  components : {
-    BiddingDetail
-  },
-  created(){
-    const biddingId = this.$route.params.id
-    this.sp_admin_get_new_bidding_details({biddingId})
-  },
-  methods : {
-    ...mapActions('biddings',['sp_admin_get_new_bidding_details'])
-  },
-
+	components : {
+		BiddingDetail
+	},
+	created(){
+		const biddingId = this.$route.params.id
+		this.sp_admin_get_new_bidding_details({biddingId})
+		this.setCurrentRoute(this.$route.name)
+		console.log('this.$route>>>>', this.$route)
+	},
+	methods : {
+		...mapMutations('common',['setCurrentRoute']),
+		...mapActions('biddings',['sp_admin_get_new_bidding_details'])
+	},
 }
 </script>
 <style lang="">

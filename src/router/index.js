@@ -50,7 +50,7 @@ const routes = [
               },
               {
                 path: "emitter-collector/:id",
-                name: "content",
+                name: "site-info",
                 component: () =>
                   import("../views/mainViews/EmitterCollectorContent.vue"),
               },

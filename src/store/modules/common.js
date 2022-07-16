@@ -38,17 +38,20 @@ export default {
 		month: null,
 		imgPath: null
 	},
-	adminPageConfig: {
-		colorTheme: {
-			activeText: '#00B286',
-		}
-	},
+	adminPageConfig: {},
 	currentRoute: null,
+	currentMenuId: null,
   },
   mutations: {
     // 로딩값 true
+	setAdminPageConfig(state, payload){
+		state.adminPageConfig= payload
+	},
 	setCurrentRoute(state, payload){
 		state.currentRoute = payload
+	},
+	setCurrentMenuId(state, payload){
+		state.currentMenuId = payload
 	},
     setBackgroundTheme(state, payload) {
 		console.log(payload)
@@ -99,7 +102,7 @@ export default {
         state.menuItems = [
           {
             title: "회원목록",
-            icon: "mdi-clipboard-text-outline",
+            icon: "mdi-account-outline",
             route: "/account",
 			routes: {'person-emitter-list':'', 'person-emitter-content':'', 'emitter-collector':'', 'site-info':'', 'not-member-list':'', 'not-member-content':''},
 			location: "nav",
@@ -167,46 +170,53 @@ export default {
 			menuId: 600,
           },
           { title: "직원관리",
+			icon: "mdi-account",
             route: "/admin/main/add-admin",
 			routes: {'add-admin':''},
 			location: "app-bar",
 			menuId: 700,
           },
           { title: "로그정보",
+			icon: "mdi-math-log",
             route: "/admin/main/log/list",
-			routes: {'log-lis':''},
+			routes: {'log-list':''},
 			location: "app-bar",
 			menuId: 800,
           },
           { title: "상담내역",
+			icon: "mdi-face-agent",
             route: "/admin/main/note-list/list",
 			routes: {'note-list-list':'', 'note-content':''},
 			location: "app-bar",
 			menuId: 900,
           },
           { title: "고객문의",
+			icon: "mdi-alert",
             route: "/admin/main/question/list",
 			routes: {'question-list':''},
 			location: "app-bar",
-			menuId: 900,
+			menuId: 1000,
           },
           { title: "버전정보",
+			icon: "mdi-dev-to",
             route: "/admin/main/version/list",
 			routes: {'version-list':''},
 			location: "app-bar",
-			menuId: 1000,
+			menuId: 1100,
           },
           { title: "MyPage",
+			icon: "mdi-cog-outline",
             route: "/account",
 			routes: {'account':''},
 			location: "app-bar",
-			menuId: 1100,
+			menuId: 1200,
           },
           { title: "로그아웃",
+			icon: "mdi-logout",
             route: "/logout",
-			routes: {'account':''},
+			routes: {'logout':''},
 			location: "app-bar",
-			menuId: 1200,
+			menuId: 1300,
           },
         ];
       // 아니라면 아래와 같이 설정
@@ -338,6 +348,10 @@ export default {
 
 	getCurrentRoute(state){
 		return state.currentRoute
+	},
+
+	getCurrentMenuId(state){
+		return state.currentMenuId
 	},
 
 	getAdminPageConfig(state){

@@ -1,13 +1,15 @@
 <template>
 	<div 
 		v-if="isLogged===true" 
-		class="container-width wrapper"
+		class="wrapper"
+		:style="{ 'width': `${getAdminPageConfig.container.width}` }"
 	>
 		<v-app>
 			<v-navigation-drawer
 				v-model="navToggle"
 				absolute
 				temporary
+				:style="{ 'width': `${getAdminPageConfig.nav.width}` }"
 			>
 				<NavList />
 			</v-navigation-drawer>
@@ -16,8 +18,8 @@
 				dense
 				color="#FFFFFF"
 				app
-				class="container-width"
-				height="72px"
+				:height="getAdminPageConfig.appBar.height"
+				:style="{ 'width': `${getAdminPageConfig.container.width}` }"
 			>
 				<v-app-bar-nav-icon @click.stop="toggle" />
 				<v-spacer></v-spacer>
@@ -32,11 +34,14 @@
 						>
 							<span
 								v-if="getCurrentRoute in menu.routes"
-								:style="{ 'color': `${getAdminPageConfig.colorTheme.activeText}` }"
+								:style="{ 'color': `${getAdminPageConfig.colorTheme.appBar.text.active}` }"
 							>
 								{{ menu.title }}
 							</span>
-							<span v-else>
+							<span 
+								v-else
+								:style="{ 'color': `${getAdminPageConfig.colorTheme.appBar.text.normal}` }"
+							>
 								{{ menu.title }}
 							</span>
 							&nbsp;&nbsp;
@@ -65,14 +70,19 @@
 			</v-main>
 
 			<v-footer
+				v-if="getAdminPageConfig.footer.display===true"
 				padless
 				style="background-color : #01b286; color : white"
+				:style="{ 
+					'background-color': `${getAdminPageConfig.footer.color.backGround}`,
+					'color': `${getAdminPageConfig.footer.color.text}`
+				}"
 			>
 				<v-col
 					class="text-center"
 					cols="12"
 				>
-					{{ new Date().getFullYear() }} — <strong>CHIUM ADMIN PAGE Ver. {{ version.fullVersion }}</strong>
+					© {{ new Date().getFullYear() }} Neuru Co, LTD.
 				</v-col>
 			</v-footer>
 			<v-overlay
@@ -150,6 +160,53 @@ export default {
 			],
 			backgroundImg: null,
 			color: "red",
+			adminPageConfig: {
+				colorTheme: {
+					appBar: {
+						text: {
+							active: '#00B286',
+							normal: '#000000'
+						}
+					},
+					nav: {
+						text: {
+							active: '#00B286',
+							normal: '#FFFFFF',
+							selectedNormal: '#000000'
+						},
+						backGroundColor: {
+							active: '#D9D9D9',
+							normal: '#272727'
+						}
+					}
+				},
+				appBar: {
+					height: '72px'
+				},
+				nav: {
+					logo:{
+						padding: '10px',
+						height: '100px',
+						width: '32px',
+						imgPath: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1657938837.png'
+					},
+					height: '100vh',
+					width: '200px',
+					itemList: {
+						padding: '0px'
+					}
+				},
+				footer: {
+					display: true,
+					color: {
+						backGround: '#272727',
+						text: '#FFFFFF'
+					}
+				},
+				container:{
+					width: '1880px'
+				}
+			}
 		}
 	},
 	computed : {
@@ -169,11 +226,12 @@ export default {
 		this.checkIsLogged()
 		this.sp_admin_get_current_background_theme()
 		this.backgroundTheme()
+		this.initAdminPageConfig()
 	},
 	methods : {
 		...mapActions('common',['checkIsLogged']),
 		...mapActions('common', ['sp_admin_get_current_background_theme']),
-		...mapMutations('common',['setVersionInfo']),
+		...mapMutations('common',['setVersionInfo', 'setAdminPageConfig']),
 		toggle(){
 			this.navToggle = !this.navToggle
 		},
@@ -207,6 +265,9 @@ export default {
 		backgroundTheme(){
 			this.backgroundImg = this.getBackgroundTheme.imgPath
 			console.log('this.backgroundImg', this.backgroundImg)
+		},
+		initAdminPageConfig(){
+			this.setAdminPageConfig(this.adminPageConfig)
 		}
 	},
 }
@@ -243,9 +304,6 @@ export default {
 	.app-content-wrapper {
 		background-color: rgba(255,255,255,0);
 		z-index:3;
-	}
-	.container-width{
-		width: 1280px;
 	}
 	.wrapper{
 		position: absolute;

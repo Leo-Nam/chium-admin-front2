@@ -21,6 +21,16 @@ export default {
 		versionList: [],
 	},
 	mutations: {
+		// 현재 페이지 번호
+		setPageNum(state, payload) {
+			state.searchObj.pageNum = payload;
+			if (state.searchObj.pageNum == 1) {
+				state.searchObj.pageOffset = 0;
+			} else {
+				state.searchObj.pageOffset =
+				(state.searchObj.pageNum - 1) * state.searchObj.pageSize;
+			}
+		},
 		setVersionList(state,payload){
 			if (payload) {
 				state.versionList = payload.VERSION_LIST;
@@ -40,7 +50,8 @@ export default {
 	},
 	actions: {
 		async sp_admin_get_version_list({state, rootState, commit}){
-			console.log('store:modules:versionControl.js:sp_admin_get_version_list:','hello')
+			console.log('store:modules:versionControl.js:sp_admin_get_version_list:','hello111')
+			console.log('store:modules:versionControl.js:state:',state)
 			try {
 				const res = await versionControlApi.sp_admin_get_version_list({state, rootState})
 				commit("setVersionList", res.data.data[0]);
@@ -65,6 +76,18 @@ export default {
 		},
 		getChangedVersion(state){
 			return state.versionInfo.VERSION;
+		},
+		// 현재 페이지 번호
+		getPageNum(state){
+			return state.searchObj.pageNum
+		},
+		// 마지막 페이지 번호
+		getLastPageNum(state){
+			return state.searchObj.lastPageNum
+		},
+		// 현재 검색어
+		getSearch(state){
+			return state.searchObj.search
 		},
 	}
 }

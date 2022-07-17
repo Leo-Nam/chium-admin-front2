@@ -28,12 +28,12 @@ export default {
 
   computed : {
     ...mapGetters('emitterCollector',[
-      'getPersonEmitterConfirmedList',
-      'getPersonEmitterConfirmed',
-      'getPersonEmitterSearch',
-      'getPersonEmitterActive',
-      'getPersonEmitterSiteId',
-      'getPersonEmitterSearchConfig',
+		'getPersonEmitterConfirmedList',
+		'getPersonEmitterConfirmed',
+		'getPersonEmitterSearch',
+		'getPersonEmitterActive',
+		'getPersonEmitterSiteId',
+		'getPersonEmitterSearchConfig',
       ]
     ),
     // 현재 vuex에 선택되어 있는 값을 적절한 keyword로 바꾸어

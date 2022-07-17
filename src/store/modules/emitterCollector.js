@@ -43,16 +43,6 @@ export default {
       pageOffset: 0,
       pageSize: 15,
     },
-	emoji: {
-		personEmitter: {
-			src: null,
-			width: null
-		},
-		emitterCollector: {
-			src: null,
-			width: null
-		}
-	},
 	s3Img: {
 		components: {
 			checkOn: {
@@ -69,10 +59,17 @@ export default {
 		personEmitter: {
 			search: {},
 			table: {},
+			emoji: {}
 		},
 		emitterCollector: {
 			search: {},
 			table: {},
+			emoji: {}
+		},
+		notMember: {
+			search: {},
+			table: {},
+			emoji: {}
 		},
 	}
   },
@@ -81,25 +78,29 @@ export default {
 		console.log('hello>>>>>', payload)
 		if (payload.type === 'personEmitter'){
 			state.pageConfig.personEmitter.search = payload.spec
-		} else {
+		} else if (payload.type === 'emitterCollector') {
 			state.pageConfig.emitterCollector.search = payload.spec
+		} else {
+			state.pageConfig.notMember.search = payload.spec
 		}
 	},
 	setTableConfig(state, payload){
-		console.log('hello>>>>>', payload.kind, payload.data)
-		if (payload.kind === 'personEmitter'){
-			state.pageConfig.personEmitter.table = payload.data
+		console.log('hello>>>>>', payload.type, payload.data)
+		if (payload.type === 'personEmitter'){
+			state.pageConfig.personEmitter.table = payload
+		} else if (payload.type === 'emitterCollector') {
+			state.pageConfig.emitterCollector.table = payload
 		} else {
-			state.pageConfig.emitterCollector.table = payload.data
+			state.pageConfig.notMember.table = payload
 		}
 	},
 	setEmoji(state, payload){
 		if(payload.type === 'personEmitter'){
-			state.emoji.personEmitter.src = payload.src
-			state.emoji.personEmitter.width = payload.width
+			state.pageConfig.personEmitter.emoji = payload
+		} else if (payload.type === 'emitterCollector') {
+			state.pageConfig.emitterCollector.emoji = payload
 		} else {
-			state.emoji.emitterCollector.src = payload.src
-			state.emoji.emitterCollector.width = payload.width
+			state.pageConfig.notMember.emoji = payload
 		}
 	},
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -282,10 +283,13 @@ export default {
       return state.personEmitterObj.siteId;
     },
 	getPersonEmitterEmoji(state){
-		return state.emoji.personEmitter
+		return state.pageConfig.personEmitter.emoji
 	},
 	getEmitterCollectorEmoji(state){
-		return state.emoji.emitterCollector
+		return state.pageConfig.emitterCollector.emoji
+	},
+	getNotMemberEmoji(state){
+		return state.pageConfig.notMember.emoji
 	},
 	getS3Img(state){
 		return state.s3Img
@@ -296,11 +300,17 @@ export default {
 	getEmitterCollectorSearchConfig(state){
 		return state.pageConfig.emitterCollector.search
 	},
+	getNotMemberSearchConfig(state){
+		return state.pageConfig.notMember.search
+	},
 	getPersonEmitterTableConfig(state){
 		return state.pageConfig.personEmitter.table		
 	},
 	getEmitterCollectorTableConfig(state){
 		return state.pageConfig.emitterCollector.table
+	},
+	getNotMemberTableConfig(state){
+		return state.pageConfig.notMember.table
 	},
   },
 };

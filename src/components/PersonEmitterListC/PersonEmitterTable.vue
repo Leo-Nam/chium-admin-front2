@@ -91,8 +91,8 @@ export default {
 			}
 			return time
 		},
-		goToContent(personEmitterId){
-			this.$router.push({ path: `./${personEmitterId}`})
+		goToContent(Id){
+			this.$router.push({ path: `./${Id}`})
 		},
 		changeStateToEmoji(state){
 			return  state ? '✅' : '❌'

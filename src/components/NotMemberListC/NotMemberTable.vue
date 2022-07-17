@@ -1,7 +1,18 @@
 <template>
 	<div>
 		<v-card-title>
-			비회원(수거자)
+			<v-img
+				:src="getNotMemberEmoji.src"
+				:max-width="getNotMemberEmoji.width"
+			>
+			</v-img>&nbsp;
+			<span
+				:style="{ 
+					'color': `${getNotMemberTableConfig.titleColor}`
+				}"
+			>
+				비회원(수거자)
+			</span>			
 		</v-card-title>
 		<v-simple-table
 			dense
@@ -9,35 +20,48 @@
 			height="700px"
 		>
 			<template #default>
-			<thead>
-				<tr>
-				<th
-					v-for="th,idx in thArray"
-					:key="idx"
-				>
-					{{ th }}
-				</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr
-					v-for="notMember,idx in getNotMemberList"
-					:key="idx"
-					style="cursor : pointer"
-					@click="goToSomeWhere({key : 'ID', value : notMember.ID})"
-				>
-					<td>{{ notMember.ID }}</td>
-					<td>{{ notMember.COMP_NAME }}</td>
-					<td>{{ notMember.BIZ_NAME }}</td>
-					<td>{{ notMember.CONTACT }} </td>
-					<td>{{ notMember.FAX }}</td>
-					<td>{{ notMember.EMAIL }}</td>
-					<td> {{ changeToIsTransit(notMember.IS_TRANSIT) }}</td>
-					<td> {{ notMember.REP_NAME }}</td>
-					<td>{{ notMember.WEBSITE }}</td>
-					<td>{{ notMember.ADDR }}</td>
-				</tr>
-			</tbody>
+				<thead>
+					<tr>
+						<th
+							v-for="th in getNotMemberTableConfig.columns.title"
+							:key="th.name"
+							class="text-left"	
+							:style="{'color': `${getNotMemberTableConfig.columns.color}`}"						
+						>
+							{{ th.name }}
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						v-for="person,idx in getNotMemberList"
+						:key="idx"
+						style="cursor : pointer"
+						@click="goToContent(person.ID)"
+					>
+						<td
+							v-for="item in getNotMemberTableConfig.columns.title"
+							:key="item.binding"
+							:style="{ 
+								'color': `${item.color}`
+							}"
+						>
+							<span
+								v-if="item.type==='switch'"
+							>
+								<v-img 
+									:src="person[item.binding]===1 ? getS3Img.components.checkOn.src : getS3Img.components.checkOff.src" 
+									:width="20" 
+								/>
+							</span>
+							<span
+								v-else
+							>
+								{{ changeValue(item.type, person[item.binding]) }} 
+							</span>
+						</td>
+					</tr>
+				</tbody>
 			</template>
 		</v-simple-table>
 	</div>
@@ -47,37 +71,35 @@ import {mapGetters} from "vuex"
 export default {
 	data(){
 		return {
-			thArray : [
-				'ID',
-				'회사명',
-				'업종',
-				'전화번호',
-				'팩스번호',
-				'이메일',
-				'수집운반',
-				'대표자',
-				'웹사이트',
-				'주소',
-			]
 		}
 	},
 	computed : {
-		...mapGetters('notMember',['getNotMemberList'])
+		...mapGetters('notMember',['getNotMemberList']),
+		...mapGetters('emitterCollector',[
+			'getNotMemberEmoji', 
+			'getNotMemberTableConfig',
+			'getS3Img'
+		]),
 	},
 	methods : {
-		changeToIsTransit(num){
-			if (num == 1){
-				return '가능'
-			}
-			return '불가'
+
+		goToContent(Id){
+			this.$router.push({ path: `./${Id}`})
 		},
 
-		goToSomeWhere({value,key}){
-			if (key === 'ID'){
-				this.$router.push(`./${value}`)
-				return
+		getTime(time){
+			if (time){
+				return time.slice(0,19)
 			}
+			return time
 		},
+		changeValue(type, v){
+			if (type ==='datetime'){
+				return this.getTime(v)
+			} else {
+				return v
+			}
+		}
 	}
 }
 </script>

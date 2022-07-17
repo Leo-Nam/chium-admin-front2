@@ -1,20 +1,18 @@
 
 <template>
-  <div>
-    <v-row style="margin-top : 10px">
-      <v-col
-
-        :md="6"
-        cols="12"
-        style="margin-bottom : 10px;"
-      >
-        <NotMemberSearchBar />
-      </v-col>
-    </v-row>
-
-    <NotMemberTable />
-    <NotMemberNav />
-  </div>
+	<div>
+		<v-row style="margin-top : 10px">
+			<v-col
+				:md="6"
+				cols="12"
+				style="margin-bottom : 10px;"
+			>
+				<NotMemberSearchBar />
+			</v-col>
+		</v-row>
+		<NotMemberTable />
+		<NotMemberNav />
+	</div>
 </template>
 <script>
 import NotMemberNav from "@/components/NotMemberListC/NotMemberNav"
@@ -23,6 +21,78 @@ import NotMemberTable from "@/components/NotMemberListC/NotMemberTable"
 
 import {mapActions,mapMutations} from "vuex"
 export default {
+	data(){
+		return{
+			emoji : {
+				type: 'notMember',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658050796.png',
+				width: '24'
+			},
+			searchConfig: {
+				type: 'notMember',
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '18px',
+						height: '50'
+					}
+				}
+			},
+			tableConfig: {
+				type: 'notMember',
+				titleColor: '#00B286',
+				height: '700px',
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'ID',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '회사명',
+							binding: 'COMP_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '업종',
+							binding: 'BIZ_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '전화번호',
+							binding: 'CONTACT',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '수집운반',
+							binding: 'IS_TRANSIT',
+							color: '#000000',
+							type: 'switch'
+						},
+						{
+							name: '영업여부',
+							binding: 'CLOSED',
+							color: '#000000',
+							type: 'switch'
+						},
+						{
+							name: '주소',
+							binding: 'ADDR',
+							color: '#000000',
+							type: 'text'
+						},
+					]
+				}
+			}
+		}
+	},
 	components : {
 		NotMemberNav,NotMemberSearchBar,NotMemberTable
 	},
@@ -44,11 +114,19 @@ export default {
 		this.controlQuerySetAndGetNotMemberList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
+		this.setTableConfig(this.tableConfig)
+		this.setSearchConfig(this.searchConfig)
+		this.setEmoji(this.emoji)
 	},
 
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),
 		...mapMutations('notMember',['setPageNum','setSearch']),
+		...mapMutations('emitterCollector',[
+			'setTableConfig',
+			'setEmoji',
+			'setSearchConfig'
+		]),
 		...mapActions('notMember',['sp_admin_retrieve_prospective_site_lists']),
 
 		async controlQuerySetAndGetNotMemberList(querySet){

@@ -10,6 +10,8 @@ export default {
       pageNum: 1,
       lastPageNum: 10,
       search: null,
+		open: null,
+		transit: null
     },
     // 선택된 비회원 정보
     selectedNotMember : {},

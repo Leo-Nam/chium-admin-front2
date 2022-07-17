@@ -52,6 +52,7 @@ export default {
 				}
 			},
 			tableConfig: {
+				type: 'emitterCollector',
 				titleColor: '#00B286',
 				height: '700px',
 				columns: {
@@ -112,7 +113,7 @@ export default {
 		this.controlQuerySetAndGetPermitList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
-		this.setTableConfig({kind: 'EmitterCollector', data: this.tableConfig})
+		this.setTableConfig(this.tableConfig)
 		this.setSearchConfig(this.searchConfig)
 		this.setEmoji(this.emoji)
 	},

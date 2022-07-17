@@ -60,6 +60,7 @@ export default {
 				}
 			},
 			tableConfig: {
+				type: 'personEmitter',
 				titleColor: '#00B286',
 				height: '700px',
 				columns: {
@@ -142,7 +143,7 @@ export default {
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
 		this.setEmoji(this.emoji)
-		this.setTableConfig({kind: 'personEmitter', data: this.tableConfig})
+		this.setTableConfig(this.tableConfig)
 		this.setSearchConfig(this.searchConfig)
 	},
 

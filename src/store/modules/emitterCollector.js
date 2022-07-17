@@ -43,8 +43,16 @@ export default {
       pageOffset: 0,
       pageSize: 15,
     },
-	emojiPath: null,
-	tableConfig: {},
+	emoji: {
+		personEmitter: {
+			src: null,
+			width: null
+		},
+		emitterCollector: {
+			src: null,
+			width: null
+		}
+	},
 	s3Img: {
 		components: {
 			checkOn: {
@@ -57,25 +65,42 @@ export default {
 			}			
 		}
 	},
-	searchConfig: {
-		personEmitter: {},
-		emitterCollector: {},
+	pageConfig: {
+		personEmitter: {
+			search: {},
+			table: {},
+		},
+		emitterCollector: {
+			search: {},
+			table: {},
+		},
 	}
   },
   mutations: {
-	setSearchConfig(state, {kind, payload}){
-		console.log('hello>>>>>', kind, payload)
-		if (kind === 'personEmitter'){
-			state.searchConfig.personEmitter = payload
+	setSearchConfig(state, payload){
+		console.log('hello>>>>>', payload)
+		if (payload.type === 'personEmitter'){
+			state.pageConfig.personEmitter.search = payload.spec
 		} else {
-			state.searchConfig.emitterCollector = payload
+			state.pageConfig.emitterCollector.search = payload.spec
 		}
 	},
 	setTableConfig(state, payload){
-		state.tableConfig = payload
+		console.log('hello>>>>>', payload.kind, payload.data)
+		if (payload.kind === 'personEmitter'){
+			state.pageConfig.personEmitter.table = payload.data
+		} else {
+			state.pageConfig.emitterCollector.table = payload.data
+		}
 	},
-	setEmojiPath(state, payload){
-		state.emojiPath = payload
+	setEmoji(state, payload){
+		if(payload.type === 'personEmitter'){
+			state.emoji.personEmitter.src = payload.src
+			state.emoji.personEmitter.width = payload.width
+		} else {
+			state.emoji.emitterCollector.src = payload.src
+			state.emoji.emitterCollector.width = payload.width
+		}
 	},
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     // %%%%%%%%%%%%%%%%%%%%사업자 수거자 배출자%%%%%%%%%%%%%%%%%%
@@ -162,6 +187,7 @@ export default {
     async sp_admin_retrieve_site_lists({ state, commit, rootState }) {
       try {
         const res = await emitterCollectorApi.sp_admin_retrieve_site_lists({state, rootState})
+		console.log('sp_admin_retrieve_site_lists>>>', res)
         commit("setEmitterCollectorList", res.data.data[0].SITE_LISTS);
       } catch (e) {
         console.log(e);
@@ -255,20 +281,26 @@ export default {
     getPersonEmitterSiteId(state) {
       return state.personEmitterObj.siteId;
     },
-	getEmojiPath(state){
-		return state.emojiPath
+	getPersonEmitterEmoji(state){
+		return state.emoji.personEmitter
 	},
-	getTableConfig(state){
-		return state.tableConfig
+	getEmitterCollectorEmoji(state){
+		return state.emoji.emitterCollector
 	},
 	getS3Img(state){
 		return state.s3Img
 	},
-	getPersionEmitterSearchConfig(state){
-		return state.searchConfig.personEmitter
+	getPersonEmitterSearchConfig(state){
+		return state.pageConfig.personEmitter.search		
 	},
 	getEmitterCollectorSearchConfig(state){
-		return state.searchConfig.emitterCollector
+		return state.pageConfig.emitterCollector.search
+	},
+	getPersonEmitterTableConfig(state){
+		return state.pageConfig.personEmitter.table		
+	},
+	getEmitterCollectorTableConfig(state){
+		return state.pageConfig.emitterCollector.table
 	},
   },
 };

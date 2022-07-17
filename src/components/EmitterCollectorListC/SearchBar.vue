@@ -1,48 +1,68 @@
 <template>
-  <v-text-field
-    solo
-    rounded
-    hide-details=""
-    label="검색어를 입력해주세요."
-    prepend-inner-icon="mdi-map-marker"
-    @keyup.enter="search"
-    @keyup="keyUpEvent"
-  />
+	<v-text-field
+		solo
+		rounded
+		hide-details=""
+		label="검색어를 입력해주세요."
+		prepend-inner-icon="mdi-map-marker"
+		@keyup.enter="search"
+		@keyup="keyUpEvent"
+		:height="getEmitterCollectorSearchConfig.common.height"
+		:style="{ 
+			'border-radius': `${getEmitterCollectorSearchConfig.common.borderRadius}`,
+			'border': `${getEmitterCollectorSearchConfig.common.border}`,
+			'background': `${getEmitterCollectorSearchConfig.common.background}`,
+			'height': `${getEmitterCollectorSearchConfig.common.height}`+'px',
+		}"
+	/>
 </template>
 <script>
 import {mapMutations,mapGetters} from "vuex"
 export default {
-  data(){
-    return{
-      preKeyword : ''
-    }
-  },
-  computed : {
-    ...mapGetters('emitterCollector',['getConfirmedState','getSearch','getEmitOrCol'])
-  },
-  methods : {
-    ...mapMutations('emitterCollector',['setSearch']),
-    // 엔터를 눌렀을 때 발생
-    search(event){
-      const content = event.target.value
-      // 이전과 동일한 키워드를 작성하면 return
-      if (this.preKeyword == content){
-        alert('동일한 키워드를 입력하셨습니다. 다시 입력해주세요')
-        return
-      }
-      // vuex에 저장된 값들을 불러와서 같이 라우터 쿼리에 넣어 보내준다.
-      this.$router.push({ path: 'emitter-collector', query: { page: 1 , keyword : this.getSearch, filter : this.getConfirmedState, eoc : this.getEmitOrCol }})
-      this.preKeyword = content
-    },
-    // 검색어를 입력할 때 마다 발생, 빈 값이면 null로 만들어 준다.
-    keyUpEvent(event){
-      let content = event.target.value
-      if (content == ""){
-        content = null
-      }
-      this.setSearch(content)
-    }
-  }
+	data(){
+		return{
+		preKeyword : ''
+		}
+	},
+	computed : {
+		...mapGetters('emitterCollector',[
+			'getConfirmedState',
+			'getSearch',
+			'getEmitOrCol',
+			'getEmitterCollectorSearchConfig',
+		])
+	},
+	methods : {
+		...mapMutations('emitterCollector',['setSearch']),
+		// 엔터를 눌렀을 때 발생
+		search(event){
+			const content = event.target.value
+			// 이전과 동일한 키워드를 작성하면 return
+			if (this.preKeyword == content){
+				alert('동일한 키워드를 입력하셨습니다. 다시 입력해주세요')
+				return
+			}
+			// vuex에 저장된 값들을 불러와서 같이 라우터 쿼리에 넣어 보내준다.
+			this.$router.push({ 
+				path: 'emitter-collector', 
+				query: { 
+					page: 1 , 
+					keyword : this.getSearch, 
+					filter : this.getConfirmedState, 
+					eoc : this.getEmitOrCol 
+				}
+			})
+			this.preKeyword = content
+		},
+		// 검색어를 입력할 때 마다 발생, 빈 값이면 null로 만들어 준다.
+		keyUpEvent(event){
+			let content = event.target.value
+			if (content == ""){
+				content = null
+			}
+			this.setSearch(content)
+		}
+	}
 }
 </script>
 <style lang="">

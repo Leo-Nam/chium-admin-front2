@@ -42,19 +42,26 @@ export default {
 	},
 	data(){
 		return {
-			emojiPath : 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1657963679.png',
+			emoji : {
+				type: 'personEmitter',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1657963679.png',
+				width: '24'
+			},
+			
 			searchConfig: {
+				type: 'personEmitter',
 				spec: {
 					common: {
 						background: '#FFFFFF',
 						border: '1px solid #D4D4D4',
-						borderRadius: '8px',
+						borderRadius: '18px',
 						height: '50'
 					}
 				}
 			},
 			tableConfig: {
 				titleColor: '#00B286',
+				height: '700px',
 				columns: {
 					color: '#031849',
 					title : [
@@ -134,10 +141,9 @@ export default {
 		this.controlQuerySetAndGetList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
-		this.setEmojiPath(this.emojiPath)
-		this.setTableConfig(this.tableConfig)
-		this.setSearchConfig({kind: 'personEmitter', payload: this.searchConfig})
-		console.log('this.searchConfig>>>', this.searchConfig)
+		this.setEmoji(this.emoji)
+		this.setTableConfig({kind: 'personEmitter', data: this.tableConfig})
+		this.setSearchConfig(this.searchConfig)
 	},
 
 	methods : {
@@ -148,7 +154,7 @@ export default {
 			'setPersonEmitterSearch',
 			'setPersonEmitterSiteId',
 			'setPersonEmitterPageNum', 
-			'setEmojiPath', 
+			'setEmoji', 
 			'setTableConfig', 
 			'setSearchConfig'
 		]),

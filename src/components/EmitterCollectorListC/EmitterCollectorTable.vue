@@ -1,39 +1,67 @@
 <template>
 	<div>
 		<v-card-title>
-			사업자회원(배출자, 수거자)
+			<v-img
+				:src="getEmitterCollectorEmoji.src"
+				max-width="24"
+			>
+			</v-img>&nbsp;
+			<span
+				:style="{ 
+					'color': `${getEmitterCollectorTableConfig.titleColor}`
+				}"
+			>
+				사업자회원(배출자, 수거자)
+			</span>			
 		</v-card-title>
 		<v-simple-table
 			dense
 			fixed-header
-			height="700px"
+			:height="getEmitterCollectorTableConfig.height"
 		>
 			<template #default>
-			<thead>
-				<tr>
-				<th 
-					v-for="th in headers"
-					:key="th"
-					class="text-left"
-				>
-					{{ th }}
-				</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr
-					v-for="item,idx in getEmitterCollectorList"
-					:key="idx"
-					style="cursor : pointer"
-					@click="goToContent(item.SITE_ID)"
-				>
-					<td>{{ item.SITE_ID }}</td>
-					<td>{{ checkEmOrCol(item.SITE_INFO[0].TRMT_BIZ_CODE) }} </td>
-					<td>{{ item.SITE_NAME }}</td>
-					<td>{{ item.COMPANY_INFO[0].BIZ_REG_CODE }}</td>
-					<td>{{ getTime(item.CREATED_AT) }}</td>
-				</tr>
-			</tbody>
+				<thead>
+					<tr>
+						<th
+							v-for="th in getEmitterCollectorTableConfig.columns.title"
+							:key="th.name"
+							class="text-left"	
+							:style="{'color': `${getEmitterCollectorTableConfig.columns.color}`}"						
+						>
+							{{ th.name }}
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						v-for="person,idx in getEmitterCollectorList"
+						:key="idx"
+						style="cursor : pointer"
+						@click="goToContent(person.ID)"
+					>
+						<td
+							v-for="item in getEmitterCollectorTableConfig.columns.title"
+							:key="item.binding"
+							:style="{ 
+								'color': `${item.color}`
+							}"
+						>
+							<span
+								v-if="item.type==='switch'"
+							>
+								<v-img 
+									:src="person[item.binding]===1 ? getS3Img.components.checkOn.src : getS3Img.components.checkOff.src" 
+									:width="20" 
+								/>
+							</span>
+							<span
+								v-else
+							>
+								{{ changeValue(item.type, item.binding, person[item.binding]) }}
+							</span>
+						</td>
+					</tr>
+				</tbody>
 			</template>
 		</v-simple-table>
 	</div>
@@ -47,7 +75,14 @@ export default {
 		}
 	},
 	computed : {
-		...mapGetters('emitterCollector',['getEmitterCollectorList'])
+		...mapGetters('emitterCollector',[
+			'getEmitterCollectorList',
+			'getEmitterCollectorTableConfig',
+			'getEmitterCollectorEmoji'
+		])
+	},
+	created(){
+		console.log('this.getEmitterCollectorEmoji', this.getEmitterCollectorEmoji)
 	},
 	methods : {
 		getTime(time){
@@ -62,6 +97,17 @@ export default {
 			}
 			return '수거자'
 		},
+		changeValue(type, binding, v){
+			if (type ==='datetime'){
+				return this.getTime(v)
+			} else {
+				if (binding === 'TRMT_BIZ_CODE'){
+					return this.checkEmOrCol(v)
+				} else {
+					return v
+				}
+			}
+		}
 	}
 
 

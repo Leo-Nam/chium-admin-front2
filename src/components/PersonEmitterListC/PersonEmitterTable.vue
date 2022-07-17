@@ -2,13 +2,13 @@
 	<div>
 		<v-card-title>
 			<v-img
-				:src="getEmojiPath"
-				max-width="24"
+				:src="getPersonEmitterEmoji.src"
+				:max-width="getPersonEmitterEmoji.width"
 			>
 			</v-img>&nbsp;
 			<span
 				:style="{ 
-					'color': `${getTableConfig.titleColor}`
+					'color': `${getPersonEmitterTableConfig.titleColor}`
 				}"
 			>
 				개인 배출자
@@ -17,16 +17,16 @@
 		<v-simple-table
 			dense
 			fixed-header
-			height="700px"
+			:height="getPersonEmitterTableConfig.height"
 		>
 			<template #default>
 				<thead>
 					<tr>
 						<th
-							v-for="th in getTableConfig.columns.title"
+							v-for="th in getPersonEmitterTableConfig.columns.title"
 							:key="th.name"
 							class="text-left"	
-							:style="{'color': `${getTableConfig.columns.color}`}"						
+							:style="{'color': `${getPersonEmitterTableConfig.columns.color}`}"						
 						>
 							{{ th.name }}
 						</th>
@@ -40,7 +40,7 @@
 						@click="goToContent(person.ID)"
 					>
 						<td
-							v-for="item in getTableConfig.columns.title"
+							v-for="item in getPersonEmitterTableConfig.columns.title"
 							:key="item.binding"
 							:style="{ 
 								'color': `${item.color}`
@@ -76,13 +76,13 @@ export default {
 	computed : {
 		...mapGetters('emitterCollector',[
 			'getPersonEmitterList', 
-			'getEmojiPath', 
-			'getTableConfig',
+			'getPersonEmitterEmoji', 
+			'getPersonEmitterTableConfig',
 			'getS3Img'
 		]),
 	},
 	created(){
-		console.log('this.getEmojiPath', this.getEmojiPath)
+		console.log('this.getPersonEmitterEmoji', this.getPersonEmitterEmoji)
 	},
 	methods : {
 		getTime(time){

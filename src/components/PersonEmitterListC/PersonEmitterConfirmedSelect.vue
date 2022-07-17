@@ -1,20 +1,20 @@
 <template>
-  <v-autocomplete
-    dense
-    rounded
-    solo
-    :items="items"
-    hide-details=""
-    :value="nowValue"
-    @change="changeValue"
-	:height="getPersionEmitterSearchConfig.spec.common.height"
-	:style="{ 
-		'border-radius': `${getPersionEmitterSearchConfig.spec.common.borderRadius}`,
-		'border': `${getPersionEmitterSearchConfig.spec.common.border}`,
-		'background': `${getPersionEmitterSearchConfig.spec.common.background}`,
-		'height': `${getPersionEmitterSearchConfig.spec.common.height}`+'px'
-	}"
-  />
+	<v-autocomplete
+		dense
+		rounded
+		solo
+		:items="items"
+		hide-details=""
+		:value="nowValue"
+		@change="changeValue"
+		:height="getPersonEmitterSearchConfig.common.height"
+		:style="{ 
+			'border-radius': `${getPersonEmitterSearchConfig.common.borderRadius}`,
+			'border': `${getPersonEmitterSearchConfig.common.border}`,
+			'background': `${getPersonEmitterSearchConfig.common.background}`,
+			'height': `${getPersonEmitterSearchConfig.common.height}`+'px'
+		}"
+	/>
 </template>
 <script>
 import {mapGetters,mapMutations} from "vuex"
@@ -33,7 +33,7 @@ export default {
       'getPersonEmitterSearch',
       'getPersonEmitterActive',
       'getPersonEmitterSiteId',
-      'getPersionEmitterSearchConfig',
+      'getPersonEmitterSearchConfig',
       ]
     ),
     // 현재 vuex에 선택되어 있는 값을 적절한 keyword로 바꾸어

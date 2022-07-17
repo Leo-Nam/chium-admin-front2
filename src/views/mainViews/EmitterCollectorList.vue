@@ -1,32 +1,29 @@
-/* eslint-disable vuetify/grid-unknown-attributes */
 <template>
-  <div>
-    <v-row style="margin-top : 10px">
-      <v-col
-
-        :md="4"
-        cols="12"
-      >
-        <SearchBar />
-      </v-col>
-    </v-row>
-    <v-row style="margin-bottom : 10px">
-      <v-col
-        cols="6"
-        :md="2"
-      >
-        <ConfirmedSelect />
-      </v-col>
-      <v-col
-        cols="6"
-        :md="2"
-      >
-        <EmitOrColSelect />
-      </v-col>
-    </v-row>
-    <EmitterCollectorTable />
-    <EmitterCollectorNav />
-  </div>
+	<div>
+		<v-row style="margin-top : 10px">
+			<v-col
+				:md="6"
+				cols="12"
+				style="margin-bottom : 10px;"
+			>
+				<SearchBar />
+			</v-col>
+			<v-col
+				cols="6"
+				:md="3"
+			>
+				<ConfirmedSelect />
+			</v-col>
+			<v-col
+				cols="6"
+				:md="3"
+			>
+				<EmitOrColSelect />
+			</v-col>
+		</v-row>
+		<EmitterCollectorTable />
+		<EmitterCollectorNav />
+	</div>
 </template>
 <script>
 import EmitterCollectorNav from "@/components/EmitterCollectorListC/EmitterCollectorNav.vue"
@@ -36,6 +33,65 @@ import SearchBar from "@/components/EmitterCollectorListC/SearchBar.vue"
 import EmitOrColSelect from "@/components/EmitterCollectorListC/EmitOrColSelect.vue"
 import {mapActions,mapMutations} from "vuex"
 export default {
+	data(){
+		return{
+			emoji : {
+				type: 'emitterCollector',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658041685.png',
+				width: '24'
+			},
+			searchConfig: {
+				type: 'emitterCollector',
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '18px',
+						height: '50'
+					}
+				}
+			},
+			tableConfig: {
+				titleColor: '#00B286',
+				height: '700px',
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'SITE_ID',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '구분',
+							binding: 'TRMT_BIZ_CODE',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '사이트',
+							binding: 'SITE_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '사업자번호',
+							binding: 'BIZ_REG_CODE',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '등록일자',
+							binding: 'CREATED_AT',
+							color: '#000000',
+							type: 'text'
+						},
+					]
+				}
+			}
+		}
+	},
 	components : {
 		EmitterCollectorNav,EmitterCollectorTable,ConfirmedSelect,SearchBar,EmitOrColSelect
 	},
@@ -56,10 +112,21 @@ export default {
 		this.controlQuerySetAndGetPermitList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
+		this.setTableConfig({kind: 'EmitterCollector', data: this.tableConfig})
+		this.setSearchConfig(this.searchConfig)
+		this.setEmoji(this.emoji)
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),
-		...mapMutations('emitterCollector',['setPageNum','setSearch','setConfirmed','setEmitOrCol']),
+		...mapMutations('emitterCollector',[
+			'setPageNum',
+			'setSearch',
+			'setConfirmed',
+			'setEmitOrCol', 
+			'setTableConfig',
+			'setEmoji',
+			'setSearchConfig'
+		]),
 		...mapActions('emitterCollector',['sp_admin_retrieve_site_lists']),
 
 		controlQuerySetAndGetPermitList(querySet){

@@ -7,6 +7,13 @@
     hide-details=""
     :value="nowValue"
     @change="changeValue"
+	:height="getPersionEmitterSearchConfig.spec.common.height"
+	:style="{ 
+		'border-radius': `${getPersionEmitterSearchConfig.spec.common.borderRadius}`,
+		'border': `${getPersionEmitterSearchConfig.spec.common.border}`,
+		'background': `${getPersionEmitterSearchConfig.spec.common.background}`,
+		'height': `${getPersionEmitterSearchConfig.spec.common.height}`+'px'
+	}"
   />
 </template>
 <script>
@@ -25,7 +32,8 @@ export default {
       'getPersonEmitterConfirmed',
       'getPersonEmitterSearch',
       'getPersonEmitterActive',
-      'getPersonEmitterSiteId'
+      'getPersonEmitterSiteId',
+      'getPersionEmitterSearchConfig',
       ]
     ),
     // 현재 vuex에 선택되어 있는 값을 적절한 keyword로 바꾸어

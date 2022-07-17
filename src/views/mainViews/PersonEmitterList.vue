@@ -1,32 +1,29 @@
 <template lang="">
-  <div>
-    <v-row style="margin-top : 10px">
-      <v-col
-
-        :md="6"
-        cols="12"
-        style="margin-bottom : 10px;"
-      >
-        <PersonEmitterSearchBar />
-      </v-col>
-    </v-row>
-    <v-row style="margin-bottom : 10px">
-      <v-col
-        cols="6"
-        :md="3"
-      >
-        <PersonEmitterConfirmedSelect />
-      </v-col>
-      <v-col
-        cols="6"
-        :md="3"
-      >
-        <PersonEmitterActiveSelect />
-      </v-col>
-    </v-row>
-    <PersonEmitterTable />
-    <PersonEmitterNav />
-  </div>
+	<div>
+		<v-row style="margin-top : 10px">
+			<v-col
+				:md="6"
+				cols="12"
+				style="margin-bottom : 10px;"
+			>
+				<PersonEmitterSearchBar />
+			</v-col>
+			<v-col
+				cols="6"
+				:md="3"
+			>
+				<PersonEmitterConfirmedSelect />
+			</v-col>
+			<v-col
+				cols="6"
+				:md="3"
+			>
+				<PersonEmitterActiveSelect />
+			</v-col>
+		</v-row>
+		<PersonEmitterTable />
+		<PersonEmitterNav />
+	</div>
 </template>
 <script>
 import PersonEmitterNav from "@/components/PersonEmitterListC/PersonEmitterNav.vue"
@@ -46,68 +43,76 @@ export default {
 	data(){
 		return {
 			emojiPath : 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1657963679.png',
+			searchConfig: {
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '8px',
+						height: '50'
+					}
+				}
+			},
 			tableConfig: {
 				titleColor: '#00B286',
-				head: {
-					columns: {
-						color: '#031849',
-						title : [
-							'ID',
-							'계정 아이디',
-							'이름',
-							'핸드폰',
-							'활성화',
-							'확인 상태',
-							'권한',
-							'담당 CS 매니저',
-							'등록 일자'
-						],
-						title2 : [
-							{
-								name: '등록번호',
-								binding: 'ID'
-							},
-							{
-								name: '계정',
-								binding: 'USER_ID'
-							},
-							{
-								name: '이름',
-								binding: 'USER_NAME'
-							},
-							{
-								name: '핸드폰',
-								binding: 'PHONE'
-							},
-							{
-								name: '활성화',
-								binding: 'ACTIVE'
-							},
-							{
-								name: '확인',
-								binding: 'CONFIRMED'
-							},
-							{
-								name: '권한',
-								binding: 'CLASS'
-							},
-							{
-								name: 'CS',
-								binding: 'CS_MANAGER_NAME'
-							},
-							{
-								name: '등록 일자',
-								binding: 'CREATED_AT'
-							},
-						]
-					}
-				},
-				body: {
-					columns: {
-						color: {
-							userId: '#00B286'
-						}
-					}
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'ID',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '계정',
+							binding: 'USER_ID',
+							color: '#00B286',
+							type: 'text'
+						},
+						{
+							name: '이름',
+							binding: 'USER_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '핸드폰',
+							binding: 'PHONE',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '활성화',
+							binding: 'ACTIVE',
+							color: '#00B286',
+							type: 'switch'
+						},
+						{
+							name: '확인',
+							binding: 'CONFIRMED',
+							color: '#FF6C03',
+							type: 'switch'
+						},
+						{
+							name: '권한',
+							binding: 'CLASS',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: 'CS',
+							binding: 'CS_MANAGER_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '등록 일자',
+							binding: 'CREATED_AT',
+							color: '#000000',
+							type: 'datetime'
+						},
+					]
 				}
 			}
 		}
@@ -131,6 +136,8 @@ export default {
 		console.log('this.$route>>>>', this.$route)
 		this.setEmojiPath(this.emojiPath)
 		this.setTableConfig(this.tableConfig)
+		this.setSearchConfig({kind: 'personEmitter', payload: this.searchConfig})
+		console.log('this.searchConfig>>>', this.searchConfig)
 	},
 
 	methods : {
@@ -142,7 +149,8 @@ export default {
 			'setPersonEmitterSiteId',
 			'setPersonEmitterPageNum', 
 			'setEmojiPath', 
-			'setTableConfig'
+			'setTableConfig', 
+			'setSearchConfig'
 		]),
 		...mapActions('emitterCollector',['sp_admin_retrieve_users']),
 

@@ -44,9 +44,33 @@ export default {
       pageSize: 15,
     },
 	emojiPath: null,
-	tableConfig: {}
+	tableConfig: {},
+	s3Img: {
+		components: {
+			checkOn: {
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658029718.png',
+				width: 20
+			},
+			checkOff: {
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658029940.png',
+				width: 20
+			}			
+		}
+	},
+	searchConfig: {
+		personEmitter: {},
+		emitterCollector: {},
+	}
   },
   mutations: {
+	setSearchConfig(state, {kind, payload}){
+		console.log('hello>>>>>', kind, payload)
+		if (kind === 'personEmitter'){
+			state.searchConfig.personEmitter = payload
+		} else {
+			state.searchConfig.emitterCollector = payload
+		}
+	},
 	setTableConfig(state, payload){
 		state.tableConfig = payload
 	},
@@ -236,6 +260,15 @@ export default {
 	},
 	getTableConfig(state){
 		return state.tableConfig
-	}
+	},
+	getS3Img(state){
+		return state.s3Img
+	},
+	getPersionEmitterSearchConfig(state){
+		return state.searchConfig.personEmitter
+	},
+	getEmitterCollectorSearchConfig(state){
+		return state.searchConfig.emitterCollector
+	},
   },
 };

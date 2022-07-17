@@ -357,6 +357,6 @@ export default {
 	getAdminPageConfig(state){
 		console.log('adminPageConfig>>>>', state.adminPageConfig)
 		return state.adminPageConfig
-	}
+	},
   },
 };

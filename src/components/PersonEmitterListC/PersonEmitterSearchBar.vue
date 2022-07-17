@@ -7,6 +7,13 @@
     prepend-inner-icon="mdi-map-marker"
     @keyup.enter="search"
     @keyup="keyUpEvent"
+	:height="getPersionEmitterSearchConfig.spec.common.height"
+	:style="{ 
+		'border-radius': `${getPersionEmitterSearchConfig.spec.common.borderRadius}`,
+		'border': `${getPersionEmitterSearchConfig.spec.common.border}`,
+		'background': `${getPersionEmitterSearchConfig.spec.common.background}`,
+		'height': `${getPersionEmitterSearchConfig.spec.common.height}`+'px',
+	}"
   />
 </template>
 <script>
@@ -25,6 +32,7 @@ export default {
       'getPersonEmitterSearch',
       'getPersonEmitterSiteId',
       'getPersonEmitterActive',
+      'getPersionEmitterSearchConfig',
     ])
   },
   methods : {
@@ -59,6 +67,5 @@ export default {
   }
 }
 </script>
-<style lang="">
-
+<style>
 </style>

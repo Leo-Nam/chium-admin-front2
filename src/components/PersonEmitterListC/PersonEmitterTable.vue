@@ -23,10 +23,10 @@
 				<thead>
 					<tr>
 						<th
-							v-for="th in getTableConfig.head.columns.title2"
+							v-for="th in getTableConfig.columns.title"
 							:key="th.name"
 							class="text-left"	
-							:style="{'color': `${getTableConfig.head.columns.color}`}"						
+							:style="{'color': `${getTableConfig.columns.color}`}"						
 						>
 							{{ th.name }}
 						</th>
@@ -40,10 +40,25 @@
 						@click="goToContent(person.ID)"
 					>
 						<td
-							v-for="item in getTableConfig.head.columns.title2"
+							v-for="item in getTableConfig.columns.title"
 							:key="item.binding"
+							:style="{ 
+								'color': `${item.color}`
+							}"
 						>
-							{{ person[item.binding] }}
+							<span
+								v-if="item.type==='switch'"
+							>
+								<v-img 
+									:src="person[item.binding]===1 ? getS3Img.components.checkOn.src : getS3Img.components.checkOff.src" 
+									:width="20" 
+								/>
+							</span>
+							<span
+								v-else
+							>
+								{{ changeValue(item.type, person[item.binding]) }}
+							</span>
 						</td>
 					</tr>
 				</tbody>
@@ -62,9 +77,9 @@ export default {
 		...mapGetters('emitterCollector',[
 			'getPersonEmitterList', 
 			'getEmojiPath', 
-			'getTableConfig'
+			'getTableConfig',
+			'getS3Img'
 		]),
-
 	},
 	created(){
 		console.log('this.getEmojiPath', this.getEmojiPath)
@@ -81,6 +96,13 @@ export default {
 		},
 		changeStateToEmoji(state){
 			return  state ? '✅' : '❌'
+		},
+		changeValue(type, v){
+			if (type ==='datetime'){
+				return this.getTime(v)
+			} else {
+				return v
+			}
 		}
 	}
 }

@@ -52,6 +52,7 @@ export default {
 				}
 			},
 			tableConfig: {
+				title: '사업자회원(배출자, 수거자)',
 				type: 'emitterCollector',
 				titleColor: '#00B286',
 				height: '700px',

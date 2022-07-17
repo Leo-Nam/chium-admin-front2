@@ -60,6 +60,7 @@ export default {
 				}
 			},
 			tableConfig: {
+				title: '개인배출자',
 				type: 'personEmitter',
 				titleColor: '#00B286',
 				height: '700px',

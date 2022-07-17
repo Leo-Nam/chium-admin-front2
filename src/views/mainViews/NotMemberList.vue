@@ -40,6 +40,7 @@ export default {
 				}
 			},
 			tableConfig: {
+				title: '비회원(수거자)',
 				type: 'notMember',
 				titleColor: '#00B286',
 				height: '700px',

@@ -18,8 +18,36 @@ export default {
     selectedBidding : {},
     // 받아온 전체 비딩리스트
     biddingList: [],
+	s3Img: {
+		components: {
+			checkOn: {
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658029718.png',
+				width: 20
+			},
+			checkOff: {
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658029940.png',
+				width: 20
+			}			
+		}
+	},
+	pageConfig: {
+		search: {},
+		table: {},
+		emoji: {},
+	}
   },
   mutations: {
+	setSearchConfig(state, payload){
+		console.log('hello>>>>>', payload)
+		state.pageConfig.search = payload.spec
+	},
+	setTableConfig(state, payload){
+		console.log('hello>>>>>', payload.type, payload.data)
+		state.pageConfig.table = payload
+	},
+	setEmoji(state, payload){
+		state.pageConfig.emoji = payload
+	},
     // 비딩 리스트를 저장
     setBiddingList(state,payload){
       if (payload) {
@@ -122,5 +150,17 @@ export default {
     getSearch(state){
       return state.searchObj.search
     },
+	getS3Img(state){
+		return state.s3Img
+	},
+	getEmoji(state){
+		return state.pageConfig.emoji
+	},
+	getSearchConfig(state){
+		return state.pageConfig.search		
+	},
+	getTableConfig(state){
+		return state.pageConfig.table		
+	},
   },
 };

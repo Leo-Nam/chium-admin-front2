@@ -47,17 +47,26 @@
 							}"
 						>
 							<span
-								v-if="item.type==='switch'"
+								v-if="item.type==='currency'"
 							>
-								<v-img 
-									:src="list[item.binding]===1 ? s3Img.components.checkOn.src : s3Img.components.checkOff.src" 
-									:width="20" 
-								/>
+								{{ changeNumToCurrency(list[item.binding]) }}
 							</span>
 							<span
 								v-else
 							>
-								{{ changeValue(item.type, list[item.binding]) }}
+								<span
+									v-if="item.type==='switch'"
+								>
+									<v-img 
+										:src="list[item.binding]===1 ? s3Img.components.checkOn.src : s3Img.components.checkOff.src" 
+										:width="20" 
+									/>
+								</span>
+								<span
+									v-else
+								>
+									{{ changeValue(item.type, list[item.binding]) }}
+								</span>
 							</span>
 						</td>
 					</tr>
@@ -107,7 +116,13 @@ export default {
 			} else {
 				return v
 			}
-		}
+		},
+		changeNumToCurrency(v){
+			if (v == null){
+				return
+			}
+			return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'
+		},
 	}
 }
 </script>

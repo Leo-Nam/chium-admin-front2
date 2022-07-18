@@ -1,88 +1,34 @@
 <template>
 	<div>
-		<v-card-title>
-			입찰정보
-		</v-card-title>
-		<v-simple-table
-			dense
-			fixed-header
-			height="700px"
-		>
-			<template #default>
-			<thead>
-				<tr>
-				<th
-					v-for="th,idx in thArray"
-					:key="idx"
-				>
-					{{ th }}
-				</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr
-					v-for="bidding,idx in getBiddingsList"
-					:key="idx"
-					style="cursor : pointer"
-					@click="goToContent(bidding.BIDDING_ID)"
-				>
-					<td>{{ bidding.BIDDING_ID }}</td>
-					<td>{{ bidding.BIDDING_RANK }}</td>
-					<td>{{ changeNumToRegNum(bidding.BID_AMOUNT) }}</td>
-					<td>{{ bidding.ORDER_ID }}</td>
-					<td>{{ bidding.COLLECTOR_NAME }}</td>
-					<td> ({{ bidding.DISPOSER_TYPE }}) {{ bidding.DISPOSER_NAME }}</td>
-					<td>{{ changeBoolToEmoji(bidding.ACTIVE) }}</td>
-					<td>{{ changeBoolToEmoji(bidding.CHECK_STATE) }}</td>
-					<td>{{ getTime(bidding.CREATED_AT) }}</td>
-				</tr>
-			</tbody>
-			</template>
-		</v-simple-table>
+		<bbsTemplate 
+			:emoji="getEmoji"
+			:config="getTableConfig"
+			:s3Img="getS3Img"
+			:lists="getBiddingsList"
+			:to="goToContent"
+		/>
 	</div>
 </template>
 <script>
+import bbsTemplate from "@/components/ModuleC/bbs/bbsTemplate.vue"
 import {mapGetters} from "vuex"
 export default {
-  data(){
-    return {
-      thArray : [
-        '등록 번호',
-        '낙찰 순위',
-        '입찰 총 금액',
-        '오더 번호',
-        '수거자 이름',
-        '배출자 이름',
-        '활성화',
-        '확인상태',
-        '등록일자',
-        ]
-    }
-  },
-  computed : {
-    ...mapGetters('biddings',['getBiddingsList'])
-  },
-  methods : {
-    getTime(time){
-      return time.slice(0,19)
-    },
-    changeBoolToEmoji(bool){
-      return bool ? '✅' : '❌'
-    },
-    changeNumToRegNum(num){
-      if (num == null){
-        return
-      }
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'
-    },
-    goToContent(siteId){
-       this.$router.push({ path: `./${siteId}`})
-    },
-
-  }
-
-
-
+	components : {
+		bbsTemplate,
+	},
+	computed : {
+		...mapGetters('biddings',[
+			'getBiddingsList',
+			'getEmoji', 
+			'getTableConfig',
+			'getS3Img',
+		])
+	},
+	methods : {
+		goToContent(siteId){
+			this.$router.push({ path: `./${siteId}`})
+		},
+	}
 }
 </script>
 <style lang="">

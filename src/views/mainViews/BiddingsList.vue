@@ -23,6 +23,85 @@ import BiddingsTable from "@/components/BiddingsListC/BiddingsTable.vue"
 
 import {mapActions,mapMutations} from "vuex"
 export default {
+	data(){
+		return{
+			emoji : {
+				type: 'biddings',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658041685.png',
+				width: '24'
+			},
+			searchConfig: {
+				type: 'biddings',
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '18px',
+						height: '50'
+					}
+				}
+			},
+			tableConfig: {
+				title: '입찰정보',
+				type: 'biddings',
+				titleColor: '#00B286',
+				height: '700px',
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'ID',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '낙찰순위',
+							binding: 'BIDDING_RANK',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '입찰총액',
+							binding: 'BID_AMOUNT',
+							color: '#000000',
+							type: 'currency'
+						},
+						{
+							name: '폐기물등록번호',
+							binding: 'ORDER_ID',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '배출자',
+							binding: 'DISPOSER_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '수거자',
+							binding: 'COLLECTOR_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '활성화',
+							binding: 'ACTIVE',
+							color: '#000000',
+							type: 'switch'
+						},
+						{
+							name: '등록일자',
+							binding: 'CREATED_AT',
+							color: '#000000',
+							type: 'datetime'
+						},
+					]
+				}
+			}
+		}
+	},
 	components : {
 		BiddingsTable,BiddingsSearchBar,BiddingsNav
 	},
@@ -44,11 +123,20 @@ export default {
 		this.controlQuerySetAndGetPermitList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
+		this.setTableConfig(this.tableConfig)
+		this.setSearchConfig(this.searchConfig)
+		this.setEmoji(this.emoji)
 	},
 
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),
-		...mapMutations('biddings',['setPageNum','setSearch']),
+		...mapMutations('biddings',[
+			'setPageNum',
+			'setSearch',
+			'setTableConfig',
+			'setEmoji',
+			'setSearchConfig'
+		]),
 		...mapActions('biddings',['sp_admin_get_new_biddings']),
 
 		async controlQuerySetAndGetPermitList(querySet){

@@ -32,7 +32,7 @@
 				style="padding:0px"
 			>
 				<v-list-item-content
-					v-if="item.menuId === 100 && item.location==='nav'"
+					v-if="item.menuId === 100 && item.location==='nav' && item.display===true"
 				>
 					<div 
 						:style="getCurrentRoute in item.routes ? { 

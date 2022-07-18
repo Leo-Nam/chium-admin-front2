@@ -30,7 +30,7 @@
 						:to="menu.route"
 					>
 						<span
-							v-if="menu.location==='app-bar'"
+							v-if="menu.location==='app-bar' && menu.display===true"
 						>
 							<span
 								v-if="getCurrentRoute in menu.routes"

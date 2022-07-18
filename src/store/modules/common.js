@@ -107,6 +107,7 @@ export default {
 			routes: {'person-emitter-list':'', 'person-emitter-content':'', 'emitter-collector':'', 'site-info':'', 'not-member-list':'', 'not-member-content':''},
 			location: "nav",
 			menuId: 100,
+			display: true,
             subNavs : [
               {
                 title: "[ 개인 ] 배출자",
@@ -114,6 +115,7 @@ export default {
                 route: "/admin/main/person-emitter/list",
 				routes: {'person-emitter-list':'', 'person-emitter-content':''},
 				menuId: 101,
+				display: true
               },
               {
                 title: "[ 사업자 ] 배출자 , 수거자 ",
@@ -121,6 +123,7 @@ export default {
                 route: "/admin/main/emitter-collector",
 				routes: {'emitter-collector':'', 'site-info':''},
 				menuId: 102,
+				display: true
               },
               {
                 title: "[ 비회원 ] 수거자 ",
@@ -128,6 +131,7 @@ export default {
                 route: "/admin/main/not-member/list",
 				routes: {'not-member-list':'', 'not-member-content':''},
 				menuId: 103,
+				display: true
               },
             ]
           },
@@ -138,6 +142,7 @@ export default {
 			routes: {'emissions-list':'', 'emissions-content':''},
 			location: "nav",
 			menuId: 200,
+			display: true
           },
           {
             title: "입찰정보",
@@ -146,6 +151,7 @@ export default {
 			routes: {'biddings-list':'', 'biddings-content':''},
 			location: "nav",
 			menuId: 300,
+			display: true
           },
           { title: "트랜잭션",
             icon: "mdi-vector-combine",
@@ -153,6 +159,7 @@ export default {
 			routes: {'transaction-list':'', 'transaction-content':''},
 			location: "nav",
 			menuId: 400,
+			display: true
           },
           { title: "처리보고서",
             icon: "mdi-content-paste",
@@ -160,6 +167,7 @@ export default {
 			routes: {'report-list':'', 'report-content':''},
 			location: "nav",
 			menuId: 500,
+			display: true
           },
           {
             title: "통계",
@@ -168,6 +176,7 @@ export default {
 			routes: {'chart':''},
 			location: "nav",
 			menuId: 600,
+			display: true
           },
           { title: "직원관리",
 			icon: "mdi-account",
@@ -175,6 +184,7 @@ export default {
 			routes: {'add-admin':''},
 			location: "app-bar",
 			menuId: 700,
+			display: true
           },
           { title: "로그정보",
 			icon: "mdi-math-log",
@@ -182,6 +192,7 @@ export default {
 			routes: {'log-list':''},
 			location: "app-bar",
 			menuId: 800,
+			display: true
           },
           { title: "상담내역",
 			icon: "mdi-face-agent",
@@ -189,6 +200,7 @@ export default {
 			routes: {'note-list-list':'', 'note-content':''},
 			location: "app-bar",
 			menuId: 900,
+			display: true
           },
           { title: "고객문의",
 			icon: "mdi-alert",
@@ -196,6 +208,7 @@ export default {
 			routes: {'question-list':''},
 			location: "app-bar",
 			menuId: 1000,
+			display: false
           },
           { title: "개발관리",
 			icon: "mdi-dev-to",
@@ -203,6 +216,7 @@ export default {
 			routes: {'version-list':''},
 			location: "app-bar",
 			menuId: 1100,
+			display: true
           },
           { title: "MyPage",
 			icon: "mdi-cog-outline",
@@ -210,6 +224,7 @@ export default {
 			routes: {'account':''},
 			location: "app-bar",
 			menuId: 1200,
+			display: true
           },
           { title: "로그아웃",
 			icon: "mdi-logout",
@@ -217,6 +232,7 @@ export default {
 			routes: {'logout':''},
 			location: "app-bar",
 			menuId: 1300,
+			display: true
           },
         ];
       // 아니라면 아래와 같이 설정

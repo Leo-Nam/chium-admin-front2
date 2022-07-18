@@ -1,10 +1,10 @@
 
 <template lang="">
-  <div>
-    <QuestionListSearchBar /><br>
-    <QuestionListTable /><br>
-    <QuestionListNav />
-  </div>
+	<div>
+		<QuestionListSearchBar /><br>
+		<QuestionListTable /><br>
+		<QuestionListNav />
+	</div>
 </template>
 <script>
 import QuestionListTable from "@/components/QuestionListC/QuestionListTable"
@@ -12,6 +12,77 @@ import QuestionListNav from "@/components/QuestionListC/QuestionListNav"
 import QuestionListSearchBar from "@/components/QuestionListC/QuestionListSearchBar"
 import {mapActions, mapMutations} from "vuex"
 export default {
+	data(){
+		return{
+			emoji : {
+				type: 'questions',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658041685.png',
+				width: '24'
+			},
+			searchConfig: {
+				type: 'questions',
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '18px',
+						height: '50'
+					}
+				}
+			},
+			tableConfig: {
+				title: '고객문의',
+				type: 'questions',
+				titleColor: '#00B286',
+				height: '700px',
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'ID',
+							color: '#000000',
+							type: 'text',
+						},
+						{
+							name: '전화번호',
+							binding: 'PHONE',
+							color: '#000000',
+							type: 'text',
+						},
+						{
+							name: '이메일',
+							binding: 'EMAIL',
+							color: '#000000',
+							type: 'text',
+						},
+						{
+							name: '분류',
+							binding: 'QUEST_CLASS',
+							color: '#000000',
+							type: 'text',
+						},
+						{
+							name: '내용',
+							binding: 'CONTENTS',
+							color: '#000000',
+							type: 'text',
+							shorten: {
+								apply: true,
+								maxLength: 50
+							},
+						},
+						{
+							name: '작성일자',
+							binding: 'CREATED_AT',
+							color: '#000000',
+							type: 'datetime',
+						},
+					]
+				}
+			}
+		}
+	},
 	components: {
 		QuestionListTable,
 		QuestionListNav,
@@ -34,11 +105,20 @@ export default {
 		// 임의로 query params를 넣은 경우에 그 번호를 현재번호로 바꿔준 뒤에
 		// 데이터를 불러온다.
 		this.controlQuerySetAndGetQuestionList(this.$route)
+		this.setTableConfig(this.tableConfig)
+		this.setSearchConfig(this.searchConfig)
+		this.setEmoji(this.emoji)
 
 	},
 
 	methods : {
-		...mapMutations('questionList',['setPageNum','setSearch']),
+		...mapMutations('questionList',[
+			'setPageNum',
+			'setSearch',
+			'setTableConfig',
+			'setEmoji',
+			'setSearchConfig'
+		]),
 		...mapActions('questionList', ['sp_admin_get_question_lists']),
 
 		async controlQuerySetAndGetQuestionList(querySet){

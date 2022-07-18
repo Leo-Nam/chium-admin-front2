@@ -79,7 +79,7 @@ export default {
 		async sp_req_b_project_list({commit}){
 			try {
 				const res = await versionControlApi.sp_req_b_project_list()
-				console.log('store:modules:addAdmin.js:sp_req_b_project_list:',res.data.data)
+				console.log('store:modules:addAdmin.js:sp_req_b_project_list:>>>>>>>>>>>>>>>>>>>>>',res.data.data)
 				commit('setProjectList', res.data.data)
 			} catch(e) {
 				console.log(e)

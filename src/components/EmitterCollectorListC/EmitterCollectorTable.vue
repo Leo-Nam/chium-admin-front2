@@ -32,29 +32,9 @@ export default {
 		console.log('this.getEmitterCollectorEmoji', this.getEmitterCollectorEmoji)
 	},
 	methods : {
-		getTime(time){
-			return time.slice(0,19)
-		},
 		goToContent(siteId){
 			this.$router.push({ path: `emitter-collector/${siteId}`})
 		},
-		checkEmOrCol(code){
-			if (Number(code) == 9){
-				return '배출자'
-			}
-			return '수거자1'
-		},
-		changeValue(type, binding, v){
-			if (type ==='datetime'){
-				return this.getTime(v)
-			} else {
-				if (binding === 'TRMT_BIZ_CODE'){
-					return this.checkEmOrCol(v)
-				} else {
-					return v
-				}
-			}
-		}
 	}
 
 

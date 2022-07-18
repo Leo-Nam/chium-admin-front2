@@ -24,6 +24,73 @@ import EmissionsTable from "@/components/EmissionsListViewC/EmissionsTable.vue"
 import {mapActions,mapMutations} from "vuex"
 
 export default {
+	data(){
+		return{
+			emoji : {
+				type: 'emissions',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658041685.png',
+				width: '24'
+			},
+			searchConfig: {
+				type: 'emissions',
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '18px',
+						height: '50'
+					}
+				}
+			},
+			tableConfig: {
+				title: '폐기물등록현황',
+				type: 'emissions',
+				titleColor: '#00B286',
+				height: '700px',
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'ID',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: 'ORDER CODE',
+							binding: 'ORDER_CODE',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '구분',
+							binding: 'DISPOSER_TYPE',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '배출자',
+							binding: 'DISPOSER_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '배출지주소',
+							binding: 'ADDR',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '등록일자',
+							binding: 'CREATED_AT',
+							color: '#000000',
+							type: 'datetime'
+						},
+					]
+				}
+			}
+		}
+	},
 	components : {
 		EmissionsTable,EmissionsSearchBar,EmissionsNav
 	},
@@ -45,11 +112,20 @@ export default {
 		this.controlQuerySetAndGetPermitList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
+		this.setTableConfig(this.tableConfig)
+		this.setSearchConfig(this.searchConfig)
+		this.setEmoji(this.emoji)
 	},
 
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),
-		...mapMutations('emissions',['setPageNum','setSearch']),
+		...mapMutations('emissions',[
+			'setPageNum',
+			'setSearch',
+			'setTableConfig',
+			'setEmoji',
+			'setSearchConfig'
+		]),
 		...mapActions('emissions',['sp_admin_get_new_comings']),
 
 		async controlQuerySetAndGetPermitList(querySet){

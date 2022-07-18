@@ -61,7 +61,7 @@ export default {
 					title : [
 						{
 							name: '등록번호',
-							binding: 'SITE_ID',
+							binding: 'ID',
 							color: '#000000',
 							type: 'text'
 						},

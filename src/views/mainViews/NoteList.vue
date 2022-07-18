@@ -1,10 +1,9 @@
-
 <template lang="">
-  <div>
-    <NoteListSearchBar /><br>
-    <NoteListTable /><br>
-    <NoteListNav />
-  </div>
+	<div>
+		<NoteListSearchBar /><br>
+		<NoteListTable /><br>
+		<NoteListNav />
+	</div>
 </template>
 <script>
 import NoteListTable from "@/components/NoteListC/NoteListTable"
@@ -12,6 +11,140 @@ import NoteListNav from "@/components/NoteListC/NoteListNav"
 import NoteListSearchBar from "@/components/NoteListC/NoteListSearchBar"
 import {mapActions, mapMutations} from "vuex"
 export default {
+	data(){
+		return{
+			emoji : {
+				type: 'notes',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658041685.png',
+				width: '24'
+			},
+			searchConfig: {
+				type: 'notes',
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '18px',
+						height: '50'
+					}
+				}
+			},
+			tableConfig: {
+				title: '상담내역',
+				type: 'notes',
+				titleColor: '#00B286',
+				height: '700px',
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'note-list',
+								binding: 'ID'
+							}
+						},
+						{
+							name: '관리자',
+							binding: 'ADMIN_NAME',
+							color: '#000000',
+							type: 'text',
+						},
+						{
+							name: '폐기물등록코드',
+							binding: 'ORDER_CODE',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'emissions',
+								binding: 'ORDER_ID'
+							}
+						},
+						{
+							name: '투찰번호',
+							binding: 'BIDDING_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'biddings',
+								binding: 'BIDDING_ID'
+							}
+						},
+						{
+							name: '트랜잭션',
+							binding: 'TRANSACTION_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'transaction',
+								binding: 'TRANSACTION_ID'
+							}
+						},
+						{
+							name: '보고서',
+							binding: 'REPORT_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'report',
+								binding: 'REPORT_ID'
+							}
+						},
+						{
+							name: '사이트ID',
+							binding: 'SITE_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								check: 'SITE_CATEGORY',
+								options: [
+									{
+										val: 0,
+										to: 'not-member',
+										binding: 'SITE_ID'
+									},
+									{
+										val: 1,
+										to: 'emitter-collector',
+										binding: 'SITE_ID'
+									},
+								]
+							}
+						},
+						{
+							name: '회원',
+							binding: 'MEMBER_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'person-emitter',
+								binding: 'MEMBER_ID'
+							}
+						},
+						{
+							name: '등록일자',
+							binding: 'CREATED_AT',
+							color: '#000000',
+							type: 'datetime',
+						},
+						{
+							name: '상담내용',
+							binding: 'NOTE',
+							color: '#000000',
+							type: 'text',
+							shorten: {
+								apply: true,
+								maxLength: 50
+							},
+						},
+					]
+				}
+			}
+		}
+	},
 	components: {
 		NoteListTable,
 		NoteListNav,
@@ -34,11 +167,20 @@ export default {
 		// 임의로 query params를 넣은 경우에 그 번호를 현재번호로 바꿔준 뒤에
 		// 데이터를 불러온다.
 		this.controlQuerySetAndGetNoteList(this.$route)
+		this.setTableConfig(this.tableConfig)
+		this.setSearchConfig(this.searchConfig)
+		this.setEmoji(this.emoji)
 
 	},
 
 	methods : {
-		...mapMutations('noteList',['setPageNum','setSearch']),
+		...mapMutations('noteList',[
+			'setPageNum',
+			'setSearch',
+			'setTableConfig',
+			'setEmoji',
+			'setSearchConfig'
+		]),
 		...mapActions('noteList', ["sp_admin_get_note_lists"]),
 
 		async controlQuerySetAndGetNoteList(querySet){

@@ -1,20 +1,19 @@
 
 <template>
-  <div>
-    <v-row style="margin-top : 10px">
-      <v-col
+	<div>
+		<v-row style="margin-top : 10px">
+			<v-col
 
-        :md="6"
-        cols="12"
-        style="margin-bottom : 10px;"
-      >
-        <ReportSearchBar />
-      </v-col>
-    </v-row>
-
-    <ReportTable />
-    <ReportNav />
-  </div>
+				:md="6"
+				cols="12"
+				style="margin-bottom : 10px;"
+			>
+				<ReportSearchBar />
+			</v-col>
+		</v-row>
+		<ReportTable />
+		<ReportNav />
+	</div>
 </template>
 <script>
 import ReportNav from "@/components/ReportListC/ReportNav"
@@ -23,7 +22,73 @@ import ReportTable from "@/components/ReportListC/ReportTable"
 
 import {mapActions,mapMutations} from "vuex"
 export default {
-
+	data(){
+		return{
+			emoji : {
+				type: 'reports',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658041685.png',
+				width: '24'
+			},
+			searchConfig: {
+				type: 'reports',
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '18px',
+						height: '50'
+					}
+				}
+			},
+			tableConfig: {
+				title: '처리보고서',
+				type: 'reports',
+				titleColor: '#00B286',
+				height: '700px',
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'ID',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '폐기물등록코드',
+							binding: 'ORDER_CODE',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '수거자',
+							binding: 'COLLECTOR_SITE_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '배출자',
+							binding: 'DISPOSER_NAME',
+							color: '#000000',
+							type: 'text'
+						},
+						{
+							name: '확인여부',
+							binding: 'CONFIRMED',
+							color: '#000000',
+							type: 'switch'
+						},
+						{
+							name: '등록일',
+							binding: 'CREATED_AT',
+							color: '#000000',
+							type: 'datetime'
+						},
+					]
+				}
+			}
+		}
+	},
 	components : {
 		ReportNav,ReportSearchBar,ReportTable
 	},
@@ -45,11 +110,20 @@ export default {
 		this.controlQuerySetAndGetReportList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
+		this.setTableConfig(this.tableConfig)
+		this.setSearchConfig(this.searchConfig)
+		this.setEmoji(this.emoji)
 	},
 
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),
-		...mapMutations('report',['setPageNum','setSearch']),
+		...mapMutations('report',[
+			'setPageNum',
+			'setSearch',
+			'setTableConfig',
+			'setEmoji',
+			'setSearchConfig'
+		]),
 		...mapActions('report',['sp_admin_get_new_reports']),
 
 		async controlQuerySetAndGetReportList(querySet){

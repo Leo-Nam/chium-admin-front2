@@ -3,7 +3,6 @@
 	<div>
 		<v-row style="margin-top : 10px">
 			<v-col
-
 				:md="6"
 				cols="12"
 				style="margin-bottom : 10px;"

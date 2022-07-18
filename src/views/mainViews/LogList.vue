@@ -1,20 +1,18 @@
 
 <template>
-  <div>
-    <v-row style="margin-top : 10px">
-      <v-col
-
-        :md="6"
-        cols="12"
-        style="margin-bottom : 10px;"
-      >
-        <LogSearchBar />
-      </v-col>
-    </v-row>
-
-    <LogTable />
-    <LogNav />
-  </div>
+	<div>
+		<v-row style="margin-top : 10px">
+			<v-col
+				:md="6"
+				cols="12"
+				style="margin-bottom : 10px;"
+			>
+				<LogSearchBar />
+			</v-col>
+		</v-row>
+		<LogTable />
+		<LogNav />
+	</div>
 </template>
 <script>
 import LogNav from "@/components/LogListC/LogNav"
@@ -23,6 +21,179 @@ import LogTable from "@/components/LogListC/LogTable"
 
 import {mapActions,mapMutations} from "vuex"
 export default {
+	data(){
+		return{
+			emoji : {
+				type: 'logs',
+				src: 'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1658041685.png',
+				width: '24'
+			},
+			searchConfig: {
+				type: 'logs',
+				spec: {
+					common: {
+						background: '#FFFFFF',
+						border: '1px solid #D4D4D4',
+						borderRadius: '18px',
+						height: '50'
+					}
+				}
+			},
+			tableConfig: {
+				title: '로그정보',
+				type: 'logs',
+				titleColor: '#00B286',
+				height: '700px',
+				columns: {
+					color: '#031849',
+					title : [
+						{
+							name: '등록번호',
+							binding: 'ID',
+							color: '#000000',
+							type: 'text',
+						},
+						{
+							name: '회원',
+							binding: 'USER_NAME',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'person-emitter',
+								binding: 'USER_ID'
+							}
+						},
+						{
+							name: '폐기물등록코드',
+							binding: 'ORDER_CODE',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'emissions',
+								binding: 'ORDER_ID'
+							}
+						},
+						{
+							name: '투찰번호',
+							binding: 'BIDDING_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'biddings',
+								binding: 'BIDDING_ID'
+							}
+						},
+						{
+							name: '트랜잭션',
+							binding: 'TRANSACTION_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'transaction',
+								binding: 'TRANSACTION_ID'
+							}
+						},
+						{
+							name: '보고서',
+							binding: 'REPORT_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								to: 'report',
+								binding: 'REPORT_ID'
+							}
+						},
+						{
+							name: '내용',
+							binding: 'JOB_NAME',
+							color: '#000000',
+							type: 'text',
+							shorten: {
+								apply: true,
+								maxLength: 50
+							},
+							popup: true
+						},
+						{
+							name: '사이트ID',
+							binding: 'SITE_ID',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								check: 'SITE_TYPE',
+								options: [
+									{
+										val: 0,
+										to: 'not-member',
+										binding: 'SITE_ID'
+									},
+									{
+										val: 1,
+										to: 'emitter-collector',
+										binding: 'SITE_ID'
+									},
+								]
+							}
+						},
+						{
+							name: '사이트',
+							binding: 'SITE_NAME',
+							color: '#000000',
+							type: 'text',
+							redirect: {
+								check: 'SITE_TYPE',
+								options: [
+									{
+										val: 0,
+										to: 'not-member',
+										binding: 'SITE_ID'
+									},
+									{
+										val: 1,
+										to: 'emitter-collector',
+										binding: 'SITE_ID'
+									},
+								]
+							}
+						},
+						{
+							name: '생성일자',
+							binding: 'CREATED_AT',
+							color: '#000000',
+							type: 'datetime',
+						},
+						{
+							name: '테이블',
+							binding: 'JOB_TABLE',
+							color: '#000000',
+							type: 'text',
+						},
+						{
+							name: '사용자ID',
+							binding: 'USER_ID',
+							color: '#000000',
+							type: 'text',
+							display: false
+						},
+						{
+							name: '폐기물등록번호',
+							binding: 'ORDER_ID',
+							color: '#000000',
+							type: 'text',
+							display: false
+						},
+						{
+							name: '회원여부',
+							binding: 'SITE_TYPE',
+							color: '#000000',
+							type: 'text',
+							display: false
+						},
+					]
+				}
+			}
+		}
+	},
 	components : {
 		LogNav,LogSearchBar,LogTable
 	},
@@ -44,11 +215,20 @@ export default {
 		this.controlQuerySetAndGetLogList(this.$route)
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
+		this.setTableConfig(this.tableConfig)
+		this.setSearchConfig(this.searchConfig)
+		this.setEmoji(this.emoji)
 	},
 
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),
-		...mapMutations('log',['setPageNum','setSearch']),
+		...mapMutations('log',[
+			'setPageNum',
+			'setSearch',
+			'setTableConfig',
+			'setEmoji',
+			'setSearchConfig'
+		]),
 		...mapActions('log',['sp_admin_get_new_logs']),
 
 		async controlQuerySetAndGetLogList(querySet){

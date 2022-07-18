@@ -1,237 +1,104 @@
 <template>
-  <div>
-	<v-card-title>
-		로그정보
-	</v-card-title>
-    <v-simple-table
-
-      fixed-header
-      height="700px"
-    >
-      <template #default>
-        <thead>
-          <tr>
-            <th
-              v-for="th,idx in thArray"
-              :key="idx"
-            >
-              {{ th }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="log,idx in getLogList"
-            :key="idx"
-          >
-            <td> {{ log.ID }} </td>
-            <td> 
-              <a
-                v-if="log.USER_ID !== null"
-                :href="returnUrl7(log.USER_ID)"
-              >
-                {{ log.USER_ID }} 
-              </a>
-            </td>
-            <td>
-              <a
-                v-if="log.USER_NAME !== null"
-                :href="returnUrl7(log.USER_ID)"
-              >
-                {{ log.USER_NAME }}
-              </a>
-            </td>
-            <td> 
-              <a
-                v-if="log.BIDDING_ID !== null"
-                :href="returnUrl3(log.BIDDING_ID)"
-              >
-                {{ log.BIDDING_ID }} 
-              </a>
-            </td>
-            <td> 
-              <a
-                v-if="log.ORDER_ID !== null"
-                :href="returnUrl1(log.ORDER_ID)"
-              >
-                {{ log.ORDER_CODE }} 
-              </a>
-            </td>
-            <td>
-              <a
-                v-if="log.ORDER_ID !== null"
-                :href="returnUrl1(log.ORDER_ID)"
-              >
-                {{ log.ORDER_ID }} 
-              </a>
-            </td>
-            <td
-              style="cursor : pointer"
-              @click="showMeLog(idx)"
-            > 
-              {{ shortenContent(log.JOB_NAME) }} 
-            </td>
-            <td> 
-              <a
-                v-if="log.REPORT_ID !== null"
-                :href="returnUrl5(log.REPORT_ID)"
-              >
-                {{ log.REPORT_ID }} 
-              </a>
-            </td>
-            <td> 
-              <a
-                v-if="log.SITE_ID !== null"
-                :href="returnUrl6(log.SITE_ID, log.USER_CATEGORY)"
-              >
-                {{ log.SITE_ID }} 
-              </a>
-            </td>
-            <td>
-              <a
-                v-if="log.SITE_ID !== null"
-                :href="returnUrl6(log.SITE_ID, log.USER_CATEGORY)"
-              >
-                {{ log.SITE_NAME }} 
-              </a>
-            </td>
-            <td> 
-              <a
-                v-if="log.TRANSACTION_ID !== null"
-                :href="returnUrl4(log.TRANSACTION_ID)"
-              >
-                {{ log.TRANSACTION_ID }} 
-              </a>
-            </td>
-            <td> {{ getTime(log.CREATED_AT) }} </td>
-            <td> {{ log.JOB_TABLE }} </td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
-    <LogPopup
-      :dialog="dialog"
-      :content="content"
-      @closeDialog="closeDialog"
-    />
-  </div>
+	<div>
+		<bbsTemplate 
+			:emoji="getEmoji"
+			:config="getTableConfig"
+			:s3Img="getS3Img"
+			:lists="getLogList"
+		/>
+	</div>
 </template>
 <script>
-import LogPopup from "./LogPopup.vue"
+import bbsTemplate from "@/components/ModuleC/bbs/bbsTemplate.vue"
+// import LogPopup from "./LogPopup.vue"
 import {mapGetters, mapMutations} from "vuex"
 export default {
-  components : {
-    LogPopup
-  },
-  data(){
-    return {
-      thArray : [
-        'ID',
-        '회원등록번호',
-        '이름',
-        '투찰등록번호',
-        '폐기물등록코드',
-        '배출자등록번호',
-        '내용',
-        '보고서등록번호',
-        '사이트등록번호',
-        '사이트이름',
-        '트랜잭션등록번호',
-        '생성일자',
-        '테이블'
-        ],
-      dialog : false,
-      content : null,
-    }
-  },
-  computed : {
-    ...mapGetters('log',['getLogList'])
-  },
+	components : {
+		// LogPopup,
+		bbsTemplate,
+	},
+	data(){
+		return {
+			dialog : false,
+			content : null,
+		}
+	},
+	computed : {
+		...mapGetters('log',[
+			'getLogList',
+			'getEmoji', 
+			'getTableConfig',
+			'getS3Img',
+		])
+	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
 	},
-  methods : {
-	...mapMutations('common',['setCurrentRoute']),
-    getTime(time){
-      if (time){
-        return time.slice(0,19)
-      }
-      return time
-    },
-    shortenContent(content){
-      if (content !== null && content.length > 35){
-         return content.slice(0,35) + '...'
-      }
-      return content
-
-    },
-    showMeLog(logIdx){
-      const newArr = this.getLogList[logIdx].JOB_NAME.split('/n')
-      this.content = newArr
-      this.dialog = true
-    },
-    closeDialog(){
-      this.dialog = false
-    },
-    returnUrl1(orderId){
-		if (orderId !== null){
-			return `/admin/main/emissions/${orderId}`
-		} else {
-			return
-		}
-    },
-    returnUrl2(noteId){
-		if (noteId !== null){
-			return `/admin/main/note-list/${noteId}`
-		} else {
-			return
-		}
-    },
-    returnUrl3(biddingId){
-		if (biddingId !== null){
-			return `/admin/main/biddings/${biddingId}`
-		} else {
-			return
-		}
-    },
-    returnUrl4(transactionId){
-		if (transactionId !== null){
-			return `/admin/main/transaction/${transactionId}`
-		} else {
-			return
-		}
-    },
-    returnUrl5(reportId){
-		if (reportId !== null){
-			return `/admin/main/report/${reportId}`
-		} else {
-			return
-		}
-    },
-    returnUrl6(siteId, userType){
-		if (siteId !== null){
-			if (userType === 'member'){
-				return `/admin/main/emitter-collector/${siteId}`
+	methods : {
+		...mapMutations('common',['setCurrentRoute']),
+		showMeLog(logIdx){
+			const newArr = this.getLogList[logIdx].JOB_NAME.split('/n')
+			this.content = newArr
+			this.dialog = true
+		},
+		closeDialog(){
+			this.dialog = false
+		},
+		returnUrl1(Id){
+			if (Id !== null){
+				return `/admin/main/emissions/${Id}`
 			} else {
-				return `/admin/main/not-member/${siteId}`
+				return
 			}
-		} else {
-			return
-		}
-    },
-    returnUrl7(memberId){
-		if (memberId !== null){
-			return `/admin/main/person-emitter/${memberId}`
-		} else {
-			return
-		}
-    },
-
-  }
-
-
-
+		},
+		returnUrl2(Id){
+			if (Id !== null){
+				return `/admin/main/note-list/${Id}`
+			} else {
+				return
+			}
+		},
+		returnUrl3(Id){
+			if (Id !== null){
+				return `/admin/main/biddings/${Id}`
+			} else {
+				return
+			}
+		},
+		returnUrl4(Id){
+			if (Id !== null){
+				return `/admin/main/transaction/${Id}`
+			} else {
+				return
+			}
+		},
+		returnUrl5(Id){
+			if (Id !== null){
+				return `/admin/main/report/${Id}`
+			} else {
+				return
+			}
+		},
+		returnUrl6(Id, userType){
+			if (Id !== null){
+				if (userType === 'member'){
+					return `/admin/main/emitter-collector/${Id}`
+				} else {
+					return `/admin/main/not-member/${Id}`
+				}
+			} else {
+				return
+			}
+		},
+		returnUrl7(Id){
+			if (Id !== null){
+				return `/admin/main/person-emitter/${Id}`
+			} else {
+				return
+			}
+		},
+	}
 }
 </script>
 <style lang="">

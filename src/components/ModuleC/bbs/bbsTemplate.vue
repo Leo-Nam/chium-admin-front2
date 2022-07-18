@@ -28,7 +28,11 @@
 							class="text-left"	
 							:style="{'color': `${config.columns.color}`}"						
 						>
-							{{ th.name }}
+							<span
+								v-if="th.hasOwnProperty('display') === false"
+							>
+								{{ th.name }}
+							</span>
 						</th>
 					</tr>
 				</thead>
@@ -47,27 +51,67 @@
 							}"
 						>
 							<span
-								v-if="item.type==='currency'"
-							>
-								{{ changeNumToCurrency(list[item.binding]) }}
-							</span>
-							<span
-								v-else
+								v-if="item.hasOwnProperty('display') === false"
 							>
 								<span
-									v-if="item.type==='switch'"
+									v-if="item.type==='currency'"
 								>
-									<v-img 
-										:src="list[item.binding]===1 ? s3Img.components.checkOn.src : s3Img.components.checkOff.src" 
-										:width="20" 
-									/>
+									{{ changeNumToCurrency(list[item.binding]) }}
 								</span>
 								<span
 									v-else
 								>
-									{{ changeValue(item.type, list[item.binding]) }}
+									<span
+										v-if="item.type==='switch'"
+									>
+										<v-img 
+											:src="list[item.binding]===1 ? s3Img.components.checkOn.src : s3Img.components.checkOff.src" 
+											:width="20" 
+										/>
+									</span>
+									<span
+										v-else
+									>
+										<span
+											v-if="item.hasOwnProperty('shorten')"
+										>
+											{{ changeValue(item.type, list[item.binding], item.shorten) }}
+										</span>
+										<span
+											v-else
+										>
+											<span
+												v-if="item.hasOwnProperty('redirect')"
+											>
+												<span
+													v-if="item.redirect.hasOwnProperty('check')"
+												>
+													<a
+														:href="returnUrl(item.redirect.options[Number(list[item.redirect.check])].to, list[item.redirect.options[Number(list[item.redirect.check])].binding])"
+													>
+														{{ changeValue(item.type, list[item.binding], null) }}
+													</a>
+												</span>
+												<span
+													v-else
+												>
+													<a
+														v-if="item.redirect !== null"
+														:href="returnUrl(item.redirect.to, list[item.redirect.binding])"
+													>
+														{{ changeValue(item.type, list[item.binding], null) }}
+													</a>
+												</span>
+											</span>
+											<span
+												v-else
+											>
+												{{ changeValue(item.type, list[item.binding], null) }}
+											</span>
+										</span>
+									</span>
 								</span>
-							</span>
+							</span> 
 						</td>
 					</tr>
 				</tbody>
@@ -97,10 +141,12 @@ export default {
 		to : {
 			type :  Function,
 			default : () => {},
-		},
+		}
 	},
 	data(){
 		return {
+			dialog : false,
+			content : null,
 		}
 	},
 	methods : {
@@ -110,11 +156,19 @@ export default {
 			}
 			return time
 		},
-		changeValue(type, v){
+		changeValue(type, v, shorten){
 			if (type ==='datetime'){
 				return this.getTime(v)
 			} else {
-				return v
+				if (shorten !== null) {
+					if (shorten.apply === true) {
+						return this.shortenContent(v, shorten.maxLength)
+					} else {
+						return v
+					}
+				} else {
+					return v
+				}
 			}
 		},
 		changeNumToCurrency(v){
@@ -122,6 +176,29 @@ export default {
 				return
 			}
 			return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'
+		},
+		shortenContent(v, length){
+			console.log(v, length)
+			if (v !== null && v.length > 35){
+				console.log('v.slice(0, Number(length))>>>>>>', v.slice(0, Number(length)))
+				return v.slice(0, Number(length)) + '...'
+			}
+			return v
+		},
+		returnUrl(to, Id){
+			if (Id !== null){
+				return `/admin/main/${to}/${Id}`
+			} else {
+				return
+			}
+		},
+		showMeLog(v){
+			const newArr = v.split('/n')
+			this.content = newArr
+			this.dialog = true
+		},
+		closeDialog(){
+			this.dialog = false
 		},
 	}
 }

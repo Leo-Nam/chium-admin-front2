@@ -3,7 +3,7 @@
 	<v-card-title>
 		버전정보
 	</v-card-title>
-	<div v-if="getUserId===7">
+	<div v-if="getUserInfo.depId===2">
 		<VersionUpdate />
 	</div>
 	<div 
@@ -60,7 +60,7 @@ export default {
 	computed : {
 		...mapActions('versionControl',['sp_admin_get_version_list']),
 		...mapGetters('versionControl',['getVersionList']),
-		...mapGetters('auth',['getUserId'])
+		...mapGetters('auth',['getUserInfo'])
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),

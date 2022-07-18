@@ -4,6 +4,11 @@
 		<v-col
 			cols="auto"
 		>
+			<ProjectList />
+		</v-col>
+		<v-col
+			cols="auto"
+		>
 			<VersionUpdateCategory />
 		</v-col>
 		<v-col
@@ -37,9 +42,11 @@
 </template>
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex"
+import ProjectList from "@/components/VersionListC/ProjectList.vue"
 import VersionUpdateCategory from "@/components/VersionListC/VersionUpdateCategory.vue"
 export default {
 	components : {
+		ProjectList,
 		VersionUpdateCategory,
 	},
 	data(){

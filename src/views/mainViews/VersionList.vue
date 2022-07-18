@@ -38,7 +38,7 @@ export default {
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),
 		...mapMutations('versionControl',['setPageNum','setSearch']),
-		...mapActions('versionControl',['sp_admin_get_version_list']),
+		...mapActions('versionControl',['sp_admin_get_version_list', 'sp_req_b_project_list']),
 
 		async controlQuerySetAndGetLogList(querySet){
 			let pageToGo = Number(querySet.query.page)
@@ -57,6 +57,7 @@ export default {
 			this.setSearch(searchKeyword)
 			this.setPageNum(pageToGo)
 			this.sp_admin_get_version_list()
+			this.sp_req_b_project_list()
 		}
 	},
 }

@@ -11,7 +11,15 @@
 		:key="info.ID"
 	>
 		<v-row style="height: 100px;">
-			<v-col cols="auto">Ver. {{ info.VERSION }}
+			<v-col cols="auto">
+				<v-row style="height: 20px;">
+					<v-col cols="auto">Ver. {{ info.VERSION }}
+					</v-col>
+				</v-row>
+				<v-row style="height: 20px;">
+					<v-col cols="auto">{{ getTime(info.PROJECT_NAME) }}
+					</v-col>
+				</v-row>
 			</v-col>
 			<v-col cols="auto">
 				<v-row style="height: 20px;">
@@ -21,6 +29,10 @@
 				<v-row style="height: 20px;">
 					<v-col cols="auto">
 						{{ showContent(info.CONTENT) }}
+					</v-col>
+				</v-row>
+				<v-row style="height: 20px;">
+					<v-col cols="auto">commited by {{ getTime(info.CREATOR_NAME) }}
 					</v-col>
 				</v-row>
 			</v-col>

@@ -197,7 +197,7 @@ export default {
 			location: "app-bar",
 			menuId: 1000,
           },
-          { title: "버전정보",
+          { title: "개발관리",
 			icon: "mdi-dev-to",
             route: "/admin/main/version/list",
 			routes: {'version-list':''},

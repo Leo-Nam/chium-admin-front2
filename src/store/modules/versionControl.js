@@ -19,8 +19,12 @@ export default {
 			search: null,
 		},
 		versionList: [],
+		projectList: [],
 	},
 	mutations: {
+		setProjectList(state, payload) {
+			state.projectList = payload;
+		},
 		// 현재 페이지 번호
 		setPageNum(state, payload) {
 			state.searchObj.pageNum = payload;
@@ -40,6 +44,9 @@ export default {
 				state.versionList = [];
 				state.searchObj.lastPageNum = 0;
 			}
+		},
+		setChangedProject(state, payload){
+			state.versionInfo.PROJECT_ID = payload
 		},
 		setChangedVersionContent(state, payload){
 			state.versionInfo.CONTENT = payload
@@ -69,6 +76,15 @@ export default {
 				console.log(e)
 			}
 		},
+		async sp_req_b_project_list({commit}){
+			try {
+				const res = await versionControlApi.sp_req_b_project_list()
+				console.log('store:modules:addAdmin.js:sp_req_b_project_list:',res.data.data)
+				commit('setProjectList', res.data.data)
+			} catch(e) {
+				console.log(e)
+			}
+		},
 	},
 	getters: {
 		getVersionList(state){
@@ -88,6 +104,9 @@ export default {
 		// 현재 검색어
 		getSearch(state){
 			return state.searchObj.search
+		},
+		getProjectList(state){
+			return state.projectList
 		},
 	}
 }

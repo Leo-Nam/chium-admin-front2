@@ -67,7 +67,7 @@ export default {
 						},
 						{
 							name: '구분',
-							binding: 'TRMT_BIZ_CODE',
+							binding: 'SITE_TYPE',
 							color: '#000000',
 							type: 'text'
 						},

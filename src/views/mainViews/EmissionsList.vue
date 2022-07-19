@@ -63,6 +63,12 @@ export default {
 							type: 'text'
 						},
 						{
+							name: '상태',
+							binding: 'STATE',
+							color: '#000000',
+							type: 'text'
+						},
+						{
 							name: '구분',
 							binding: 'DISPOSER_TYPE',
 							color: '#000000',

@@ -37,15 +37,13 @@
             <td>{{ collector.SI_GUN_GU }}</td>
             <td>{{ collector.TRMT_BIZ_NM }}</td>
             <td>
-              <v-btn
+              <a
                 style="cursor : pointer"
-                rounded
                 color="primary"
-                dark
                 @click="showNoteCreatePopup(collector.ID)"
               >
                 노트추가
-              </v-btn>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -112,5 +110,4 @@ export default {
 }
 </script>
 <style lang="">
-
 </style>

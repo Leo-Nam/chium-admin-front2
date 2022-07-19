@@ -1,10 +1,20 @@
 <template>
-  <div>
-    <div id="map" />
-    <div style="display : none;">
-      {{ getOrderInfo }}
-    </div>
-  </div>
+	<div 
+		:style="{
+			'padding': '30px',
+			'margin-top' : '15px',
+			'margin-bottom' : '15px',
+		}" 
+	>
+		<div id="map" />
+		<div 
+			:style="{
+				'display': `none`,
+			}"
+		>
+			{{ getOrderInfo }}
+		</div>
+	</div>
 </template>
 <script>
 

@@ -1,76 +1,84 @@
 <template>
-  <div>
-    <v-card class="main-order">
-      <EmissionOrderInfoFirst />  
-      <EmissionScheduleCalendar ref="scheduleCalendar" />
-      <EmissionCollectorListAreaOfInterest
-        :orderid="orderId"
-      />
-      <v-card class="collector-list">
-        <v-row>
-          <v-col>
-            <EmissionMapCollectorListWithin />
-          </v-col>
-          <v-col>
-            <EmissionCollectorListOpt />
-            <EmissionCollectorListTableWithOpt 
-              :orderid="orderId"
-            />
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-card>
+	<div>
+		<div 
+			:style="{
+				'margin-bottom': '30px',
+			}"
+		>
+			<EmissionOrderInfoFirst/>  
+		</div>
+		<div>
+			<EmissionScheduleCalendar ref="scheduleCalendar" />
+			<EmissionCollectorListAreaOfInterest
+				:orderid="orderId"
+			/>
+			<v-card class="collector-list">
+			<v-row>
+				<v-col>
+					<EmissionMapCollectorListWithin />
+				</v-col>
+			</v-row>
+			<!-- <v-row>
+				<v-col>
+					<EmissionCollectorListOpt />
+					<EmissionCollectorListTableWithOpt 
+						:orderid="orderId"
+					/>
+				</v-col>
+			</v-row> -->
+			</v-card>
 
 
-    <v-card
-      v-if="getBiddingInfo"
-      class="collector-list"
-    >
-      <EmissionBiddingTable />
-    </v-card>
+			<v-card
+				v-if="getBiddingInfo"
+				class="collector-list"
+			>
+				<EmissionBiddingTable />
+			</v-card>
 
-    <v-card class="collector-list">
-      <EmissionTransactionTable />
-    </v-card>
+			<v-card class="collector-list">
+				<EmissionTransactionTable />
+			</v-card>
 
-    <v-card
-      v-if="getReportInfo"
-      class="collector-list"
-    >
-      <EmissionReportTable />
-    </v-card>
+			<v-card
+				v-if="getReportInfo"
+				class="collector-list"
+			>
+				<EmissionReportTable />
+			</v-card>
 
 
-    <v-card
-      v-if="getLogList"
-      class="collector-list"
-    >
-      <EmissionLog />
-    </v-card>
+			<v-card
+				v-if="getLogList"
+				class="collector-list"
+			>
+				<EmissionLog />
+			</v-card>
 
-    <v-card
-      v-if="getLogList"
-      class="collector-list"
-    >
-      <v-card-title>
-        노트
-      </v-card-title>
+			<v-card
+				v-if="getLogList"
+				class="collector-list"
+			>
+				<v-card-title>
+					노트
+				</v-card-title>
 
-      <NoteInput :order-id="orderId" />
-      <NoteList
-        v-if="getNotes"
-        :note-list="getNotes"
-      />
-    </v-card>
-  </div>
+				<NoteInput :order-id="orderId" />
+				<NoteList
+					v-if="getNotes"
+					:note-list="getNotes"
+				/>
+			</v-card>
+		</div>
+	</div>
 </template>
 <script>
 import EmissionOrderInfoFirst from "@/components/EmissionsContentC/EmissionOrderInfoFirst.vue"
 import EmissionBiddingTable from "@/components/EmissionsContentC/EmissionBiddingTable.vue"
 import EmissionScheduleCalendar from "@/components/EmissionsContentC/EmissionScheduleCalendar.vue"
 import EmissionCollectorListAreaOfInterest from "@/components/EmissionsContentC/EmissionCollectorListAreaOfInterest.vue"
-import EmissionCollectorListOpt from "@/components/EmissionsContentC/EmissionCollectorListOpt.vue"
-import EmissionCollectorListTableWithOpt from "@/components/EmissionsContentC/EmissionCollectorListTableWithOpt.vue"
+// import EmissionCollectorListOpt from "@/components/EmissionsContentC/EmissionCollectorListOpt.vue"
+// import EmissionCollectorListTableWithOpt from "@/components/EmissionsContentC/EmissionCollectorListTableWithOpt.vue"
 import EmissionMapCollectorListWithin from "@/components/EmissionsContentC/EmissionMapCollectorListWithin.vue"
 import EmissionTransactionTable from "@/components/EmissionsContentC/EmissionTransactionTable.vue"
 import EmissionLog from "@/components/EmissionsContentC/EmissionLog.vue"
@@ -84,8 +92,8 @@ export default {
 		EmissionBiddingTable,
 		EmissionScheduleCalendar,
 		EmissionCollectorListAreaOfInterest,
-		EmissionCollectorListOpt,
-		EmissionCollectorListTableWithOpt,
+		// EmissionCollectorListOpt,
+		// EmissionCollectorListTableWithOpt,
 		EmissionMapCollectorListWithin,
 		EmissionTransactionTable,
 		EmissionLog,

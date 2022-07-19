@@ -1,6 +1,5 @@
 <template ref="refCalendar"> 
-  <v-row class="fill-height">
-    <v-col>
+	<div>
       <v-sheet height="64">
         <v-toolbar
           flat
@@ -128,8 +127,7 @@
           </v-card>
         </v-menu>
       </v-sheet>
-    </v-col>
-  </v-row>
+	</div>
 </template>
 
 <script>

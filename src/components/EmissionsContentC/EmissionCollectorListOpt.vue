@@ -1,64 +1,64 @@
 <template>
-  <div style="margin-bottom : 15px">
-    <v-row>
-      <v-col cols="auto">
-        <v-select
-          id="opt-select"
-          style="width : 180px"
-          :items="getOptList"
-          label="종류"
-          :value="selectedOpt"
-          hide-details=""
-          solo
-          @change="changeOpt"
-        />
-      </v-col>
-      <v-col>
-        <div
-          id="search-input"
-        >
-          <v-text-field
-            v-model="keyword"
-            hide-details=""
-            placeholder="검색어 🚀"
-            solo
-          />
-        </div>
-      </v-col>
-      <v-col v-if="selectedOpt === '비회원사 거리'">
-        <v-autocomplete
-          dense
-          rounded
-          solo
-          :items="isTransitOpt"
-          hide-details=""
-          :value="isTransitOpt[0]"
-          @change="changeIsTransitOpt"
-        />
-      </v-col>
-      <v-col v-if="selectedOpt === '비회원사 거리'">
-        <v-autocomplete
-          dense
-          rounded
-          solo
-          :items="bCodeWithinOpt"
-          hide-details=""
-          :value="bCodeWithinOpt[0]"
-          @change="changeBCodeWithinOpt"
-        />
-      </v-col>
-
-
-      <v-col
-        align-self="center"
-        cols="auto"
-      >
-        <v-btn @click="searchBtn">
-          검색하기
-        </v-btn>
-      </v-col>
-    </v-row>
-  </div>
+	<div style="margin-bottom : 15px">
+		<v-row>
+			<v-col cols="auto">
+				<div>
+					<v-select
+						outlined
+						id="opt-select"
+						:items="getOptList"
+						:value="selectedOpt"
+						hide-details=""
+						@change="changeOpt"
+						:style="{
+							'width': '300px',
+							'padding-left': '20px',
+						}"
+					/>
+				</div>
+			</v-col>
+			<v-col>
+				<div>
+					<v-text-field
+						outlined
+						v-model="keyword"
+						hide-details=""
+						placeholder="검색어 🚀"
+					/>
+				</div>
+			</v-col>
+			<v-col
+				align-self="center"
+				cols="auto"
+			>
+				<div
+					:style="{
+						'padding-right': '20px',
+					}"
+				>
+					<div
+						@click="searchBtn"
+						:style="{
+							'padding': '0px',
+							'margin': '0px',
+							'height': '56px',
+							'width': '300px',
+							'border-radius': '6px',
+							'display': 'table-cell',
+							'vertical-align': 'middle',
+							'align': 'center',
+							'border': 'solid 1px',
+							'cursor': 'pointer',
+							'text-align': 'center',
+							'border-color': '#8D8D8D'
+						}"
+					>
+							검색하기
+					</div>
+				</div>
+			</v-col>
+		</v-row>
+	</div>
 </template>
 <script>
 import { mapGetters, mapActions, mapMutations} from "vuex"

@@ -1,44 +1,847 @@
 <template>
   <v-card>
-    <v-card-title>배출 오더 정보</v-card-title>
-    <v-row>
-      <v-col cols="auto">
-        <v-card-subtitle> {{ getOrderInfo.COLLECTOR_ID === null ? '입찰 거래' : '기존거래' }}</v-card-subtitle>
-      </v-col>
-      <v-col cols="auto">
-        <v-card-subtitle> 최종 수정 시각 ⏲ {{ getTime(getOrderInfo.UPDATED_AT) }}</v-card-subtitle>
-      </v-col>
-      <v-col
-        cols="auto"
-        align-self="center"
-      >
-        <v-btn @click="modify">
-          수정하기
-        </v-btn>
-      </v-col>
-    </v-row>
-    <HeaderAndText :infos="[{header : 'ORDER ID', text : getOrderInfo.ORDER_ID},{header : 'ORDER CODE', text : getOrderInfo.ORDER_CODE},{header : 'ORDER 삭제 여부', text : getOrderInfo.IS_DELETED, checkType : true, key:'IS_DELETED'},{header : 'ORDER 삭제 시각', text : getOrderInfo.DELETED_AT, isTime : true}]" />
-    <HeaderAndText :infos="[{header : '개인 / 사업자', text : getOrderInfo.DISPOSER_TYPE},{header : '업체명', text : getOrderInfo.DISPOSER_NAME, ruPersonOrNot : getOrderInfo.DISPOSER_TYPE, key : 'DISPOSER_NAME' }]" />
-    <HeaderAndText :infos="[{header : '배출지', text : getOrderInfo.ADDR},{header : '배출 등록 시각', text : getOrderInfo.CREATED_AT, isTime : true}]" />
-    <HeaderAndText :infos="[{header : '요청사항', text : getOrderInfo.NOTE},{header : '상태 체크 유무', text : getOrderInfo.CHECK_STATE, checkType : true},{header : 'CS 확인여부', text : getOrderInfo.CS_CONFIRMED, checkType : true, key : 'CS_CONFIRMED'}]" />
-    <HeaderAndText :infos="[{header : '방문 시작 시각', text : getOrderInfo.VISIT_START_AT, isTime : true},{header : '방문 조기마감 여부', text : getOrderInfo.VISIT_EARLY_CLOSEING, checkType : true},{header : '방문 조기마감 요청 시각', text : getOrderInfo.VISIT_EARLY_CLOSED_AT, isTime : true}]" />
-    <HeaderAndText :infos="[{header : '입찰 마감 시각', text : getOrderInfo.BIDDING_END_AT, isTime : true},{header : '배출 시작 시각', text : getOrderInfo.OPEN_AT, isTime : true},{header : '배출 종료 시각', text : getOrderInfo.CLOSE_AT, isTime : true}]" />
-    <HeaderAndText :infos="[{header : '방문 예정자 수', text : getOrderInfo.PROSPECTIVE_VISITORS},{header : '입찰자 수', text : getOrderInfo.BIDDERS },{header : '잠재 입찰자 수', text : getOrderInfo.PROSPECTIVE_BIDDERS }]" />
-    <HeaderAndText :infos="[{header : '낙찰자 입찰 정보', text : getOrderInfo.SELECTED, key : 'SELECTED'},{header : '낙찰자 선정 시각', text : getOrderInfo.SELECTED_AT, isTime : true },{header : '낙찰자 선정 기한', text : getOrderInfo.MAX_SELECT_AT , isTime : true}]" />
-    <HeaderAndText :infos="[{header : '1순위 수거자 선택 여부', text : getOrderInfo.COLLECTOR_SELECTION_CONFIRMED, checkType : true},{header : '1순위 수거자 선택 시각', text : getOrderInfo.COLLECTOR_SELECTION_CONFIRMED_AT, isTime : true },{header : '1순위 수거자 응답 기한', text : getOrderInfo.COLLECTOR_MAX_DECISION_AT , isTime : true}]" />
-    <HeaderAndText :infos="[{header : '2순위 수거자 선택 여부', text : getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2, checkType : true},{header : '2순위 수거자 선택 시각', text : getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2_AT, isTime : true },{header : '2순위 수거자 응답 기한', text : getOrderInfo.COLLECTOR_MAX_DECISION2_AT , isTime : true}]" />
-    <EmissionMap style="margin-top : 15px; margin-bottom : 15px" />
-    <EmissionImageList style="margin-top : 15px; margin-bottom : 15px" />
+	<div>
+		<div 
+			:style="{
+				'padding-top': '40px', 
+				'padding-bottom': '0px', 
+				'padding-left': '30px', 
+				'padding-right': '30px', 
+				'margin': '0px'
+			}"
+		>
+			<h2>배출 오더 정보</h2>
+		</div>
+		<div 
+			:style="{
+				'padding-top': '0px', 
+				'padding-bottom': '0px', 
+				'padding-left': '30px', 
+				'padding-right': '30px', 
+				'margin': '0px'
+			}"
+		>
+			<EmissionImageList 
+				:style="{
+					'margin-top': '15px', 
+					'margin-bottom' : '15px'
+				}" 
+			/>
+		</div>
+		<div 
+			:style="{
+				'padding': '30px',
+			}"
+		>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					거래방식
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textFieldBig.width}`,
+							'height': `${tableConfig.textFieldBig.height}`,
+							'border': `${tableConfig.textFieldBig.border}`,
+							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
+							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
+							'display': `${tableConfig.textFieldBig.display}`,
+							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.COLLECTOR_ID === null ? '입찰 거래' : '기존거래' }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					ORDER ID
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textFieldBig.width}`,
+							'height': `${tableConfig.textFieldBig.height}`,
+							'border': `${tableConfig.textFieldBig.border}`,
+							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
+							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
+							'display': `${tableConfig.textFieldBig.display}`,
+							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.ORDER_ID }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					개인/사업자
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textFieldBig.width}`,
+							'height': `${tableConfig.textFieldBig.height}`,
+							'border': `${tableConfig.textFieldBig.border}`,
+							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
+							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
+							'display': `${tableConfig.textFieldBig.display}`,
+							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.DISPOSER_TYPE }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					ORDER CODE
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textFieldBig.width}`,
+							'height': `${tableConfig.textFieldBig.height}`,
+							'border': `${tableConfig.textFieldBig.border}`,
+							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
+							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
+							'display': `${tableConfig.textFieldBig.display}`,
+							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.ORDER_CODE }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					업체명
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textFieldBig.width}`,
+							'height': `${tableConfig.textFieldBig.height}`,
+							'border': `${tableConfig.textFieldBig.border}`,
+							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
+							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
+							'display': `${tableConfig.textFieldBig.display}`,
+							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.DISPOSER_NAME }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					ORDER 삭제여부
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div>
+						<v-switch
+							:input-value="getOrderInfo.IS_DELETED"
+							inset
+							:style="{
+								'height': `${tableConfig.switch.height}`,
+								'margin-top': `${tableConfig.switch.marginTop}`
+							}"
+						></v-switch>
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					배출지
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textFieldBig.width}`,
+							'height': `${tableConfig.textFieldBig.height}`,
+							'border': `${tableConfig.textFieldBig.border}`,
+							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
+							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
+							'display': `${tableConfig.textFieldBig.display}`,
+							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.ADDR }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					ORDER 삭제일시
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textFieldBig.width}`,
+							'height': `${tableConfig.textFieldBig.height}`,
+							'border': `${tableConfig.textFieldBig.border}`,
+							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
+							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
+							'display': `${tableConfig.textFieldBig.display}`,
+							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.DELETED_AT }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					배출등록일시
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textFieldBig.width}`,
+							'height': `${tableConfig.textFieldBig.height}`,
+							'border': `${tableConfig.textFieldBig.border}`,
+							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
+							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
+							'display': `${tableConfig.textFieldBig.display}`,
+							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.CREATED_AT }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					CS확인여부
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div>
+						<v-switch
+							:input-value="getOrderInfo.CS_CONFIRMED"
+							inset
+							:style="{
+								'height': `${tableConfig.switch.height}`,
+								'margin-top': `${tableConfig.switch.marginTop}`
+							}"
+						></v-switch>
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					상태체크여부
+				</v-col>
+				<v-col 
+					cols="4"
+				>
+					<div>
+						<v-switch
+							:input-value="getOrderInfo.CHECK_STATE"
+							inset
+							:style="{
+								'height': `${tableConfig.switch.height}`,
+								'margin-top': `${tableConfig.switch.marginTop}`
+							}"
+						></v-switch>
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+			>
+				<v-col 
+					cols="2"
+				>
+					요청사항
+				</v-col>
+				<v-col 
+					cols="10"
+				>
+					<div>
+						<v-textarea
+							solo
+							outlined
+							flat
+							:value="getOrderInfo.NOTE"
+							:style="{
+								'width': `${tableConfig.textArea.width}`,
+								'height': `${tableConfig.textArea.height}`
+							}"
+						></v-textarea>	
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					방문시작일시
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.VISIT_START_AT }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					방문조기마감여부
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div>
+						<v-switch
+							:input-value="getOrderInfo.VISIT_EARLY_CLOSEING"
+							inset
+							:style="{
+								'height': `${tableConfig.switch.height}`,
+								'margin-top': `${tableConfig.switch.marginTop}`
+							}"
+						></v-switch>
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					방문조기마감요청일시
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.VISIT_EARLY_CLOSED_AT }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					입찰마감일시
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.BIDDING_END_AT }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					배출시작일시
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.OPEN_AT }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					배출종료일시
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.CLOSE_AT }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					방문예정자수
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.PROSPECTIVE_VISITORS }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					입찰자수
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.BIDDERS }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					잠재입찰자수
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.PROSPECTIVE_BIDDERS }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					낙찰자투찰번호
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.SELECTED }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					낙찰자선정일시
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.SELECTED_AT }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					낙찰자선정기한
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.MAX_SELECT_AT }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					1순위결심여부
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div>
+						<v-switch
+							:input-value="getOrderInfo.COLLECTOR_SELECTION_CONFIRMED"
+							inset
+							:style="{
+								'height': `${tableConfig.switch.height}`,
+								'margin-top': `${tableConfig.switch.marginTop}`
+							}"
+						></v-switch>
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					1순위결심일시
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.COLLECTOR_SELECTION_CONFIRMED_AT }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					1순위결심기한
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.COLLECTOR_MAX_DECISION_AT }}
+					</div>
+				</v-col>
+			</v-row>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col 
+					cols="2"
+				>
+					2순위결심여부
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div>
+						<v-switch
+							:input-value="getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2"
+							inset
+							:style="{
+								'height': `${tableConfig.switch.height}`,
+								'margin-top': `${tableConfig.switch.marginTop}`
+							}"
+						></v-switch>
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					2순위결심일시
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2_AT }}
+					</div>
+				</v-col>
+				<v-col 
+					cols="2"
+					:style="{
+						'padding-left': `${tableConfig.label.paddingLeft.rightColumn}`
+					}"
+				>
+					2순위결심기한
+				</v-col>
+				<v-col 
+					cols="2"
+				>
+					<div 
+						:style="{
+							'width': `${tableConfig.textField.width}`,
+							'height': `${tableConfig.textField.height}`,
+							'border': `${tableConfig.textField.border}`,
+							'border-radius': `${tableConfig.textField.borderRadius}`,
+							'vertical-align': `${tableConfig.textField.verticalAlign}`,
+							'display': `${tableConfig.textField.display}`,
+							'padding-left': `${tableConfig.textField.paddingLeft}`,
+						}"
+					>
+						{{ getOrderInfo.COLLECTOR_MAX_DECISION2_AT }}
+					</div>
+				</v-col>
+			</v-row>
+		</div>
+	</div>
+	<div>
+		<EmissionMap/>
+	</div>
   </v-card>
 </template>
 <script>
 import {mapGetters,mapActions} from "vuex"
-import HeaderAndText from "./EmissionHeaderAndText.vue"
 import EmissionMap from "./EmissionMap.vue"
 import EmissionImageList from "./EmissionImageList.vue"
 export default {
+	data(){
+		return{
+			tableConfig:{
+				rowMarginBottom: '20px',
+				textFieldBig: {
+					width: '600px',
+					height: '40px',
+					border: 'solid 1px',
+					borderRadius: '10px',
+					verticalAlign: 'middle',
+					display: 'table-cell',
+					paddingLeft: '10px'
+				},
+				textField: {
+					width: '300px',
+					height: '40px',
+					border: 'solid 1px',
+					borderRadius: '10px',
+					verticalAlign: 'middle',
+					display: 'table-cell',
+					paddingLeft: '10px'
+				},
+				textArea: {
+					width: '100%',
+					height: '200px'
+				},
+				switch: {
+					height: '0px',
+					marginTop: '0px'
+				},
+				label: {
+					paddingLeft: {
+						leftColumn: '0px',
+						rightColumn: '20px'
+					}
+				}
+			}
+		}
+	},
   components : {
-    HeaderAndText,EmissionMap,EmissionImageList
+    EmissionMap,EmissionImageList
   },
   computed : {
     ...mapGetters('emissions',['getOrderInfo']),
@@ -60,5 +863,4 @@ export default {
 }
 </script>
 <style lang="">
-
 </style>

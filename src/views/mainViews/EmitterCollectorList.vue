@@ -72,6 +72,12 @@ export default {
 							type: 'text'
 						},
 						{
+							name: '활동여부',
+							binding: 'ACTIVE',
+							color: '#000000',
+							type: 'switch'
+						},
+						{
 							name: '사이트',
 							binding: 'SITE_NAME',
 							color: '#000000',

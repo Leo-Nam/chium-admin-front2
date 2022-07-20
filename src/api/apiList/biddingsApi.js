@@ -7,6 +7,7 @@ export default {
   sp_admin_get_new_biddings({ state, rootState }) {
     const userId = rootState.auth.userId;
     const url = "api/admin/common/sp_admin_get_new_biddings";
+	console.log('sp_admin_get_new_biddings started in Api')
     let data = {
       params: JSON.stringify([
         {

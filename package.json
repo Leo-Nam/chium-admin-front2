@@ -1,6 +1,6 @@
 {
   "name": "chium-admin",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve --local",
@@ -28,7 +28,10 @@
     "vue-chartjs": "^4.0.7",
     "vue-class-component": "^7.2.6",
     "vue-cookies": "^1.8.1",
+    "vue-element-resize-detector": "^1.0.6",
+    "vue-fabric-wrapper": "^0.3.71",
     "vue-infinite-loading": "^2.4.5",
+    "vue-resize-directive": "^1.2.0",
     "vue-router": "^3.5.1",
     "vue-socket.io": "^3.0.10",
     "vue-sse": "^2.5.2",

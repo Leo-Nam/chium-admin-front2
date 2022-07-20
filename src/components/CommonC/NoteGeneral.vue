@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card flat>
 		<v-card-title>
 			<span class="text-h5">상담 내용 작성</span>
 		</v-card-title>

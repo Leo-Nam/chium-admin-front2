@@ -8,67 +8,87 @@
 			<EmissionOrderInfoFirst/>  
 		</div>
 		<div>
-			<EmissionScheduleCalendar ref="scheduleCalendar" />
-			<EmissionCollectorListAreaOfInterest
-				:orderid="orderId"
-			/>
-			<v-card class="collector-list">
 			<v-row>
 				<v-col>
-					<EmissionMapCollectorListWithin />
+					<EmissionScheduleCalendar ref="scheduleCalendar" />
 				</v-col>
 			</v-row>
-			<!-- <v-row>
+			<v-row>
 				<v-col>
-					<EmissionCollectorListOpt />
-					<EmissionCollectorListTableWithOpt 
+					<EmissionCollectorListAreaOfInterest
 						:orderid="orderId"
 					/>
+					<v-card class="collector-list">
+						<v-row>
+							<v-col>
+								<EmissionMapCollectorListWithin />
+							</v-col>
+						</v-row>
+					</v-card>
 				</v-col>
-			</v-row> -->
-			</v-card>
+			</v-row>
+			<v-row>
+				<v-col>
+					<v-card
+						v-if="getBiddingInfo"
+						class="collector-list"
+					>
+						<EmissionBiddingTable />
+					</v-card>
+				</v-col>
+			</v-row>
+			<v-row>
+				<v-col>
+					<v-card class="collector-list">
+						<EmissionTransactionTable />
+					</v-card>
+				</v-col>
+			</v-row>
+			<v-row>
+				<v-col>
+					<v-card
+						v-if="getReportInfo"
+						class="collector-list"
+					>
+						<EmissionReportTable />
+					</v-card>
+				</v-col>
+			</v-row>
+			<v-row>
+				<v-col>
+					<v-card
+						v-if="getLogList"
+						class="collector-list"
+					>
+						<EmissionLog />
+					</v-card>
+				</v-col>
+			</v-row>
+			<v-row>
+				<v-col>
+					<v-card
+						v-if="getLogList"
+						class="collector-list"
+					>
+						<v-card-title>
+							노트
+						</v-card-title>
+
+						<NoteInput :order-id="orderId" />
+						<NoteList
+							v-if="getNotes"
+							:note-list="getNotes"
+						/>
+					</v-card>
+				</v-col>
+			</v-row>
 
 
-			<v-card
-				v-if="getBiddingInfo"
-				class="collector-list"
-			>
-				<EmissionBiddingTable />
-			</v-card>
-
-			<v-card class="collector-list">
-				<EmissionTransactionTable />
-			</v-card>
-
-			<v-card
-				v-if="getReportInfo"
-				class="collector-list"
-			>
-				<EmissionReportTable />
-			</v-card>
 
 
-			<v-card
-				v-if="getLogList"
-				class="collector-list"
-			>
-				<EmissionLog />
-			</v-card>
 
-			<v-card
-				v-if="getLogList"
-				class="collector-list"
-			>
-				<v-card-title>
-					노트
-				</v-card-title>
 
-				<NoteInput :order-id="orderId" />
-				<NoteList
-					v-if="getNotes"
-					:note-list="getNotes"
-				/>
-			</v-card>
+
 		</div>
 	</div>
 </template>

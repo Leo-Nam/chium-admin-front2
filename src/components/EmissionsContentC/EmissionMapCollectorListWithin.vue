@@ -11,7 +11,7 @@
 				<div 
 					id="mapCollectorListWith" 
 					:style="{
-						'height': '200px',
+						'height': '350px',
 						'margin-left': '20px',
 						'resize': 'both',
 						'over-flow': 'auto'

@@ -42,13 +42,6 @@
 						<td>{{ site.PHONE }}</td>
 						<td>{{ changeToString(site.DIST) }}</td>
 						<td>
-							<!-- <a
-								style="cursor : pointer"
-								color="primary"
-								@click="showNoteCreatePopup(site.ID, 1)"
-							>
-								노트추가
-							</a> -->
 							<a
 								style="cursor : pointer"
 								color="primary"
@@ -87,15 +80,6 @@
 				</tbody>
 			</template>
 		</v-simple-table>
-		<v-card>
-			<NoteCreatePopup
-				:dialog="dialog"
-				:orderid="orderid"
-				:siteid="siteID"
-				:sitecategory="siteCategory"
-				@closeDialog="closeDialog"
-			/>
-		</v-card>
 		<div
 			:style="{
 				'display': `${note.display}`
@@ -112,11 +96,9 @@
 </template>
 <script>
 import NoteGeneral from "../CommonC/NoteGeneral.vue"
-import NoteCreatePopup from "../CommonC/NoteCreate.vue"
 import {mapGetters} from "vuex"
 export default {
 	components : {
-		NoteCreatePopup,
 		NoteGeneral
 	},
 	props: {

@@ -311,31 +311,11 @@
 					</div>
 				</v-col>
 			</v-row>
-			<v-row 
-				no-gutters 
-			>
-				<v-col 
-					cols="2"
-				>
-					요청사항
-				</v-col>
-				<v-col 
-					cols="10"
-				>
-					<div>
-						<v-textarea
-							solo
-							outlined
-							flat
-							:value="getOrderInfo.NOTE"
-							:style="{
-								'width': `${tableConfig.textArea.width}`,
-								'height': `${tableConfig.textArea.height}`
-							}"
-						></v-textarea>	
-					</div>
-				</v-col>
-			</v-row>
+					<EmissionComment
+						width="tableConfig.textArea.width"
+						height="tableConfig.textArea.height"
+						:value="getOrderInfo.NOTE"
+					/>
 			<v-row 
 				no-gutters 
 				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
@@ -800,6 +780,7 @@
 import {mapGetters,mapActions} from "vuex"
 import EmissionMap from "./EmissionMap.vue"
 import EmissionImageList from "./EmissionImageList.vue"
+import EmissionComment from "./EmissionComment.vue"
 export default {
 	data(){
 		return{
@@ -825,7 +806,7 @@ export default {
 				},
 				textArea: {
 					width: '100%',
-					height: '200px'
+					height: '150px'
 				},
 				switch: {
 					height: '0px',
@@ -841,7 +822,7 @@ export default {
 		}
 	},
   components : {
-    EmissionMap,EmissionImageList
+    EmissionMap,EmissionImageList,EmissionComment
   },
   computed : {
     ...mapGetters('emissions',['getOrderInfo']),

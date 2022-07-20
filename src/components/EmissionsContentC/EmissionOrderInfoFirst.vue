@@ -375,7 +375,7 @@
 				>
 					<div>
 						<v-switch
-							:input-value="getOrderInfo.VISIT_EARLY_CLOSEING"
+							:input-value="Number(getOrderInfo.VISIT_EARLY_CLOSING)"
 							inset
 							:style="{
 								'height': `${tableConfig.switch.height}`,

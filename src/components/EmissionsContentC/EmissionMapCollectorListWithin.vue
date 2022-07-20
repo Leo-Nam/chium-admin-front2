@@ -14,7 +14,7 @@
 						'height': '350px',
 						'margin-left': '20px',
 						'resize': 'both',
-						'over-flow': 'auto'
+						'over-flow': 'auto',
 					}" 
 				/>
 			</v-col>

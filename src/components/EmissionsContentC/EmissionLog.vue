@@ -28,14 +28,6 @@
             <td> {{ log.ID }} </td>
             <td> 
               <a
-                v-if="log.USER_ID !== null"
-                :href="returnUrl7(log.USER_ID)"
-              >
-                {{ log.USER_ID }} 
-              </a>
-            </td>
-            <td> 
-              <a
                 v-if="log.USER_NAME !== null"
                 :href="returnUrl7(log.USER_ID)"
               >
@@ -58,14 +50,6 @@
                 {{ log.ORDER_CODE }} 
               </a>
             </td>
-            <td> 
-              <a
-                v-if="log.ORDER_ID !== null"
-                :href="returnUrl1(log.ORDER_ID)"
-              >
-                {{ log.ORDER_ID }} 
-              </a>
-            </td>
             <td
               style="cursor : pointer"
               @click="showMeLog(idx)"
@@ -78,14 +62,6 @@
                 :href="returnUrl5(log.REPORT_ID)"
               >
                 {{ log.REPORT_ID }} 
-              </a>
-            </td>
-            <td> 
-              <a
-                v-if="log.SITE_ID !== null"
-                :href="returnUrl6(log.SITE_ID)"
-              >
-                {{ log.SITE_ID }} 
               </a>
             </td>
             <td> 
@@ -128,17 +104,14 @@ export default {
     return {
       thArray : [
         'ID',
-        '사용자 등록 번호',
-        '사용자 이름',
-        '투찰 번호',
-        '오더 코드',
-        '오더 아이디',
+        '이름',
+        '투찰',
+        '배출',
         '내용',
-        '리포트 아이디',
-        '사이트 아이디',
-        '사이트 이름',
-        '트랜잭션 아이디',
-        '생성 일자',
+        '리포트',
+        '사이트',
+        'TR',
+        '생성',
         'Table'
         ],
       dialog : false,
@@ -159,8 +132,8 @@ export default {
       if (content==null ||content==undefined){
         return
       }
-      if (content.length > 35){
-         return content.slice(0,35) + '...'
+      if (content.length > 30){
+         return content.slice(0,30) + '...'
       }
       return content
 

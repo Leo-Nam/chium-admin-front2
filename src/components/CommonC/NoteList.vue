@@ -53,13 +53,6 @@
             </td>
             <td>
               <a
-                :href="returnUrl2(note.ORDER_ID)"
-              >
-                {{ note.ORDER_ID }}
-              </a>
-            </td>
-            <td>
-              <a
                 :href="returnUrl5(note.REPORT_ID)"
               >
                 {{ note.REPORT_ID }}
@@ -110,19 +103,18 @@ export default {
       dialog : false,
       content : [],
       thArray : [
-        '노트 번호',
+        '번호',
         '관리자',
-        '입찰 번호',
+        '투찰',
 
-        '유저 이름',
+        '이름',
         '내용',
-        '오더 코드',
-        '오더 번호',
-        '처리보고서 번호',
+        '배출',
+        '리포트',
 
-        '사이트 이름',
-        '트랜잭션 번호',
-        '등록 시각'
+        '사이트',
+        'TR',
+        '생성'
       ]
     }
   },

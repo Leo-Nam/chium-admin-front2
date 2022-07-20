@@ -27,7 +27,6 @@
             @click="goToContent(bidding.COLLECTOR_BIDDING_ID)"
           >
             <td>{{ bidding.COLLECTOR_BIDDING_ID }}</td>
-            <td>{{ bidding.COLLECTOR_SITE_ID }}</td>
             <td>{{ bidding.COLLECTOR_SITE_NAME }}</td>
             <td>{{ bidding.COLLECTOR_PHONE }}</td>
             <td>{{ bidding.COLLECTOR_SI_DO }}</td>
@@ -45,13 +44,12 @@ export default {
   data(){
     return {
       biddingTh : [
-        'BIDDING_ID',
-        'SITE_ID',
-        'SITE_NAME',
-        'COLLECTOR_PHONE',
-        'SI_DO',
-        'SI_GUN_GU',
-        'STATE',
+        'ID',
+        '사이트',
+        '연락처',
+        '시도',
+        '시군구',
+        '상태',
       ]
     }
   },

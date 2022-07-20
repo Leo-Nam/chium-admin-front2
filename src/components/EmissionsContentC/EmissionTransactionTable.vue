@@ -50,14 +50,6 @@
                 {{ transaction.COLLECTOR_NAME }}
               </a>
             </td>
-            <td>
-              <a
-                v-if="transaction.COLLECTOR_SITE_ID !== null"
-                :href="returnUrl6(transaction.COLLECTOR_SITE_ID)"
-              >
-                {{ transaction.COLLECTOR_SITE_ID }}
-              </a>
-            </td>
             <td>{{ getTime(transaction.COLLECT_ASK_END_AT) }}</td>
 
             <td>
@@ -81,15 +73,12 @@ export default {
   data(){
     return {
       thArray : [
-        '번호',
-        '오더 코드',
-        '거래 유형',
-
-        '수거자 이름',
-        '수거자 번호',
-        '수거자 요청 기한',
-
-        '배출자 이름',
+        'ID',
+        '배출',
+        '유형',
+        '수거자',
+        '수거요청기한',
+        '배출자',
         '확인상태'
         ]
     }

@@ -1,5 +1,5 @@
 <template>
-	<v-card>
+	<v-card flat>
 		<v-row>
 			<v-col>
 				<div
@@ -116,7 +116,8 @@ export default {
 			noteGeneralWidth: '0%',
 			note: {
 				display: 'none'
-			}
+			},
+			siteCategory: 1
 		}
 	},
 	computed : {

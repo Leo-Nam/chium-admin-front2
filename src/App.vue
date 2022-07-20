@@ -204,7 +204,7 @@ export default {
 					}
 				},
 				container:{
-					width: '1880px'
+					width: '1280px'
 				}
 			}
 		}

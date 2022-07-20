@@ -18,7 +18,7 @@
 					<EmissionCollectorListAreaOfInterest
 						:orderid="orderId"
 					/>
-					<v-card class="collector-list">
+					<v-card flat class="collector-list">
 						<v-row>
 							<v-col>
 								<EmissionMapCollectorListWithin />
@@ -30,6 +30,7 @@
 			<v-row>
 				<v-col>
 					<v-card
+						flat
 						v-if="getBiddingInfo"
 						class="collector-list"
 					>
@@ -39,7 +40,7 @@
 			</v-row>
 			<v-row>
 				<v-col>
-					<v-card class="collector-list">
+					<v-card flat class="collector-list">
 						<EmissionTransactionTable />
 					</v-card>
 				</v-col>
@@ -47,6 +48,7 @@
 			<v-row>
 				<v-col>
 					<v-card
+						flat
 						v-if="getReportInfo"
 						class="collector-list"
 					>
@@ -57,6 +59,7 @@
 			<v-row>
 				<v-col>
 					<v-card
+						flat
 						v-if="getLogList"
 						class="collector-list"
 					>
@@ -67,6 +70,7 @@
 			<v-row>
 				<v-col>
 					<v-card
+						flat
 						v-if="getLogList"
 						class="collector-list"
 					>
@@ -82,13 +86,6 @@
 					</v-card>
 				</v-col>
 			</v-row>
-
-
-
-
-
-
-
 		</div>
 	</div>
 </template>

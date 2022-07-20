@@ -236,7 +236,7 @@
 							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.DELETED_AT }}
+						{{ getTime(getOrderInfo.DELETED_AT) }}
 					</div>
 				</v-col>
 				<v-col 
@@ -261,7 +261,7 @@
 							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.CREATED_AT }}
+						{{ getTime(getOrderInfo.CREATED_AT) }}
 					</div>
 				</v-col>
 			</v-row>
@@ -339,7 +339,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.VISIT_START_AT }}
+						{{ getTime(getOrderInfo.VISIT_START_AT) }}
 					</div>
 				</v-col>
 				<v-col 
@@ -386,7 +386,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.VISIT_EARLY_CLOSED_AT }}
+						{{ getTime(getOrderInfo.VISIT_EARLY_CLOSED_AT) }}
 					</div>
 				</v-col>
 			</v-row>
@@ -413,7 +413,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.BIDDING_END_AT }}
+						{{ getTime(getOrderInfo.BIDDING_END_AT) }}
 					</div>
 				</v-col>
 				<v-col 
@@ -438,7 +438,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.OPEN_AT }}
+						{{ getTime(getOrderInfo.OPEN_AT) }}
 					</div>
 				</v-col>
 				<v-col 
@@ -463,7 +463,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.CLOSE_AT }}
+						{{ getTime(getOrderInfo.CLOSE_AT) }}
 					</div>
 				</v-col>
 			</v-row>
@@ -592,7 +592,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.SELECTED_AT }}
+						{{ getTime(getOrderInfo.SELECTED_AT) }}
 					</div>
 				</v-col>
 				<v-col 
@@ -617,7 +617,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.MAX_SELECT_AT }}
+						{{ getTime(getOrderInfo.MAX_SELECT_AT) }}
 					</div>
 				</v-col>
 			</v-row>
@@ -666,7 +666,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.COLLECTOR_SELECTION_CONFIRMED_AT }}
+						{{ getTime(getOrderInfo.COLLECTOR_SELECTION_CONFIRMED_AT) }}
 					</div>
 				</v-col>
 				<v-col 
@@ -691,7 +691,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.COLLECTOR_MAX_DECISION_AT }}
+						{{ getTime(getOrderInfo.COLLECTOR_MAX_DECISION_AT) }}
 					</div>
 				</v-col>
 			</v-row>
@@ -740,7 +740,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2_AT }}
+						{{ getTime(getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2_AT) }}
 					</div>
 				</v-col>
 				<v-col 
@@ -765,7 +765,7 @@
 							'padding-left': `${tableConfig.textField.paddingLeft}`,
 						}"
 					>
-						{{ getOrderInfo.COLLECTOR_MAX_DECISION2_AT }}
+						{{ getTime(getOrderInfo.COLLECTOR_MAX_DECISION2_AT) }}
 					</div>
 				</v-col>
 			</v-row>

@@ -33,12 +33,12 @@
 export default {
 	props : {
 		width : {
-			type : Number,
-			default : 0
+			type : String,
+			default : null
 		},
 		height : {
-			type : Number,
-			default : 0
+			type : String,
+			default : null
 		},
 		value : {
 			type : String,

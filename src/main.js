@@ -4,9 +4,10 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import globalConfig from "./globalConfig"
+import resize from "vue-element-resize-detector";
 // import VueSSE from 'vue-sse'
 
-
+Vue.use(resize)
 Vue.config.productionTip = false;
 Vue.designConfig = 1280
 

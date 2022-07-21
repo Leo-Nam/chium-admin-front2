@@ -50,7 +50,7 @@ const routes = [
               },
               {
                 path: "emitter-collector/:id",
-                name: "site-info",
+                name: "content",
                 component: () =>
                   import("../views/mainViews/EmitterCollectorContent.vue"),
               },
@@ -211,27 +211,10 @@ const routes = [
 
                 ]
               },
-              {
-                path: "version",
-                name: "version",
-                component: () =>
-                  import("../views/defaultViews/VersionDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "version-list",
-                    component: () => import("../views/mainViews/VersionList.vue"),
-                  },
-                ]
-              },
+
             ],
           },
         ],
-      },
-      {
-        path: "account",
-        name: "account",
-        component: () => import("../views/accountDetailsView.vue"),
       },
       {
         path: "login",
@@ -258,6 +241,7 @@ router.beforeEach(async (to, from, next) => {
   // 모든 라우터에 접속할 때마다 이 함수를 거친다.
   // 로그인 한 상태에서 login 으로 이동하려고하면 다른 화면으로 이동시킴
   if (to.matched.some((record) => record.meta.unauthorized)) {
+	console.log('VueCookies.get>>>>', VueCookies.get("token"))
     if (VueCookies.get("token")) {
       return next("/admin/main/emitter-collector");
     }
@@ -278,6 +262,7 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
+  console.log('여기라구2...')
   return next();
 });
 

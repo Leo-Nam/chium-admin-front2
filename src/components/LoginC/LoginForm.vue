@@ -1,7 +1,7 @@
 <template>
 	<div style="width:480px">
 		<v-row>
-			<v-col><div style="width:100%;height:150px;text-align:center"><h1>Chium Manager</h1></div>
+			<v-col><div style="width:100%;height:150px;text-align:center"><h1>Chium Manager1{{ isLogged }}</h1></div>
 			</v-col>
 		</v-row>
 		<v-row>
@@ -80,6 +80,12 @@
 import {mapActions, mapGetters, mapMutations} from "vuex"
 import packageJson from "/package.json"
 export default {
+	props: {
+		isLogged:{
+			type: Boolean,
+			default: null
+		}
+	},
 	data(){
 		return {
 			adminId : '',
@@ -96,6 +102,7 @@ export default {
 	},
 	mounted() {
 		this.parseVersionInfo()
+		console.log('this.isLogged>>>>>>', this.isLogged)
 	},
 	computed : {
 		...mapGetters('auth',['getUserInit', 'getUserId']),

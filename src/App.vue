@@ -119,7 +119,9 @@
 								style="background-color:transparent"
 							>
 							<!--style="background-color:transparent"-->
-								<LoginForm /><div :style="{ color: color}"></div>
+								<LoginForm 
+									:isLogged = "isLogged"
+								/><div :style="{ color: color}"></div>
 							</v-card>
 						</v-col>
 					</v-row>

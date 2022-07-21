@@ -5,230 +5,262 @@ import store from "@/store";
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    component: () => import("../views/defaultViews/DefaultView.vue"),
-    redirect: "/login",
-    children: [
-      {
-        path: "admin",
-        name: "admin",
-        component: () => import("../views/defaultViews/AdminDefaultView.vue"),
-        children: [
-          {
-            path: "main",
-            name: "main",
-            component: () =>
-              import("../views/defaultViews/MainDefaultView.vue"),
-            children: [
-              {
-                path: "person-emitter",
-                name: "person-emitter",
-                component: () => import("../views/defaultViews/PersonEmitterDefault.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "person-emitter-list",
-                    component: () => import("../views/mainViews/PersonEmitterList.vue"),
-                  },
-                  {
-                    path: ":id",
-                    name: "person-emitter-content",
-                    component: () => import("../views/mainViews/PersonEmitterContent.vue"),
-                  },
-                ]
-              },
-              {
-                path: "emitter-collector",
-                name: "emitter-collector",
-                component: () => import("../views/mainViews/EmitterCollectorList.vue"),
-              },
-              {
-                path: "chart",
-                name: "chart",
-                component: () => import("../views/mainViews/ChartView.vue"),
-              },
-              {
-                path: "emitter-collector/:id",
-                name: "content",
-                component: () =>
-                  import("../views/mainViews/EmitterCollectorContent.vue"),
-              },
-              {
-                path: "add-admin",
-                name: "add-admin",
-                component: () => import("../views/mainViews/addAdmin.vue"),
-                // 최고 권한자만 들어갈 수 있도록 표시
-                meta: { adminKing: true },
-              },
-              {
-                path: "geo",
-                name: "geo",
-                component: () => import("../views/defaultViews/ChatDefaultView.vue"),
-                children: [
-                  {
-                    path: "latlng",
-                    name: "latlng",
-                    component: () => import("../views/mainViews/LatLng.vue"),
-                  },
-                ]
-              },
-              {
-                path: "emissions",
-                name: "emissions",
-                component: () =>
-                  import("../views/defaultViews/EmissionsDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "emissions-list",
-                    component: () => import("../views/mainViews/EmissionsList.vue"),
-                  },
-                  {
-                    path: ":id",
-                    name: "emissions-content",
-                    component: () => import("../views/mainViews/EmissionsContent.vue"),
-                  },
-                ]
-              },
-              {
-                path: "biddings",
-                name: "biddings",
-                component: () =>
-                  import("../views/defaultViews/BiddingsDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "biddings-list",
-                    component: () => import("../views/mainViews/BiddingsList.vue"),
-                  },
-                  {
-                    path: ":id",
-                    name: "biddings-content",
-                    component: () => import("../views/mainViews/BiddingsContent.vue"),
-                  },
-                ]
-              },
-              {
-                path: "transaction",
-                name: "transaction",
-                component: () =>
-                  import("../views/defaultViews/TransActionDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "transaction-list",
-                    component: () => import("../views/mainViews/TransActionList.vue"),
-                  },
-                  {
-                    path: ":id",
-                    name: "transaction-content",
-                    component: () => import("../views/mainViews/TransActionContent.vue"),
-                  },
-                ]
-              },
-              {
-                path: "report",
-                name: "report",
-                component: () =>
-                  import("../views/defaultViews/ReportDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "report-list",
-                    component: () => import("../views/mainViews/ReportList.vue"),
-                  },
-                  {
-                    path: ":id",
-                    name: "report-content",
-                    component: () => import("../views/mainViews/ReportContent.vue"),
-                  },
-                ]
-              },
-              {
-                path: "log",
-                name: "log",
-                component: () =>
-                  import("../views/defaultViews/LogDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "log-list",
-                    component: () => import("../views/mainViews/LogList.vue"),
-                  },
-
-                ]
-              },
-              {
-                path: "not-member",
-                name: "not-member",
-                component: () =>
-                  import("../views/defaultViews/NotMemberDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "not-member-list",
-                    component: () => import("../views/mainViews/NotMemberList.vue"),
-                  },
-                  {
-                    path: ":id",
-                    name: "not-member-content",
-                    component: () => import("../views/mainViews/NotMemberContent.vue"),
-                  },
-
-                ]
-              },
-              {
-                path: "note-list",
-                name: "note-list",
-                component: () =>
-                  import("../views/defaultViews/NoteListDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "note-list-list",
-                    component: () => import("../views/mainViews/NoteList.vue"),
-                  },
-                  {
-                    path: ":id",
-                    name: "note-content",
-                    component: () => import("../views/mainViews/NoteContent.vue"),
-                  },
-
-                ]
-              },
-              {
-                path: "question",
-                name: "question",
-                component: () =>
-                  import("../views/defaultViews/QuestionDefaultView.vue"),
-                children: [
-                  {
-                    path: "list",
-                    name: "question-list",
-                    component: () => import("../views/mainViews/QuestionList.vue"),
-                  },
-
-                ]
-              },
-
-            ],
-          },
-        ],
-      },
-      {
-        path: "login",
-        name: "login",
-        component: () => import("../views/LoginView.vue"),
-        meta: { unauthorized: true },
-      },
-      {
-        path: "logout",
-        name: "logout",
-        component: () => import("../views/LogoutView.vue"),
-      },
-    ],
-  },
+	{
+		path: "/",
+		component: () => import("../views/defaultViews/DefaultView.vue"),
+		redirect: "/login",
+		children: [
+			{
+				path: "admin",
+				name: "admin",
+				component: () => import("../views/defaultViews/AdminDefaultView.vue"),
+				children: [
+					{
+						path: "main",
+						name: "main",
+						component: () =>
+						import("../views/defaultViews/MainDefaultView.vue"),
+						children: [
+							{
+								path: "person-emitter",
+								name: "person-emitter",
+								component: () => import("../views/defaultViews/PersonEmitterDefault.vue"),
+								children: [
+									{
+										path: "list",
+										name: "person-emitter-list",
+										component: () => import("../views/mainViews/PersonEmitterList.vue"),
+									},
+									{
+										path: ":id",
+										name: "person-emitter-content",
+										component: () => import("../views/mainViews/PersonEmitterContent.vue"),
+									},
+								]
+							},
+							{
+								path: "emitter-collector",
+								name: "emitter-collector",
+								component: () => import("../views/mainViews/EmitterCollectorList.vue"),
+							},
+							{
+								path: "chart",
+								name: "chart",
+								component: () => import("../views/mainViews/ChartView.vue"),
+							},
+							{
+								path: "emitter-collector/:id",
+								name: "site-info",
+								component: () =>
+								import("../views/mainViews/EmitterCollectorContent.vue"),
+							},
+							{
+								path: "add-admin",
+								name: "add-admin",
+								component: () => import("../views/mainViews/addAdmin.vue"),
+								// 최고 권한자만 들어갈 수 있도록 표시
+								meta: { adminKing: true },
+							},
+							{
+								path: "geo",
+								name: "geo",
+								component: () => import("../views/defaultViews/ChatDefaultView.vue"),
+								children: [
+									{
+										path: "latlng",
+										name: "latlng",
+										component: () => import("../views/mainViews/LatLng.vue"),
+									},
+								]
+							},
+							{
+								path: "emissions",
+								name: "emissions",
+								component: () =>
+								import("../views/defaultViews/EmissionsDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "emissions-list",
+										component: () => import("../views/mainViews/EmissionsList.vue"),
+									},
+									{
+										path: ":id",
+										name: "emissions-content",
+										component: () => import("../views/mainViews/EmissionsContent.vue"),
+									},
+								]
+							},
+							{
+								path: "biddings",
+								name: "biddings",
+								component: () =>
+								import("../views/defaultViews/BiddingsDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "biddings-list",
+										component: () => import("../views/mainViews/BiddingsList.vue"),
+									},
+									{
+										path: ":id",
+										name: "biddings-content",
+										component: () => import("../views/mainViews/BiddingsContent.vue"),
+									},
+								]
+							},
+							{
+								path: "transaction",
+								name: "transaction",
+								component: () =>
+								import("../views/defaultViews/TransActionDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "transaction-list",
+										component: () => import("../views/mainViews/TransActionList.vue"),
+									},
+									{
+										path: ":id",
+										name: "transaction-content",
+										component: () => import("../views/mainViews/TransActionContent.vue"),
+									},
+								]
+							},
+							{
+								path: "report",
+								name: "report",
+								component: () =>
+								import("../views/defaultViews/ReportDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "report-list",
+										component: () => import("../views/mainViews/ReportList.vue"),
+									},
+									{
+										path: ":id",
+										name: "report-content",
+										component: () => import("../views/mainViews/ReportContent.vue"),
+									},
+								]
+							},
+							{
+								path: "log",
+								name: "log",
+								component: () =>
+								import("../views/defaultViews/LogDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "log-list",
+										component: () => import("../views/mainViews/LogList.vue"),
+									},
+								]
+							},
+							{
+								path: "not-member",
+								name: "not-member",
+								component: () =>
+								import("../views/defaultViews/NotMemberDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "not-member-list",
+										component: () => import("../views/mainViews/NotMemberList.vue"),
+									},
+									{
+										path: ":id",
+										name: "not-member-content",
+										component: () => import("../views/mainViews/NotMemberContent.vue"),
+									},
+								]
+							},
+							{
+								path: "note-list",
+								name: "note-list",
+								component: () =>
+								import("../views/defaultViews/NoteListDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "note-list-list",
+										component: () => import("../views/mainViews/NoteList.vue"),
+									},
+									{
+										path: ":id",
+										name: "note-content",
+										component: () => import("../views/mainViews/NoteContent.vue"),
+									},
+								]
+							},
+							{
+								path: "question",
+								name: "question",
+								component: () =>
+								import("../views/defaultViews/QuestionDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "question-list",
+										component: () => import("../views/mainViews/QuestionList.vue"),
+									},
+								]
+							},
+							{
+								path: "version",
+								name: "version",
+								component: () =>
+								import("../views/defaultViews/VersionDefaultView.vue"),
+								children: [
+									{
+										path: "list",
+										name: "version-list",
+										component: () => import("../views/mainViews/VersionList.vue"),
+									},
+								]
+							},
+						],
+					},
+				],
+			},
+			{
+				path: "account",
+				name: "account",
+				component: () => import("../views/defaultViews/AccountDefaultView.vue"),
+				children: [
+					{
+						path: "info",
+						name: "account-info",
+						component: () => import("../views/mainViews/AccountDetailsView.vue"),
+					},
+					{
+						path: "update",
+						name: "account-update",
+						component: () => import("../views/defaultViews/AccountUpdateNameDefaultView.vue"),
+						children: [
+							{
+								path: "userName",
+								name: "account-update-userName",
+								component: () => import("../views/mainViews/ChangeUserNameView.vue"),
+							},
+						]
+					},
+				]
+			},
+			{
+				path: "login",
+				name: "login",
+				component: () => import("../views/LoginView.vue"),
+				meta: { unauthorized: true },
+			},
+			{
+				path: "logout",
+				name: "logout",
+				component: () => import("../views/LogoutView.vue"),
+			},
+		],
+	},
 ];
 
 const router = new VueRouter({
@@ -240,8 +272,10 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
   // 모든 라우터에 접속할 때마다 이 함수를 거친다.
   // 로그인 한 상태에서 login 으로 이동하려고하면 다른 화면으로 이동시킴
+  if (to.name == "login" && VueCookies.get("token")===null) {
+    return next("/login");
+  }
   if (to.matched.some((record) => record.meta.unauthorized)) {
-	console.log('VueCookies.get>>>>', VueCookies.get("token"))
     if (VueCookies.get("token")) {
       return next("/admin/main/emitter-collector");
     }
@@ -262,7 +296,6 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  console.log('여기라구2...')
   return next();
 });
 

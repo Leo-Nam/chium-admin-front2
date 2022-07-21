@@ -5,13 +5,10 @@
 </template>
 <script>
 import AccountDetails from "@/components/AccountC/AccountDetails.vue"
-import {mapGetters,mapMutations} from "vuex"
+import {mapMutations} from "vuex"
 export default {
 	components : {
 		AccountDetails
-	},
-	computed : {
-		...mapGetters('auth',['getUserInfo'])
 	},
 	mounted(){
 	},
@@ -25,11 +22,4 @@ export default {
 }
 </script>
 <style >
-.container-box {
-  height: 700px !important;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-
-}
 </style>

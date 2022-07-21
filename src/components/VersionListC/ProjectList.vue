@@ -29,6 +29,7 @@ export default {
 		changeProject(a){
 			console.log('components:VersionListC:VersionUpdateCategory.vue:changeProject:a',a)
 			console.log('components:VersionListC:VersionUpdateCategory.vue:changeProject:a',this.projectList.indexOf(a))
+			console.log(this.projectList)
 			this.setChangedProject(this.getProjectList[this.projectList.indexOf(a)].ID)
 		},
 		async getProjectNames(){

@@ -274,8 +274,7 @@ export default {
 						'account':'',
 						'account-info':'',
 						'account-update':'',
-						'account-update-userName':'',
-						
+						'account-update-userName':'',						
 					},
 					location: "app-bar",
 					menuId: 1200,

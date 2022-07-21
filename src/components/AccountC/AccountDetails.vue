@@ -117,7 +117,7 @@
 											이름
 										</v-col>
 										<v-col cols="8">
-											{{ getUserInfo.userName }}
+											{{ getUserInfo.usedName === 1 ? getUserInfo.userName : getUserInfo.nickName }}
 										</v-col>
 										<v-col 
 											cols="1"
@@ -126,7 +126,7 @@
 											}"
 										>
 											<a
-												:href="returnUrl('/account/info/update/userName')"
+												:href="returnUrl('/account/update/userName')"
 											>
 												<v-icon
 													:style="{
@@ -160,13 +160,28 @@
 												'text-align': 'right',
 											}"
 										>
-											<v-icon
-												:style="{
-													'color': '#00B286',
-												}"
+											<span
+												v-if="getUserInfo.lockBirthDate === 1"
 											>
-												mdi-lock
-											</v-icon>
+												<v-icon
+													:style="{
+														'color': '#00B286',
+													}"
+												>
+													mdi-lock
+												</v-icon>
+											</span>
+											<span
+												v-else
+											>
+												<v-icon
+													:style="{
+														'color': '#00B286',
+													}"
+												>
+													mdi-account-multiple
+												</v-icon>
+											</span>
 											<v-icon>
 												mdi-chevron-right
 											</v-icon>
@@ -191,13 +206,28 @@
 												'text-align': 'right',
 											}"
 										>
-											<v-icon
-												:style="{
-													'color': '#00B286',
-												}"
+											<span
+												v-if="getUserInfo.lockGender === 1"
 											>
-												mdi-lock
-											</v-icon>
+												<v-icon
+													:style="{
+														'color': '#00B286',
+													}"
+												>
+													mdi-lock
+												</v-icon>
+											</span>
+											<span
+												v-else
+											>
+												<v-icon
+													:style="{
+														'color': '#00B286',
+													}"
+												>
+													mdi-account-multiple
+												</v-icon>
+											</span>
 											<v-icon>
 												mdi-chevron-right
 											</v-icon>
@@ -237,8 +267,8 @@
 										</v-col>
 										<v-col cols="8">
 											<v-row
-												v-for="item in getUserInfo.email"
-												:key="item"
+												v-for="item, idx in getUserInfo.email"
+												:key="idx"
 											>
 												<v-col>
 													{{ item.EMAIL }}
@@ -251,13 +281,28 @@
 												'text-align': 'right',
 											}"
 										>
-											<v-icon
-												:style="{
-													'color': '#00B286',
-												}"
+											<span
+												v-if="getUserInfo.lockEmail === 1"
 											>
-												mdi-account-multiple
-											</v-icon>
+												<v-icon
+													:style="{
+														'color': '#00B286',
+													}"
+												>
+													mdi-lock
+												</v-icon>
+											</span>
+											<span
+												v-else
+											>
+												<v-icon
+													:style="{
+														'color': '#00B286',
+													}"
+												>
+													mdi-account-multiple
+												</v-icon>
+											</span>
 											<v-icon>
 												mdi-chevron-right
 											</v-icon>
@@ -282,13 +327,28 @@
 												'text-align': 'right',
 											}"
 										>
-											<v-icon
-												:style="{
-													'color': '#00B286',
-												}"
+											<span
+												v-if="getUserInfo.lockPhone === 1"
 											>
-												mdi-account-multiple
-											</v-icon>
+												<v-icon
+													:style="{
+														'color': '#00B286',
+													}"
+												>
+													mdi-lock
+												</v-icon>
+											</span>
+											<span
+												v-else
+											>
+												<v-icon
+													:style="{
+														'color': '#00B286',
+													}"
+												>
+													mdi-account-multiple
+												</v-icon>
+											</span>
 											<v-icon>
 												mdi-chevron-right
 											</v-icon>
@@ -481,6 +541,22 @@ export default {
 	}
 }
 </script>
-<style lang="">
+<style scoped>
+	a:link { 
+		text-decoration: none; 
+		color: black
+	}
+	a:visited { 
+		text-decoration: none; 
+		color: black
+	}
+	a:hover { 
+		text-decoration: none; 
+		color: black
+	}
+	a:active { 
+		text-decoration: none; 
+		color: black
+	}
 
 </style>

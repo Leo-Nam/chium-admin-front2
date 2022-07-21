@@ -38,13 +38,30 @@ export default {
 			lockGender: null,
 			lockEmail: null,
 			lockPhone: null,
+			nickName: null,
+			usedName: null,
 			loginInfo: {
 				adminId : null,
 				adminPw : null,
 				adminPw2 : null
+			},
+			nameList: {
+				usedNameIndex: null,
+				list: ['이름', '닉네임']
 			}
 		},
 	mutations: {
+		setNameList(state){
+			state.nameList.list[0] = '이름'
+			state.nameList.list[1] = '닉네임'
+		},
+		changeUserInfo(state, payload){
+			state[payload.key] = payload.value
+			console.log('payload.key>>>', payload.key, 'state[payload.key]>>>', state[payload.key], )
+			if (payload.key === 'usedName'){
+				state.nameList.usedNameIndex = payload.value
+			}
+		},
 		// 로그인 한 어드민 유저 설정
 		setUser(state, payload) {
 			state.userId = payload.userInfo.userId
@@ -67,6 +84,10 @@ export default {
 			state.lockGender = payload.userInfo.lockGender
 			state.lockEmail = payload.userInfo.lockEmail
 			state.lockPhone = payload.userInfo.lockPhone
+			state.nickName = payload.userInfo.nickName
+			state.usedName = payload.userInfo.usedName
+
+			state.nameList.usedNameIndex = payload.userInfo.usedName
 		},
 		// 로그아웃
 		logout(state) {
@@ -123,6 +144,8 @@ export default {
 					lockGender : getData.LOCK_GENDER,
 					lockEmail : getData.LOCK_EMAIL,
 					lockPhone : getData.LOCK_PHONE,
+					nickName : getData.NICK_NAME,
+					usedName : getData.USED_NAME,
 				}
 				// const userId = getData.ID;
 				// const classNum = getData.CLASS;
@@ -170,6 +193,15 @@ export default {
 				commit("setUserInitSucess");
 				// 화면 이동
 				router.push({ path: "/admin/main/emitter-collector" });
+			}
+		},
+		async sp_admin_update_admin_info({state, rootState}){
+			try {
+				console.log('sp_admin_update_admin_info>>>>', state)
+				await authApi.sp_admin_update_admin_info({state, rootState})
+				// location.reload()
+			} catch (e) {
+				console.log(e)
 			}
 		},
 	},
@@ -229,7 +261,12 @@ export default {
 				lockGender : state.lockGender,
 				lockEmail : state.lockEmail,
 				lockPhone : state.lockPhone,
+				nickName : state.nickName,
+				usedName : state.usedName,
 			}
+		},
+		getNameList(state){
+			return state.nameList
 		}
 	},
 };

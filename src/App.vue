@@ -212,8 +212,19 @@ export default {
 		}
 	},
 	computed : {
-		...mapGetters('common',['getNowLoadingState', 'getVersionInfo', 'getBackgroundTheme', 'getCurrentRoute', 'getAdminPageConfig', 'getMenuList']),
-		...mapGetters('auth',['isLogged', 'getUserId', 'getUserClassId']),
+		...mapGetters('common',[
+			'getNowLoadingState', 
+			'getVersionInfo', 
+			'getBackgroundTheme', 
+			'getCurrentRoute', 
+			'getAdminPageConfig', 
+			'getMenuList'
+		]),
+		...mapGetters('auth',[
+			'isLogged', 
+			'getUserId', 
+			'getUserClassId'
+		]),
 		
 	},
 	watch : {

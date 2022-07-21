@@ -44,4 +44,20 @@ export default {
     };
     return myAxios(url, method, data);
   },
+  sp_admin_update_admin_info({state,rootState}){
+    const userId = rootState.auth.userId;
+    const url = "api/admin/common/sp_admin_update_admin_info";
+    let data = {
+      params: JSON.stringify([
+        {
+          ID: userId,
+          USER_NAME: state.userName,
+          NICK_NAME: state.nickName,
+          USED_NAME: state.usedName,
+        },
+      ]),
+    };
+	console.log('sp_admin_update_admin_info:data', data)
+    return myAxios(url, method, data);
+  }
 };

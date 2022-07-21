@@ -13,18 +13,18 @@ const routes = [
 			{
 				path: "admin",
 				name: "admin",
-				component: () => import("../views/defaultViews/AdminDefaultView.vue"),
+				component: () => import("../views/defaultViews/DefaultView.vue"),
 				children: [
 					{
 						path: "main",
 						name: "main",
 						component: () =>
-						import("../views/defaultViews/MainDefaultView.vue"),
+						import("../views/defaultViews/DefaultView.vue"),
 						children: [
 							{
 								path: "person-emitter",
 								name: "person-emitter",
-								component: () => import("../views/defaultViews/PersonEmitterDefault.vue"),
+								component: () => import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -64,7 +64,7 @@ const routes = [
 							{
 								path: "geo",
 								name: "geo",
-								component: () => import("../views/defaultViews/ChatDefaultView.vue"),
+								component: () => import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "latlng",
@@ -77,7 +77,7 @@ const routes = [
 								path: "emissions",
 								name: "emissions",
 								component: () =>
-								import("../views/defaultViews/EmissionsDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -95,7 +95,7 @@ const routes = [
 								path: "biddings",
 								name: "biddings",
 								component: () =>
-								import("../views/defaultViews/BiddingsDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -113,7 +113,7 @@ const routes = [
 								path: "transaction",
 								name: "transaction",
 								component: () =>
-								import("../views/defaultViews/TransActionDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -131,7 +131,7 @@ const routes = [
 								path: "report",
 								name: "report",
 								component: () =>
-								import("../views/defaultViews/ReportDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -149,7 +149,7 @@ const routes = [
 								path: "log",
 								name: "log",
 								component: () =>
-								import("../views/defaultViews/LogDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -162,7 +162,7 @@ const routes = [
 								path: "not-member",
 								name: "not-member",
 								component: () =>
-								import("../views/defaultViews/NotMemberDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -180,7 +180,7 @@ const routes = [
 								path: "note-list",
 								name: "note-list",
 								component: () =>
-								import("../views/defaultViews/NoteListDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -198,7 +198,7 @@ const routes = [
 								path: "question",
 								name: "question",
 								component: () =>
-								import("../views/defaultViews/QuestionDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -211,7 +211,7 @@ const routes = [
 								path: "version",
 								name: "version",
 								component: () =>
-								import("../views/defaultViews/VersionDefaultView.vue"),
+								import("../views/defaultViews/DefaultView.vue"),
 								children: [
 									{
 										path: "list",
@@ -227,7 +227,7 @@ const routes = [
 			{
 				path: "account",
 				name: "account",
-				component: () => import("../views/defaultViews/AccountDefaultView.vue"),
+				component: () => import("../views/defaultViews/DefaultView.vue"),
 				children: [
 					{
 						path: "info",
@@ -237,7 +237,7 @@ const routes = [
 					{
 						path: "update",
 						name: "account-update",
-						component: () => import("../views/defaultViews/AccountUpdateNameDefaultView.vue"),
+						component: () => import("../views/defaultViews/DefaultView.vue"),
 						children: [
 							{
 								path: "userName",

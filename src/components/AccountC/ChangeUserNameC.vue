@@ -33,11 +33,14 @@
 										'justify-content': 'left'
 									}"
 								>
-									<v-icon>
-										mdi-arrow-left
-									</v-icon>
-									&nbsp;이름
-
+									<router-link
+										to="/account/info"
+									>
+										<v-icon>
+											mdi-arrow-left
+										</v-icon>
+										&nbsp;이름
+									</router-link>
 								</div>
 							</v-col>
 						</v-row>

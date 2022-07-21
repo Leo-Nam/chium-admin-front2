@@ -117,7 +117,7 @@
 											이름
 										</v-col>
 										<v-col cols="8">
-											{{ getUserInfo.usedName === 1 ? getUserInfo.userName : getUserInfo.nickName }}
+											{{ getUserInfo.usedName === 0 ? getUserInfo.userName : getUserInfo.nickName }}
 										</v-col>
 										<v-col 
 											cols="1"

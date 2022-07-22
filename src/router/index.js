@@ -244,6 +244,11 @@ const routes = [
 								name: "account-update-userName",
 								component: () => import("../views/mainViews/ChangeUserNameView.vue"),
 							},
+							{
+								path: "birthDate",
+								name: "account-update-birthDate",
+								component: () => import("../views/mainViews/ChangeUserBirthDateView.vue"),
+							},
 						]
 					},
 				]

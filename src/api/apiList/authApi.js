@@ -59,5 +59,19 @@ export default {
     };
 	console.log('sp_admin_update_admin_info:data', data)
     return myAxios(url, method, data);
+  },
+  sp_admin_update_admin_birthday({state,rootState}){
+    const userId = rootState.auth.userId;
+    const url = "api/admin/common/sp_admin_update_admin_birthday";
+    let data = {
+      params: JSON.stringify([
+        {
+          ID: userId,
+          BIRTH_DAY: state.birthDay,
+        },
+      ]),
+    };
+	console.log('sp_admin_update_admin_birthday:data', data)
+    return myAxios(url, method, data);
   }
 };

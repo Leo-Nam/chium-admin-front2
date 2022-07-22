@@ -30,7 +30,7 @@ export default {
 			deletedAt : null,
 			active : null,
 			config : null,
-			birthDate : null,
+			birthDay : null,
 			gender : null,
 			email : null,
 			phone: null,
@@ -45,6 +45,10 @@ export default {
 				adminPw : null,
 				adminPw2 : null
 			},
+			birthYear: null,
+			birthMonth: null,
+			birthDate: null,
+			showBirthYearOnly: null,
 			nameList: {
 				usedNameIndex: null,
 				list: ['이름', '닉네임']
@@ -56,7 +60,28 @@ export default {
 			state.nameList.list[1] = '닉네임'
 		},
 		changeUserInfo(state, payload){
-			state[payload.key] = payload.value
+			if (payload.key === 'birthYear' || payload.key === 'birthMonth' || payload.key === 'birthDate'){
+				let by = null
+				let bm = null
+				let bd = null
+
+				state[payload.key] = Number(payload.value)
+				by = state['birthYear']
+				bm = state['birthMonth']
+				bd = state['birthDate']
+				if (Number(by) < 10){
+					by = '0' + by
+				}
+				if (Number(bm) < 10){
+					bm = '0' + bm
+				}
+				if (Number(bd) < 10){
+					bd = '0' + bd
+				}
+				state['birthDay'] = by + '-' + bm + '-' + bd
+			} else {
+				state[payload.key] = payload.value
+			}
 			console.log('payload.key>>>', payload.key, 'state[payload.key]>>>', state[payload.key], )
 			if (payload.key === 'usedName'){
 				state.nameList.usedNameIndex = payload.value
@@ -76,16 +101,29 @@ export default {
 			state.deletedAt = payload.userInfo.deletedAt
 			state.active = payload.userInfo.active
 			state.config = payload.userInfo.config
-			state.birthDate = payload.userInfo.birthDate
+			state.birthDay = payload.userInfo.birthDay
 			state.gender = payload.userInfo.gender
 			state.email = payload.userInfo.email
 			state.phone = payload.userInfo.phone
-			state.lockBirthDate = payload.userInfo.lockBirthDate
+			state.lockBirthDay = payload.userInfo.lockBirthDay
 			state.lockGender = payload.userInfo.lockGender
 			state.lockEmail = payload.userInfo.lockEmail
 			state.lockPhone = payload.userInfo.lockPhone
+			state.showBirthYearOnly = payload.userInfo.showBirthYearOnly
 			state.nickName = payload.userInfo.nickName
 			state.usedName = payload.userInfo.usedName
+			
+			if (payload.userInfo.birthDay != null){
+				const dateTemp = new Date(payload.userInfo.birthDay)
+				state.birthYear = dateTemp.getFullYear()
+				state.birthMonth = dateTemp.getMonth() + 1
+				state.birthDate = dateTemp.getDate()
+			} else {
+				const dateTemp = new Date()
+				state.birthYear = dateTemp.getFullYear()
+				state.birthMonth = dateTemp.getMonth() + 1
+				state.birthDate = dateTemp.getDate()
+			}			
 
 			state.nameList.usedNameIndex = payload.userInfo.usedName
 		},
@@ -136,17 +174,19 @@ export default {
 					deletedAt : getData.DELETED_AT,
 					active : getData.ACTIVE,
 					config : getData.CONFIG,
-					birthDate : getData.BIRTH_DATE,
+					birthDay : getData.BIRTH_DAY,
 					gender : getData.GENDER,
 					email : getData.EMAIL,
 					phone : getData.PHONE,
-					lockBirthDate : getData.LOCK_BIRTH_DATE,
+					lockBirthDay : getData.LOCK_BIRTH_DAY,
 					lockGender : getData.LOCK_GENDER,
 					lockEmail : getData.LOCK_EMAIL,
 					lockPhone : getData.LOCK_PHONE,
+					showBirthYearOnly : getData.SHOW_BIRTH_YEAR_ONLY,
 					nickName : getData.NICK_NAME,
 					usedName : getData.USED_NAME,
 				}
+				console.log(getData.BIRTH_DAY)
 				// const userId = getData.ID;
 				// const classNum = getData.CLASS;
 				// const userName = getData.NAME;
@@ -166,7 +206,6 @@ export default {
 					// 화면 이동
 					router.push({ path: "/account/info" });
 				}
-				console.log('store:modules:auth.js:login:','6')
 			}
 		},
 
@@ -199,6 +238,15 @@ export default {
 			try {
 				console.log('sp_admin_update_admin_info>>>>', state)
 				await authApi.sp_admin_update_admin_info({state, rootState})
+				// location.reload()
+			} catch (e) {
+				console.log(e)
+			}
+		},
+		async sp_admin_update_admin_birthday({state, rootState}){
+			try {
+				console.log('sp_admin_update_admin_birthday>>>>', state)
+				await authApi.sp_admin_update_admin_birthday({state, rootState})
 				// location.reload()
 			} catch (e) {
 				console.log(e)
@@ -253,7 +301,7 @@ export default {
 				deletedAt : state.deletedAt,
 				active : state.active,
 				config : state.config,
-				birthDate : state.birthDate,
+				birthDay : state.birthDay,
 				gender : state.gender,
 				email : state.email,
 				phone : state.phone,
@@ -261,8 +309,13 @@ export default {
 				lockGender : state.lockGender,
 				lockEmail : state.lockEmail,
 				lockPhone : state.lockPhone,
+				showBirthYearOnly : state.showBirthYearOnly,
 				nickName : state.nickName,
 				usedName : state.usedName,
+				
+				birthYear : state.birthYear,
+				birthMonth : state.birthMonth,
+				birthDate : state.birthDate,
 			}
 		},
 		getNameList(state){

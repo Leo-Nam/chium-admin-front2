@@ -254,6 +254,28 @@ const routes = [
 								name: "account-update-gender",
 								component: () => import("../views/mainViews/ChangeUserGenderView.vue"),
 							},
+							{
+								path: "email",
+								name: "account-email",
+								component: () => import("../views/mainViews/ChangeUserEmailView.vue"),
+							},
+							{
+								path: "email",
+								name: "account-update-email",
+								component: () => import("../views/defaultViews/DefaultView.vue"),
+								children: [
+									{
+										path: "login",
+										name: "account-update-email-login",
+										component: () => import("../views/mainViews/ChangeUserEmailLoginView.vue"),
+									},
+									{
+										path: "recovery",
+										name: "account-update-email-recovery",
+										component: () => import("../views/mainViews/ChangeUserEmailRecoveryView.vue"),
+									},
+								]
+							},
 						]
 					},
 				]

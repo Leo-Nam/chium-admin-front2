@@ -274,14 +274,7 @@
 											이메일
 										</v-col>
 										<v-col cols="8">
-											<v-row
-												v-for="item, idx in getUserInfo.email"
-												:key="idx"
-											>
-												<v-col>
-													{{ item.EMAIL }}
-												</v-col>
-											</v-row>
+											{{ getUserInfo.email }}
 										</v-col>
 										<v-col 
 											cols="1"
@@ -289,31 +282,35 @@
 												'text-align': 'right',
 											}"
 										>
-											<span
-												v-if="getUserInfo.lockEmail === 1"
+											<a
+												:href="returnUrl('/account/update/email')"
 											>
-												<v-icon
-													:style="{
-														'color': '#00B286',
-													}"
+												<span
+													v-if="getUserInfo.lockEmail === 1"
 												>
-													mdi-lock
-												</v-icon>
-											</span>
-											<span
-												v-else
-											>
-												<v-icon
-													:style="{
-														'color': '#00B286',
-													}"
+													<v-icon
+														:style="{
+															'color': '#00B286',
+														}"
+													>
+														mdi-lock
+													</v-icon>
+												</span>
+												<span
+													v-else
 												>
-													mdi-account-multiple
+													<v-icon
+														:style="{
+															'color': '#00B286',
+														}"
+													>
+														mdi-account-multiple
+													</v-icon>
+												</span>
+												<v-icon>
+													mdi-chevron-right
 												</v-icon>
-											</span>
-											<v-icon>
-												mdi-chevron-right
-											</v-icon>
+											</a>
 										</v-col>
 									</v-row>
 									<v-divider />

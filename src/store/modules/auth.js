@@ -33,6 +33,7 @@ export default {
 			birthDay : null,
 			gender : null,
 			email : null,
+			recoveryEmails : null,
 			phone: null,
 			lockBirthDate: null,
 			lockGender: null,
@@ -112,6 +113,7 @@ export default {
 			state.birthDay = payload.userInfo.birthDay
 			state.gender = payload.userInfo.gender
 			state.email = payload.userInfo.email
+			state.recoveryEmails = payload.userInfo.recoveryEmails
 			state.phone = payload.userInfo.phone
 			state.lockBirthDay = payload.userInfo.lockBirthDay
 			state.lockGender = payload.userInfo.lockGender
@@ -188,6 +190,7 @@ export default {
 					birthDay : getData.BIRTH_DAY,
 					gender : getData.GENDER,
 					email : getData.EMAIL,
+					recoveryEmails : getData.RECOVERY_EMAILS,
 					phone : getData.PHONE,
 					lockBirthDay : getData.LOCK_BIRTH_DAY,
 					lockGender : getData.LOCK_GENDER,
@@ -281,6 +284,15 @@ export default {
 				console.log(e)
 			}
 		},
+		async sp_admin_update_admin_email({state, rootState}){
+			try {
+				console.log('sp_admin_update_admin_email>>>>', state)
+				await authApi.sp_admin_update_admin_email({state, rootState})
+				// location.reload()
+			} catch (e) {
+				console.log(e)
+			}
+		},
 	},
 	getters: {
 		getUserClass(state) {
@@ -333,6 +345,7 @@ export default {
 				birthDay : state.birthDay,
 				gender : state.gender,
 				email : state.email,
+				recoveryEmails : state.recoveryEmails,
 				phone : state.phone,
 				lockBirthDate : state.lockBirthDate,
 				lockGender : state.lockGender,
@@ -357,6 +370,12 @@ export default {
 		getUserGender(state){
 			console.log(state.gender)
 			return state.gender
+		},
+		getUserEmails(state){
+			return {
+				loginEmail: state.email,
+				recoveryEmails: state.recoveryEmails
+			}
 		}
 	},
 };

@@ -93,4 +93,18 @@ export default {
 		console.log('sp_admin_update_admin_gender:data', data)
 		return myAxios(url, method, data);
 	},
+	sp_admin_update_admin_email({state,rootState}){
+		const userId = rootState.auth.userId;
+		const url = "api/admin/common/sp_admin_update_admin_email";
+		let data = {
+		params: JSON.stringify([
+			{
+			ID: userId,
+			EMAIL: state.email,
+			},
+		]),
+		};
+		console.log('sp_admin_update_admin_email:data', data)
+		return myAxios(url, method, data);
+	},
 };

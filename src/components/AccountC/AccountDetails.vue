@@ -430,7 +430,7 @@
 							<v-row>
 								<v-col cols="11">
 									{{ getUserInfo.uid }}<br/>
-									최종변경일: {{ getTime(getUserInfo.updatedAt) }}
+									{{ getUidUpdatedAt.subject }}: {{ getTime(getUidUpdatedAt.updatedAt) }}
 								</v-col>
 								<v-col 
 									cols="1"
@@ -438,9 +438,13 @@
 										'text-align': 'right',
 									}"
 								>
-									<v-icon>
-										mdi-chevron-right
-									</v-icon>
+									<a
+										:href="returnUrl('/account/update/uid')"
+									>
+										<v-icon>
+											mdi-chevron-right
+										</v-icon>
+									</a>
 								</v-col>
 							</v-row>
 						</div>
@@ -457,7 +461,7 @@
 							<v-row>
 								<v-col cols="11">
 									********<br/>
-									최종변경일: {{ getTime(getUserInfo.updatedAt) }}
+									{{ getPwdUpdatedAt.subject }}: {{ getTime(getPwdUpdatedAt.updatedAt) }}
 								</v-col>
 								<v-col 
 									cols="1"
@@ -493,8 +497,8 @@
 							<v-row>
 								<v-col cols="11">
 									화면 폭<br/>
-									1280px<br/>
-									최종변경일: {{ getTime(getUserInfo.updatedAt) }}
+									{{ getResolution }}px<br/>
+									{{ getResolutionUpdatedAt.subject }}: {{ getTime(getResolutionUpdatedAt.updatedAt) }}
 								</v-col>
 								<v-col 
 									cols="1"
@@ -502,9 +506,13 @@
 										'text-align': 'right',
 									}"
 								>
-									<v-icon>
-										mdi-chevron-right
-									</v-icon>
+									<a
+										:href="returnUrl('/account/update/resolution')"
+									>
+										<v-icon>
+											mdi-chevron-right
+										</v-icon>
+									</a>
 								</v-col>
 							</v-row>
 						</div>
@@ -516,17 +524,31 @@
 </div>
 </template>
 <script>
-import {mapMutations, mapGetters} from "vuex"
+import {mapMutations, mapGetters, mapActions} from "vuex"
 export default {
 	computed : {
-		...mapGetters('auth',['getUserInfo']),
+		...mapGetters('auth',[
+			'getUserInfo', 
+			'getPwdUpdatedAt',
+			'getUidUpdatedAt',
+			'getResolutionUpdatedAt',
+			'getResolution'
+		]),
 		
 	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
 		console.log('this.$route>>>>', this.$route)
+		this.sp_admin_get_updated_at({keyword: 'PHONE'})
+		this.sp_admin_get_updated_at({keyword: 'UID'})
+		this.sp_admin_get_updated_at({keyword: 'RESOLUTION'})
+		this.sp_req_b_resolution()
 	},
 	methods : {
+		...mapActions('auth',[
+			'sp_admin_get_updated_at',
+			'sp_req_b_resolution',
+		]),
 		...mapMutations('common',['setCurrentRoute']),
 		changeUserName() {
 			console.log('hello987898789')

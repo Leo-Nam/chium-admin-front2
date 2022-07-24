@@ -39,7 +39,7 @@
 										<v-icon>
 											mdi-arrow-left
 										</v-icon>
-										&nbsp;성별
+										&nbsp;로그인 아이디
 									</router-link>
 								</div>
 							</v-col>
@@ -67,6 +67,7 @@
 					}"
 				>
 					<v-card
+						flat
 						:style="{
 							'padding': '30px',
 							'width': '50%',
@@ -75,64 +76,81 @@
 					>
 						<v-row>
 							<v-col>
-								<v-container
-									class="px-0"
-									fluid
+								<div
+									:style="{
+										'justify-content': 'left',
+										'width': '100%'
+									}"
 								>
-									<v-radio-group v-model="radioGroup">
-									<v-radio
-										v-for="list in getGenderList.list"
-										:key="list.GENDER"
-										:label="`${list.GENDER}`"
-										:value="`${list.ID}`"
+									<v-card
+										flat
+										:style="{
+											'padding-bottom': '50px',
+										}"
+									>
+										<v-row>
+											<v-col>
+												<v-text-field
+													flat
+													id="uid"
+													dense
+													:value="getUserUid"
+													hide-details=""
+													solo
+													readonly
+													append-icon="mdi-pencil-outline"
+													@click:append="changeContent('uid')"
+													@input="MyVmodel($event)"
+													:style="{
+														'justify-content': 'left',
+														'font-size': '20px'
+													}"
+												/>
+											</v-col>
+										</v-row>
+										<v-divider />
+									</v-card>
+									<v-card
+										flat
 										:style="{
 											'padding-bottom': '20px',
 										}"
-										:off-icon="getUserGender == list.ID ? '$radioOn' : '$radioOff'"
-										@change="changeUserGender(list.ID)"
-									></v-radio>
-									</v-radio-group>
-								</v-container>
-								<v-card
-									flat
-									:style="{
-										'padding-bottom': '20px',
-									}"
-								>
-									<v-row
-										:style="{
-											'justify-content': 'right',
-										}"
 									>
-										<v-col>
-											<div
-												:style="{
-													'align-items': 'right',
-													'padding': '0px',
-													'width': '100%'
-												}"
-											>
-												<v-btn
-													text
-													outlined
-													@click="sp_admin_update_admin_gender"
-												>
-													저장하기
-												</v-btn>
-												<router-link
-													to="/account/info"
+										<v-row
+											:style="{
+												'justify-content': 'right',
+											}"
+										>
+											<v-col>
+												<div
+													:style="{
+														'align-items': 'right',
+														'padding': '0px',
+														'width': '100%'
+													}"
 												>
 													<v-btn
 														text
 														outlined
+														@click="sp_admin_update_admin_loginid"
 													>
-														취소하기
+														저장하기
 													</v-btn>
-												</router-link>
-											</div>
-										</v-col>
-									</v-row>
-								</v-card>
+													<router-link
+														to="/account/info"
+													>
+														<v-btn
+															text
+															outlined
+														>
+															취소하기
+														</v-btn>
+													</router-link>
+												</div>
+											</v-col>
+										</v-row>
+									</v-card>
+								</div>
 							</v-col>
 						</v-row>
 					</v-card>
@@ -146,8 +164,6 @@ import {mapMutations, mapGetters, mapActions} from "vuex"
 export default {
 	data(){
 		return {
-			displayNameList: [],
-			radioGroup: 1,
 		}
 	},
 	created(){
@@ -155,12 +171,25 @@ export default {
 		console.log('this.$route>>>>', this.$route)
 	},
 	computed: {
-		...mapGetters('auth',['getGenderList', 'getUserGender']),
+		...mapGetters('auth',['getUserUid']),
 	},
 	methods : {
-		...mapActions('auth',['sp_admin_update_admin_gender']),
-		...mapMutations('auth',['changeUserGender']),
+		...mapActions('auth',['sp_admin_update_admin_loginid']),
+		...mapMutations('auth',['changeUserUid']),
 		...mapMutations('common',['setCurrentRoute']),
+
+		MyVmodel(v){
+			this.changeUserUid(v)
+		},
+		changeContent(e){
+			const el = document.getElementById(e)
+			if (el.readOnly){
+				el.readOnly = false
+			} else {
+				el.readOnly = true
+			}
+			el.focus()
+		},
 	}
 }
 </script>

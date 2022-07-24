@@ -47,21 +47,16 @@ instance.interceptors.response.use(
 );
 
 function myAxios(url, method, data, config = null) {
-	console.log("api:index.js:myAxios:",'여기여기...', url, method, data)
   if (config != null) {
-	console.log("api:index.js:myAxios:",'여기여기111...', url, method, data)
     if (method == "post") {
       return instance.post(url, data, config);
     } else {
-		console.log("api:index.js:myAxios:",'여기여기222...', url, method, data)
       return instance.get(url, data, config);
     }
   }
   if (method == "post") {
-	console.log("api:index.js:myAxios:",'여기여기333...', url, method, data)
     return instance.post(url, data);
   } else {
-	console.log("api:index.js:myAxios:",'여기여기444...', url, method, data)
     return instance.get(url, data);
   }
 }

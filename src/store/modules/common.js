@@ -281,6 +281,8 @@ export default {
 						'account-update-email-login':'',
 						'account-update-email-recovery':'',
 						'account-update-phone':'',
+						'account-update-uid':'',
+						'account-update-resolution':'',
 					},
 					location: "app-bar",
 					menuId: 1200,

@@ -2,7 +2,7 @@
 	<div 
 		v-if="isLogged===true" 
 		class="wrapper"
-		:style="{ 'width': `${getAdminPageConfig.container.width}` }"
+		:style="{ 'width': `${getResolution}px` }"
 	>
 		<v-app>
 			<v-navigation-drawer
@@ -206,7 +206,7 @@ export default {
 					}
 				},
 				container:{
-					width: '1280px'
+					width: this.getResolution + 'px'
 				}
 			}
 		}
@@ -223,14 +223,15 @@ export default {
 		...mapGetters('auth',[
 			'isLogged', 
 			'getUserId', 
-			'getUserClassId'
+			'getUserClassId', 
+			'getResolution'
 		]),
 		
 	},
 	watch : {
 		isLogged(){
 			this.checkIsLogged()
-		}
+		},
 	},
 	mounted() {
 		this.parseVersionInfo()

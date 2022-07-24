@@ -41,6 +41,7 @@ export default {
 			lockPhone: null,
 			nickName: null,
 			usedName: null,
+			resolution: null,
 			loginInfo: {
 				adminId : null,
 				adminPw : null,
@@ -57,12 +58,24 @@ export default {
 			GenderList: {
 				show: null,
 				list: {}
-			}
+			},
+			resolutionList: {},
+			updatedAtList: {},
 		},
 	mutations: {
+		setUpdatedAtList(state, payload){
+			if (payload !== null){
+				state.updatedAtList[payload.INFO_TYPE] = payload.UPDATED_AT
+				console.log(state.updatedAtList, "updatedAtList")
+			}
+		},
 		setGenderList(state, payload){
 			console.log('length', payload.length)
 			state.GenderList.list = payload
+		},
+		setResolutionList(state, payload){
+			console.log('setResolutionList', state, payload)
+			state.resolutionList = payload
 		},
 		setNameList(state){
 			state.nameList.list[0] = '이름'
@@ -122,6 +135,7 @@ export default {
 			state.showBirthYearOnly = payload.userInfo.showBirthYearOnly
 			state.nickName = payload.userInfo.nickName
 			state.usedName = payload.userInfo.usedName
+			state.resolution = payload.userInfo.resolution
 			
 			if (payload.userInfo.birthDay != null){
 				const dateTemp = new Date(payload.userInfo.birthDay)
@@ -150,11 +164,17 @@ export default {
 		setUserInitSucess(state){
 			state.userInit = true
 		},
-		chageUserGender(state, payload){
+		changeUserGender(state, payload){
 			state.gender = payload
+		},
+		changeResolution(state, payload){
+			state.resolution = payload
 		},
 		chageUserPhone(state, payload){
 			state.phone = payload
+		},
+		changeUserUid(state, payload){
+			state.loginInfo.adminId = payload
 		}
 
 	},
@@ -202,6 +222,7 @@ export default {
 					showBirthYearOnly : getData.SHOW_BIRTH_YEAR_ONLY,
 					nickName : getData.NICK_NAME,
 					usedName : getData.USED_NAME,
+					resolution : getData.RESOLUTION,
 				}
 				console.log(getData.BIRTH_DAY)
 				// const userId = getData.ID;
@@ -305,6 +326,45 @@ export default {
 				console.log(e)
 			}
 		},
+		async sp_admin_update_admin_loginid({state, rootState}){
+			try {
+				console.log('sp_admin_update_admin_loginid>>>>', state)
+				await authApi.sp_admin_update_admin_loginid({state, rootState})
+				// location.reload()
+			} catch (e) {
+				console.log(e)
+			}
+		},
+		async sp_admin_get_updated_at({commit, rootState}, {keyword}){
+			try {
+				const res = await authApi.sp_admin_get_updated_at({rootState, keyword})
+				// location.reload()
+				console.log('sp_admin_get_updated_at의 keyword', keyword)
+				console.log('sp_admin_get_updated_at의 data', res.data.data)
+				commit("setUpdatedAtList", res.data.data);
+			} catch (e) {
+				console.log(e)
+			}
+		},
+		async sp_req_b_resolution({commit}){
+			try {
+				const res = await authApi.sp_req_b_resolution()
+				console.log('store:modules:auth.js:sp_req_b_resolution:>>>>>>>>>>>>>>>>>>>???????',res.data.data)
+				commit('setResolutionList', res.data.data)
+			} catch(e) {
+				console.log('store:modules:auth.js:sp_req_b_resolution:>>>>>>>>>>>>>>>>>>>???????',e)
+				console.log(e)
+			}
+		},
+		async sp_admin_update_resolution({state, rootState}){
+			try {
+				console.log('sp_admin_update_resolution>>>>', state)
+				await authApi.sp_admin_update_resolution({state, rootState})
+				// location.reload()
+			} catch (e) {
+				console.log(e)
+			}
+		},
 	},
 	getters: {
 		getUserClass(state) {
@@ -366,6 +426,7 @@ export default {
 				showBirthYearOnly : state.showBirthYearOnly,
 				nickName : state.nickName,
 				usedName : state.usedName,
+				resolution : state.resolution,
 				
 				birthYear : state.birthYear,
 				birthMonth : state.birthMonth,
@@ -391,6 +452,57 @@ export default {
 		},
 		getUserPhone(state){
 			return state.phone
+		},
+		getUserUid(state){
+			return state.loginInfo.adminId
+		},
+		getPwdUpdatedAt(state){
+			console.log('state.updatedAtList.PWD', state.updatedAtList.PWD)
+			if (state.updatedAtList.PWD !== undefined){
+				return { 
+					subject : '최종변경일', 
+					updatedAt : state.updatedAtList['PWD'],
+				}
+			} else {
+				return { 
+					subject : '최초생성일', 
+					updatedAt : state.createdAt 
+				}
+			}
+		},
+		getUidUpdatedAt(state){
+			console.log('state.updatedAtList.UID', state.updatedAtList.UID)
+			if (state.updatedAtList.UID !== undefined){
+				return { 
+					subject : '최종변경일', 
+					updatedAt : state.updatedAtList['UID'],
+				}
+			} else {
+				return { 
+					subject : '최초생성일', 
+					updatedAt : state.createdAt 
+				}
+			}
+		},
+		getResolutionUpdatedAt(state){
+			console.log('state.updatedAtList.RESOLUTION', state.updatedAtList.RESOLUTION)
+			if (state.updatedAtList.RESOLUTION !== undefined){
+				return { 
+					subject : '최종변경일', 
+					updatedAt : state.updatedAtList['RESOLUTION'],
+				}
+			} else {
+				return { 
+					subject : '최초생성일', 
+					updatedAt : state.createdAt 
+				}
+			}
+		},
+		getResolution(state){
+			return state.resolution
+		},
+		getResolutionList(state){
+			return state.resolutionList
 		},
 	},
 };

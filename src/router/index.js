@@ -281,6 +281,16 @@ const routes = [
 								name: "account-update-phone",
 								component: () => import("../views/mainViews/ChangeUserPhoneView.vue"),
 							},
+							{
+								path: "uid",
+								name: "account-update-uid",
+								component: () => import("../views/mainViews/ChangeUserUidView.vue"),
+							},
+							{
+								path: "resolution",
+								name: "account-update-resolution",
+								component: () => import("../views/mainViews/ChangeResolutionView.vue"),
+							},
 						]
 					},
 				]

@@ -85,8 +85,8 @@ export default {
 		let data = {
 		params: JSON.stringify([
 			{
-			ID: userId,
-			GENDER: state.gender,
+				ID: userId,
+				GENDER: state.gender,
 			},
 		]),
 		};
@@ -99,8 +99,8 @@ export default {
 		let data = {
 		params: JSON.stringify([
 			{
-			ID: userId,
-			EMAIL: state.email,
+				ID: userId,
+				EMAIL: state.email,
 			},
 		]),
 		};
@@ -113,12 +113,59 @@ export default {
 		let data = {
 		params: JSON.stringify([
 			{
-			ID: userId,
-			PHONE: state.phone,
+				ID: userId,
+				PHONE: state.phone,
 			},
 		]),
 		};
 		console.log('sp_admin_update_admin_phone:data', data)
+		return myAxios(url, method, data);
+	},
+	sp_admin_update_admin_loginid({state,rootState}){
+		const userId = rootState.auth.userId;
+		const url = "api/admin/common/sp_admin_update_admin_loginid";
+		let data = {
+		params: JSON.stringify([
+			{
+				ID: userId,
+				UID: state.loginInfo.adminId,
+			},
+		]),
+		};
+		console.log('sp_admin_update_admin_loginid:data', data)
+		return myAxios(url, method, data);
+	},
+	sp_admin_get_updated_at({rootState, keyword}){
+		const userId = rootState.auth.userId;
+		const url = "api/admin/common/sp_admin_get_updated_at";
+		let data = {
+		params: JSON.stringify([
+			{
+				ID: userId,
+				KEYWORD: keyword,
+			},
+		]),
+		};
+		console.log('sp_admin_get_updated_at:data', data)
+		return myAxios(url, method, data);
+	},
+
+	sp_req_b_resolution() {
+		const url = "api/admin/common/sp_req_b_resolution";
+		return myAxios(url, method);
+	},
+	sp_admin_update_resolution({state,rootState}){
+		const userId = rootState.auth.userId;
+		const url = "api/admin/common/sp_admin_update_resolution";
+		let data = {
+		params: JSON.stringify([
+			{
+				ID: userId,
+				RESOLUTION: state.resolution,
+			},
+		]),
+		};
+		console.log('sp_admin_update_resolution:data', data)
 		return myAxios(url, method, data);
 	},
 };

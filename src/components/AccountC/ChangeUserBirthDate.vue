@@ -48,6 +48,7 @@
 				</div>
 			</v-col>
 		</v-row>
+		<v-divider />
 		<v-row
 			:style="{
 				'width': '100%',

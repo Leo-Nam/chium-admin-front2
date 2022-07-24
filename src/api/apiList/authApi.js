@@ -73,5 +73,24 @@ export default {
     };
 	console.log('sp_admin_update_admin_birthday:data', data)
     return myAxios(url, method, data);
-  }
+  },
+
+	sp_req_b_genders() {
+		const url = "api/admin/common/sp_req_b_genders";
+		return myAxios(url, method);
+	},
+	sp_admin_update_admin_gender({state,rootState}){
+		const userId = rootState.auth.userId;
+		const url = "api/admin/common/sp_admin_update_admin_gender";
+		let data = {
+		params: JSON.stringify([
+			{
+			ID: userId,
+			GENDER: state.gender,
+			},
+		]),
+		};
+		console.log('sp_admin_update_admin_gender:data', data)
+		return myAxios(url, method, data);
+	},
 };

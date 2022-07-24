@@ -52,9 +52,17 @@ export default {
 			nameList: {
 				usedNameIndex: null,
 				list: ['이름', '닉네임']
+			},
+			GenderList: {
+				show: null,
+				list: {}
 			}
 		},
 	mutations: {
+		setGenderList(state, payload){
+			console.log('length', payload.length)
+			state.GenderList.list = payload
+		},
 		setNameList(state){
 			state.nameList.list[0] = '이름'
 			state.nameList.list[1] = '닉네임'
@@ -139,6 +147,9 @@ export default {
 		},
 		setUserInitSucess(state){
 			state.userInit = true
+		},
+		chageUserGender(state, payload){
+			state.gender = payload
 		}
 
 	},
@@ -252,6 +263,24 @@ export default {
 				console.log(e)
 			}
 		},
+		async sp_req_b_genders({commit}){
+			try {
+				const res = await authApi.sp_req_b_genders()
+				console.log('store:modules:auth.js:sp_req_b_genders:',res.data.data)
+				commit('setGenderList', res.data.data)
+			} catch(e) {
+				console.log(e)
+			}
+		},
+		async sp_admin_update_admin_gender({state, rootState}){
+			try {
+				console.log('sp_admin_update_admin_gender>>>>', state)
+				await authApi.sp_admin_update_admin_gender({state, rootState})
+				// location.reload()
+			} catch (e) {
+				console.log(e)
+			}
+		},
 	},
 	getters: {
 		getUserClass(state) {
@@ -320,6 +349,14 @@ export default {
 		},
 		getNameList(state){
 			return state.nameList
+		},
+		getGenderList(state){
+			console.log(state.GenderList.list)
+			return state.GenderList
+		},
+		getUserGender(state){
+			console.log(state.gender)
+			return state.gender
 		}
 	},
 };

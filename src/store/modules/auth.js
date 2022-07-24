@@ -152,6 +152,9 @@ export default {
 		},
 		chageUserGender(state, payload){
 			state.gender = payload
+		},
+		chageUserPhone(state, payload){
+			state.phone = payload
 		}
 
 	},
@@ -293,6 +296,15 @@ export default {
 				console.log(e)
 			}
 		},
+		async sp_admin_update_admin_phone({state, rootState}){
+			try {
+				console.log('sp_admin_update_admin_phone>>>>', state)
+				await authApi.sp_admin_update_admin_phone({state, rootState})
+				// location.reload()
+			} catch (e) {
+				console.log(e)
+			}
+		},
 	},
 	getters: {
 		getUserClass(state) {
@@ -376,6 +388,9 @@ export default {
 				loginEmail: state.email,
 				recoveryEmails: state.recoveryEmails
 			}
-		}
+		},
+		getUserPhone(state){
+			return state.phone
+		},
 	},
 };

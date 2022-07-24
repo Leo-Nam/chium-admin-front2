@@ -332,31 +332,35 @@
 												'text-align': 'right',
 											}"
 										>
-											<span
-												v-if="getUserInfo.lockPhone === 1"
+											<a
+												:href="returnUrl('/account/update/phone')"
 											>
-												<v-icon
-													:style="{
-														'color': '#00B286',
-													}"
+												<span
+													v-if="getUserInfo.lockPhone === 1"
 												>
-													mdi-lock
-												</v-icon>
-											</span>
-											<span
-												v-else
-											>
-												<v-icon
-													:style="{
-														'color': '#00B286',
-													}"
+													<v-icon
+														:style="{
+															'color': '#00B286',
+														}"
+													>
+														mdi-lock
+													</v-icon>
+												</span>
+												<span
+													v-else
 												>
-													mdi-account-multiple
+													<v-icon
+														:style="{
+															'color': '#00B286',
+														}"
+													>
+														mdi-account-multiple
+													</v-icon>
+												</span>
+												<v-icon>
+													mdi-chevron-right
 												</v-icon>
-											</span>
-											<v-icon>
-												mdi-chevron-right
-											</v-icon>
+											</a>
 										</v-col>
 									</v-row>
 								</div>

@@ -280,6 +280,7 @@ export default {
 						'account-email':'',
 						'account-update-email-login':'',
 						'account-update-email-recovery':'',
+						'account-update-phone':'',
 					},
 					location: "app-bar",
 					menuId: 1200,

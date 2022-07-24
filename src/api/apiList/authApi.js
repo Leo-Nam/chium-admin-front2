@@ -107,4 +107,18 @@ export default {
 		console.log('sp_admin_update_admin_email:data', data)
 		return myAxios(url, method, data);
 	},
+	sp_admin_update_admin_phone({state,rootState}){
+		const userId = rootState.auth.userId;
+		const url = "api/admin/common/sp_admin_update_admin_phone";
+		let data = {
+		params: JSON.stringify([
+			{
+			ID: userId,
+			PHONE: state.phone,
+			},
+		]),
+		};
+		console.log('sp_admin_update_admin_phone:data', data)
+		return myAxios(url, method, data);
+	},
 };

@@ -276,6 +276,11 @@ const routes = [
 									},
 								]
 							},
+							{
+								path: "phone",
+								name: "account-update-phone",
+								component: () => import("../views/mainViews/ChangeUserPhoneView.vue"),
+							},
 						]
 					},
 				]

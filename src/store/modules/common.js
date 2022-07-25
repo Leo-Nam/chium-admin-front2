@@ -283,6 +283,7 @@ export default {
 						'account-update-phone':'',
 						'account-update-uid':'',
 						'account-update-resolution':'',
+						'account-update-avatar':'',
 					},
 					location: "app-bar",
 					menuId: 1200,
@@ -389,6 +390,14 @@ export default {
 					commit('setBackgroundTheme',res.data.data)
 			} catch (e) {
 				console.log(e)
+			}
+		},
+		async uploadImageToS3({ commit }, payload) {
+			try {
+				const res = await commonApi.uploadImageToS3({payload});
+				commit("auth/setAvatarImage", res.data, {root : true});
+			} catch (e) {
+				console.log(e);
 			}
 		},
 	},

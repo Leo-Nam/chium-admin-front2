@@ -63,6 +63,10 @@ export default {
 			updatedAtList: {},
 		},
 	mutations: {
+		setAvatarImage(state, payload) {
+			console.log('setAvatarImage>>>>>>', payload)
+			state.avatarPath = payload;
+		},
 		setUpdatedAtList(state, payload){
 			if (payload !== null){
 				state.updatedAtList[payload.INFO_TYPE] = payload.UPDATED_AT
@@ -365,6 +369,15 @@ export default {
 				console.log(e)
 			}
 		},
+		async sp_admin_update_admin_avatar({state, rootState}){
+			try {
+				console.log('sp_admin_update_admin_avatar>>>>', state)
+				await authApi.sp_admin_update_admin_avatar({state, rootState})
+				// location.reload()
+			} catch (e) {
+				console.log(e)
+			}
+		},
 	},
 	getters: {
 		getUserClass(state) {
@@ -503,6 +516,9 @@ export default {
 		},
 		getResolutionList(state){
 			return state.resolutionList
+		},
+		getUserAvatar(state){
+			return state.avatarPath
 		},
 	},
 };

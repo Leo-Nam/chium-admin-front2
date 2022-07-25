@@ -90,21 +90,30 @@
 								<div>
 									<v-row>
 										<v-col cols="3">
-											사진
+											프로필 사진
 										</v-col>
 										<v-col cols="8">
 											사진을 추가하여 계정을 맞춤설정할 수 있습니다
 										</v-col>
-										<v-col cols="1">
-											<v-avatar
-												height="64px"
-												width="64px"
+										<v-col 
+											cols="1"
+											:style="{
+												'text-align': 'right',
+											}"
+										>
+											<a
+												:href="returnUrl('/account/update/avatar')"
 											>
-												<img
-													:src="getUserInfo.avatarPath"
-													:alt="getUserInfo.uid"
+												<v-avatar
+													height="64px"
+													width="64px"
 												>
-											</v-avatar>
+													<img
+														:src="getUserInfo.avatarPath"
+														:alt="getUserInfo.uid"
+													>
+												</v-avatar>
+											</a>
 										</v-col>
 									</v-row>
 									<v-row

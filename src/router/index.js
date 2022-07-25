@@ -291,6 +291,11 @@ const routes = [
 								name: "account-update-resolution",
 								component: () => import("../views/mainViews/ChangeResolutionView.vue"),
 							},
+							{
+								path: "avatar",
+								name: "account-update-avatar",
+								component: () => import("../views/mainViews/ChangeUserAvatarView.vue"),
+							},
 						]
 					},
 				]

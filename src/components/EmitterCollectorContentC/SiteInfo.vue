@@ -306,7 +306,7 @@
 
                     </span>
 
-                    <v-icon @click="changeImgae(key)">
+                    <v-icon @click="changeImage(key)">
                       mdi-pencil
                     </v-icon>
                     <ImagePopup
@@ -437,7 +437,7 @@ export default {
 		MyVmodel(key,value){
 			this.changeSelectedUserInfo({key,value})
 		},
-		changeImgae(key){
+		changeImage(key){
 			if (key == 'bizRegImgPath') {
 				document.getElementById('biz-img').click()
 			} else if (key == 'permitRegImgPath') {

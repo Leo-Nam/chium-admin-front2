@@ -22,6 +22,16 @@ export default {
     return myAxios(url, method, null);
   },
 
+	uploadImageToS3({ payload }) {
+		const url = "api/admin/common/uploadImageToS3";
+		const config = {
+			headers: {
+				"content-type": "multipart/form-data",
+			},
+		};
+		return myAxios(url, method, payload, config);
+	},
+
 
 
   // 유저의 인덱스의 값

@@ -157,6 +157,7 @@ const routes = [
 								name: "log",
 								component: () =>
 								import("../views/defaultViews/DefaultView.vue"),
+								meta: { adminKing: true },
 								children: [
 									{
 										path: "list",

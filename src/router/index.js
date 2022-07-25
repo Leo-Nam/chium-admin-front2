@@ -62,6 +62,13 @@ const routes = [
 								meta: { adminKing: true },
 							},
 							{
+								path: "control-service",
+								name: "control-service",
+								component: () => import("../views/mainViews/ControlServiceView.vue"),
+								// 최고 권한자만 들어갈 수 있도록 표시
+								meta: { adminKing: true },
+							},
+							{
 								path: "geo",
 								name: "geo",
 								component: () => import("../views/defaultViews/DefaultView.vue"),

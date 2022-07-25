@@ -211,6 +211,17 @@ export default {
 					display: true
 				},
 				{ 
+					title: "서비스관리",
+					icon: "mdi-account",
+					route: "/admin/main/control-service",
+					routes: {
+						'control-service':''
+					},
+					location: "app-bar",
+					menuId: 700,
+					display: true
+				},
+				{ 
 					title: "직원관리",
 					icon: "mdi-account",
 					route: "/admin/main/add-admin",

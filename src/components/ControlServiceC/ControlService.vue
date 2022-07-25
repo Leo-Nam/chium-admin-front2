@@ -39,7 +39,7 @@
 										<v-icon>
 											mdi-arrow-left
 										</v-icon>
-										&nbsp;이름
+										&nbsp;서비스관리
 									</router-link>
 								</div>
 							</v-col>

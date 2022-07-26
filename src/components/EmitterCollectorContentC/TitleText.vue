@@ -1,11 +1,26 @@
 <template>
-  <div class="title-site-name">
-    <span
-      class="text-h5"
-    >{{ getSeletedUser.siteName }} {{ getSeletedUser.userType == 3 ? '( 수거자 )' : '( 배출자 )' }}</span>
-
-    <span style="font-size : 10px; text-align : center;"> 수정 시각 : {{ getSeletedUser.updatedAt }} 🕐</span>
-  </div>
+	<div class="title-site-name">
+		<v-card
+			:style="{
+				'width': '100%',
+				'font-size': '10px',
+				'text-align': 'left',
+				'background': '#00B286',
+				'height': '50px',
+			}"
+			flat
+		>
+			<span
+				class="text-h5"
+				:style="{
+					'padding-left': '20px',
+					'line-height': '50px'
+				}"
+			>
+				{{ getSeletedUser.userType == 3 ? '수거업체' : '배출업체' }}
+			</span>
+		</v-card>
+	</div>
 </template>
 <script>
 import {mapGetters} from "vuex"
@@ -15,11 +30,8 @@ export default {
   },
 }
 </script>
-<style  >
-.title-site-name {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom : 15px;
+<style>
+template {
+	font-family: Verdana;
 }
 </style>

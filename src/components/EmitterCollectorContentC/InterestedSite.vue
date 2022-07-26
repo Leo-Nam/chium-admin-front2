@@ -1,41 +1,47 @@
 <template>
 	<div>
-	<div>관심업체</div>
-	<v-chip-group
-		active-class="primary--text"
-		column
-	>
-		<span
-			v-if="userType === 1"
+		<div
+			:style="{
+				'padding-bottom': `30px`
+			}"
 		>
-			<v-chip
-				v-for="site, idx in getInterestedSiteList"
-				:key="site+idx"
-			>
-				<a
-					:href="returnUrl(site['TARGET_ID'])"
-				>
-					{{ site['TARGET_NAME'] }}
-				</a>
-			
-			</v-chip>
-		</span>
-		<span
-			v-else
+			관심업체
+		</div>
+		<v-chip-group
+			active-class="primary--text"
+			column
 		>
-			<v-chip
-				v-for="site, idx in getPersonalInterestedSiteList"
-				:key="site+idx"
+			<span
+				v-if="userType === 1"
 			>
-				<a
-					:href="returnUrl(site['TARGET_ID'])"
+				<v-chip
+					v-for="site, idx in getInterestedSiteList"
+					:key="site+idx"
 				>
-					{{ site['TARGET_NAME'] }}
-				</a>
-			
-			</v-chip>
-		</span>
-	</v-chip-group>
+					<a
+						:href="returnUrl(site['TARGET_ID'])"
+					>
+						{{ site['TARGET_NAME'] }}
+					</a>
+				
+				</v-chip>
+			</span>
+			<span
+				v-else
+			>
+				<v-chip
+					v-for="site, idx in getPersonalInterestedSiteList"
+					:key="site+idx"
+				>
+					<a
+						:href="returnUrl(site['TARGET_ID'])"
+					>
+						{{ site['TARGET_NAME'] }}
+					</a>
+				
+				</v-chip>
+			</span>
+		</v-chip-group>
 	</div>
 </template>
 <script>

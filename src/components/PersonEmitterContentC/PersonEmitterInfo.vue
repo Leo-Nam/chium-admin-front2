@@ -88,7 +88,7 @@
 									<!-- 소속사이트인 경우 -->
 									<div v-else-if="content == 'SITE_ID'">
 										<div v-if="getSelectedPersonEmitter[content]===0">
-											{{ getSelectedPersonEmitter['SITE_NAME'] }}
+											개인회원
 										</div>
 										<div v-else>
 											<a
@@ -133,7 +133,7 @@
 				</v-expansion-panel-content>
 			</v-expansion-panel>
 		</v-expansion-panels>
-		<v-card style="margin-top : 50px;">
+		<v-card style="margin-top : 50px;" v-if="getPersonalInterestedSiteCount>0">
 			<v-row>
 				<v-col>
 					<div 
@@ -144,7 +144,7 @@
 							'margin': '0px'
 						}"
 					>
-						<div v-if="getPersonalInterestedSiteCount>0">
+						<div>
 							<InterestedSite 
 								:userType="userType"
 							/>

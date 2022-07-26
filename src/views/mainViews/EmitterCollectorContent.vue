@@ -1,5 +1,10 @@
 <template>
-  <v-container>
+  <v-container
+	:style="{
+		'padding-left': '0px',
+		'padding-right': '0px',
+	}"
+  >
     <TitleText class="title-text" />
     <v-card class="top-card">
       <SiteInfo />
@@ -128,18 +133,18 @@ export default {
 <style lang="scss">
 a { text-decoration: none; }
 .top-card {
-  padding : 40px;
-  margin-bottom: 40px;
+	padding : 40px;
+	margin-bottom: 40px;
 }
 .title-text {
-  margin-top: 10px;
-  margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 30px;
 }
 @media (max-width: 600px) {
-  .top-card {
-      padding-left : 5px;
-      padding-right : 5px;
-      margin-bottom: 40px;
-  }
+	.top-card {
+		padding-left : 5px;
+		padding-right : 5px;
+		margin-bottom: 40px;
+	}
 }
 </style>

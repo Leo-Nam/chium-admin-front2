@@ -1,17 +1,5 @@
 <template>
   <div>
-    <v-row
-      justify="end"
-      style="margin-bottom : 30px"
-    >
-      <v-col
-        cols="auto"
-      >
-        <v-btn @click="modifyBtn">
-          수정하기
-        </v-btn>
-      </v-col>
-    </v-row>
 
     <v-expansion-panels
       multiple
@@ -157,6 +145,7 @@
               </v-row>
             </v-col>
           </v-row>
+			<customButton01 @btnClick="modifyBtn"/>
           <div v-if="checkEmiOrCol(getSeletedUser.trmtBizCode)">
             <v-divider style="margin-top : 20px; margin-bottom : 20px" />
             <v-row>
@@ -374,6 +363,7 @@ import SubHeader from "@/components/EmitterCollectorContentC/SubHeader.vue"
 import ImagePopup from "@/components/EmitterCollectorContentC/ImagePopup.vue"
 import WsteKind from "@/components/EmitterCollectorContentC/WsteKind"
 import WsteClassKind from "@/components/EmitterCollectorContentC/WsteClassKind"
+import customButton01 from "@/components/ModuleC/customButton01"
 
 
 export default {
@@ -381,7 +371,8 @@ export default {
 		SubHeader,
 		WsteKind,
 		WsteClassKind, 
-		ImagePopup
+		ImagePopup,
+		customButton01
 	},
 	data(){
 		return  {
@@ -524,6 +515,9 @@ export default {
 				return false
 			}
 			return true
+		},
+		handleCreate(){
+			console.log('Child has been created.')
 		}
 	}
 }

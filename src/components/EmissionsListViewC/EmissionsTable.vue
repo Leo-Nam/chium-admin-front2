@@ -24,9 +24,6 @@ export default {
 			'getS3Img',
 		]),
 	},
-	created(){
-		console.log('this.getEmitterCollectorEmoji', this.getEmitterCollectorEmoji)
-	},
 	methods : {
 		goToContent(Id){
 			this.$router.push({ path: `./${Id}`})

@@ -210,7 +210,6 @@ export default {
 	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	computed: {
 		...mapGetters('auth',['getUserAvatar']),
@@ -234,14 +233,12 @@ export default {
 			document.getElementById('avatar-img').click()
 		},
 		uploadImage(e){
-			console.log('components:EmitterCollectorContentC:SiteInfo.vue:uploadBizImg:',e,'bizimg 1')
 			if (e == undefined){
 				alert('파일을 제대로 입력해주세요')
 				return
 			}
 			const formData = new FormData();
 			formData.append('file', e)
-			console.log('e>>>>>>>>', e)
 			this.uploadImageToS3(formData)
 		},
 	}

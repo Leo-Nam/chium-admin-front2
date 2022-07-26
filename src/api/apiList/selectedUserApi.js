@@ -67,7 +67,6 @@ export default {
         },
       ]),
     };
-	console.log('api:apiList:selectedUserApi.js:sp_admin_update_site_info:', data)
     return myAxios(url, method, data);
   },
   sp_admin_get_personal_details({ rootState, memberId }) {
@@ -83,7 +82,7 @@ export default {
     };
     return myAxios(url, method, data);
   },
-  sendModifiedPersonEmitter({ rootState, userData }){
+  sp_admin_update_personal_details({ rootState, userData }){
     const userId = rootState.auth.userId;
     const url = "api/admin/common/sp_admin_update_personal_details";
     const data = {

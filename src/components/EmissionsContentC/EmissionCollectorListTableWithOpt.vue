@@ -173,7 +173,6 @@ export default {
 			this.dialog = false
 		},
 		showNote(siteId, siteCategory){
-			console.log('hello note')
 			this.note.display = 'inline'
 			this.siteID = siteId
 			this.siteCategory = siteCategory
@@ -182,7 +181,6 @@ export default {
 			this.windowSize = { x: window.innerWidth, y: window.innerHeight }
 		},
 		changeShowStatus(v){
-			console.log('close note sign received')
 			this.note.display = v
 		}
 	}

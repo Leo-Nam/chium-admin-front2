@@ -170,7 +170,6 @@ export default {
 	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	computed: {
 		...mapGetters('auth',['getUserEmails']),
@@ -189,7 +188,6 @@ export default {
 		},
 
 		MyVmodel(key, value){
-			console.log(key, value)
 			this.changeUserInfo({key, value})
 		},
 	}

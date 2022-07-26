@@ -23,7 +23,6 @@ export default {
 	created(){
 		this.sp_admin_retrieve_stat_registeration()
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),

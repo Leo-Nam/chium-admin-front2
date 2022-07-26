@@ -36,11 +36,9 @@ export default {
 	},
 	mutations: {
 		setSearchConfig(state, payload){
-			console.log('hello>>>>>', payload)
 			state.pageConfig.search = payload.spec
 		},
 		setTableConfig(state, payload){
-			console.log('hello>>>>>', payload.type, payload.data)
 			state.pageConfig.table = payload
 		},
 		setEmoji(state, payload){
@@ -108,7 +106,6 @@ export default {
 		async sp_admin_get_new_transaction_details({rootState, commit},{transactionId}){
 			try {
 				const res = await transactionApi.sp_admin_get_new_transaction_details({rootState,transactionId})
-				console.log('store:modules:transaction.js:sp_admin_get_new_transaction_details:',res,'레스`')
 				commit("setTransactionDetail", res.data.data[0].TRANSACTION_INFO);
 				commit("common/setNotes", res.data.data[0].NOTES.NOTES,{ root: true });
 			} catch (e) {

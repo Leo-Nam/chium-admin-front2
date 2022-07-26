@@ -64,21 +64,17 @@ export default {
 		},
 	mutations: {
 		setAvatarImage(state, payload) {
-			console.log('setAvatarImage>>>>>>', payload)
 			state.avatarPath = payload;
 		},
 		setUpdatedAtList(state, payload){
 			if (payload !== null){
 				state.updatedAtList[payload.INFO_TYPE] = payload.UPDATED_AT
-				console.log(state.updatedAtList, "updatedAtList")
 			}
 		},
 		setGenderList(state, payload){
-			console.log('length', payload.length)
 			state.GenderList.list = payload
 		},
 		setResolutionList(state, payload){
-			console.log('setResolutionList', state, payload)
 			state.resolutionList = payload
 		},
 		setNameList(state){
@@ -108,7 +104,6 @@ export default {
 			} else {
 				state[payload.key] = payload.value
 			}
-			console.log('payload.key>>>', payload.key, 'state[payload.key]>>>', state[payload.key], )
 			if (payload.key === 'usedName'){
 				state.nameList.usedNameIndex = payload.value
 			}
@@ -228,7 +223,6 @@ export default {
 					usedName : getData.USED_NAME,
 					resolution : getData.RESOLUTION,
 				}
-				console.log(getData.BIRTH_DAY)
 				// const userId = getData.ID;
 				// const classNum = getData.CLASS;
 				// const userName = getData.NAME;
@@ -260,7 +254,7 @@ export default {
 					adminPw: state.loginInfo.adminPw, 
 				});
 			}catch(e){
-				console.log( e)
+				console.log(e)
 			}
 			const status = res.data.state;
 			if (status > 0) {
@@ -278,7 +272,6 @@ export default {
 		},
 		async sp_admin_update_admin_info({state, rootState}){
 			try {
-				console.log('sp_admin_update_admin_info>>>>', state)
 				await authApi.sp_admin_update_admin_info({state, rootState})
 				// location.reload()
 			} catch (e) {
@@ -287,7 +280,6 @@ export default {
 		},
 		async sp_admin_update_admin_birthday({state, rootState}){
 			try {
-				console.log('sp_admin_update_admin_birthday>>>>', state)
 				await authApi.sp_admin_update_admin_birthday({state, rootState})
 				// location.reload()
 			} catch (e) {
@@ -297,7 +289,6 @@ export default {
 		async sp_req_b_genders({commit}){
 			try {
 				const res = await authApi.sp_req_b_genders()
-				console.log('store:modules:auth.js:sp_req_b_genders:',res.data.data)
 				commit('setGenderList', res.data.data)
 			} catch(e) {
 				console.log(e)
@@ -305,7 +296,6 @@ export default {
 		},
 		async sp_admin_update_admin_gender({state, rootState}){
 			try {
-				console.log('sp_admin_update_admin_gender>>>>', state)
 				await authApi.sp_admin_update_admin_gender({state, rootState})
 				// location.reload()
 			} catch (e) {
@@ -314,7 +304,6 @@ export default {
 		},
 		async sp_admin_update_admin_email({state, rootState}){
 			try {
-				console.log('sp_admin_update_admin_email>>>>', state)
 				await authApi.sp_admin_update_admin_email({state, rootState})
 				// location.reload()
 			} catch (e) {
@@ -323,7 +312,6 @@ export default {
 		},
 		async sp_admin_update_admin_phone({state, rootState}){
 			try {
-				console.log('sp_admin_update_admin_phone>>>>', state)
 				await authApi.sp_admin_update_admin_phone({state, rootState})
 				// location.reload()
 			} catch (e) {
@@ -332,7 +320,6 @@ export default {
 		},
 		async sp_admin_update_admin_loginid({state, rootState}){
 			try {
-				console.log('sp_admin_update_admin_loginid>>>>', state)
 				await authApi.sp_admin_update_admin_loginid({state, rootState})
 				// location.reload()
 			} catch (e) {
@@ -343,8 +330,6 @@ export default {
 			try {
 				const res = await authApi.sp_admin_get_updated_at({rootState, keyword})
 				// location.reload()
-				console.log('sp_admin_get_updated_at의 keyword', keyword)
-				console.log('sp_admin_get_updated_at의 data', res.data.data)
 				commit("setUpdatedAtList", res.data.data);
 			} catch (e) {
 				console.log(e)
@@ -353,16 +338,13 @@ export default {
 		async sp_req_b_resolution({commit}){
 			try {
 				const res = await authApi.sp_req_b_resolution()
-				console.log('store:modules:auth.js:sp_req_b_resolution:>>>>>>>>>>>>>>>>>>>???????',res.data.data)
 				commit('setResolutionList', res.data.data)
 			} catch(e) {
-				console.log('store:modules:auth.js:sp_req_b_resolution:>>>>>>>>>>>>>>>>>>>???????',e)
 				console.log(e)
 			}
 		},
 		async sp_admin_update_resolution({state, rootState}){
 			try {
-				console.log('sp_admin_update_resolution>>>>', state)
 				await authApi.sp_admin_update_resolution({state, rootState})
 				// location.reload()
 			} catch (e) {
@@ -371,8 +353,7 @@ export default {
 		},
 		async sp_admin_update_admin_avatar({state, rootState}){
 			try {
-				console.log('sp_admin_update_admin_avatar>>>>', state)
-				await authApi.sp_admin_update_admin_avatar({state, rootState})
+				await authApi.sp_admin_update_resolution({state, rootState})
 				// location.reload()
 			} catch (e) {
 				console.log(e)
@@ -450,11 +431,9 @@ export default {
 			return state.nameList
 		},
 		getGenderList(state){
-			console.log(state.GenderList.list)
 			return state.GenderList
 		},
 		getUserGender(state){
-			console.log(state.gender)
 			return state.gender
 		},
 		getUserEmails(state){
@@ -470,7 +449,6 @@ export default {
 			return state.loginInfo.adminId
 		},
 		getPwdUpdatedAt(state){
-			console.log('state.updatedAtList.PWD', state.updatedAtList.PWD)
 			if (state.updatedAtList.PWD !== undefined){
 				return { 
 					subject : '최종변경일', 
@@ -484,7 +462,6 @@ export default {
 			}
 		},
 		getUidUpdatedAt(state){
-			console.log('state.updatedAtList.UID', state.updatedAtList.UID)
 			if (state.updatedAtList.UID !== undefined){
 				return { 
 					subject : '최종변경일', 
@@ -498,7 +475,6 @@ export default {
 			}
 		},
 		getResolutionUpdatedAt(state){
-			console.log('state.updatedAtList.RESOLUTION', state.updatedAtList.RESOLUTION)
 			if (state.updatedAtList.RESOLUTION !== undefined){
 				return { 
 					subject : '최종변경일', 

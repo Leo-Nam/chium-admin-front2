@@ -55,7 +55,6 @@ export default {
 	created(){
 		this.init()
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	computed : {
 		...mapActions('versionControl',['sp_admin_get_version_list']),
@@ -72,11 +71,9 @@ export default {
 		},
 		async init(){
 			await this.sp_admin_get_version_list;
-			// console.log("this.getVersionInfo", this.getVersionInfo)
 		},
 		showContent(e){
 			let content = e.split('\n')
-			console.log('components:VersionListC:VersionListAll.vue:showContent:','hello')
 			content = e.replace(/(?:\r\n|\r|\n)/g, '<br />')
 			return content
 		},

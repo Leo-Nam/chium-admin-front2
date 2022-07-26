@@ -159,7 +159,6 @@ export default {
 	methods : {
 		...mapMutations('common',['setCurrentMenuId']),
 		goToRoute(route, menuId){
-			console.log('menuId', menuId)
 			this.$router.push({path : route})
 			this.setCurrentMenuId(menuId)
 		}

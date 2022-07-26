@@ -12,7 +12,6 @@ export default {
 	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
-		console.log('이게 나와야지??? this.$route>>>>', this.$route)
 		this.sp_req_b_genders()
 	},
 	methods : {

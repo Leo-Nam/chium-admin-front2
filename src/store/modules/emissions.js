@@ -67,11 +67,9 @@ export default {
 
 	mutations: {
 		setSearchConfig(state, payload){
-			console.log('hello>>>>>', payload)
 			state.pageConfig.search = payload.spec
 		},
 		setTableConfig(state, payload){
-			console.log('hello>>>>>', payload.type, payload.data)
 			state.pageConfig.table = payload
 		},
 		setEmoji(state, payload){
@@ -115,6 +113,7 @@ export default {
 			state.reportInfo = payload
 		},
 		changeOrderInfo(state,{key,value}){
+			console.log(key,value)
 			state.orderInfo[key] = value
 		},
 		// 배출지를 관심 지역으로 설정한 수거자들
@@ -182,7 +181,7 @@ export default {
 		async sp_admin_update_order_details({state,rootState}){
 			try {
 				await emissionsApi.sp_admin_update_order_details({state,rootState})
-				location.reload()
+				// location.reload()
 			} catch (e) {
 				console.log(e)
 			}
@@ -215,7 +214,6 @@ export default {
 		async logList2({rootState,commit},{orderId}){
 			try {
 				const res = await logApi.logList2({rootState,orderId})
-				console.log('store:modules:emissions.js:logList2:', res,'로그리스트2')
 				commit("setLogList", res.data.data[0].LOG_LIST);
 			} catch (e) {
 				console.log(e)
@@ -243,14 +241,12 @@ export default {
 			}
 
 			const res = await emissionsApi.sp_get_prospective_site_list_inside_range({rootState ,distance, lat, lng, bCode, isTransit})
-			console.log('store:modules:emissions.js:sp_get_prospective_site_list_inside_range:', res,'dddd')
 			commit('setCollectorListWithin',res.data.data)
 		},
 
 		async sp_admin_get_disposer_schedule({rootState,commit},{orderId}){
 			try {
 				const res = await emissionsApi.sp_admin_get_disposer_schedule({rootState, orderId})
-				console.log('store:modules:emissions.js:sp_admin_get_disposer_schedule:', res.data.data.DATA,'sp_admin_get_disposer_schedule')
 				commit("setOrderSchedule", res.data.data.DATA);
 			} catch (e) {
 				console.log(e)

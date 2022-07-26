@@ -67,19 +67,9 @@
 				<v-col 
 					cols="4"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textFieldBig.width}`,
-							'height': `${tableConfig.textFieldBig.height}`,
-							'border': `${tableConfig.textFieldBig.border}`,
-							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
-							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
-							'display': `${tableConfig.textFieldBig.display}`,
-							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.COLLECTOR_ID === null ? '입찰 거래' : '기존거래' }}
-					</div>
+					<divTextFieldBig 
+						:text="getOrderInfo.COLLECTOR_ID === null ? '입찰 거래' : '기존거래'"
+					/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -94,19 +84,7 @@
 				<v-col 
 					cols="4"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textFieldBig.width}`,
-							'height': `${tableConfig.textFieldBig.height}`,
-							'border': `${tableConfig.textFieldBig.border}`,
-							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
-							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
-							'display': `${tableConfig.textFieldBig.display}`,
-							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.ORDER_ID }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.ORDER_ID"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -119,19 +97,7 @@
 				<v-col 
 					cols="4"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textFieldBig.width}`,
-							'height': `${tableConfig.textFieldBig.height}`,
-							'border': `${tableConfig.textFieldBig.border}`,
-							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
-							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
-							'display': `${tableConfig.textFieldBig.display}`,
-							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.DISPOSER_TYPE }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.DISPOSER_TYPE"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -146,19 +112,7 @@
 				<v-col 
 					cols="4"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textFieldBig.width}`,
-							'height': `${tableConfig.textFieldBig.height}`,
-							'border': `${tableConfig.textFieldBig.border}`,
-							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
-							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
-							'display': `${tableConfig.textFieldBig.display}`,
-							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.ORDER_CODE }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.ORDER_CODE"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -171,19 +125,7 @@
 				<v-col 
 					cols="4"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textFieldBig.width}`,
-							'height': `${tableConfig.textFieldBig.height}`,
-							'border': `${tableConfig.textFieldBig.border}`,
-							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
-							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
-							'display': `${tableConfig.textFieldBig.display}`,
-							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.DISPOSER_NAME }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.DISPOSER_NAME"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -200,13 +142,13 @@
 				>
 					<div>
 						<v-switch
-							:input-value="getOrderInfo.IS_DELETED"
+							:input-value="getOrderInfo.IS_DELETED === 1 ? true : false"
 							inset
 							:style="{
 								'height': `${tableConfig.switch.height}`,
 								'margin-top': `${tableConfig.switch.marginTop}`
 							}"
-							@change="changeOrderInfo({key: 'IS_DELETED', value: $event})"
+							@change="modifyOrderInfo({key: 'IS_DELETED', value: $event})"
 						></v-switch>
 					</div>
 				</v-col>
@@ -221,19 +163,7 @@
 				<v-col 
 					cols="4"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textFieldBig.width}`,
-							'height': `${tableConfig.textFieldBig.height}`,
-							'border': `${tableConfig.textFieldBig.border}`,
-							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
-							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
-							'display': `${tableConfig.textFieldBig.display}`,
-							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.ADDR }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.ADDR"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -248,19 +178,7 @@
 				<v-col 
 					cols="4"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textFieldBig.width}`,
-							'height': `${tableConfig.textFieldBig.height}`,
-							'border': `${tableConfig.textFieldBig.border}`,
-							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
-							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
-							'display': `${tableConfig.textFieldBig.display}`,
-							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.DELETED_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.DELETED_AT)"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -273,19 +191,7 @@
 				<v-col 
 					cols="4"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textFieldBig.width}`,
-							'height': `${tableConfig.textFieldBig.height}`,
-							'border': `${tableConfig.textFieldBig.border}`,
-							'border-radius': `${tableConfig.textFieldBig.borderRadius}`,
-							'vertical-align': `${tableConfig.textFieldBig.verticalAlign}`,
-							'display': `${tableConfig.textFieldBig.display}`,
-							'padding-left': `${tableConfig.textFieldBig.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.CREATED_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.CREATED_AT)"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -300,17 +206,15 @@
 				<v-col 
 					cols="4"
 				>
-					<div>
-						<v-switch
-							:input-value="getOrderInfo.CS_CONFIRMED"
-							inset
-							:style="{
-								'height': `${tableConfig.switch.height}`,
-								'margin-top': `${tableConfig.switch.marginTop}`
-							}"
-							@change="changeOrderInfo({key: 'CS_CONFIRMED', value: $event})"
-						></v-switch>
-					</div>
+					<v-switch
+						:input-value="getOrderInfo.CS_CONFIRMED === 1 ? true : false"
+						inset
+						:style="{
+							'height': `${tableConfig.switch.height}`,
+							'margin-top': `${tableConfig.switch.marginTop}`
+						}"
+						@change="modifyOrderInfo({key: 'CS_CONFIRMED', value: $event})"
+					></v-switch>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -323,17 +227,10 @@
 				<v-col 
 					cols="4"
 				>
-					<div>
-						<v-switch
-							:input-value="getOrderInfo.CHECK_STATE"
-							inset
-							:style="{
-								'height': `${tableConfig.switch.height}`,
-								'margin-top': `${tableConfig.switch.marginTop}`
-							}"
-							disabled
-						></v-switch>
-					</div>
+					<customSwitch01 
+						:value="getOrderInfo.CHECK_STATE === 1 ? true : false"
+						:disabled="true"
+					/>
 				</v-col>
 			</v-row>
 					<EmissionComment
@@ -353,19 +250,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.VISIT_START_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.VISIT_START_AT)"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -378,17 +263,10 @@
 				<v-col 
 					cols="2"
 				>
-					<div>
-						<v-switch
-							:input-value="Number(getOrderInfo.VISIT_EARLY_CLOSING)"
-							inset
-							:style="{
-								'height': `${tableConfig.switch.height}`,
-								'margin-top': `${tableConfig.switch.marginTop}`
-							}"
-							disabled
-						></v-switch>
-					</div>
+					<customSwitch01 
+						:value="Number(getOrderInfo.VISIT_EARLY_CLOSING) === 1 ? true : false"
+						:disabled="true"
+					/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -401,19 +279,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.VISIT_EARLY_CLOSED_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.VISIT_EARLY_CLOSED_AT)"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -428,19 +294,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.BIDDING_END_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.BIDDING_END_AT)"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -453,19 +307,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.OPEN_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.OPEN_AT)"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -478,19 +320,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.CLOSE_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.CLOSE_AT)"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -505,19 +335,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.PROSPECTIVE_VISITORS }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.PROSPECTIVE_VISITORS"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -530,19 +348,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.BIDDERS }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.BIDDERS"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -555,19 +361,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.PROSPECTIVE_BIDDERS }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.PROSPECTIVE_BIDDERS"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -582,19 +376,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getOrderInfo.SELECTED }}
-					</div>
+					<divTextFieldBig :text="getOrderInfo.SELECTED"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -607,19 +389,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.SELECTED_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.SELECTED_AT)"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -632,19 +402,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.MAX_SELECT_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.MAX_SELECT_AT)"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -659,17 +417,10 @@
 				<v-col 
 					cols="2"
 				>
-					<div>
-						<v-switch
-							:input-value="getOrderInfo.COLLECTOR_SELECTION_CONFIRMED"
-							inset
-							:style="{
-								'height': `${tableConfig.switch.height}`,
-								'margin-top': `${tableConfig.switch.marginTop}`
-							}"
-							disabled
-						></v-switch>
-					</div>
+					<customSwitch01 
+						:value="getOrderInfo.COLLECTOR_SELECTION_CONFIRMED === 1 ? true : false"
+						:disabled="true"
+					/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -682,19 +433,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.COLLECTOR_SELECTION_CONFIRMED_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.COLLECTOR_SELECTION_CONFIRMED_AT)"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -707,19 +446,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.COLLECTOR_MAX_DECISION_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.COLLECTOR_MAX_DECISION_AT)"/>
 				</v-col>
 			</v-row>
 			<v-row 
@@ -734,17 +461,10 @@
 				<v-col 
 					cols="2"
 				>
-					<div>
-						<v-switch
-							:input-value="getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2"
-							inset
-							:style="{
-								'height': `${tableConfig.switch.height}`,
-								'margin-top': `${tableConfig.switch.marginTop}`
-							}"
-							disabled
-						></v-switch>
-					</div>
+					<customSwitch01 
+						:value="getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2 === 1 ? true : false"
+						:disabled="true"
+					/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -757,19 +477,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.COLLECTOR_SELECTION_CONFIRMED2_AT)"/>
 				</v-col>
 				<v-col 
 					cols="2"
@@ -782,19 +490,7 @@
 				<v-col 
 					cols="2"
 				>
-					<div 
-						:style="{
-							'width': `${tableConfig.textField.width}`,
-							'height': `${tableConfig.textField.height}`,
-							'border': `${tableConfig.textField.border}`,
-							'border-radius': `${tableConfig.textField.borderRadius}`,
-							'vertical-align': `${tableConfig.textField.verticalAlign}`,
-							'display': `${tableConfig.textField.display}`,
-							'padding-left': `${tableConfig.textField.paddingLeft}`,
-						}"
-					>
-						{{ getTime(getOrderInfo.COLLECTOR_MAX_DECISION2_AT) }}
-					</div>
+					<divTextFieldBig :text="getTime(getOrderInfo.COLLECTOR_MAX_DECISION2_AT)"/>
 				</v-col>
 			</v-row>
 		</div>
@@ -809,6 +505,8 @@ import {mapGetters, mapActions, mapMutations} from "vuex"
 import EmissionMap from "./EmissionMap.vue"
 import EmissionImageList from "./EmissionImageList.vue"
 import EmissionComment from "./EmissionComment.vue"
+import divTextFieldBig from "@/components/ModuleC/divTextFieldBig.vue"
+import customSwitch01 from "@/components/ModuleC/customSwitch01.vue"
 export default {
 	data(){
 		return{
@@ -849,15 +547,18 @@ export default {
 			}
 		}
 	},
-  components : {
-    EmissionMap,EmissionImageList,EmissionComment
-  },
-  computed : {
-    ...mapGetters('emissions',['getOrderInfo']),
+	components : {
+		EmissionMap,
+		EmissionImageList,
+		EmissionComment,
+		divTextFieldBig,
+		customSwitch01
+	},
+	computed : {
+		...mapGetters('emissions',['getOrderInfo']),
 
-  },
-
-  methods : {
+	},
+	methods : {
 		...mapMutations('emissions',['changeOrderInfo']),
 		...mapActions('emissions',['sp_admin_update_order_details']),
 		getTime(time){
@@ -867,6 +568,10 @@ export default {
 			modify(){
 			this.sp_admin_update_order_details();
 		},
+		modifyOrderInfo(payload){
+			console.log(payload)
+			this.changeOrderInfo({key: payload.key, value: (payload.value === true ? 1 : 0)})
+		}
 	}
 }
 </script>

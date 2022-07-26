@@ -178,9 +178,7 @@ export default {
 			return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'
 		},
 		shortenContent(v, length){
-			console.log(v, length)
 			if (v !== null && v.length > 35){
-				console.log('v.slice(0, Number(length))>>>>>>', v.slice(0, Number(length)))
 				return v.slice(0, Number(length)) + '...'
 			}
 			return v

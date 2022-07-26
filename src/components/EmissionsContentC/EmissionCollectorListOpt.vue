@@ -85,7 +85,6 @@ export default {
       this.selectedOpt = v
     },
     changeIsTransitOpt(v){
-      console.log('components:EmissionContentC:EmissionCollectorListOpt.vue:changeIsTransitOpt:',v)
       this.setNowSelectedIsTransitOpt(v)
     },
     changeBCodeWithinOpt(v){

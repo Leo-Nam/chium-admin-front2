@@ -266,19 +266,15 @@ export default {
 			this.version.minorVersion = this.version.fullVersion.substring(firstComma+1, secondComma)
 			this.version.patchVersion = this.version.fullVersion.substring(secondComma+1, this.version.fullVersion.length)
 			this.setVersionInfo(this.version)
-
-			console.log('App.vue:parseVersionInfo:', this.getVersionInfo)
 		},
 		closeDialog(){
 			this.dialog = false
 		},
 		showMyAccountSimple(){
 			this.dialog = true
-			console.log('components:commonC:NoteList.vue:showMeNote:','hello')
 		},
 		backgroundTheme(){
 			this.backgroundImg = this.getBackgroundTheme.imgPath
-			console.log('this.backgroundImg', this.backgroundImg)
 		},
 		initAdminPageConfig(){
 			this.setAdminPageConfig(this.adminPageConfig)

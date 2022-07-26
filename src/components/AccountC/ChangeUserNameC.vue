@@ -244,7 +244,6 @@ export default {
 	created(){
 		this.setCurrentRoute(this.$route.name)
 		this.setNameList()
-		console.log('this.$route>>>>', this.$route)
 	},
 	computed: {
 		...mapGetters('auth',['getUserInfo', 'getNameList']),
@@ -257,7 +256,6 @@ export default {
 		MyVmodel(key, value){
 			this.updateDisplayNameList(key, value)
 			this.changeUserInfo({key, value})
-			console.log('this.displayNameList.....', this.displayNameList)
 		},
 		changeContent(e){
 			const el = document.getElementById(e)
@@ -269,13 +267,9 @@ export default {
 			el.focus()
 		},
 		updateDisplayNameList(key, v){
-			console.log(key, v)
 			this.displayNameList[key] = v
-			console.log(this.displayNameList)
 		},
 		changeCategory(a){
-			console.log('a ===>', a)
-			console.log('getNameList index ===>', this.getNameList.list.indexOf(a))
 			this.changeUserInfo({key: 'usedName', value: this.getNameList.list.indexOf(a)})
 		},
 	}

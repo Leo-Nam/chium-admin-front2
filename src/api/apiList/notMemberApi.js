@@ -60,7 +60,6 @@ export default {
         },
       ]),
     };
-	console.log('api:apiList:notMemberApi.js:sp_admin_update_prospective_member_info:', data)
     return myAxios(url, method, data);
   },
 };

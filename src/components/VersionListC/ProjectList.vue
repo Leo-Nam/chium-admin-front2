@@ -27,17 +27,12 @@ export default {
 	methods : {
 		...mapMutations('versionControl',['setChangedProject']),
 		changeProject(a){
-			console.log('components:VersionListC:VersionUpdateCategory.vue:changeProject:a',a)
-			console.log('components:VersionListC:VersionUpdateCategory.vue:changeProject:a',this.projectList.indexOf(a))
-			console.log(this.projectList)
 			this.setChangedProject(this.getProjectList[this.projectList.indexOf(a)].ID)
 		},
 		async getProjectNames(){
-			console.log('this.getProjectList >>>>>>>>>', this.getProjectList)
 			for (let i=0;i<this.getProjectList.length;i++){
 				this.projectList.push(this.getProjectList[i].NAME)
 			}
-			console.log('this.projectList >>>>>>>>>', this.projectList)
 		}
 	}
 }

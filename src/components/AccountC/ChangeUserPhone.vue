@@ -169,7 +169,6 @@ export default {
 	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	computed: {
 		...mapGetters('auth',['getUserPhone']),

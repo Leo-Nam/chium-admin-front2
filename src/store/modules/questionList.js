@@ -29,11 +29,9 @@ export default {
 	},
 	mutations: {
 		setSearchConfig(state, payload){
-			console.log('hello>>>>>', payload)
 			state.pageConfig.search = payload.spec
 		},
 		setTableConfig(state, payload){
-			console.log('hello>>>>>', payload.type, payload.data)
 			state.pageConfig.table = payload
 		},
 		setEmoji(state, payload){

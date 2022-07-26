@@ -224,11 +224,9 @@ export default {
       state.selectedUser.lng = payload.lng;
     },
     addWsteList(state, payload) {
-		console.log('store:modules:selectedUser.js:addWsteList:','123>>>', state, payload)
       state.selectedUser.wsteList.push(payload);
     },
     addWsteClassList(state, payload) {
-		console.log('store:modules:selectedUser.js:addWsteClassList:','456>>>', state, payload)
       state.selectedUser.wsteClassList.push(payload);
     },
     removeWsteList(state, payload) {
@@ -289,7 +287,6 @@ export default {
       try {
         const res = await selectedUserApi.sp_admin_retrieve_site_info({state,rootState,siteId})
         const siteInfo = res.data.data[0].SITE_INFO[0];
-		console.log('store:modules:selectedUser.js:sp_admin_retrieve_site_info:','siteInfo >>>>>>', siteInfo)
         commit("setSelectedUser", siteInfo);
         if (state.selectedUser.userType === 3){
           commit('setShowListIfIEmitter', siteInfo.COLLECTOR_BIDDING_LIST.BIDDINGS)
@@ -342,7 +339,6 @@ export default {
       try {
         const memberId = payload
         const res = await selectedUserApi.sp_admin_get_personal_details({rootState, memberId});
-		console.log('store:modules:selectedUser.js:sp_admin_get_personal_details:',res.data.data)
         commit('setSelectedPersonEmitter',res.data.data)
         commit('common/setNotes',res.data.data.NOTES.NOTES, {root : true})
       } catch (e) {
@@ -360,9 +356,9 @@ export default {
       }
     },
     // [ 개인 ] 배출자 정보 변경
-    async sendModifiedPersonEmitter({state, rootState }) {
+    async sp_admin_update_personal_details({state, rootState }) {
       try {
-        await selectedUserApi.sendModifiedPersonEmitter({rootState, userData: state.selectedPersonEmitter});
+        await selectedUserApi.sp_admin_update_personal_details({rootState, userData: state.selectedPersonEmitter});
         window.location.reload();
       } catch (e) {
         console.log(e);

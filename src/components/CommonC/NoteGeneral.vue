@@ -89,7 +89,6 @@ export default {
 			this.closeNote()
 		},
 		closeNote(){
-			console.log('closeNote emitted')
 			this.$emit('closed', 'none')
 		}
 	},

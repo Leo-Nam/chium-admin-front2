@@ -14,7 +14,6 @@ export default {
 		const reportId = Number(this.$route.params.id)
 		this.sp_admin_get_new_report_details({reportId})
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),

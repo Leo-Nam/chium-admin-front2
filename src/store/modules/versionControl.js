@@ -57,8 +57,6 @@ export default {
 	},
 	actions: {
 		async sp_admin_get_version_list({state, rootState, commit}){
-			console.log('store:modules:versionControl.js:sp_admin_get_version_list:','hello111')
-			console.log('store:modules:versionControl.js:state:',state)
 			try {
 				const res = await versionControlApi.sp_admin_get_version_list({state, rootState})
 				commit("setVersionList", res.data.data[0]);
@@ -69,8 +67,7 @@ export default {
 		// 
 		async sp_admin_insert_version_info({state, rootState}){
 			try {
-				const res = await versionControlApi.sp_admin_insert_version_info({state, rootState})
-				console.log('store:modules:versionControl.js:sp_admin_insert_version_info:',res)
+				await versionControlApi.sp_admin_insert_version_info({state, rootState})
 				location.reload()
 			} catch (e) {
 				console.log(e)
@@ -79,7 +76,6 @@ export default {
 		async sp_req_b_project_list({commit}){
 			try {
 				const res = await versionControlApi.sp_req_b_project_list()
-				console.log('store:modules:addAdmin.js:sp_req_b_project_list:>>>>>>>>>>>>>>>>>>>>>',res.data.data)
 				commit('setProjectList', res.data.data)
 			} catch(e) {
 				console.log(e)

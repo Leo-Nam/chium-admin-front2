@@ -135,7 +135,6 @@ export default {
 			this.siteID = siteId
 		},
 		showNote(siteId, siteCategory){
-			console.log('hello note')
 			this.noteGeneralWidth='30%'
 			this.listWidth='70%'
 			this.note.display = 'inline'
@@ -146,7 +145,6 @@ export default {
 			this.dialog = false
 		},
 		changeShowStatus(v){
-			console.log('close note sign received')
 			this.noteGeneralWidth='0%'
 			this.listWidth='100%'
 			this.note.display = v

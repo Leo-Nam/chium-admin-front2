@@ -16,7 +16,6 @@ export default {
 			},
 		]),
 		};
-		console.log('sp_admin_change_policy:data', data)
 		return myAxios(url, method, data);
 	},
 };

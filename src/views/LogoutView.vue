@@ -9,7 +9,6 @@ export default {
 	created(){
 		this.logout()
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),

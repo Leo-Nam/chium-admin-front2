@@ -17,7 +17,6 @@ export default {
 		this.sp_admin_retrieve_prospective_site_info({siteId : notMemberId})
 		this.sp_req_b_trmt_biz()
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),

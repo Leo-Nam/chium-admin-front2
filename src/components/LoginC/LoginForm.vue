@@ -102,7 +102,6 @@ export default {
 	},
 	mounted() {
 		this.parseVersionInfo()
-		console.log('this.isLogged>>>>>>', this.isLogged)
 	},
 	computed : {
 		...mapGetters('auth',['getUserInit', 'getUserId']),
@@ -112,11 +111,9 @@ export default {
 		...mapMutations('auth',['setUserItem']),
 		...mapMutations('common',['setVersionInfo']),
 		loginBtn(){
-			console.log('components:LoginC:LoginForm.vue:loginBtn:','loginbtn')
 			this.login({adminId : this.adminId, adminPw : this.adminPw})
 		},
 		initUserInfo(){
-			console.log('components:LoginC:LoginForm.vue:initUserInfo:','zzzㅋㅋㅋ')
 			if (this.adminPw === this.adminPw2){
 				this.sp_admin_init_user()
 			}else{
@@ -135,8 +132,6 @@ export default {
 			this.version.minorVersion = this.version.fullVersion.substring(firstComma+1, secondComma)
 			this.version.patchVersion = this.version.fullVersion.substring(secondComma+1, this.version.fullVersion.length)
 			this.setVersionInfo(this.version)
-
-			console.log('App.vue:parseVersionInfo:', this.getVersionInfo)
 		},
 
 		right(str, chr) {

@@ -38,11 +38,9 @@ export default {
   },
   mutations: {
 		setSearchConfig(state, payload){
-			console.log('hello123>>>>>', payload)
 			state.pageConfig.search = payload.spec
 		},
 		setTableConfig(state, payload){
-			console.log('hello123>>>>>', payload.type, payload.data)
 			state.pageConfig.table = payload
 		},
 		setEmoji(state, payload){
@@ -101,13 +99,10 @@ export default {
 	actions: {
 		// 비딩리스트를 서버에 요청
 		async sp_admin_get_new_biddings({state, rootState, commit}){
-			console.log('sp_admin_get_new_biddings started....')
 			try {
 				const res = await biddingsApi.sp_admin_get_new_biddings({state, rootState})
-				console.log('sp_admin_get_new_biddings>>>res:', res)
 				commit("setBiddingList", res.data.data[0]);
 			} catch (e) {
-				console.log('sp_admin_get_new_biddings>>>e:', e)
 				console.log(e)
 			}
 		},

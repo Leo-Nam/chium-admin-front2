@@ -547,7 +547,6 @@ export default {
 	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 		this.sp_admin_get_updated_at({keyword: 'PHONE'})
 		this.sp_admin_get_updated_at({keyword: 'UID'})
 		this.sp_admin_get_updated_at({keyword: 'RESOLUTION'})
@@ -560,7 +559,6 @@ export default {
 		]),
 		...mapMutations('common',['setCurrentRoute']),
 		changeUserName() {
-			console.log('hello987898789')
 			this.$router.push({
 				path: '/account/changeUserName',
 				params: {

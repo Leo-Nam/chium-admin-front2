@@ -36,7 +36,6 @@ export default {
         },
       ]),
     };
-    console.log('api:apiList:emitterCollectorApi.js:sp_admin_retrieve_users:',data)
     return myAxios(url, method, data);
   },
 };

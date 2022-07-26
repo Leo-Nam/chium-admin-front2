@@ -104,7 +104,6 @@ export default {
 		this.sp_admin_retrieve_site_info({siteId : this.$route.params.id, circleRange : null})
 		this.getWsteLists()
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 
 	methods : {

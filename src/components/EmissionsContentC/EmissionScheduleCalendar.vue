@@ -159,9 +159,6 @@ import {mapGetters, mapActions} from "vuex"
     },
     methods: {
     ...mapActions('emissions',['sp_admin_get_disposer_schedule']),
-		reloadPage(){
-			console.log('components:EmissionContentC:EmissionScheduleCalendar.vue:reloadPage:','자식컴포넌트 리로드')
-		},
       viewDay ({ date }) {
         this.focus = date
         this.type = 'day'
@@ -198,13 +195,9 @@ import {mapGetters, mapActions} from "vuex"
 		await this.sp_admin_get_disposer_schedule({orderId: this.$route.params.id})
         const events = []
         const eventCount = this.getOrderSchedule.length
-		console.log('components:EmissionContentC:EmissionScheduleCalendar.vue:',eventCount, 'eventCount')
 
         for (let i = 0; i < eventCount; i++) {
 			if(this.getOrderSchedule[i].START_AT != null && this.getOrderSchedule[i].END_AT != null){
-				console.log('components:EmissionContentC:EmissionScheduleCalendar.vue:updateRange:',this.getOrderSchedule[i].NAME)
-				console.log('components:EmissionContentC:EmissionScheduleCalendar.vue:updateRange:',this.getOrderSchedule[i].START_AT)
-				console.log('components:EmissionContentC:EmissionScheduleCalendar.vue:updateRange:',this.getOrderSchedule[i].END_AT)
 				events.push({
 					name: this.getOrderSchedule[i].NAME,
 					// start: (this.getOrderSchedule[i].START_AT !== null ? new Date(this.getOrderSchedule[i].START_AT) : null),
@@ -219,7 +212,6 @@ import {mapGetters, mapActions} from "vuex"
 
         this.events = events
         // this.events = this.getOrderSchedule1
-		console.log('components:EmissionContentC:EmissionScheduleCalendar.vue:updateRange:',this.events, '===> events')
       },
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a

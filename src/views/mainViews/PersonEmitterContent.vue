@@ -16,7 +16,6 @@ export default {
 		const personEmitterId = this.$route.params.id
 		this.sp_admin_get_personal_details(personEmitterId)
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),

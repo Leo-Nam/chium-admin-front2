@@ -112,7 +112,6 @@ export default {
 	created(){
 		this.sp_req_b_department()
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	methods: {
 		...mapActions('addAdmin',['sp_req_b_department', 'sp_admin_insert_manager']),
@@ -120,7 +119,6 @@ export default {
 		...mapMutations('common',['setCurrentRoute']),
 
 		changeState(key,value){
-			console.log('components:addAdminC:addAdminForm.vue:changeState:',value,key)
 			if(key === 'department'){
 				this.setDepartmentItem(value)
 			}else{

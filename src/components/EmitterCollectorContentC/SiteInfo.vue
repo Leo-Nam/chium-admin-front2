@@ -454,7 +454,6 @@ export default {
 			this.uploadPermitImgToS3(formData)
 		},
 		uploadBizImg(e){
-			console.log('components:EmitterCollectorContentC:SiteInfo.vue:uploadBizImg:',e,'bizimg 1')
 			if (e == undefined){
 				alert('파일을 제대로 입력해주세요')
 				return
@@ -503,7 +502,6 @@ export default {
 						let lat = parseFloat(result.lat)
 						let lng = parseFloat(result.log)
 						this.setAddr({ addr : data.address+', ', bCode : data.bcode, lat, lng } )
-							console.log('components:EmitterCollectorContentC:SiteInfo.vue:addrChange:','this.addrInfo >>>>>>', { addr : data.address+', ', bCode : data.bcode, lat, lng })
 					})
 
 				},

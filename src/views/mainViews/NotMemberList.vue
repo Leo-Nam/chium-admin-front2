@@ -114,7 +114,6 @@ export default {
 		// 데이터를 불러온다.
 		this.controlQuerySetAndGetNotMemberList(this.$route)
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 		this.setTableConfig(this.tableConfig)
 		this.setSearchConfig(this.searchConfig)
 		this.setEmoji(this.emoji)

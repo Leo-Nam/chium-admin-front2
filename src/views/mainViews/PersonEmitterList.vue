@@ -142,7 +142,6 @@ export default {
 		// 데이터를 불러온다.
 		this.controlQuerySetAndGetList(this.$route)
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 		this.setEmoji(this.emoji)
 		this.setTableConfig(this.tableConfig)
 		this.setSearchConfig(this.searchConfig)

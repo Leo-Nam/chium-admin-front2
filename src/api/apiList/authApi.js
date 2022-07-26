@@ -6,7 +6,6 @@ export default {
   // 로그인 할 시 인풋으로 받는 아이디 비밀번호 값
   sp_admin_init_user({ adminId, adminUid, adminPw }) {
     const url = "api/admin/common/sp_admin_init_user";
-	console.log('api:apiList:authApi.js:sp_admin_init_user:userInit-url >>>>>', { adminId, adminUid, adminPw })
     let data = {
       params: JSON.stringify([
         {
@@ -16,12 +15,10 @@ export default {
         },
       ]),
     };
-	console.log('api:apiList:authApi.js:sp_admin_init_user::data123>>>>', data)
     return myAxios(url, method, data);
   },
   login({ adminId, adminPw }) {
     const url = "api/admin/common/admin_login";
-	console.log('api:apiList:authApi.js:login:login-url >>>>>', url)
     let data = {
       params: JSON.stringify([
         {
@@ -57,7 +54,6 @@ export default {
         },
       ]),
     };
-	console.log('sp_admin_update_admin_info:data', data)
     return myAxios(url, method, data);
   },
   sp_admin_update_admin_birthday({state,rootState}){
@@ -71,7 +67,6 @@ export default {
         },
       ]),
     };
-	console.log('sp_admin_update_admin_birthday:data', data)
     return myAxios(url, method, data);
   },
 
@@ -90,7 +85,6 @@ export default {
 			},
 		]),
 		};
-		console.log('sp_admin_update_admin_gender:data', data)
 		return myAxios(url, method, data);
 	},
 	sp_admin_update_admin_email({state,rootState}){
@@ -104,7 +98,6 @@ export default {
 			},
 		]),
 		};
-		console.log('sp_admin_update_admin_email:data', data)
 		return myAxios(url, method, data);
 	},
 	sp_admin_update_admin_phone({state,rootState}){
@@ -118,7 +111,6 @@ export default {
 			},
 		]),
 		};
-		console.log('sp_admin_update_admin_phone:data', data)
 		return myAxios(url, method, data);
 	},
 	sp_admin_update_admin_loginid({state,rootState}){
@@ -132,7 +124,6 @@ export default {
 			},
 		]),
 		};
-		console.log('sp_admin_update_admin_loginid:data', data)
 		return myAxios(url, method, data);
 	},
 	sp_admin_get_updated_at({rootState, keyword}){
@@ -146,7 +137,6 @@ export default {
 			},
 		]),
 		};
-		console.log('sp_admin_get_updated_at:data', data)
 		return myAxios(url, method, data);
 	},
 
@@ -165,7 +155,6 @@ export default {
 			},
 		]),
 		};
-		console.log('sp_admin_update_resolution:data', data)
 		return myAxios(url, method, data);
 	},
 	sp_admin_update_admin_avatar({state,rootState}){
@@ -179,7 +168,6 @@ export default {
 			},
 		]),
 		};
-		console.log('sp_admin_update_admin_avatar:data', data)
 		return myAxios(url, method, data);
 	},
 };

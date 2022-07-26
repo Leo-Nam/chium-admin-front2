@@ -139,13 +139,11 @@ export default {
 		this.setNowSelectedBCodeWithinOpt('해당 시군구')
 	},
 	async created(){
-		console.log('views:mainViews:EmissionsContent.vue:created:',this.$route.params.id, "====>this.$route.params.id")
 		await this.sp_admin_get_new_comings_detail(this.$route.params.id)
 		await this.sp_get_site_list_whose_biz_areas_of_interest()
 		await this.sp_get_site_list_inside_range()
 		await this.logList2({orderId : this.getOrderInfo.ORDER_ID})
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),

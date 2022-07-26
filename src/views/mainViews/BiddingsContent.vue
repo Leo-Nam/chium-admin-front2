@@ -14,7 +14,6 @@ export default {
 		const biddingId = this.$route.params.id
 		this.sp_admin_get_new_bidding_details({biddingId})
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	methods : {
 		...mapMutations('common',['setCurrentRoute']),

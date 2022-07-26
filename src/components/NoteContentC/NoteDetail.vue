@@ -96,9 +96,6 @@ export default {
   computed : {
     ...mapGetters('noteList',['getNoteDetail']),
   },
-	created(){
-		console.log('this.$route>>>>', this.$route)
-	},
 
   methods : {	
 	...mapMutations('noteList', ['changeSelectedNote']),
@@ -133,11 +130,9 @@ export default {
 	
     MyVmodel(key,value){
 		this.changeSelectedNote({key,value})
-		console.log('components:NoteContentC:NoteDetail.vue:MyVmodel:',value)
     },
 
     returnUrl(value,key){
-		console.log('components:NoteContentC:NoteDetail.vue:returnUrl:',"returnUrl ===>", value, key)
       if (key === 'ORDER_ID'){
         return `/admin/main/emissions/${value}`
       } else if (key === 'SITE_ID') {

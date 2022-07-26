@@ -19,7 +19,6 @@ export default {
 		//  네비게이션 버튼을 눌렀을 경우
 		changePage(pageToGo){
 			// vuex에 저장된 값들을 불러와서 같이 라우터 쿼리에 넣어 보내준다.
-			console.log('pageToGo', pageToGo)
 			this.$router.push({ path: 'list', query: { page: pageToGo, keyword : this.getSearch}})
 		}
 	}

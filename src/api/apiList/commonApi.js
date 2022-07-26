@@ -32,6 +32,10 @@ export default {
 		return myAxios(url, method, payload, config);
 	},
 
+	sp_req_b_cs_manager() {
+		const url = "api/admin/common/sp_req_b_cs_manager";
+		return myAxios(url, method);
+	},
 
 
   // 유저의 인덱스의 값

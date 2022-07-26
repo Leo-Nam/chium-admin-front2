@@ -75,7 +75,6 @@ export default {
   },
   mutations: {
 	setSearchConfig(state, payload){
-		console.log('hello>>>>>', payload)
 		if (payload.type === 'personEmitter'){
 			state.pageConfig.personEmitter.search = payload.spec
 		} else if (payload.type === 'emitterCollector') {
@@ -85,7 +84,6 @@ export default {
 		}
 	},
 	setTableConfig(state, payload){
-		console.log('hello>>>>>', payload.type, payload.data)
 		if (payload.type === 'personEmitter'){
 			state.pageConfig.personEmitter.table = payload
 		} else if (payload.type === 'emitterCollector') {
@@ -188,7 +186,6 @@ export default {
     async sp_admin_retrieve_site_lists({ state, commit, rootState }) {
       try {
         const res = await emitterCollectorApi.sp_admin_retrieve_site_lists({state, rootState})
-		console.log('sp_admin_retrieve_site_lists>>>', res)
         commit("setEmitterCollectorList", res.data.data[0].SITE_LISTS);
       } catch (e) {
         console.log(e);

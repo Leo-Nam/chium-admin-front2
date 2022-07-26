@@ -174,7 +174,6 @@ export default {
 	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 	computed: {
 		...mapGetters('auth',['getResolution', 'getResolutionList']),
@@ -187,7 +186,6 @@ export default {
 		MyVmodel(key, value){
 			// this.updateDisplayNameList(key, value)
 			this.changeUserInfo({key, value})
-			console.log('this.displayNameList.....', this.displayNameList)
 		},
 	}
 }

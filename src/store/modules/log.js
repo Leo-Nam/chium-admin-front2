@@ -35,11 +35,9 @@ export default {
 	},
 	mutations: {
 		setSearchConfig(state, payload){
-			console.log('hello>>>>>', payload)
 			state.pageConfig.search = payload.spec
 		},
 		setTableConfig(state, payload){
-			console.log('hello>>>>>', payload.type, payload.data)
 			state.pageConfig.table = payload
 		},
 		setEmoji(state, payload){
@@ -85,7 +83,6 @@ export default {
 		async sp_admin_get_new_logs({state,rootState,commit},{orderId}){
 			try {
 				const res = await logApi.sp_admin_get_new_logs({state, rootState,orderId})
-				console.log('store:modules:log.js:sp_admin_get_new_logs:', res)
 				commit("setLogList", res.data.data[0]);
 			} catch (e) {
 				console.log(e)

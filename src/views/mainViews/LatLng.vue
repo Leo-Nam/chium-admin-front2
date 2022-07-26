@@ -51,7 +51,6 @@
         },
         watch :{
           gogo(){
-            console.log('views:mainViews:LatLng.vue:gogo:','dp')
               this.cnt++
               if(this.cnt == 10){
                 this.splitPoint();
@@ -81,9 +80,6 @@
           success({coords}){
             const lat = coords.latitude;
             const lng = coords.longitude;
-            console.log('views:mainViews:LatLng.vue:success:',lng,'lng')
-            console.log('views:mainViews:LatLng.vue:success:',lat,'lat')
-            console.log('views:mainViews:LatLng.vue:success:',this.cnt)
             this.DrawLine.arrPoint.push(lng)
             this.DrawLine.arrPoint.push(lat)
 
@@ -328,7 +324,6 @@
 
           },
           reqLoadApi( pointString, callback ){
-            console.log('views:mainViews:LatLng.vue:reqLoadApi:','poinstrinf!!!!',pointString)
             var url = 'https://apis.openapi.sk.com/tmap/road/matchToRoads?version=1&appKey=l7xxf9c79745eeb2448f86433b9e231eb2f9'; // 이동한 도로 찾기 api 요청 url입니다.
                 // eslint-disable-next-line no-undef
                 $.ajax({

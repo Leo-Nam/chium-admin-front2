@@ -173,7 +173,6 @@ export default {
 	},
 	created(){
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 		this.sp_req_b_sys_policy()
 	},
 	computed: {

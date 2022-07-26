@@ -41,8 +41,47 @@ export default {
 		adminPageConfig: {},
 		currentRoute: null,
 		currentMenuId: null,
+		tableConfig:{
+			rowMarginBottom: '20px',
+			textFieldBig: {
+				width: '600px',
+				height: '40px',
+				border: 'solid 1px',
+				borderRadius: '10px',
+				verticalAlign: 'middle',
+				display: 'table-cell',
+				paddingLeft: '10px'
+			},
+			textField: {
+				width: '300px',
+				height: '40px',
+				border: 'solid 1px',
+				borderRadius: '10px',
+				verticalAlign: 'middle',
+				display: 'table-cell',
+				paddingLeft: '10px'
+			},
+			textArea: {
+				width: '100%',
+				height: '150px'
+			},
+			switch: {
+				height: '0px',
+				marginTop: '0px'
+			},
+			label: {
+				paddingLeft: {
+					leftColumn: '0px',
+					rightColumn: '20px'
+				}
+			},
+			csManagerList: {}
+		}
 	},
 	mutations: {
+		setCsManagerList(state, payload){
+			state.csManagerList= payload
+		},
 		// 로딩값 true
 		setAdminPageConfig(state, payload){
 			state.adminPageConfig= payload
@@ -54,7 +93,6 @@ export default {
 			state.currentMenuId = payload
 		},
 		setBackgroundTheme(state, payload) {
-			console.log(payload)
 			state.backgroundTheme.month = payload.MONTH;
 			state.backgroundTheme.imgPath = payload.BACKGROUND_IMG;
 		},
@@ -397,7 +435,6 @@ export default {
 		async sp_admin_get_current_background_theme({commit}){
 			try {
 				const res = await commonApi.sp_admin_get_current_background_theme()
-				console.log('res', res)
 					commit('setBackgroundTheme',res.data.data)
 			} catch (e) {
 				console.log(e)
@@ -409,6 +446,14 @@ export default {
 				commit("auth/setAvatarImage", res.data, {root : true});
 			} catch (e) {
 				console.log(e);
+			}
+		},
+		async sp_req_b_cs_manager({commit}){
+			try {
+				const res = await commonApi.sp_req_b_cs_manager()
+				commit('setCsManagerList', res.data.data)
+			} catch(e) {
+				console.log(e)
 			}
 		},
 	},
@@ -456,8 +501,15 @@ export default {
 		},
 
 		getAdminPageConfig(state){
-			console.log('adminPageConfig>>>>', state.adminPageConfig)
 			return state.adminPageConfig
+		},
+
+		getTableConfig(state){
+			return state.tableConfig
+		},
+
+		getCsManagerList(state){
+			return state.csManagerList
 		},
 	},
 };

@@ -44,7 +44,6 @@ export default {
 	async sp_req_b_department({commit}){
 		try {
 			const res = await addAdminApi.sp_req_b_department()
-			console.log('store:modules:addAdmin.js:sp_req_b_department:',res.data.data)
 			commit('setDepartmentList', res.data.data)
 		} catch(e) {
 			console.log(e)
@@ -52,8 +51,7 @@ export default {
 	},
 	async sp_admin_insert_manager({state}){
 		try {
-			const res = await addAdminApi.sp_admin_insert_manager(state)
-			console.log('store:modules:addAdmin.js:sp_admin_insert_manager:',res)
+			await addAdminApi.sp_admin_insert_manager(state)
 		} catch(e) {
 			console.log(e)
 		}

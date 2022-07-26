@@ -39,13 +39,10 @@ export default {
 		...mapMutations('versionControl',['setChangedVersionNew']),
 		changeCategory(a){
 			this.prevVersion = this.packageJson.version
-			console.log('components:VersionListC:VersionUpdateCategory.vue:changeCategory:','this.prevVersion >>>', this.prevVersion)
 			this.parseVersionInfo()
-			console.log('components:VersionListC:VersionUpdateCategory.vue:changeCategory:',a)
 			this.changeVersionInfo(a)
 			this.nextVersion = this.getVersionInfo
 			this.setChangedVersionNew(this.nextVersion.fullVersion)
-			console.log('components:VersionListC:VersionUpdateCategory.vue:changeCategory:','this.nextVersion >>>', this.nextVersion['fullVersion'])
 		},
 
 		right(str, chr) {

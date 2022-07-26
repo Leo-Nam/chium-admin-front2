@@ -32,7 +32,6 @@ export default {
 		// 데이터를 불러온다.
 		this.controlQuerySetAndGetLogList(this.$route)
 		this.setCurrentRoute(this.$route.name)
-		console.log('this.$route>>>>', this.$route)
 	},
 
 	methods : {

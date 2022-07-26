@@ -26,7 +26,6 @@ export default {
 	sp_admin_get_note_details({rootState, payload}) {
 		const userId = rootState.auth.userId;
 		const noteId = payload.noteId;
-		console.log('api:apiList:noteListApi.js:sp_admin_get_note_details:', userId, noteId)
 		const url = "api/admin/common/sp_admin_get_note_details";
 		let data = {
 			params: JSON.stringify([
@@ -42,7 +41,6 @@ export default {
 	sp_admin_update_note({rootState, state}) {
 		const userId = rootState.auth.userId;
 		const noteDetails = state.selectedNote;
-		console.log('api:apiList:noteListApi.js:sp_admin_update_note:', userId, noteDetails)
 		const url = "api/admin/common/sp_admin_update_note";
 		let data = {
 			params: JSON.stringify([
@@ -55,7 +53,6 @@ export default {
 				},
 			]),
 		};
-		console.log('api:apiList:noteListApi.js:sp_admin_update_note:', data, 'data.......')
 		return myAxios(url, method, data);
 	},
 

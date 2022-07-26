@@ -30,6 +30,28 @@
 		</div>
 		<div 
 			:style="{
+				'padding-left': '30px',
+				'padding-right': '30px',
+				'text-align': 'right'
+			}"
+		>
+			<v-row 
+				no-gutters 
+				:style="{'margin-bottom':`${tableConfig.rowMarginBottom}`}"
+			>
+				<v-col>
+					<v-btn
+						text
+						outlined
+						@click="sp_admin_update_order_details"
+					>
+						수정하기
+					</v-btn>
+				</v-col>
+			</v-row>
+		</div>
+		<div 
+			:style="{
 				'padding': '30px',
 			}"
 		>
@@ -184,6 +206,7 @@
 								'height': `${tableConfig.switch.height}`,
 								'margin-top': `${tableConfig.switch.marginTop}`
 							}"
+							@change="changeOrderInfo({key: 'IS_DELETED', value: $event})"
 						></v-switch>
 					</div>
 				</v-col>
@@ -285,6 +308,7 @@
 								'height': `${tableConfig.switch.height}`,
 								'margin-top': `${tableConfig.switch.marginTop}`
 							}"
+							@change="changeOrderInfo({key: 'CS_CONFIRMED', value: $event})"
 						></v-switch>
 					</div>
 				</v-col>
@@ -307,6 +331,7 @@
 								'height': `${tableConfig.switch.height}`,
 								'margin-top': `${tableConfig.switch.marginTop}`
 							}"
+							disabled
 						></v-switch>
 					</div>
 				</v-col>
@@ -361,6 +386,7 @@
 								'height': `${tableConfig.switch.height}`,
 								'margin-top': `${tableConfig.switch.marginTop}`
 							}"
+							disabled
 						></v-switch>
 					</div>
 				</v-col>
@@ -641,6 +667,7 @@
 								'height': `${tableConfig.switch.height}`,
 								'margin-top': `${tableConfig.switch.marginTop}`
 							}"
+							disabled
 						></v-switch>
 					</div>
 				</v-col>
@@ -715,6 +742,7 @@
 								'height': `${tableConfig.switch.height}`,
 								'margin-top': `${tableConfig.switch.marginTop}`
 							}"
+							disabled
 						></v-switch>
 					</div>
 				</v-col>
@@ -777,7 +805,7 @@
   </v-card>
 </template>
 <script>
-import {mapGetters,mapActions} from "vuex"
+import {mapGetters, mapActions, mapMutations} from "vuex"
 import EmissionMap from "./EmissionMap.vue"
 import EmissionImageList from "./EmissionImageList.vue"
 import EmissionComment from "./EmissionComment.vue"
@@ -830,17 +858,16 @@ export default {
   },
 
   methods : {
-    ...mapActions('emissions',['sp_admin_update_order_details']),
-    getTime(time){
-      if (time != null) {
-      return time.slice(0,19)}
-
-    },
-    modify(){
-      this.sp_admin_update_order_details();
-
-    }
-  }
+		...mapMutations('emissions',['changeOrderInfo']),
+		...mapActions('emissions',['sp_admin_update_order_details']),
+		getTime(time){
+			if (time != null) {
+				return time.slice(0,19)}
+			},
+			modify(){
+			this.sp_admin_update_order_details();
+		},
+	}
 }
 </script>
 <style lang="">

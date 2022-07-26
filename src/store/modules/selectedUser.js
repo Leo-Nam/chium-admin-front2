@@ -63,8 +63,7 @@ export default {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     // 개인 배출자의 정보가 여기에 담긴다.
-    selectedPersonEmitter : {
-    },
+    selectedPersonEmitter : {},
 	businessArea: [],
 	InterestedSite: []
   },
@@ -430,11 +429,23 @@ export default {
 		return state.selectedUser.addedSiteList
 	},
 
+	getPersonalInterestedSiteList(state){
+		return state.selectedPersonEmitter.ADDED_SITE_LIST
+	},
+
 	getInterestedSiteCount(state){
 		if (state.selectedUser.addedSiteList === null){
 			return 0
 		} else {
 			return state.selectedUser.addedSiteList.length
+		}
+	},
+
+	getPersonalInterestedSiteCount(state){
+		if (state.selectedPersonEmitter.ADDED_SITE_LIST === null){
+			return 0
+		} else {
+			return state.selectedPersonEmitter.ADDED_SITE_LIST.length
 		}
 	},
 

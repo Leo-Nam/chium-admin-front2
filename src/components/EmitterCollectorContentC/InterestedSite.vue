@@ -5,30 +5,58 @@
 		active-class="primary--text"
 		column
 	>
-		<v-chip
-		v-for="site in getInterestedSiteList"
-		:key="site"
+		<span
+			v-if="userType === 1"
 		>
-              <a
-                :href="returnUrl(site['TARGET_ID'])"
-              >
-                {{ site['TARGET_NAME'] }}
-              </a>
-		
-		</v-chip>
+			<v-chip
+				v-for="site, idx in getInterestedSiteList"
+				:key="site+idx"
+			>
+				<a
+					:href="returnUrl(site['TARGET_ID'])"
+				>
+					{{ site['TARGET_NAME'] }}
+				</a>
+			
+			</v-chip>
+		</span>
+		<span
+			v-else
+		>
+			<v-chip
+				v-for="site, idx in getPersonalInterestedSiteList"
+				:key="site+idx"
+			>
+				<a
+					:href="returnUrl(site['TARGET_ID'])"
+				>
+					{{ site['TARGET_NAME'] }}
+				</a>
+			
+			</v-chip>
+		</span>
 	</v-chip-group>
 	</div>
 </template>
 <script>
 import { mapGetters} from "vuex"
 export default {
+	props: {
+		userType: {
+			type: Number,
+			default: 1
+		}
+	},
   data(){
     return {
     }
 
   },
   computed : {
-    ...mapGetters('selectedUser',['getInterestedSiteList'])
+    ...mapGetters('selectedUser',[
+		'getInterestedSiteList', 
+		'getPersonalInterestedSiteList'
+	])
   },
 
   methods : {
@@ -38,6 +66,22 @@ export default {
   }
 }
 </script>
-<style lang="">
+<style scoped>
+	a:link { 
+		text-decoration: none; 
+		color: black
+	}
+	a:visited { 
+		text-decoration: none; 
+		color: black
+	}
+	a:hover { 
+		text-decoration: none; 
+		color: black
+	}
+	a:active { 
+		text-decoration: none; 
+		color: black
+	}
 
 </style>

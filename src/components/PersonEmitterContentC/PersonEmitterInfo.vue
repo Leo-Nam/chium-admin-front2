@@ -134,6 +134,26 @@
 			</v-expansion-panel>
 		</v-expansion-panels>
 		<v-card style="margin-top : 50px;">
+			<v-row>
+				<v-col>
+					<div 
+						:style="{
+							'padding-bottom': '0px', 
+							'padding-left': '30px', 
+							'padding-right': '30px', 
+							'margin': '0px'
+						}"
+					>
+						<div v-if="getPersonalInterestedSiteCount>0">
+							<InterestedSite 
+								:userType="userType"
+							/>
+						</div>
+					</div>
+				</v-col>
+			</v-row>
+		</v-card>
+		<v-card style="margin-top : 50px;">
 			<v-card-title>
 				노트
 			</v-card-title>
@@ -156,6 +176,7 @@
 <script>
 import NoteInput from "@/components/CommonC/NoteInput.vue"
 import NoteList from "@/components/CommonC/NoteList.vue"
+import InterestedSite from "@/components/EmitterCollectorContentC/InterestedSite.vue"
 // import customSwitch01 from "@/components/ModuleC/customSwitch01.vue"
 import {mapGetters,mapMutations,mapActions} from "vuex"
 
@@ -163,7 +184,8 @@ export default {
 	components : {
 		NoteInput,
 		NoteList,
-		// customSwitch01
+		// customSwitch01,
+		InterestedSite
 	},
 	data(){
 		return{
@@ -176,7 +198,7 @@ export default {
 				'담당 CS 매니저',
 				'사진',
 				'활성화',
-				'확인 상태',
+				'앱노출',
 				'NOTICE_ENABLED',
 				'PUSH_ENABLED',
 				'소속사이트',
@@ -199,11 +221,15 @@ export default {
 			csManager: {
 				id: [],
 				name: [],
-			}
+			},
+			userType: 0
 		}
 	},
 	computed : {
-		...mapGetters('selectedUser',['getSelectedPersonEmitter']),
+		...mapGetters('selectedUser',[
+			'getSelectedPersonEmitter', 
+			'getPersonalInterestedSiteCount'
+		]),
 		...mapGetters('common',[
 			'getNotes', 
 			'getTableConfig', 

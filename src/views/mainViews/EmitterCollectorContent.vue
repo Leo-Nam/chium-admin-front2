@@ -10,7 +10,9 @@
 		class="top-card"
 	>
 		<div v-if="getInterestedSiteCount>0">
-			<InterestedSite />
+			<InterestedSite 
+				:userType="userType"
+			/>
 		</div>
     </v-card>
 
@@ -84,9 +86,19 @@ export default {
 		BusinessArea,
 		InterestedSite
 	},
+	data(){
+		return{
+			userType: 1
+		}
+	},
 
 	computed : {
-		...mapGetters('selectedUser',['getShowListIfIEmitter','getSeletedUser', 'getUserType', 'getInterestedSiteCount']),
+		...mapGetters('selectedUser',[
+			'getShowListIfIEmitter',
+			'getSeletedUser', 
+			'getUserType', 
+			'getInterestedSiteCount'
+		]),
 		...mapGetters('common',['getNotes'])
 	},
 	watch : {

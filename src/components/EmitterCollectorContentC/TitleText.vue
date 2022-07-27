@@ -1,5 +1,5 @@
 <template>
-	<div class="title-site-name">
+	<div>
 		<v-card
 			:style="{
 				'width': '100%',
@@ -11,27 +11,30 @@
 			flat
 		>
 			<span
-				class="text-h5"
 				:style="{
 					'padding-left': '20px',
-					'line-height': '50px'
+					'line-height': '50px',
+					'color': '#FFFFFF',
+					'font-size': `${fontSize}`+'px',
+					'font-weight': 'bold',
 				}"
 			>
-				{{ getSeletedUser.userType == 3 ? '수거업체' : '배출업체' }}
+				{{ title }}
 			</span>
 		</v-card>
 	</div>
 </template>
 <script>
-import {mapGetters} from "vuex"
 export default {
-  computed : {
-    ...mapGetters('selectedUser',['getSeletedUser'])
-  },
+	props: {
+		title: {
+			type: String,
+			default: null
+		},
+		fontSize: {
+			type: Number,
+			default: 20
+		}
+	},
 }
 </script>
-<style>
-template {
-	font-family: Verdana;
-}
-</style>

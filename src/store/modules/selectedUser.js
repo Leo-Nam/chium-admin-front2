@@ -32,6 +32,7 @@ export default {
       lng: null,
       updatedAt: null,
       userType : null,
+      userTypeName : null,
       bizRegCode: null,
       bizRegImgPath: null,
       compName: null,
@@ -162,6 +163,7 @@ export default {
       state.selectedUser.siteList = payload.SITE_LIST;
       // 수거자인지 배출자인지 구분 수거자라면 3 배출자라면 2
       state.selectedUser.userType = payload.USER_TYPE;
+      state.selectedUser.userTypeName = payload.USER_TYPE_NAME;
       // 값이 null 일때에도 배열상태를 유지하기 위해
       state.selectedUser.managerList = payload.MANAGER_LIST
       state.selectedUser.contactPath = payload.CONTACT_PATH

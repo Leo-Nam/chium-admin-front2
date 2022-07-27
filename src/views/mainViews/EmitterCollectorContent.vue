@@ -5,7 +5,11 @@
 		'padding-right': '0px',
 	}"
   >
-    <TitleText class="title-text" />
+    <TitleText 
+		class="title-text"
+		:title="getSeletedUser.userTypeName"
+		:fontSize="20"
+	/>
     <v-card class="top-card">
       <SiteInfo />
     </v-card>

@@ -16,6 +16,7 @@ import questionList from "./modules/questionList";
 import addAdmin from "./modules/addAdmin";
 import versionControl from "./modules/versionControl";
 import controlService from "./modules/controlService";
+import sseStore from "./modules/sseStore";
 import createPersistedState from "vuex-persistedstate";
 import SecureLS from "secure-ls";
 const ls = new SecureLS({ isCompression: false }); // 브라우저의 application local storage에 표시되는 경우 암호와 되어 해독이 불가능하도록 조치하게 됨
@@ -50,5 +51,6 @@ export default new Vuex.Store({
 	addAdmin,
 	versionControl,
 	controlService,
+	sseStore,
   },
 });

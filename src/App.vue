@@ -146,6 +146,8 @@ export default {
 	},
 	data(){
 		return{
+			serverTimeStampNewVal: null,
+			serverTimeStampOldVal: null,
 			dialog : false,
 			navToggle : false,
 			packageJson : packageJson,
@@ -208,7 +210,8 @@ export default {
 				container:{
 					width: this.getResolution + 'px'
 				}
-			}
+			},
+			messages: [],
 		}
 	},
 	computed : {
@@ -232,20 +235,36 @@ export default {
 		isLogged(){
 			this.checkIsLogged()
 		},
+		serverTimeStampNewVal: function(value){
+			console.log("timestamp:", value)
+			this.setSSEChanged(value)
+		}
 	},
 	mounted() {
 		this.parseVersionInfo()
+		
 	},
 	created(){
 		this.checkIsLogged()
 		this.sp_admin_get_current_background_theme()
 		this.backgroundTheme()
 		this.initAdminPageConfig()
+		// this.fetch()
+		this.listenEvent()
+		// this.connectSse()
+	},
+	beforeDestroy() {
+		console.log('destroyed')
+		this.$el.removeEventListener('message', (evt) => {
+			this.handleClickEvent(evt)
+			console.log('evt', evt)
+		})
 	},
 	methods : {
 		...mapActions('common',['checkIsLogged']),
 		...mapActions('common', ['sp_admin_get_current_background_theme']),
 		...mapMutations('common',['setVersionInfo', 'setAdminPageConfig']),
+		...mapMutations('sseStore',['setSSEChanged']),
 		toggle(){
 			this.navToggle = !this.navToggle
 		},
@@ -278,6 +297,55 @@ export default {
 		},
 		initAdminPageConfig(){
 			this.setAdminPageConfig(this.adminPageConfig)
+		},
+		handleBan(banMessage) {
+			// Note that we can access properties of message, since our parser is set to JSON
+			// and the hypothetical object has a `reason` property.
+			this.messages.push(`You've been banned! Reason: ${banMessage.reason}`);
+		},
+		handleChat(message) {
+			// Note that we can access properties of message, since our parser is set to JSON
+			// and the hypothetical object has these properties.
+			this.messages.push(`${message.user} said: ${message.text}`);
+		},
+		handleMessage(message, lastEventId) {
+			console.warn('Received a message w/o an event!', message, lastEventId);
+		},
+		listenEvent(){
+			let sse = new EventSource(process.env.VUE_APP_API + '/sse')
+			console.log('hello woong! sse connected!!!')
+			// sse.addEventListener('open', function (data) {
+			// 	// ready();
+			// 	console.log(data)
+			// });
+			// sse.addEventListener('error', function (data) {
+			// 	// winston.error(data, { source: 'dailymotion' });
+			// 	console.log(data)
+			// });
+			sse.addEventListener('message', (e) => this.serverTimeStampHasChanged(e.data))
+			// sse.addEventListener('message', function (event) {
+			// 	if (event.type == 'message'){
+			// 		const data = event.data
+			// 		// this.setSSEChanged(data)
+			// 		if(this.serverTimeStampNewVal !== null){
+			// 			this.serverTimeStampOldVal = this.serverTimeStampNewVal
+			// 		}
+			// 		this.serverTimeStampNewVal = data
+			// 		console.log('this.serverTimeStampNewVal>>>>>>>', this.serverTimeStampNewVal)
+			// 		console.log('this.serverTimeStampOldVal>>>>>>>', this.serverTimeStampOldVal)
+			// 	} else {
+			// 		console.log(event)
+			// 	}
+			// })
+		},
+		serverTimeStampHasChanged(e){
+			console.log('serverTimeStampHasChanged')
+			// if(this.serverTimeStampOldVal !== this.serverTimeStampNewVal){
+			// 	return false
+			// } else {
+			// 	return true
+			// }
+			this.setSSEChanged(e)
 		}
 	},
 }

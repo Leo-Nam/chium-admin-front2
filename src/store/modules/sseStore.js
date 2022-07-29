@@ -3,18 +3,22 @@
 export default {
   namespaced: true,
   state: {
-	timestamp: null,
+	sseData: {
+		timestamp: null,
+		table: null,
+		type: null,
+	},
 	isChanged: false
   },
   mutations: {
 	setSSEChanged(state, payload){
-		console.log('inside setSSEChanged>>>>', state, payload)
-		if (state.timestamp === payload){
+		console.log('inside setSSEChanged>>>>', state, payload/1000, Math.floor(Date.now())/1000)
+		if (state.sseData === payload){
 			state.isChanged = false
 		} else {
 			state.isChanged = true
 		}
-		state.timestamp = payload
+		state.sseData = payload
 	},
   },
   getters: {

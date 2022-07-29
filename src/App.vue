@@ -346,9 +346,23 @@ export default {
 			// } else {
 			// 	return true
 			// }
-			this.setSSEChanged(e)
-			EventBus.$emit('push-sse', e);
-		}
+			let sseDataTemp = JSON.parse(e)
+			this.setSSEChanged(sseDataTemp)
+			EventBus.$emit('push-sse', sseDataTemp);
+			console.log(sseDataTemp)
+			// this.soundAlerm()
+		},
+		// play(sound) {
+		// 	if (sound) {
+		// 		var audio = new Audio(sound);
+		// 		audio.play();
+		// 	}
+		// },
+		// soundAlerm(){
+		// 	this.play(
+		// 		'https://chium-admin.s3.ap-northeast-2.amazonaws.com/images/admin-1659056555.mp3'
+		// 	)
+		// }
 	},
 }
 </script>

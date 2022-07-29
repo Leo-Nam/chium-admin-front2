@@ -133,6 +133,7 @@
 
 <script>
 
+import EventBus from './EventBus';
 import {mapGetters,mapActions,mapMutations} from "vuex"
 import packageJson from "/package.json"
 
@@ -313,7 +314,7 @@ export default {
 		},
 		listenEvent(){
 			let sse = new EventSource(process.env.VUE_APP_API + '/sse')
-			console.log('hello woong! sse connected!!!')
+			console.log('hello! sse connected!!!')
 			// sse.addEventListener('open', function (data) {
 			// 	// ready();
 			// 	console.log(data)
@@ -346,6 +347,7 @@ export default {
 			// 	return true
 			// }
 			this.setSSEChanged(e)
+			EventBus.$emit('push-sse', e);
 		}
 	},
 }

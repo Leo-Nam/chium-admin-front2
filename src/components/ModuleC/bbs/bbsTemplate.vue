@@ -141,7 +141,7 @@ export default {
 		to : {
 			type :  Function,
 			default : () => {},
-		}
+		},
 	},
 	data(){
 		return {

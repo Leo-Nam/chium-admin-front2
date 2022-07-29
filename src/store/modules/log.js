@@ -31,9 +31,17 @@ export default {
 			search: {},
 			table: {},
 			emoji: {},
-		}
+		},
+		sseTimeStamp: null,
 	},
 	mutations: {
+		setLogTimeStamp(state, payload){
+			console.log('before changing setSseTimeStamp', state.sseTimeStamp, payload)
+			if(state.sseTimeStamp !== payload){
+				console.log('setSseTimeStamp has changed...')
+				state.sseTimeStamp = payload
+			}
+		},
 		setSearchConfig(state, payload){
 			state.pageConfig.search = payload.spec
 		},
@@ -122,6 +130,9 @@ export default {
 		},
 		getTableConfig(state){
 			return state.pageConfig.table		
+		},
+		getLogTimeStamp(state){
+			return state.sseTimeStamp
 		},
 	},
 };

@@ -41,6 +41,7 @@ export default {
 	},
 	created(){
 		EventBus.$on('push-sse', (payload)=>{
+			console.log('payload>>>>>>', payload)
 			this.updateLoglist()
 			if(payload !== null && Number(this.getLogTimeStamp) !== Number(payload)){
 				this.sseTimeStamp = payload;
@@ -56,6 +57,7 @@ export default {
 		...mapMutations('log',['setLogTimeStamp']),
 		...mapActions('log',['sp_admin_get_new_logs']),
 		updateLoglist(){
+			console.log('updateLoglist')
 			this.renderKey += 1
 			this.sp_admin_get_new_logs({orderId : null})
 		}

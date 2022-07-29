@@ -260,12 +260,16 @@ export default {
 			this.handleClickEvent(evt)
 			console.log('evt', evt)
 		})
+		this.$el.removeEventListener('trackingInfo', (evt) => {
+			this.handleClickEvent(evt)
+			console.log('evt', evt)
+		})
 	},
 	methods : {
 		...mapActions('common',['checkIsLogged']),
 		...mapActions('common', ['sp_admin_get_current_background_theme']),
 		...mapMutations('common',['setVersionInfo', 'setAdminPageConfig']),
-		...mapMutations('sseStore',['setSSEChanged']),
+		...mapMutations('sseStore',['setSSEChanged', 'setTrackingChanged']),
 		toggle(){
 			this.navToggle = !this.navToggle
 		},
@@ -315,41 +319,26 @@ export default {
 		listenEvent(){
 			let sse = new EventSource(process.env.VUE_APP_API + '/sse')
 			console.log('hello! sse connected!!!')
-			// sse.addEventListener('open', function (data) {
-			// 	// ready();
-			// 	console.log(data)
-			// });
-			// sse.addEventListener('error', function (data) {
-			// 	// winston.error(data, { source: 'dailymotion' });
-			// 	console.log(data)
-			// });
 			sse.addEventListener('message', (e) => this.serverTimeStampHasChanged(e.data))
-			// sse.addEventListener('message', function (event) {
-			// 	if (event.type == 'message'){
-			// 		const data = event.data
-			// 		// this.setSSEChanged(data)
-			// 		if(this.serverTimeStampNewVal !== null){
-			// 			this.serverTimeStampOldVal = this.serverTimeStampNewVal
-			// 		}
-			// 		this.serverTimeStampNewVal = data
-			// 		console.log('this.serverTimeStampNewVal>>>>>>>', this.serverTimeStampNewVal)
-			// 		console.log('this.serverTimeStampOldVal>>>>>>>', this.serverTimeStampOldVal)
-			// 	} else {
-			// 		console.log(event)
-			// 	}
-			// })
+			
+			let sseTracking = new EventSource(process.env.VUE_APP_API + '/tracking')
+			console.log('hello! sse tracking connected!!!')
+			sseTracking.addEventListener('message', (e) => this.serverTrackingInfoHasChanged(e.data))
 		},
 		serverTimeStampHasChanged(e){
 			console.log('serverTimeStampHasChanged')
-			// if(this.serverTimeStampOldVal !== this.serverTimeStampNewVal){
-			// 	return false
-			// } else {
-			// 	return true
-			// }
 			let sseDataTemp = JSON.parse(e)
 			this.setSSEChanged(sseDataTemp)
 			EventBus.$emit('push-sse', sseDataTemp);
 			console.log(sseDataTemp)
+			// this.soundAlerm()
+		},
+		serverTrackingInfoHasChanged(e){
+			console.log('serverTrackingInfoHasChanged')
+			let sseTrackingTemp = JSON.parse(e)
+			console.log(sseTrackingTemp)
+			this.setTrackingChanged(sseTrackingTemp)
+			EventBus.$emit('push-tracking', sseTrackingTemp);
 			// this.soundAlerm()
 		},
 		// play(sound) {

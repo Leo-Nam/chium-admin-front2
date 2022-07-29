@@ -9,7 +9,8 @@
 		<div 
 			id="map" 
 			:style="{
-				'height': '350px',
+				'height': '600px',
+				'width': '600px',
 				'resize': 'both',
 				'over-flow': 'auto',
 				'max-width': '100%'
@@ -26,7 +27,7 @@
 </template>
 <script>
 
-import {mapGetters} from "vuex"
+import {mapGetters, mapActions, mapMutations} from "vuex"
 export default {
     data() {
         return {
@@ -34,6 +35,7 @@ export default {
     },
 	computed : {
 		...mapGetters('emissions',['getOrderInfo']),
+		...mapGetters('sseStore',['getTrackingInfo']),
 	},
 	mounted() {
 		if (window.kakao && window.kakao.maps) {
@@ -51,11 +53,19 @@ export default {
 		document.getElementById('map').innerHTML = "";
 		this.initMap()
 	},
+	async created(){
+		await this.sp_admin_get_new_comings_detail(432)
+		this.setCurrentRoute(this.$route.name)
+	},
 	methods: {
+		...mapMutations('common',['setCurrentRoute']),
+		...mapActions('emissions',['sp_admin_get_new_comings_detail']),
 		async initMap() {
 				console.log(this.getOrderInfo)
 			try {	
-				const latLng = new kakao.maps.LatLng(this.getOrderInfo.LAT, this.getOrderInfo.LNG)
+				// const latLng = new kakao.maps.LatLng(this.getOrderInfo.LAT, this.getOrderInfo.LNG)
+				const latLng = new kakao.maps.LatLng(this.getTrackingInfo.lat, this.getTrackingInfo.lng)
+				console.log('DisplayTracking.vue[latLng]: ', latLng)
 				const container = document.getElementById("map");
 				const options = {
 					center: latLng,

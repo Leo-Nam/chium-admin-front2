@@ -8,11 +8,17 @@ export default {
 		table: null,
 		type: null,
 	},
-	isChanged: false
+	sseTrackingData: {
+		id: null,
+		lat: null,
+		lng: null,
+		timestamp: null,
+	},
+	isChanged: false,
+	isTrackingChanged: false
   },
   mutations: {
 	setSSEChanged(state, payload){
-		console.log('inside setSSEChanged>>>>', state, payload/1000, Math.floor(Date.now())/1000)
 		if (state.sseData === payload){
 			state.isChanged = false
 		} else {
@@ -20,10 +26,21 @@ export default {
 		}
 		state.sseData = payload
 	},
+	setTrackingChanged(state, payload){
+		if (state.sseTrackingData === payload){
+			state.isTrackingChanged = false
+		} else {
+			state.isTrackingChanged = true
+		}
+		state.sseTrackingData = payload
+	},
   },
   getters: {
 	getSSEChanged(state){
 		return state.isChanged
+	},
+	getTrackingInfo(state){
+		return state.sseTrackingData
 	},
   },
 };

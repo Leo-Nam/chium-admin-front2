@@ -249,7 +249,7 @@ export default {
 					display: true
 				},
 				{ 
-					title: "트래킹",
+					title: "#####",
 					icon: "mdi-account",
 					route: "/admin/main/tracking",
 					routes: {

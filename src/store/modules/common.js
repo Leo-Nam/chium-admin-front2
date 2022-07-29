@@ -249,6 +249,17 @@ export default {
 					display: true
 				},
 				{ 
+					title: "트래킹",
+					icon: "mdi-account",
+					route: "/admin/main/tracking",
+					routes: {
+						'tracking':''
+					},
+					location: "app-bar",
+					menuId: 1500,
+					display: true
+				},
+				{ 
 					title: "서비스관리",
 					icon: "mdi-account",
 					route: "/admin/main/control-service",
@@ -267,7 +278,7 @@ export default {
 						'add-admin':''
 					},
 					location: "app-bar",
-					menuId: 700,
+					menuId: 1400,
 					display: true
 				},
 				{ 

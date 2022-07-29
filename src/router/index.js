@@ -228,6 +228,13 @@ const routes = [
 									},
 								]
 							},
+							{
+								path: "tracking",
+								name: "tracking",
+								component: () => import("../views/mainViews/TrackingView.vue"),
+								// 최고 권한자만 들어갈 수 있도록 표시
+								meta: { adminKing: true },
+							},
 						],
 					},
 				],
